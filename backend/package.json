@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "debug": "set NODE_ENV=debug && nodemon ./main.js localhost 8080",
+    "api": "set NODE_ENV=production && node main.js"
+  },
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.17.2",
+    "chalk": "^2.1.0",
+    "compression": "^1.7.0",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "google-auth-library": "^1.4.0",
+    "jsonwebtoken": "^8.0.1",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.10",
+    "morgan": "^1.9.0",
+    "mysql2": "^1.5.1",
+    "redis": "^2.8.0",
+    "sequelize": "^4.31.2",
+    "validate.js": "^0.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
