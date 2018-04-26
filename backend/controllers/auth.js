@@ -15,6 +15,7 @@ function getJwt(userId) {
 
 module.exports = {
     registerValidator: function (req, res, next) {
+        // todo: Сделать валидацию полей req.body
         next();
     },
 
@@ -40,26 +41,38 @@ module.exports = {
         }
     },
 
-    googleRegisterValidator: function (req, res, next) {
-
-    },
-
-    googleRegister: async function (req, res) {
+    googleRegisterValidator: async function (req, res, next) {
         const {body} = req;
+        // todo: Сделать валидацию полей req.body
         try {
             const ticket = await googleAuthClient.verifyIdToken({
                 idToken: body.idToken,
                 audience: config.googleClientId,
             });
+            if (ticket === null) {
+                res.status(400).send('Could not verify idToken');
+            }
             const payload = ticket.getPayload();
             const userId = payload['sub'];
 
-            const hashedPassword = await bcrypt.hash(body.password, 8);
+            if (body.userId === userId && Date.now() < payload.exp) {
+                next();
+            } else {
+                res.status(400).send('Invalid token');
+            }
+        } catch(e) {
+            res.status(500).send();
+        }
+    },
+
+    googleRegister: async function (req, res) {
+        const {body} = req;
+        try {
             const user = await User.create({
                 firstName: body.firstName,
                 lastName: body.lastName,
                 email: body.email,
-                password: hashedPassword
+                google_id: body.google_id,
             }).dataValues;
             console.log(user);
 
@@ -79,5 +92,13 @@ module.exports = {
 
     login: function (req, res) {
 
+    },
+    
+    googleLoginValidator: function (req, res, next) {
+        
+    },
+    
+    googleLogin: function(req, res, next) {
+        
     }
 };
