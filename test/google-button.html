@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id"
+          content="160162546321-8u5mfbbgqa28l3q5d80l8is3ps9gsd0c.apps.googleusercontent.com">
+    <title>Document</title>
+
+
+    <script src="https://apis.google.com/js/client:platform.js?onload=startApp" async defer></script>
+</head>
+
+<body>
+
+<div id="gConnect">
+    <div id="signin-button"></div>
+</div>
+<div>
+    <button onClick="gapi.auth2.getAuthInstance().signOut()">Sign out</button>
+    <button onClick="gapi.auth2.getAuthInstance().disconnect()">Disconnect</button>
+</div>
+
+<script>
+    window.onbeforeunload = function (e) {
+        gapi.auth2.getAuthInstance().signOut();
+    };
+
+    function onSuccess(googleUser) {
+        console.log(googleUser.getBasicProfile());
+        let basicProfile = googleUser.getBasicProfile();
+//        $.post('http://localhost:8090/api/auth/google-register', {
+//            email: basicProfile.getEmail(),
+//            firstName: basicProfile.getGivenName(),
+//            lastName: basicProfile.getFamilyName(),
+//            idToken: googleUser.getAuthResponse().id_token,
+//            userId: basicProfile.getId()
+//        });
+
+        $.post('http://localhost:8090/api/auth/google-login', {
+            idToken: googleUser.getAuthResponse().id_token,
+            userId: basicProfile.getId()
+        });
+    }
+    function onFailure(error) {
+        console.log(error);
+    }
+
+    /**
+     * Minimal implementation of Sign-in button rendered at load.
+     */
+    function startApp() {
+        gapi.load('auth2', function () {
+            gapi.client.load('plus', 'v1').then(function () {
+                gapi.signin2.render('signin-button', {
+                    scope: 'profile',
+                    fetch_basic_profile: true
+                });
+                gapi.auth2.init({
+                    fetch_basic_profile: false,
+                    client_id: '160162546321-8u5mfbbgqa28l3q5d80l8is3ps9gsd0c.apps.googleusercontent.com',
+                    scope: 'profile'
+                }).then(function () {
+                    console.log('init');
+                    auth2 = gapi.auth2.getAuthInstance();
+                    auth2.isSignedIn.listen(function () {
+                        console.log(auth2.currentUser.get());
+                    });
+                    auth2.then(function (resp) {
+                        console.log(auth2.currentUser.get());
+                    });
+                });
+            });
+        });
+    }
+
+    function authResponse() {
+        console.log(auth2.currentUser.get().getAuthResponse());
+    }
+
+    window.onbeforeunload = function (e) {
+        gapi.auth2.getAuthInstance().signOut();
+    };
+</script>
+
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+</body>
+
+</html>
