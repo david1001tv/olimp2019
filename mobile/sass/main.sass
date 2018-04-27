@@ -1,0 +1,248 @@
+*
+	padding: 0
+	margin: 0
+
+body
+	height: 1500px
+
+.clearfix:after 
+  visibility: hidden
+  display: block
+  font-size: 0
+  content: " "
+  clear: both
+  height: 0
+
+.head // Херед приложений
+	display: flex
+	height: 10%
+	background-color: #E75555
+	color: #fff
+	.title
+		margin: auto 5%
+
+.wrap // Телефон
+	background-color: black
+	height: 550px
+	width: 285px
+	padding: 20px 10px
+	border-radius: 35px
+	position: relative
+	box-shadow: 4px 5px 8px grey
+	margin: 50px auto
+	font-family: "OpenSansRegular"
+	.dynamic
+		background-color: #292929
+		height: .9%
+		width: 14%
+		border-radius: 3px
+		margin: 0 auto
+	.screen // экран
+		margin: 15px auto 10px
+		height: 88%
+		background-color: #3A3A3A
+		background-image: url('../img/wallpaper1.jpg')
+		background-size: contain
+		color: #fff
+		.home // Главный экран
+			height: 95%
+		.top-bar // Верхняя панель
+			position: relative
+			height: 5%
+			padding: 0 4px
+			background-color: rgba(0, 0, 0, .8)
+			color: #fff
+			font-size: .8em
+			.time
+				position: absolute
+				left: 44%
+			.right
+				float: right
+				font-size: .85em
+				i
+					padding: 4px 2px
+		.todo-list // Список заданий
+			width: 100%
+			height: 60%
+			.head
+				height: 16%
+				justify-content: space-between
+				background-color: #2384D1
+				i
+					font-size: 1.4em
+					margin: auto 15px
+					cursor: pointer
+			.list
+				width: 100%
+				max-height: 84%
+				background-color: rgba(255, 255, 255, .85)
+				color: #474747
+				overflow-y: scroll
+				font-family: "Exo2Regular"
+				li
+					list-style-type: none
+					padding: 15px 10px
+					border-bottom: 1px solid #D4D4D4
+					.text
+						width: 90%
+						float: left
+						padding-right: 5px
+					.state
+						display: flex
+						margin: auto
+						width: 10%
+						float: right
+						.ok
+							font-size: 1.2em
+							color: #00D023
+						.circle
+							width: 1em
+							height: 1em
+							border: 2px solid #909090
+							border-radius: 50%
+
+	// Приложение на главном экране
+	.apps
+		display: flex
+		justify-content: space-around
+		width: 100%
+		height: 40%
+		// margin-top: 10%
+		align-items: center
+		.item
+			flex-basis: 25%
+			cursor: pointer
+			.icon
+				height: 80%
+				img
+					width: 100%
+			.title
+				font-size: .95em
+				text-align: center
+				font-family: "OpenSansLight"
+
+	// Приложение "Почта"
+	.mail
+		height: 95%
+		background-color: #fff
+		color: #3F3F3F
+		// display: none // СКРЫЛ ДЛЯ ВЕРСКИ ДРУГИХ ЭКРАНОВ
+		.head
+			display: flex
+			height: 10%
+			background-color: #E75555
+			color: #fff
+			.title
+				margin: auto 5%
+		.messages // Список сообщений
+			height: 90%
+			overflow-y: scroll
+		.message // Отдельное сообщение
+			position: relative
+			list-style-type: none
+			padding: 10px
+			border-bottom: 1px solid #CBCBCB
+			cursor: pointer
+			transition: .2s
+			color: #878787
+			&:hover
+				background-color: #EAEAEA
+			.sender
+				padding-right: 20%
+				font-size: .95em
+			.theme,
+			.text
+				font: .95em "OpenSansRegular"
+			.text
+				font: .8em "RobotoLight"
+			.date
+				position: absolute
+				top: 8%
+				right: 3%
+				font: .7em "Exo2Regular"
+			.icon-user,
+			.icon-letter
+				color: #878787
+			.icon-user
+				font-size: .9em
+		.message.unread
+			background-color: #F8F8F8
+			color: #000
+			.sender
+				font-family: "OpenSansBold"
+			.theme
+				font-family: "OpenSansBold"
+			.date
+				font-family: "Exo2Bold"
+				color: #4773DB
+			.icon-user,
+			.icon-letter
+				color: #000
+
+	// Входящее письмо
+	.letter
+		height: 95%
+		background-color: #fff
+		.head
+			font-size: 1.3em
+			i
+				cursor: pointer
+		.content
+			padding-bottom: 10%
+			height: 90%
+			color: #000
+			font-family: "RobotoLight"
+			overflow-y: scroll
+			.theme
+				font-family: "OpenSansSemiBold"
+				padding:  6% 7% 
+				border-bottom: 1px solid #DDDDDD
+			.info
+				display: flex
+				padding: 4% 7%
+				.logo
+					flex-basis: 25%
+					img
+						max-width: 100%
+				.user-info
+					flex: 3 1 50%
+					padding-left: 10%
+					.sender
+						margin-top: 2%
+					.recipient,
+					.date
+						color: #4F4F4F
+					.recipient
+						font-size: .85em
+					.date
+						font-size: .75em
+			.text
+				padding: 1% 7%
+				font: .9em "RobotoLight"
+				text-align: justify
+				color: #4C4C4C
+	.button // Кнопка "Домой"
+		position: relative
+		height: 40px
+		width: 40px
+		margin: 0 auto
+		border-radius: 50%
+		background-color: #252525
+		cursor: pointer
+		.square
+			position: absolute
+			top: 30%
+			left: 30%
+			width: 40%
+			height: 40%
+			border: 1px solid #575757
+			border-radius: 15%
+
+
+
+
+.shoEto
+	margin-top: 30px
+	font-size: 3em
+	text-align: center
+	font-family: Courier New
