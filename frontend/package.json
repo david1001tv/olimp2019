@@ -1,0 +1,52 @@
+{
+  "name": "olimp",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack -p",
+    "start": "./node_modules/.bin/webpack-dev-server --hot --inline"
+  },
+  "keywords": [],
+  "author": "Fruch6807",
+  "license": "MIT",
+  "dependencies": {
+    "autobind-decorator": "^2.1.0",
+    "npm": "^5.8.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-google-login": "^3.2.1",
+    "react-loadable": "^5.3.1",
+    "react-md": "^1.2.13",
+    "react-router-dom": "^4.2.2",
+    "regenerator-runtime": "^0.11.1",
+    "validate.js": "^0.12.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-plugin-transform-imports": "^1.5.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "url-loader": "^1.0.1",
+    "webpack": "^3.11.0",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^2.11.2"
+  }
+}
