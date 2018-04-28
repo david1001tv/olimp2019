@@ -21,6 +21,7 @@ export async function logIn(credentials) {
   }).then(res => res.json());
 
   token = response.token;
+  localStorage.setItem('token', token);
 }
 
 export async function register(data) {
@@ -32,7 +33,8 @@ export async function register(data) {
     },
   }).then(res => res.json());
 
-  token = response.token;
+    token = response.token;
+    localStorage.setItem('token', token);
 }
 
 export async function googleRegister (data) {
@@ -45,6 +47,7 @@ export async function googleRegister (data) {
     }).then(res => res.json());
 
     token = response.token;
+    localStorage.setItem('token', token);
 }
 
 export async function googleLogIn(credentials) {
@@ -57,4 +60,5 @@ export async function googleLogIn(credentials) {
     }).then(res => res.json());
 
     token = response.token;
+    localStorage.setItem('token', token);
 }

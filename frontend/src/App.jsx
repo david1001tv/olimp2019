@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Auth from '~components/Auth';
 import PrivateRoute from '~components/PrivateRoute';
 import Menu from '~components/Menu';
+import GameComponent from '~components/Game';
 
 class App extends Component {
   render() {
@@ -15,9 +16,9 @@ class App extends Component {
         />
         <Switch>
           <Route path="/auth" component={Auth} />
-          <PrivateRoute
+          <Route
             path="/"
-            component={() => <div>Super secret content</div>}
+            component={() => <GameComponent />}
           />
         </Switch>
       </main>
