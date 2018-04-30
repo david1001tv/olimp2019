@@ -17,7 +17,6 @@ class Auth extends Component {
     }
 
     return (
-      <Paper zDepth={3} className="auth">
         <div>
           <Switch>
             <Redirect
@@ -37,7 +36,6 @@ class Auth extends Component {
             />
           </Switch>
         </div>
-      </Paper>
     );
   }
 }
