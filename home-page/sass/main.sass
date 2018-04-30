@@ -1,0 +1,74 @@
+*
+	padding: 0
+	margin: 0
+	&:active,
+	&:focus
+		outline: none
+
+.clearfix:after 
+  visibility: hidden
+  display: block
+  font-size: 0
+  content: " "
+  clear: both
+  height: 0
+
+body
+	font: 18px "Pangolin"
+	background-image: url(../img/bg.jpg)
+	background-size: 100%
+	background-repeat: no-repeat
+	background-position: 0 60%
+	
+header
+	.page-title
+		padding-top: 30px
+		font: 4em "Neucha"
+		text-align: center
+		font-stretch: ultra-expanded
+.page-subtitle
+	margin: 40px auto 30px
+	text-align: center
+	font-size: 2em
+
+.game-info
+	width: 80%
+	margin: 0 auto
+	font-size: 1.3em
+	text-align: center
+	color: #3A3A3A
+
+.buttons
+	display: flex
+	flex-direction: column
+	margin: 100px 0
+	.btn
+		background-color: transparent
+		border: none
+		margin: 25px 0
+		width: 100%
+		text-align: center
+		width: 340px
+		height: 100px
+		cursor: pointer
+		background-size: 100%
+		background-repeat: no-repeat
+		margin: 20px auto
+	#start
+		background-image: url(../img/img/img/buttons/button-start-released.png)
+		&:active
+			background-image: url(../img/img/img/buttons/button-start-pressed.png)
+	#continue
+		background-image: url(../img/img/img/buttons/button-continue-released.png)
+		&:active
+			background-image: url(../img/img/img/buttons/button-continue-pressed.png)
+footer
+	padding-bottom: 50px
+	text-align: center
+	.likes
+		margin-bottom: 20px
+		font-size: 2em
+		color: #2B2B2B
+	.copyright
+		font-size: 1.7em
+		color: #3C3C3C
