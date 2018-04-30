@@ -3,3 +3,4 @@ node_modules/
 .sublime/
 backend/config.js
 frontend/public/build
+package-lock.json
