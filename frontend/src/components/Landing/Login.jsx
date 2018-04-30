@@ -113,7 +113,9 @@ class Login extends Component {
 
         return (
             <div className="login-form">
-                <h3>Вхід</h3>
+                <div className="md-text-center">
+                    <h3>Вхід</h3>
+                </div>
                 <div className="md-text-center">
                     <GoogleLogin
                         render={renderProps => (
