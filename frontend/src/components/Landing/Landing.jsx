@@ -27,29 +27,9 @@ class Landing extends Component {
                         <div className="copyright">Команда ДВНЗ “ПДТУ”, 2018 ©</div>
                         <button className="btn-feedback" id="btn-feedback">Зворотній зв'язок</button>
                     </footer>
-                    <div className="auth" id="auth">
-                        <div className="title">Вхід</div>
-                        <button className="google-auth">
-                            <img src="img/buttons/button-google-released.png" alt="" />
-                        </button>
-                        <form>
-                            <input type="text" placeholder="ім’я" />
-                            <input type="password" placeholder="пароль" />
-                        </form>
-                        <button className="submit"></button>
-                    </div>
-
-                    <div className="feedback" id="feedback">
-                        <div className="title">Зворотній зв'язок</div>
-                        <form>
-                            <input type="text" placeholder="Електронна адреса" />
-                            <textarea placeholder="Текст проблеми" rows="10"></textarea>
-                        </form>
-                        <button className="submit"></button>
-                    </div>
                 </div>
                 <DialogContainer
-                    visible={true}
+                    visible={false}
                 >
                     <Login />
                 </DialogContainer>
