@@ -7,23 +7,23 @@ export default class IntroState extends Phaser.State {
         console.log(0);
         console.log(this.camera);
         window.CAMERA = this.camera;
-        // this.camera.scale.setTo(5, 5);
-        this.camera.x = 1128;
-        this.camera.y = 280;
+
+        this.camera.scale.setTo(5, 5);
+        this.camera.x = 1128 * 5 - 1000;
+        this.camera.y = 280 * 5 - 300;
+        this.game.add.tween(this.camera).to({ x: 1128, y: 280 }, 5000).start();
         this.game.add.tween(this.camera.scale).to({
             x: 1,
             y: 1,
-        }, 3000).start().onComplete.add(() => {
-            this.next();
-        });
+        }, 5000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
         this.game.camera.flash(0x000000, 3000, true);
         yield;
 
-
+        this.david.loadTexture('d-sits-turn');
         this.game.add.tween(this.mom).to({
             alpha: 1
-        }, 1500, Phaser.Easing.Cubic.In)
-        .start().onComplete.add(() => {
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
             this.next();
         });
         yield;
@@ -43,6 +43,24 @@ export default class IntroState extends Phaser.State {
 
         this.game.displayDialogLine('Ви', 'Добре, мамо');
         yield;
+
+
+        this.david.loadTexture('d-sits');
+        this.game.add.tween(this.mom).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+            this.next();
+        });
+        yield;
+
+
+        this.game.displayDialogLine('Ви', 'Кожного дня працюю за комп’ютером. Справді добре було б покращити свої навички володіння їм.');
+        yield;
+
+
+        this.game.displayDialogLine('Ви', 'Вирішено. Поступлю на програміста.');
+        yield;
     }
 
     init() {
@@ -50,9 +68,11 @@ export default class IntroState extends Phaser.State {
     }
 
     preload() {
-        this.load.image('bg', './assets/images/quest-bg1.png');
-        this.load.image('mom', './assets/images/mom.png');
-        this.load.image('d-sits', './assets/images/d-sits.png');
+        this.load.image('bg', './assets/images/1-1 (intro)/bg-1-1.png');
+        this.load.image('mom', './assets/images/1-1 (intro)/mom.png');
+        this.load.image('d-sits', './assets/images/1-1 (intro)/d-sits.png');
+        this.load.image('d-sits-turn', './assets/images/1-1 (intro)/d-sits-turn.png');
+        this.load.image('printer', './assets/images/1-1 (intro)/printer.png');
     }
 
     create() {
@@ -71,6 +91,14 @@ export default class IntroState extends Phaser.State {
         david.aspectRatio = david.width / david.height;
         david.height = 551;
         david.width = david.aspectRatio * david.height;
+        this.david = david;
+
+        let printer = this.game.add.image(284, 340, 'printer');
+        printer.aspectRatio = printer.width / printer.height;
+        printer.height = 178;
+        printer.width = printer.aspectRatio * printer.height;
+
+
 
         // const bannerText = 'Phaser + ES6 + Webpack';
         // let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText, {
