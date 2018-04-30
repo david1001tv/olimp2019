@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Link, Redirect, withRouter} from 'react-router-dom';
-import {Button, TextField, LinearProgress} from 'react-md';
+import {Button, TextField, LinearProgress, Paper} from 'react-md';
 import validate from 'validate.js';
 import autobind from 'autobind-decorator';
 import {GoogleLogin} from 'react-google-login';
 
-import googleLogo from '../../img/google-logo.png';
+import googleLoginButton from '../../img/buttons/button-google-released.png';
 
 import {logIn, isAuthenticated, googleLogIn} from '~api';
 
@@ -112,19 +112,18 @@ class Login extends Component {
         const {email, password} = this.state.data;
 
         return (
-            <div>
-                <h3>Вхід</h3>
+            <div className="login-form">
+                <div className="md-text-center">
+                    <h3>Вхід</h3>
+                </div>
                 <div className="md-text-center">
                     <GoogleLogin
                         render={renderProps => (
-                            <Button
-                                iconEl={<img height="20px" src={googleLogo}/>}
-                                raised
+                            <button
                                 onClick={renderProps.onClick}
-                                style={{textTransform: 'none'}}
+                                className="drawn-btn drawn-btn__google"
                             >
-                                Увійти через Google
-                            </Button>
+                            </button>
                         )}
                         onSuccess={this.handleGoogleResponseSuccess}
                         onFailure={e => console.error(e)}
@@ -162,14 +161,12 @@ class Login extends Component {
                     </div>
                     <div className="md-text-center">
                         {this.state.isLoading ? <LinearProgress /> : null}
-                        <Button
+                        <button
                             type="submit"
-                            raised
-                            primary
+                            className="drawn-btn drawn-btn__log-in"
                             disabled={this.state.isLoading}
                         >
-                            Войти
-                        </Button>
+                        </button>
                     </div>
                 </form>
             </div>

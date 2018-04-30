@@ -2,6 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
+definePlugin = new webpack.DefinePlugin({
+    __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
+})
+
 const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
 const phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
 const pixi = path.join(phaserModule, 'build/custom/pixi.js');
@@ -10,7 +14,6 @@ const p2 = path.join(phaserModule, 'build/custom/p2.js');
 module.exports = {
     entry: {
         main: './src/index.js',
-        vendor: ['pixi', 'p2', 'phaser', 'webfontloader', 'react', 'react-dom']
     },
     output: {
         path: path.resolve(__dirname, 'public/build'),
@@ -25,7 +28,7 @@ module.exports = {
             '~api': path.resolve(__dirname, './src/api.js'),
             'phaser': phaser,
             'pixi': pixi,
-            'p2': p2
+            'p2': p2,
         },
     },
     module: {
@@ -69,9 +72,6 @@ module.exports = {
                     },
                 }],
             },
-            { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
-            { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
-            { test: /p2\.js/, use: ['expose-loader?p2'] }
         ],
     },
     devServer: {
@@ -93,12 +93,9 @@ module.exports = {
                 js: ['main.js'],
             },
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor'/* chunkName= */,
-            filename: 'vendor.bundle.js'/* filename= */
-        }),
-        new webpack.DefinePlugin({
-            __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('./public/build/vendor-manifest.json'),
         })
     ],
 };
