@@ -7,7 +7,6 @@ export default class DocsState extends Phaser.State {
         console.log(0);
         console.log(this.camera);
         window.CAMERA = this.camera;
-        // this.camera.scale.setTo(5, 5);
         this.camera.x = 1128;
         this.camera.y = 280;
         this.game.add.tween(this.camera.scale).to({
@@ -44,10 +43,6 @@ export default class DocsState extends Phaser.State {
         this.game.displayDialogLine('Голос всередені', 'Добре, хлопче. Тільки пообіцяй, що про це ніхто не буде знати.\
         Гаразд? Ну добре. Отже підказка: не забудь перевірити шафу. Усе, мені пора, щасти тобі. <клік щоб продовжити>');
         yield;
-
-
-        /*this.game.displayDialogLine('Ви', 'Добре, мамо');
-        yield;*/
     }
 
     init() {
@@ -58,12 +53,12 @@ export default class DocsState extends Phaser.State {
 
     preload() {
         this.load.image('bg', './assets/images/quest-bg-1-2.png');
-        this.load.image('door-closed', './assets/images/door-closed.png');
+
         this.load.image('d-right', './assets/images/d-right.png');
-        this.load.image('sertificate', './assets/images/sertificate.png');
-        //this.load.image('door-opened-right', './assets/images/door-opened-right.png');
-        //this.load.image('door-opened-left', './assets/images/door-opened-left.png');
+
+        this.load.image('door-closed', './assets/images/door-closed.png');
         this.load.image('door-opened', './assets/images/door-opened.png');
+        this.load.image('sertificate', './assets/images/sertificate.png');
         this.load.image('passport', './assets/images/passport.png');
         this.load.image('photos', './assets/images/photos.png');
         this.load.image('warticket', './assets/images/warticket.png');
@@ -76,47 +71,9 @@ export default class DocsState extends Phaser.State {
         this.load.image('zno-small', './assets/images/zno-small.png');
     }
 
-    open_door(){
-        //this.door_opened_right.alpha = 1;
-        //this.door_opened_left.alpha = 1;
-        this.door_opened.alpha = 1;
-        this.door_closed.alpha = 0;
-    }
-
-    close_door(){
-        //this.door_opened_right.alpha = 0;
-        //this.door_opened_left.alpha = 0;
-        this.door_opened.alpha = 0;
-        this.door_closed.alpha = 1;
-    }
-
-    get_sertificate() {
-        this.sertificate.alpha = 0
-        this.eng.alpha = 1;
-    }
-
-    get_passport() {
-        this.passport.alpha = 0;
-        this.pass.alpha = 1;
-    }
-
-    get_photos() {
-        this.photos.alpha = 0;
-        this.phot.alpha = 1;
-    }
-
-    get_war() {
-        this.warticket.alpha = 0;
-        this.war.alpha = 1;
-    }
-
-    get_zno() {
-        this.zno.alpha = 0;
-        this.zno_small.alpha = 1;
-    }
-
     create() {
-        //game.input.mouse.capture = true;
+        let count = 0;
+        this.count = count;
 
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
@@ -163,7 +120,6 @@ export default class DocsState extends Phaser.State {
         sertificate.width = sertificate.aspectRatio * sertificate.height;
         sertificate.inputEnabled = true;
         this.sertificate = sertificate;
-        sertificate.events.onInputDown.add(this.get_sertificate, this);
 
         let photos = this.game.add.image(1170, 525, 'photos');
         photos.aspectRatio = photos.width / photos.height;
@@ -171,7 +127,6 @@ export default class DocsState extends Phaser.State {
         photos.width = photos.aspectRatio * photos.height;
         photos.inputEnabled = true;
         this.photos = photos;
-        photos.events.onInputDown.add(this.get_photos, this);
 
         let warticket = this.game.add.image(1720, 340, 'warticket');
         warticket.aspectRatio = warticket.width / warticket.height;
@@ -179,7 +134,6 @@ export default class DocsState extends Phaser.State {
         warticket.width = warticket.aspectRatio * warticket.height;
         warticket.inputEnabled = true;
         this.warticket = warticket;
-        warticket.events.onInputDown.add(this.get_war, this);
 
         let zno = this.game.add.image(660, 783, 'zno');
         zno.aspectRatio = zno.width / zno.height;
@@ -187,7 +141,6 @@ export default class DocsState extends Phaser.State {
         zno.width = zno.aspectRatio * zno.height;
         zno.inputEnabled = true;
         this.zno = zno;
-        zno.events.onInputDown.add(this.get_zno, this);
 
         let passport = this.game.add.image(364, 435, 'passport');
         passport.aspectRatio = passport.width / passport.height;
@@ -195,7 +148,6 @@ export default class DocsState extends Phaser.State {
         passport.width = passport.aspectRatio * passport.height;
         passport.inputEnabled = true;
         this.passport = passport;
-        passport.events.onInputDown.add(this.get_passport, this);
 
         let door_closed = this.game.add.image(103, 234, 'door-closed');
         door_closed.aspectRatio = door_closed.width / door_closed.height;
@@ -204,7 +156,6 @@ export default class DocsState extends Phaser.State {
         door_closed.alpha = 1;
         door_closed.inputEnabled = true;
         door_closed.input.priorityID = 1;
-        door_closed.events.onInputDown.add(this.open_door, this);
         this.door_closed = door_closed;
 
         let door_opened = this.game.add.image(5, 240, 'door-opened');
@@ -212,26 +163,14 @@ export default class DocsState extends Phaser.State {
         door_opened.height = 580;
         door_opened.width = door_opened.aspectRatio * door_opened.height;
         door_opened.inputEnabled = true;
-        door_opened.events.onInputDown.add(this.close_door, this);
         door_opened.alpha = 0;
         this.door_opened = door_opened;
-        /*let door_opened_right = this.game.add.image(5, 240, 'door-opened-right');
-        door_opened_right.aspectRatio = door_opened_right.width / door_opened_right.height;
-        door_opened_right.height = 580;
-        door_opened_right.width = door_opened_right.aspectRatio * door_opened_right.height;
-        door_opened_right.inputEnabled = true;
-        door_opened_right.events.onInputDown.add(this.close_door, this);
-        door_opened_right.alpha = 0;
-        this.door_opened_right = door_opened_right;
 
-        let door_opened_left = this.game.add.image(5, 240, 'door-opened-left');
-        door_opened_left.aspectRatio = door_opened_left.width / door_opened_left.height;
-        door_opened_left.height = 580;
-        door_opened_left.width = door_opened_left.aspectRatio * door_opened_left.height;
-        door_opened_left.inputEnabled = true;
-        door_opened_left.events.onInputDown.add(this.close_door, this);
-        door_opened_left.alpha = 0;
-        this.door_opened_left = door_opened_left;*/
+        let arr = [sertificate, passport, photos, warticket, zno, door_closed, door_opened];
+
+        arr.forEach(e => {
+            e.events.onInputDown.add(this.handleClick, this);
+        })
 
         let david = this.game.add.image(1300, 280, 'd-right');
         david.aspectRatio = david.width / david.height;
@@ -240,28 +179,45 @@ export default class DocsState extends Phaser.State {
         david.alpha = 0;
         this.david = david;
 
-        // const bannerText = 'Phaser + ES6 + Webpack';
-        // let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText, {
-        //     font: '40px Bangers',
-        //     fill: '#77BFA3',
-        //     smoothed: false
-        // });
-
-        // banner.padding.set(10, 16);
-        // banner.anchor.setTo(0.5);
-
         this.stage.disableVisibilityChange = true;
-
         this.next();
+    }
+
+    handleClick(obj){
+        this.count++;
+        if(obj.key === this.sertificate.key) {
+            this.sertificate.alpha = 0
+            this.eng.alpha = 1;
+        }
+        if(obj.key === this.passport.key) {
+            this.passport.alpha = 0
+            this.pass.alpha = 1;
+        }
+        if(obj.key === this.warticket.key) {
+            this.warticket.alpha = 0
+            this.war.alpha = 1;
+        }
+        if(obj.key === this.photos.key) {
+            this.photos.alpha = 0
+            this.phot.alpha = 1;
+        }
+        if(obj.key === this.zno.key) {
+            this.zno.alpha = 0
+            this.zno_small.alpha = 1;
+        }
+        if(obj.key === this.door_closed.key){
+            this.door_opened.alpha = 1;
+            this.door_closed.alpha = 0;
+        }
+        if(obj.key === this.door_opened.key){
+            this.door_opened.alpha = 0;
+            this.door_closed.alpha = 1;
+        }
     }
 
     render() {
         // if (__DEV__) {
-            /*let count = 0;
-            if(game.input.mousePointer.isDown) {
-                count++;
-            }*/
-        this.game.debug.spriteInfo(this.david, 32, 32);
+
         // }
     }
 
