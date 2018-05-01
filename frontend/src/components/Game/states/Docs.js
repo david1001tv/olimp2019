@@ -79,91 +79,41 @@ export default class DocsState extends Phaser.State {
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
 
-        let eng = this.game.add.image(70, 800, 'eng-small');
-        eng.aspectRatio = eng.width / eng.height;
-        eng.height = 70;
-        eng.width = eng.aspectRatio * eng.height;
-        eng.alpha = 0;
+        let eng = this.create_sprite('eng-small', 70, 800, 70, false, false);
         this.eng = eng;
 
-        let pass = this.game.add.image(140, 800, 'pass-small');
-        pass.aspectRatio = pass.width / pass.height;
-        pass.height = 70;
-        pass.width = pass.aspectRatio * pass.height;
-        pass.alpha = 0;
+        let pass = this.create_sprite('pass-small', 140, 800, 70, false, false);
         this.pass = pass;
 
-        let phot = this.game.add.image(210, 800, 'photos-small');
-        phot.aspectRatio = phot.width / phot.height;
-        phot.height = 70;
-        phot.width = phot.aspectRatio * phot.height;
-        phot.alpha = 0;
+        let phot = this.create_sprite('photos-small', 210, 800, 70, false, false);
         this.phot = phot;
 
-        let war = this.game.add.image(280, 800, 'war-small');
-        war.aspectRatio = war.width / war.height;
-        war.height = 70;
-        war.width = war.aspectRatio * war.height;
-        war.alpha = 0;
+        let war = this.create_sprite('war-small', 280, 800, 70, false, false);
         this.war = war;
 
-        let zno_small = this.game.add.image(350, 800, 'zno-small');
-        zno_small.aspectRatio = zno_small.width / zno_small.height;
-        zno_small.height = 70;
-        zno_small.width = zno_small.aspectRatio * zno_small.height;
-        zno_small.alpha = 0;
+        let zno_small = this.create_sprite('zno-small', 350, 800, 70, false, false);
         this.zno_small = zno_small;
 
-        let sertificate = this.game.add.image(1430, 175, 'sertificate');
-        sertificate.aspectRatio = sertificate.width / sertificate.height;
-        sertificate.height = 120;
-        sertificate.width = sertificate.aspectRatio * sertificate.height;
-        sertificate.inputEnabled = true;
+        let sertificate = this.create_sprite('sertificate', 1430, 175, 120, true, true);
         this.sertificate = sertificate;
 
-        let photos = this.game.add.image(1170, 525, 'photos');
-        photos.aspectRatio = photos.width / photos.height;
-        photos.height = 40;
-        photos.width = photos.aspectRatio * photos.height;
-        photos.inputEnabled = true;
+        let photos = this.create_sprite('photos', 1170, 525, 40, true, true);
         this.photos = photos;
 
-        let warticket = this.game.add.image(1720, 340, 'warticket');
-        warticket.aspectRatio = warticket.width / warticket.height;
-        warticket.height = 40;
-        warticket.width = warticket.aspectRatio * warticket.height;
-        warticket.inputEnabled = true;
+        let warticket = this.create_sprite('warticket', 1720, 340, 40, true, true);
         this.warticket = warticket;
 
-        let zno = this.game.add.image(660, 783, 'zno');
-        zno.aspectRatio = zno.width / zno.height;
-        zno.height = 50;
-        zno.width = zno.aspectRatio * zno.height;
-        zno.inputEnabled = true;
+        let zno = this.create_sprite('zno', 660, 783, 50, true, true);
         this.zno = zno;
 
-        let passport = this.game.add.image(364, 435, 'passport');
-        passport.aspectRatio = passport.width / passport.height;
-        passport.height = 23.12345;
-        passport.width = passport.aspectRatio * passport.height;
-        passport.inputEnabled = true;
+        let passport = this.create_sprite('passport', 364, 435, 23.12345, true, true);
         this.passport = passport;
 
-        let door_closed = this.game.add.image(103, 234, 'door-closed');
-        door_closed.aspectRatio = door_closed.width / door_closed.height;
-        door_closed.height = 540;
-        door_closed.width = door_closed.aspectRatio * door_closed.height;
-        door_closed.alpha = 1;
-        door_closed.inputEnabled = true;
+        let door_closed = this.create_sprite('door-closed', 103, 234, 540, true, true);
         door_closed.input.priorityID = 1;
         this.door_closed = door_closed;
 
-        let door_opened = this.game.add.image(5, 240, 'door-opened');
-        door_opened.aspectRatio = door_opened.width / door_opened.height;
-        door_opened.height = 580;
-        door_opened.width = door_opened.aspectRatio * door_opened.height;
-        door_opened.inputEnabled = true;
-        door_opened.alpha = 0;
+        let door_opened = this.create_sprite('door-opened', 5, 240, 580, false, true);
         this.door_opened = door_opened;
 
         let arr = [sertificate, passport, photos, warticket, zno, door_closed, door_opened];
@@ -172,11 +122,7 @@ export default class DocsState extends Phaser.State {
             e.events.onInputDown.add(this.handleClick, this);
         })
 
-        let david = this.game.add.image(1300, 280, 'd-right');
-        david.aspectRatio = david.width / david.height;
-        david.height = 551;
-        david.width = david.aspectRatio * david.height;
-        david.alpha = 0;
+        let david = this.create_sprite('d-right', 1300, 280, 551, false, false);
         this.david = david;
 
         this.stage.disableVisibilityChange = true;
@@ -213,6 +159,23 @@ export default class DocsState extends Phaser.State {
             this.door_opened.alpha = 0;
             this.door_closed.alpha = 1;
         }
+    }
+
+    create_sprite(name, pos_X, pos_Y, height, flag_alpha, flag_input) {
+        let tmp = this.game.add.image(pos_X, pos_Y, name);
+        tmp.aspectRatio = tmp.width / tmp.height;
+        tmp.height = height;
+        tmp.width = tmp.aspectRatio * tmp.height;
+        if(flag_alpha === false) {
+            tmp.alpha = 0;
+        }
+        else {
+            tmp.alpha = 1;
+        }
+        if(flag_input === true) {
+            tmp.inputEnabled = true;
+        }
+        return tmp;
     }
 
     render() {
