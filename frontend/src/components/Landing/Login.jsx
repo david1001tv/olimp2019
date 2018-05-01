@@ -113,7 +113,7 @@ class Login extends Component {
 
         return (
             <div className="login-form">
-                <div className="md-text-center">
+                <div className="md-text-center title">
                     <h3>Вхід</h3>
                 </div>
                 <div className="md-text-center">

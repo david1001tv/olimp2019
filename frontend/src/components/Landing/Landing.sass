@@ -1,5 +1,10 @@
+*:active,
+*:focus
+	outline: none
+
 body
 	font: 18px "Pangolin"
+	background-color: #fff
 	background-image: url(../../img/bg.jpg)
 	background-size: 100%
 	background-repeat: no-repeat
@@ -74,17 +79,19 @@ footer
 		color: #353535
 		border-bottom: 1px solid #353535
   
-  .md-dialog
-  width: auto
+.md-dialog
+	width: auto
+	padding: 10px 70px
 
-.login-form
-  font-size: 20px
-  *
-    font-size: 1em
-  h3
-    font-size: 2em
-
-
+	.md-dialog-content .login-form form div div .md-text-field-container label,
+	.md-dialog-content .login-form form div div .md-text-field-container input
+		font-family: "Pangolin", Arial, serif
+		font-size: 1.1em
+	.title h3
+		font-size: 3em
+		font-family: "Neucha", Arial, 'Times New Roman'
+		.md-text-field-container *
+			font-size: 30px !important
 
 .drawn-btn
   background-color: transparent
@@ -112,7 +119,23 @@ footer
     &:active
       background-image: url(../../img/buttons/button-enter-pressed.png)
   &__google
-    width: 409px
+    width: 340px
+    background-image: url(../../img/buttons/button-google-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-google-pressed.png)
+
+@media screen and (max-width: 630px)
+	.md-dialog
+		padding: 20px
+	.drawn-btn
+		height: 65px
+	.drawn-btn__log-in
+    width: 250px
+    background-image: url(../../img/buttons/button-enter-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-enter-pressed.png)
+	.drawn-btn__google
+    width: 250px
     background-image: url(../../img/buttons/button-google-released.png)
     &:active
       background-image: url(../../img/buttons/button-google-pressed.png)

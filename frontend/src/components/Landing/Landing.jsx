@@ -29,7 +29,7 @@ class Landing extends Component {
                     </footer>
                 </div>
                 <DialogContainer
-                    visible={false}
+                    visible={true}
                 >
                     <Login />
                 </DialogContainer>
