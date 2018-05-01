@@ -66,7 +66,8 @@ export default class Scanner extends Phaser.State {
         docs.forEach((e) => {
             e.inputEnabled = true;
             e.input.useHandCursor = true;
-            e.input.enableDrag();
+            e.input.pixelPerfectOver = true;
+            e.input.enableDrag(false, true, true, 1);
             e.events.onDragStart.add(this.handleDragStart, this);
         });
 
@@ -106,7 +107,8 @@ export default class Scanner extends Phaser.State {
 
     handleScanEnd() {
         this.isScanning = false;
-
+        let scannerRectangle = new Phaser.Rectangle(149, 87, 1280, 809);
+        console.log(Phaser.Rectangle.containsRect(this.activeDocument.getBounds(), scannerRectangle));
     }
 
     next() {
