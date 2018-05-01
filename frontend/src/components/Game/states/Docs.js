@@ -20,28 +20,33 @@ export default class DocsState extends Phaser.State {
         yield;
 
 
-        /*this.game.add.tween(this.mom).to({
+        this.game.add.tween(this.david).to({
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.In)
         .start().onComplete.add(() => {
             this.next();
         });
-        yield;*/
-
-
-        /*this.game.displayDialogLine('Маман', 'Доброго ранку синку! Тобі вже прийшов лист з університету?');
         yield;
 
 
-        this.game.displayDialogLine('Ви', 'Так, мамо');
+        this.game.displayDialogLine('Ви', "Такс... Потрібно зібрати документи. Мені потрібні: \
+        паспорт, військовий квиток, результати ЗНО, фотокартки, сертифікат з английської. \
+        От тільки де вони лежать? <клік щоб продовжити>");
         yield;
 
 
-        this.game.displayDialogLine('Маман', 'Ти вже обрав спеціальність? Син моєї подруги програміст, вже на першому курсі він отримував 1000$ щомісяця.');
+        this.game.displayDialogLine('Голос всередені', 'Гей, ти, так, ти-ти, хочеш підказку? \
+        Тоді клацай знов на це повідомлення. І поводься природно, ніхтно не повинен знати про цю розмову. \
+        <клік щоб продовжити>');
         yield;
 
 
-        this.game.displayDialogLine('Ви', 'Добре, мамо');
+        this.game.displayDialogLine('Голос всередені', 'Добре, хлопче. Тільки пообіцяй, що про це ніхто не буде знати.\
+        Гаразд? Ну добре. Отже підказка: не забудь перевірити шафу. Усе, мені пора, щасти тобі. <клік щоб продовжити>');
+        yield;
+
+
+        /*this.game.displayDialogLine('Ви', 'Добре, мамо');
         yield;*/
     }
 
@@ -232,6 +237,8 @@ export default class DocsState extends Phaser.State {
         david.aspectRatio = david.width / david.height;
         david.height = 551;
         david.width = david.aspectRatio * david.height;
+        david.alpha = 0;
+        this.david = david;
 
         // const bannerText = 'Phaser + ES6 + Webpack';
         // let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText, {
@@ -250,11 +257,11 @@ export default class DocsState extends Phaser.State {
 
     render() {
         // if (__DEV__) {
-            let count = 0;
-            /*if(game.input.mousePointer.isDown) {
+            /*let count = 0;
+            if(game.input.mousePointer.isDown) {
                 count++;
             }*/
-        //this.game.debug.spriteInfo(this.mom, 32, 32);
+        this.game.debug.spriteInfo(this.david, 32, 32);
         // }
     }
 
