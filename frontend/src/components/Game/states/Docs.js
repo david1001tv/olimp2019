@@ -58,6 +58,9 @@ export default class DocsState extends Phaser.State {
 
         this.load.image('door-closed', './assets/images/door-closed.png');
         this.load.image('door-opened', './assets/images/door-opened.png');
+        this.load.image('door-opened-right', './assets/images/door-opened-right.png');
+        this.load.image('door-opened-left', './assets/images/door-opened-left.png');
+        
         this.load.image('sertificate', './assets/images/sertificate.png');
         this.load.image('passport', './assets/images/passport.png');
         this.load.image('photos', './assets/images/photos.png');
@@ -106,17 +109,21 @@ export default class DocsState extends Phaser.State {
         let zno = this.create_sprite('zno', 660, 783, 50, true, true);
         this.zno = zno;
 
+        let door_opened_right = this.create_sprite('door-opened-right', 430, 235, 565, false, true);
+        this.door_opened_right = door_opened_right;
+
+        let door_opened_left = this.create_sprite('door-opened-left', 0, 243, 582, false, true);
+        this.door_opened_left = door_opened_left;
+
         let passport = this.create_sprite('passport', 364, 435, 23.12345, true, true);
+        passport.input.pixelPerfectOver = true;
         this.passport = passport;
 
         let door_closed = this.create_sprite('door-closed', 103, 234, 540, true, true);
         door_closed.input.priorityID = 1;
         this.door_closed = door_closed;
 
-        let door_opened = this.create_sprite('door-opened', 5, 240, 580, false, true);
-        this.door_opened = door_opened;
-
-        let arr = [sertificate, passport, photos, warticket, zno, door_closed, door_opened];
+        let arr = [sertificate, passport, photos, warticket, zno, door_closed, door_opened_left, door_opened_right];
 
         arr.forEach(e => {
             e.events.onInputDown.add(this.handleClick, this);
@@ -152,11 +159,15 @@ export default class DocsState extends Phaser.State {
             this.zno_small.alpha = 1;
         }
         if(obj.key === this.door_closed.key){
-            this.door_opened.alpha = 1;
+            this.door_opened_left.alpha = 1;
+            this.door_opened_right.alpha = 1;
             this.door_closed.alpha = 0;
+            this.door_closed.visible = false;
         }
-        if(obj.key === this.door_opened.key){
-            this.door_opened.alpha = 0;
+        if(obj.key === this.door_opened_left.key || obj.key === this.door_opened_right.key){
+            this.door_closed.visible = true;
+            this.door_opened_left.alpha = 0;
+            this.door_opened_right.alpha = 0;
             this.door_closed.alpha = 1;
         }
     }
