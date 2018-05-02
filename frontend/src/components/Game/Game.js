@@ -6,6 +6,7 @@ import BootState from './states/Boot';
 import IntroState from './states/Intro';
 import DocsState from './states/Docs';
 import ScannerState from './states/Scanner';
+import BrowserState from './states/Browser'
 
 
 import config from './config';
@@ -21,6 +22,7 @@ class Game extends Phaser.Game {
         this.state.add('Intro', IntroState, false);
         this.state.add('Docs', DocsState, false);
         this.state.add('Scanner', ScannerState, false);
+        this.state.add('Browser', BrowserState, false);
 
         this.state.start('Docs');
     }
