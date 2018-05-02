@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
@@ -38,8 +38,8 @@ class Phone extends Component {
     }
 
     render() {
-        const {showMail} = this.state;
-        const {isShown} = this.props;
+        const { showMail } = this.state;
+        const { isShown } = this.props;
 
         let className = `phone-wrapper ${isShown ? 'phone-wrapper--shown' : ''}`;
         return (
@@ -47,13 +47,13 @@ class Phone extends Component {
                 <div className="dynamic"></div>
                 <div className="screen">
                     <div className="top-bar">
-                        <span className="date" id="date">24.04.18</span>
-                        <span className="time" id="time">17:56</span>
-                        <span className="right">
-                    <i className="fas fa-wifi" aria-hidden="true"></i>
-                    <i className="fas fa-signal"></i>
-                    <i className="fas fa-battery-half"></i>
-                </span>
+                        <div className="date" id="date">24.04.18</div>
+                        <div className="time" id="time">17:56</div>
+                        <div className="right">
+                            <i className="fas fa-wifi" aria-hidden="true">o</i>
+                            <i className="fas fa-signal">o</i>
+                            <i className="fas fa-battery-half">o</i>
+                        </div>
                     </div>
                     {
                         showMail
@@ -65,7 +65,7 @@ class Phone extends Component {
                                 onMapClick={this.handleMapClick}
                             />
                     }
-                    { showMail ? <Mail /> : null}
+                    {showMail ? <Mail /> : null}
                 </div>
                 <div className="button" id="btn-home" onClick={this.handleHomeClick}>
                     <div className="square"></div>

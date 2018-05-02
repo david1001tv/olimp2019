@@ -43,42 +43,6 @@ class TodoList extends Component {
                                 <div className="circle"></div>
                             </div>
                         </li>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <div className="circle"></div>
-                            </div>
-                        </li>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <div className="circle"></div>
-                            </div>
-                        </li>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <div className="circle"></div>
-                            </div>
-                        </li>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <div className="circle"></div>
-                            </div>
-                        </li>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <div className="circle"></div>
-                            </div>
-                        </li>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <div className="circle"></div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>
