@@ -1,12 +1,97 @@
-.md-dialog
-  width: auto
+*:active,
+*:focus
+	outline: none
 
-.login-form
-  font-size: 20px
-  *
-    font-size: 1em
-  h3
-    font-size: 2em
+body
+	font: 18px "Pangolin"
+	background-color: #fff
+	background-image: url(../../img/bg.jpg)
+	background-size: 100%
+	background-repeat: no-repeat
+	background-position: 0 50%
+
+.wrapper
+	display: flex
+	flex-direction: column
+	height: 100%
+
+button
+	background-color: transparent
+	border: none
+	cursor: pointer
+
+.content
+	flex: 1 0 auto
+	
+header
+	.page-title
+		padding-top: 30px
+		font: 4em "Neucha"
+		text-align: center
+		font-stretch: ultra-expanded
+.page-subtitle
+	margin: 40px auto 30px
+	text-align: center
+	font-size: 2em
+
+.game-info
+	width: 80%
+	margin: 0 auto
+	font-size: 1.3em
+	text-align: center
+	color: #3A3A3A
+
+.buttons
+	display: flex
+	flex-direction: column
+	margin: 100px 0
+	.btn
+		margin: 25px 0
+		width: 100%
+		text-align: center
+		width: 340px
+		height: 94px
+		background-size: 100%
+		background-repeat: no-repeat
+		margin: 20px auto
+	#start
+		background-image: url(../../img/buttons/button-start-released.png)
+		&:active
+			background-image: url(../../img/buttons/button-start-pressed.png)
+	#continue
+		background-image: url(../../img/buttons/button-continue-released.png)
+		&:active
+			background-image: url(../../img/buttons/button-continue-pressed.png)
+footer
+	flex: 0 0 auto
+	padding-bottom: 30px
+	text-align: center
+	.likes
+		margin-bottom: 20px
+		font-size: 2em
+		color: #2B2B2B
+	.copyright
+		font-size: 1.7em
+		color: #3C3C3C
+	.btn-feedback
+		margin-top: 10px
+		font: 1.1em "Neucha"
+		color: #353535
+		border-bottom: 1px solid #353535
+  
+.md-dialog
+	width: auto
+	padding: 10px 70px
+
+	.md-dialog-content .login-form form div div .md-text-field-container label,
+	.md-dialog-content .login-form form div div .md-text-field-container input
+		font-family: "Pangolin", Arial, serif
+		font-size: 1.1em
+	.title h3
+		font-size: 3em
+		font-family: "Neucha", Arial, 'Times New Roman'
+		.md-text-field-container *
+			font-size: 30px !important
 
 .drawn-btn
   background-color: transparent
@@ -34,7 +119,23 @@
     &:active
       background-image: url(../../img/buttons/button-enter-pressed.png)
   &__google
-    width: 409px
+    width: 340px
+    background-image: url(../../img/buttons/button-google-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-google-pressed.png)
+
+@media screen and (max-width: 630px)
+	.md-dialog
+		padding: 20px
+	.drawn-btn
+		height: 65px
+	.drawn-btn__log-in
+    width: 250px
+    background-image: url(../../img/buttons/button-enter-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-enter-pressed.png)
+	.drawn-btn__google
+    width: 250px
     background-image: url(../../img/buttons/button-google-released.png)
     &:active
       background-image: url(../../img/buttons/button-google-pressed.png)
