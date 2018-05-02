@@ -3,6 +3,7 @@ import {GoogleLogin} from 'react-google-login';
 import {Button, TextField, LinearProgress} from 'react-md';
 import autobind from 'autobind-decorator';
 import validate from 'validate.js';
+import './Register.sass';
 
 import googleLogo from '../../img/google-logo.png';
 import {register, googleRegister} from '~api';
@@ -125,19 +126,18 @@ class Register extends Component {
         const {password, email, firstName, lastName} = this.state.data;
 
         return (
-            <div>
-                <h3>Реєстрація</h3>
+            <div className="auth">
+                <div className="title">
+                    <h3>Реєстрація</h3>
+                </div>
                 <div className="md-text-center">
                     <GoogleLogin
                         render={renderProps => (
-                            <Button
-                                iconEl={<img height="20px" src={googleLogo}/>}
-                                raised
+                            <button
                                 onClick={renderProps.onClick}
-                                style={{textTransform: 'none'}}
+                                className="drawn-btn drawn-btn__google"
                             >
-                                Увійти через Google
-                            </Button>
+                            </button>
                         )}
                         onSuccess={this.handleGoogleResponseSuccess}
                         onFailure={e => console.error(e)}
@@ -195,14 +195,12 @@ class Register extends Component {
 
                     <div className="md-text-center md-cell md-cell--12">
                         {this.state.isLoading ? <LinearProgress /> : null}
-                        <Button
-                            raised
-                            primary
+                        <button
                             type="submit"
+                            className="drawn-btn drawn-btn__register "
                             disabled={this.state.isLoading}
                         >
-                            Зареєструватися
-                        </Button>
+                        </button>
                     </div>
                 </form>
             </div>
