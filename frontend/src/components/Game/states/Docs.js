@@ -109,7 +109,7 @@ export default class DocsState extends Phaser.State {
         let zno = this.create_sprite('zno', 660, 783, 50, true, true);
         this.zno = zno;
 
-        let door_opened_right = this.create_sprite('door-opened-right', 430, 235, 565, false, true);
+        let door_opened_right = this.create_sprite('door-opened-right', 430, 235, 575, false, true);
         this.door_opened_right = door_opened_right;
 
         let door_opened_left = this.create_sprite('door-opened-left', 0, 243, 582, false, true);
