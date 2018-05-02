@@ -28,21 +28,25 @@ export default class DocsState extends Phaser.State {
         yield;
 
 
-        this.game.displayDialogLine('Ви', "Такс... Потрібно зібрати документи. Мені потрібні: \
-        паспорт, військовий квиток, результати ЗНО, фотокартки, сертифікат з английської. \
-        От тільки де вони лежать? <клік щоб продовжити>");
+        this.game.displayDialogLine('Ви', "Так... Треба зібрати документи. Мені потрібні: \
+        паспорт, військовий квиток, лист ЗНО, фотографії, сертифікат володіння іноземною моовю. \
+        От тільки де вони лежать?");
+        yield;
+
+        this.game.displayDialogLine('Ви', "Якщо я забуду що мені потрібно, то я зможу подивитись це в телефоні.");
         yield;
 
 
-        this.game.displayDialogLine('Голос всередені', 'Гей, ти, так, ти-ти, хочеш підказку? \
-        Тоді клацай знов на це повідомлення. І поводься природно, ніхтно не повинен знати про цю розмову. \
-        <клік щоб продовжити>');
-        yield;
+        this.game.input.onDown.add(this.countClick, this);
 
+        let arr = [this.sertificate, this.passport, this.photos, this.warticket, this.zno, this.door_closed, this.door_opened_left, this.door_opened_right];
 
-        this.game.displayDialogLine('Голос всередені', 'Добре, хлопче. Тільки пообіцяй, що про це ніхто не буде знати.\
-        Гаразд? Ну добре. Отже підказка: не забудь перевірити шафу. Усе, мені пора, щасти тобі. <клік щоб продовжити>');
+        arr.forEach(e => {
+            e.events.onInputDown.add(this.handleClick, this);
+        });
+
         yield;
+        this.state.start('Scanner');
     }
 
     init() {
@@ -75,26 +79,27 @@ export default class DocsState extends Phaser.State {
     }
 
     create() {
-        let count = 0;
-        this.count = count;
+        this.grade = 0;
+        this.count = 0;
+        this.flags = [false, false, false, false, false];
 
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
 
-        let eng = this.create_sprite('eng-small', 70, 800, 70, false, false);
+        let eng = this.create_sprite('eng-small', 70, 880, 70, false, false);
         this.eng = eng;
 
-        let pass = this.create_sprite('pass-small', 140, 800, 70, false, false);
+        let pass = this.create_sprite('pass-small', 160, 880, 70, false, false);
         this.pass = pass;
 
-        let phot = this.create_sprite('photos-small', 210, 800, 70, false, false);
+        let phot = this.create_sprite('photos-small', 250, 880, 70, false, false);
         this.phot = phot;
 
-        let war = this.create_sprite('war-small', 280, 800, 70, false, false);
+        let war = this.create_sprite('war-small', 340, 880, 70, false, false);
         this.war = war;
 
-        let zno_small = this.create_sprite('zno-small', 350, 800, 70, false, false);
+        let zno_small = this.create_sprite('zno-small', 430, 880, 70, false, false);
         this.zno_small = zno_small;
 
         let sertificate = this.create_sprite('sertificate', 1430, 175, 120, true, true);
@@ -123,12 +128,6 @@ export default class DocsState extends Phaser.State {
         door_closed.input.priorityID = 1;
         this.door_closed = door_closed;
 
-        let arr = [sertificate, passport, photos, warticket, zno, door_closed, door_opened_left, door_opened_right];
-
-        arr.forEach(e => {
-            e.events.onInputDown.add(this.handleClick, this);
-        })
-
         let david = this.create_sprite('d-right', 1300, 280, 551, false, false);
         this.david = david;
 
@@ -136,27 +135,35 @@ export default class DocsState extends Phaser.State {
         this.next();
     }
 
-    handleClick(obj){
+    countClick(){
         this.count++;
+    }
+
+    handleClick(obj){
         if(obj.key === this.sertificate.key) {
-            this.sertificate.alpha = 0
+            this.sertificate.alpha = 0;
             this.eng.alpha = 1;
+            this.flags[0] = true;
         }
         if(obj.key === this.passport.key) {
-            this.passport.alpha = 0
+            this.passport.alpha = 0;
             this.pass.alpha = 1;
+            this.flags[1] = true;
         }
         if(obj.key === this.warticket.key) {
-            this.warticket.alpha = 0
+            this.warticket.alpha = 0;
             this.war.alpha = 1;
+            this.flags[2] = true;
         }
         if(obj.key === this.photos.key) {
-            this.photos.alpha = 0
+            this.photos.alpha = 0;
             this.phot.alpha = 1;
+            this.flags[3] = true;
         }
         if(obj.key === this.zno.key) {
-            this.zno.alpha = 0
+            this.zno.alpha = 0;
             this.zno_small.alpha = 1;
+            this.flags[4] = true;
         }
         if(obj.key === this.door_closed.key){
             this.door_opened_left.alpha = 1;
@@ -169,6 +176,28 @@ export default class DocsState extends Phaser.State {
             this.door_opened_left.alpha = 0;
             this.door_opened_right.alpha = 0;
             this.door_closed.alpha = 1;
+        }
+
+        if(this.flags.every(e => e)){
+            if(this.count <= 8){
+                this.grade = 100;
+            }
+            else if(this.count <= 9){
+                this.grade = 90;
+            }
+            else if(this.count <= 10){
+                this.grade = 80;
+            }
+            else if(this.count <= 11){
+                this.grade = 70;
+            }
+            else if(this.count <= 12){
+                this.grade = 60;
+            }
+            else {
+                this.grade = 50;
+            }
+            this.next();
         }
     }
 
