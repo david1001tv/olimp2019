@@ -29,6 +29,8 @@ export default class Scanner extends Phaser.State {
     }
 
     create() {
+        this.count = 0;//count of scannings
+
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
@@ -73,7 +75,7 @@ export default class Scanner extends Phaser.State {
 
         this.stage.disableVisibilityChange = true;
 
-        this.next();
+        //this.next();
     }
 
     handleDragStart(document) {
@@ -91,6 +93,8 @@ export default class Scanner extends Phaser.State {
 
     handleStartButtonClick() {
         if (!this.isScanning) {
+            this.count++;//count of scannings
+
             this.isScanning = true;
             let forthTween = this.game.add.tween(this.scanline).to({
                 x: 1455,
@@ -108,7 +112,24 @@ export default class Scanner extends Phaser.State {
     handleScanEnd() {
         this.isScanning = false;
         let scannerRectangle = new Phaser.Rectangle(149, 87, 1280, 809);
-        console.log(Phaser.Rectangle.containsRect(this.activeDocument.getBounds(), scannerRectangle));
+
+        if(this.activeDocument !== null) {
+            this.activeDocument.isScanned = true;
+            console.log(Phaser.Rectangle.containsRect(this.activeDocument.getBounds(), scannerRectangle));
+        }
+        else {
+            console.log('Document isn\'t found.');
+        }
+        console.log('Count of scannings: ' + this.count);
+        if(this.docs.every(e => e.isScanned)){
+            if(this.count == 5){
+                this.grade = 100;
+            }
+            else if(this.count <= 9){
+                this.grade = 50;
+            }
+            this.next();
+        }
     }
 
     next() {
