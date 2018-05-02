@@ -71,9 +71,11 @@ class GameComponent extends Component {
 
     @autobind
     handleShowPhoneButtonClick() {
-        this.setState({
-           phoneIsShown: !this.state.phoneIsShown,
-        });
+        if (!this.state.dialogIsShown) {
+            this.setState({
+                phoneIsShown: !this.state.phoneIsShown,
+            });
+        }
     }
 
     render() {
@@ -89,7 +91,13 @@ class GameComponent extends Component {
                             <div id="dialog-container">
                                 <div id="message-source">{messageSource}</div>
                                 <div id="message-text">{messageText.slice(0, charPosition)}</div>
-                                { charPosition === messageText.length ? <div id="message-hint"><em>Клацніть мишкою, щоб продовжити...</em></div> : null }
+                                {
+                                    charPosition === messageText.length
+                                        ?
+                                        <div id="message-hint"><em>Клацніть мишкою, щоб продовжити...</em></div>
+                                        :
+                                        null
+                                }
                             </div>
                             :
                             null
