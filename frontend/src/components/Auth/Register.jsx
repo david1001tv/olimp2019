@@ -197,7 +197,7 @@ class Register extends Component {
                         {this.state.isLoading ? <LinearProgress /> : null}
                         <button
                             type="submit"
-                            className="drawn-btn drawn-btn__log-in"
+                            className="drawn-btn drawn-btn__register "
                             disabled={this.state.isLoading}
                         >
                         </button>

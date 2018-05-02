@@ -1,12 +1,13 @@
 .auth
   background-color: #fff
   min-width: 250px
-  max-width: 400px
+  max-width: 600px
   width: 90%
   margin-left: auto
   margin-right: auto
   margin-top: 32px
-  padding: 32px
+  padding: 32px 100px
+  box-shadow: 3px 3px 8px #aaa
   h3
     text-align: center
     font-size: 2.5em
@@ -14,3 +15,13 @@
   .drawn-btn__google
     width: 250px
     height: 55px
+  .drawn-btn__register
+    width: 250px
+    height: 56px
+    background-image: url(../../img/buttons/button-register-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-register-pressed.png)
+  .md-text-field-container input,
+  .md-text-field-container label
+    font-size: 1.1em
+    font-family: "Neucha", Arial, serif
