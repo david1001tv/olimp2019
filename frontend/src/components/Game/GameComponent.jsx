@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
-
 import Game from './Game.js';
+import Phone from './Phone/Phone';
+
 
 import './GameComponent.sass';
 
@@ -34,7 +35,8 @@ class GameComponent extends Component {
             messageSource: source,
             messageText: text,
             dialogIsShown: true,
-            charPosition: 0
+            charPosition: 0,
+            phoneIsShown: false
         });
 
         this.textAnimationTimer = setInterval(this.handleTimerTick, 50);
@@ -67,8 +69,15 @@ class GameComponent extends Component {
         }
     }
 
+    @autobind
+    handleShowPhoneButtonClick() {
+        this.setState({
+           phoneIsShown: !this.state.phoneIsShown,
+        });
+    }
+
     render() {
-        const {dialogIsShown, messageText, messageSource, charPosition} = this.state;
+        const {dialogIsShown, messageText, messageSource, charPosition, phoneIsShown} = this.state;
         return (
             <div
                 id="game-container-wrapper"
@@ -85,6 +94,12 @@ class GameComponent extends Component {
                             :
                             null
                     }
+                    <button
+                        className="show-phone-button"
+                        onClick={this.handleShowPhoneButtonClick}
+                    >
+                    </button>
+                    <Phone isShown={phoneIsShown}/>
                 </div>
             </div>
         );

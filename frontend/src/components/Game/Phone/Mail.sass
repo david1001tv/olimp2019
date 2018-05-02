@@ -1,0 +1,99 @@
+.mail
+  height: 95%
+  background-color: #fff
+  color: #3F3F3F
+  // display: none // СКРЫЛ ДЛЯ ВЕРСКИ ДРУГИХ ЭКРАНОВ
+  .head
+    display: flex
+    height: 10%
+    background-color: #E75555
+    color: #fff
+    .title
+      margin: auto 5%
+  .messages
+    height: 90%
+    overflow-y: scroll
+  .message // Отдельное сообщение
+    position: relative
+    list-style-type: none
+    padding: 4%
+    border-bottom: 1px solid #CBCBCB
+    cursor: pointer
+    transition: .2s
+    color: #878787
+    &:hover
+      background-color: #EAEAEA
+    .sender
+      padding-right: 20%
+      font-size: .95em
+    .theme,
+    .text
+      font: .95em "OpenSansRegular"
+    .text
+      font: .8em "RobotoLight"
+    .date
+      position: absolute
+      top: 8%
+      right: 3%
+      font: .7em "Exo2Regular"
+    .icon-user,
+    .icon-letter
+      color: #878787
+    .icon-user
+      font-size: .9em
+  .message.unread
+    background-color: #F8F8F8
+    color: #000
+    .sender
+      font-family: "OpenSansBold"
+    .theme
+      font-family: "OpenSansBold"
+    .date
+      font-family: "Exo2Bold"
+      color: #4773DB
+    .icon-user,
+    .icon-letter
+      color: #000
+
+  // Входящее письмо
+  .letter
+    height: 95%
+    background-color: #fff
+    .head
+      font-size: 1.3em
+      i
+        cursor: pointer
+    .content
+      padding-bottom: 10%
+      height: 90%
+      color: #000
+      font-family: "RobotoLight"
+      overflow-y: scroll
+      .theme
+        font-family: "OpenSansSemiBold"
+        padding:  6% 7%
+        border-bottom: 1px solid #DDDDDD
+      .info
+        display: flex
+        padding: 4% 7%
+        .logo
+          flex-basis: 25%
+          img
+            max-width: 100%
+        .user-info
+          flex: 3 1 50%
+          padding-left: 10%
+          .sender
+            margin-top: 2%
+          .recipient,
+          .date
+            color: #4F4F4F
+          .recipient
+            font-size: .85em
+          .date
+            font-size: .75em
+      .text
+        padding: 1% 7%
+        font: .9em "RobotoLight"
+        text-align: justify
+        color: #4C4C4C

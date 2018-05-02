@@ -4,6 +4,7 @@
 #game-container
   position: relative
   display: inline-block
+  overflow: hidden
 
 #dialog-container
   height: 20%
@@ -28,3 +29,19 @@
   #message-hint
     text-align: right
     color: #adb5bd
+
+.show-phone-button
+  position: absolute
+  top: 12px
+  right: 10px
+  height: 72px
+  width: 73px
+  cursor: pointer
+  background-color: transparent
+  border: none
+  background-size: 100%
+  background-repeat: no-repeat
+  background-image: url(../../img/button-phone-released.png)
+  &:active
+    background-image: url(../../img/button-phone-pressed.png)
+
