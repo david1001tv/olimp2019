@@ -8,8 +8,8 @@ import './HomeScreen.sass';
 
 class HomeScreen extends Component {
     static propTypes = {
-        onMailClick: PropTypes.function,
-        onMapClick: PropTypes.function
+        onMailClick: PropTypes.func,
+        onMapClick: PropTypes.func,
     };
 
     constructor(props) {

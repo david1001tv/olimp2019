@@ -1,17 +1,13 @@
-/* globals __DEV__ */
 import Phaser from 'phaser';
+import {smartSetHeight} from '../utils';
 
 
 export default class IntroState extends Phaser.State {
     * gen() {
-        console.log(0);
-        console.log(this.camera);
-        window.CAMERA = this.camera;
-
         this.camera.scale.setTo(5, 5);
-        this.camera.x = 1128 * 5 - 1000;
+        this.camera.x = 1128 * 5;
         this.camera.y = 280 * 5 - 300;
-        this.game.add.tween(this.camera).to({ x: 1128, y: 280 }, 5000).start();
+        this.game.add.tween(this.camera).to({ x: -250, y: 0 }, 5000).start();
         this.game.add.tween(this.camera.scale).to({
             x: 1,
             y: 1,
@@ -29,19 +25,19 @@ export default class IntroState extends Phaser.State {
         yield;
 
 
-        this.game.displayDialogLine('Маман', 'Доброго ранку синку! Тобі вже прийшов лист з університету?');
+        this.game.displayDialogLine('Маман', 'Доброго ранку, синку! Тобі вже прийшов лист з університету?', () => this.next());
         yield;
 
 
-        this.game.displayDialogLine('Ви', 'Так, мамо');
+        this.game.displayDialogLine('Ви', 'Так, мамо.', () => this.next());
         yield;
 
 
-        this.game.displayDialogLine('Маман', 'Ти вже обрав спеціальність? Син моєї подруги програміст, вже на першому курсі він отримував 1000$ щомісяця.');
+        this.game.displayDialogLine('Маман', 'Ти вже обрав спеціальність? Син моєї подруги програміст, вже на першому курсі він отримував 1000$ щомісяця.', () => this.next());
         yield;
 
 
-        this.game.displayDialogLine('Ви', 'Добре, мамо');
+        this.game.displayDialogLine('Ви', 'Добре, мамо.', () => this.next());
         yield;
 
 
@@ -55,12 +51,18 @@ export default class IntroState extends Phaser.State {
         yield;
 
 
-        this.game.displayDialogLine('Ви', 'Кожного дня працюю за комп’ютером. Справді добре було б покращити свої навички володіння їм.');
+        this.game.displayDialogLine('Ви', 'Кожного дня працюю за комп’ютером. Справді добре було б покращити свої навички володіння їм.', () => this.next());
         yield;
 
 
-        this.game.displayDialogLine('Ви', 'Вирішено. Поступлю на програміста.');
+        this.game.displayDialogLine('Ви', 'Вирішено! Поступлю на програміста.', () => this.next());
         yield;
+
+        this.game.camera.fade(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+        this.state.start('Docs');
     }
 
     init() {
@@ -81,44 +83,20 @@ export default class IntroState extends Phaser.State {
         bg.width = this.game.width;
 
         let mom = this.game.add.image(1612, 200, 'mom');
-        mom.aspectRatio = mom.width / mom.height;
-        mom.height = 668;
-        mom.width = mom.aspectRatio * mom.height;
+        smartSetHeight(mom, 668);
         mom.alpha = 0;
         this.mom = mom;
 
         let david = this.game.add.image(1128, 280, 'd-sits');
-        david.aspectRatio = david.width / david.height;
-        david.height = 551;
-        david.width = david.aspectRatio * david.height;
+        smartSetHeight(david, 551);
         this.david = david;
 
         let printer = this.game.add.image(284, 340, 'printer');
-        printer.aspectRatio = printer.width / printer.height;
-        printer.height = 178;
-        printer.width = printer.aspectRatio * printer.height;
-
-
-
-        // const bannerText = 'Phaser + ES6 + Webpack';
-        // let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText, {
-        //     font: '40px Bangers',
-        //     fill: '#77BFA3',
-        //     smoothed: false
-        // });
-
-        // banner.padding.set(10, 16);
-        // banner.anchor.setTo(0.5);
+        smartSetHeight(printer, 178);
 
         this.stage.disableVisibilityChange = true;
 
         this.next();
-    }
-
-    render() {
-        // if (__DEV__) {
-        this.game.debug.spriteInfo(this.mom, 32, 32);
-        // }
     }
 
     next() {

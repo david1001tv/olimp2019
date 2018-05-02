@@ -1,115 +1,38 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import autobind from 'autobind-decorator';
-
-import Game from './Game.js';
-import Phone from './Phone/Phone';
-
-
-import './GameComponent.sass';
-
+import Game from './Game';
 
 class GameComponent extends Component {
-    state = {
-        messageText: '',
-        messageSource: '',
-        charPosition: 0,
-        dialogIsShown: false
+    static defaultProps = {
+        inputEnabled: true,
+    };
+
+    static propTypes = {
+        inputEnabled: PropTypes.bool,
+        displayDialogLine: PropTypes.func
     };
 
     constructor(props) {
         super(props);
         this.game = null;
-        this.textAnimationTimer = null;
     }
+
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.inputEnabled !== this.props.inputEnabled) {
+            this.game.input.enabled = nextProps.inputEnabled;
+        }
+    }
+
 
     componentDidMount() {
-        let game = new Game();
-        game.displayDialogLine = this.displayDialogLine;
-        this.game = game;
-    }
-
-    @autobind
-    displayDialogLine(source, text) {
-        this.setState({
-            messageSource: source,
-            messageText: text,
-            dialogIsShown: true,
-            charPosition: 0,
-            phoneIsShown: false
-        });
-
-        this.textAnimationTimer = setInterval(this.handleTimerTick, 50);
-    }
-
-    @autobind
-    handleTimerTick() {
-        if (this.state.charPosition === this.state.messageText.length) {
-            clearInterval(this.textAnimationTimer);
-        } else {
-            this.setState({
-                charPosition: this.state.charPosition + 1
-            });
-        }
-    }
-
-    @autobind
-    handleGameContainerClick(e) {
-        const {messageText, charPosition, dialogIsShown} = this.state;
-        if (dialogIsShown) {
-            e.preventDefault();
-            if (charPosition === messageText.length) {
-                this.setState({dialogIsShown: false});
-                clearInterval(this.textAnimationTimer);
-                this.game.next();
-            }
-            if (charPosition < messageText.length) {
-                this.setState({charPosition: messageText.length});
-            }
-        }
-    }
-
-    @autobind
-    handleShowPhoneButtonClick() {
-        if (!this.state.dialogIsShown) {
-            this.setState({
-                phoneIsShown: !this.state.phoneIsShown,
-            });
-        }
+        this.game = new Game();
+        this.game.displayDialogLine = this.props.displayDialogLine;
     }
 
     render() {
-        const {dialogIsShown, messageText, messageSource, charPosition, phoneIsShown} = this.state;
         return (
-            <div
-                id="game-container-wrapper"
-                onClick={this.handleGameContainerClick}
-            >
-                <div id="game-container">
-                    {
-                        dialogIsShown ?
-                            <div id="dialog-container">
-                                <div id="message-source">{messageSource}</div>
-                                <div id="message-text">{messageText.slice(0, charPosition)}</div>
-                                {
-                                    charPosition === messageText.length
-                                        ?
-                                        <div id="message-hint"><em>Клацніть мишкою, щоб продовжити...</em></div>
-                                        :
-                                        null
-                                }
-                            </div>
-                            :
-                            null
-                    }
-                    <button
-                        className="show-phone-button"
-                        onClick={this.handleShowPhoneButtonClick}
-                    >
-                    </button>
-                    <Phone isShown={phoneIsShown}/>
-                </div>
-            </div>
+            ''
         );
     }
 }

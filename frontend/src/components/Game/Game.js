@@ -26,7 +26,7 @@ class Game extends Phaser.Game {
         this.state.add('Browser', BrowserState, false);
         this.state.add('Cross', CrossState, false);
 
-        this.state.start('Docs');
+        this.state.start('Boot');
     }
 
     next() {

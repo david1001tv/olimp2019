@@ -1,1 +1,1 @@
-export {default} from './GameComponent';
+export {default} from './GameWrapper';

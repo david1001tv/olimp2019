@@ -5,6 +5,11 @@
   position: relative
   display: inline-block
   overflow: hidden
+  canvas
+    transition: filter 1s ease-in-out
+
+.blurred > canvas
+  filter: blur(4px)
 
 #dialog-container
   height: 20%
@@ -31,6 +36,7 @@
     color: #adb5bd
 
 .show-phone-button
+  z-index: 1
   position: absolute
   top: 12px
   right: 10px
