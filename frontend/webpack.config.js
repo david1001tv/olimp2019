@@ -8,9 +8,11 @@ const pixi = path.join(phaserModule, 'build/custom/pixi.js');
 const p2 = path.join(phaserModule, 'build/custom/p2.js');
 
 module.exports = {
+    cache: true,
+
     entry: {
+        vendor: ['pixi', 'p2', 'phaser', 'webfontloader', 'react', 'react-dom'],
         main: './src/index.js',
-        vendor: ['pixi', 'p2', 'phaser', 'webfontloader', 'react', 'react-dom']
     },
     output: {
         path: path.resolve(__dirname, 'public/build'),
@@ -75,7 +77,7 @@ module.exports = {
         ],
     },
     devServer: {
-        port: 3030,
+        port: 3000,
         contentBase: path.join(__dirname, 'public'),
         disableHostCheck: true,
         historyApiFallback: true,
@@ -87,18 +89,24 @@ module.exports = {
         overlay: true,
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js', minChunks: Infinity}),
+        new webpack.optimize.CommonsChunkPlugin({name: 'common', filename: 'common.js', minChunks: 2, chunks: ['main', 'vendor']}),
+
         new HtmlWebpackPlugin({
+            chunksSortMode: (c1, c2) => {
+                let order = ['common', 'vendor', 'main'];
+                let o1 = order.indexOf(c1.names[0]);
+                let o2 = order.indexOf(c2.names[0]);
+                return o1 - o2;
+            },
             template: './src/index.html',
             files: {
-                js: ['main.js'],
+                js: ['vendor.js', 'common.js', 'main.js'],
             },
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor'/* chunkName= */,
-            filename: 'vendor.bundle.js'/* filename= */
+
         }),
         new webpack.DefinePlugin({
             __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
-        })
+        }),
     ],
 };

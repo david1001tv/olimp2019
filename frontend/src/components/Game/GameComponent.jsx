@@ -34,9 +34,6 @@ class GameComponent extends Component {
             messageSource: source,
             messageText: text,
             dialogIsShown: true,
-            // Если текст диалога нужно будет анимировать, эту строчку следует удалить, следующую раскомментить
-            // Также нужно будет установить интервал обновления для анимации
-            // charPosition: text.length,
             charPosition: 0
         });
 
@@ -83,6 +80,7 @@ class GameComponent extends Component {
                             <div id="dialog-container">
                                 <div id="message-source">{messageSource}</div>
                                 <div id="message-text">{messageText.slice(0, charPosition)}</div>
+                                { charPosition === messageText.length ? <div id="message-hint"><em>Клацніть мишкою, щоб продовжити...</em></div> : null }
                             </div>
                             :
                             null
