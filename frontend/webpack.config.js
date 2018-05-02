@@ -75,7 +75,7 @@ module.exports = {
         ],
     },
     devServer: {
-        port: 3030,
+        port: 3000,
         contentBase: path.join(__dirname, 'public'),
         disableHostCheck: true,
         historyApiFallback: true,
