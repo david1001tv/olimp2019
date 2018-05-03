@@ -6,12 +6,13 @@ const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
 const phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
 const pixi = path.join(phaserModule, 'build/custom/pixi.js');
 const p2 = path.join(phaserModule, 'build/custom/p2.js');
+const phaserInput = path.join(__dirname, '/node_modules/@orange-games/phaser-input/build/phaser-input.js');
 
 module.exports = {
     cache: true,
 
     entry: {
-        vendor: ['pixi', 'p2', 'phaser', 'webfontloader', 'react', 'react-dom'],
+        vendor: ['pixi', 'p2', 'phaser', 'webfontloader', 'react', 'react-dom', 'phaser-input'],
         main: './src/index.js',
     },
     output: {
@@ -27,7 +28,8 @@ module.exports = {
             '~api': path.resolve(__dirname, './src/api.js'),
             'phaser': phaser,
             'pixi': pixi,
-            'p2': p2
+            'p2': p2,
+            'phaser-input': phaserInput,
         },
     },
     module: {
@@ -73,7 +75,8 @@ module.exports = {
             },
             { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
             { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
-            { test: /p2\.js/, use: ['expose-loader?p2'] }
+            { test: /p2\.js/, use: ['expose-loader?p2'] },
+            { test: /phaser-input\.js$/, use: ['exports-loader?PhaserInput=true'] },
         ],
     },
     devServer: {
