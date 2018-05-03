@@ -48,26 +48,26 @@ export default class DocsState extends Phaser.State {
     }
 
     preload() {
-        this.load.image('bg', './assets/images/quest-bg-1-2.png');
+        this.load.image('bg', './assets/images/1-2 (point&click)/quest-bg-1-2.png');
 
-        this.load.image('d-right', './assets/images/d-right.png');
+        this.load.image('d-right', './assets/images/1-2 (point&click)/d-right.png');
 
-        this.load.image('door-closed', './assets/images/door-closed.png');
-        this.load.image('door-opened', './assets/images/door-opened.png');
-        this.load.image('door-opened-right', './assets/images/door-opened-right.png');
-        this.load.image('door-opened-left', './assets/images/door-opened-left.png');
+        this.load.image('door-closed', './assets/images/1-2 (point&click)/door-closed.png');
+        this.load.image('door-opened', './assets/images/1-2 (point&click)/door-opened.png');
+        this.load.image('door-opened-right', './assets/images/1-2 (point&click)/door-opened-right.png');
+        this.load.image('door-opened-left', './assets/images/1-2 (point&click)/door-opened-left.png');
 
-        this.load.image('sertificate', './assets/images/sertificate.png');
-        this.load.image('passport', './assets/images/passport.png');
-        this.load.image('photos', './assets/images/photos.png');
-        this.load.image('warticket', './assets/images/warticket.png');
-        this.load.image('zno', './assets/images/zno.png');
+        this.load.image('sertificate', './assets/images/1-2 (point&click)/sertificate.png');
+        this.load.image('passport', './assets/images/1-2 (point&click)/passport.png');
+        this.load.image('photos', './assets/images/1-2 (point&click)/photos.png');
+        this.load.image('warticket', './assets/images/1-2 (point&click)/warticket.png');
+        this.load.image('zno', './assets/images/1-2 (point&click)/zno.png');
 
-        this.load.image('sertificate-small', './assets/images/eng-small.png');
-        this.load.image('passport-small', './assets/images/pass-small.png');
-        this.load.image('photos-small', './assets/images/photos-small.png');
-        this.load.image('warticket-small', './assets/images/war-small.png');
-        this.load.image('zno-small', './assets/images/zno-small.png');
+        this.load.image('sertificate-small', './assets/images/1-2 (point&click)/eng-small.png');
+        this.load.image('passport-small', './assets/images/1-2 (point&click)/pass-small.png');
+        this.load.image('photos-small', './assets/images/1-2 (point&click)/photos-small.png');
+        this.load.image('warticket-small', './assets/images/1-2 (point&click)/war-small.png');
+        this.load.image('zno-small', './assets/images/1-2 (point&click)/zno-small.png');
     }
 
     create() {
