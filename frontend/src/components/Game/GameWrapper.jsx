@@ -8,6 +8,50 @@ import GameComponent from './GameComponent';
 
 import './GameWrapper.sass';
 
+const phoneAPI = {
+    addTodo(todo) {
+        this.setState({todos: [...this.state.todos, todo]});
+    },
+
+    addTodos(todos) {
+        this.setState({todos: [...this.state.todos, ...todos]});
+    },
+
+    completeTodo(id) {
+        let todoIndex = this.state.todos.findIndex(e => e.id === id);
+        if (todoIndex !== -1) {
+            let todo = {...this.state.todos[todoIndex]};
+            todo.isDone = true;
+            let newTodos = [...this.state.todos];
+            newTodos.splice(todoIndex, 1, todo);
+            this.setState({todos: newTodos});
+        }
+    },
+
+    clearTodos() {
+        this.setState({todos: []});
+    },
+
+    addMessage(message) {
+        this.setState({phoneMessages: [message, ...this.state.phoneMessages]});
+    },
+
+    addMessages(messages) {
+
+    },
+
+    setTime(time) {
+        this.setState({phoneTime: time});
+    },
+
+    setDate(date) {
+        this.setState({phoneDate: date});
+    },
+
+    setEnabled(enabled) {
+        this.setState({phoneEnabled: enabled});
+    }
+};
 
 class GameWrapper extends Component {
     state = {
@@ -17,11 +61,19 @@ class GameWrapper extends Component {
         dialogIsShown: false,
         phoneIsShown: false,
         dialogCallback: () => null,
+        todos: [],
+        phoneMessages: [],
+        phoneTime: '',
+        phoneDate: '',
+        phoneEnabled: false,
     };
 
     constructor(props) {
         super(props);
         this.textAnimationTimer = null;
+        for (let key in phoneAPI) {
+            phoneAPI[key] = phoneAPI[key].bind(this);
+        }
     }
 
     @autobind
@@ -102,6 +154,7 @@ class GameWrapper extends Component {
                     <GameComponent
                         inputEnabled={!phoneIsShown && !dialogIsShown}
                         displayDialogLine={this.displayDialogLine}
+                        phone
                     />
                     <button
                         className="show-phone-button"
