@@ -5,53 +5,9 @@ import autobind from 'autobind-decorator';
 import Game from './Game.js';
 import Phone from './Phone/Phone';
 import GameComponent from './GameComponent';
+import phoneAPI from './phoneAPI';
 
 import './GameWrapper.sass';
-
-const phoneAPI = {
-    addTodo(todo) {
-        this.setState({todos: [...this.state.todos, todo]});
-    },
-
-    addTodos(todos) {
-        this.setState({todos: [...this.state.todos, ...todos]});
-    },
-
-    completeTodo(id) {
-        let todoIndex = this.state.todos.findIndex(e => e.id === id);
-        if (todoIndex !== -1) {
-            let todo = {...this.state.todos[todoIndex]};
-            todo.isDone = true;
-            let newTodos = [...this.state.todos];
-            newTodos.splice(todoIndex, 1, todo);
-            this.setState({todos: newTodos});
-        }
-    },
-
-    clearTodos() {
-        this.setState({todos: []});
-    },
-
-    addMessage(message) {
-        this.setState({phoneMessages: [message, ...this.state.phoneMessages]});
-    },
-
-    addMessages(messages) {
-
-    },
-
-    setTime(time) {
-        this.setState({phoneTime: time});
-    },
-
-    setDate(date) {
-        this.setState({phoneDate: date});
-    },
-
-    setEnabled(enabled) {
-        this.setState({phoneEnabled: enabled});
-    }
-};
 
 class GameWrapper extends Component {
     state = {
@@ -71,8 +27,9 @@ class GameWrapper extends Component {
     constructor(props) {
         super(props);
         this.textAnimationTimer = null;
-        for (let key in phoneAPI) {
-            phoneAPI[key] = phoneAPI[key].bind(this);
+        this.phoneAPI = {...phoneAPI};
+        for (let key in this.phoneAPI) {
+            this.phoneAPI[key] = this.phoneAPI[key].bind(this);
         }
     }
 
@@ -154,14 +111,20 @@ class GameWrapper extends Component {
                     <GameComponent
                         inputEnabled={!phoneIsShown && !dialogIsShown}
                         displayDialogLine={this.displayDialogLine}
-                        phone
+                        phone={this.phoneAPI}
                     />
                     <button
                         className="show-phone-button"
                         onClick={this.handleShowPhoneButtonClick}
                     >
                     </button>
-                    <Phone isShown={phoneIsShown}/>
+                    <Phone
+                        isShown={phoneIsShown}
+                        todos={this.state.todos}
+                        messages={this.state.phoneMessages}
+                        time={this.state.phoneTime}
+                        date={this.state.phoneDate}
+                    />
                 </div>
             </div>
         );

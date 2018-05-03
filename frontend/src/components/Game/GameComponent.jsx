@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Game from './Game';
+import FakeBrowser from '~components/FakeBrowser';
+
 
 class GameComponent extends Component {
     static defaultProps = {
@@ -9,7 +11,12 @@ class GameComponent extends Component {
 
     static propTypes = {
         inputEnabled: PropTypes.bool,
-        displayDialogLine: PropTypes.func
+        displayDialogLine: PropTypes.func,
+        phone: PropTypes.object,
+    };
+
+    state = {
+        fakeBrowserIsShown: true, // DEBUG
     };
 
     constructor(props) {
@@ -28,12 +35,17 @@ class GameComponent extends Component {
     componentDidMount() {
         this.game = new Game();
         this.game.displayDialogLine = this.props.displayDialogLine;
+        this.game.phone = this.props.phone;
     }
 
     render() {
-        return (
-            ''
-        );
+        if (this.state.fakeBrowserIsShown) {
+            return (
+                <FakeBrowser />
+            );
+        }
+
+        return '';
     }
 }
 

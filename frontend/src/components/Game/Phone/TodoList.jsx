@@ -12,6 +12,9 @@ class TodoList extends Component {
     }
 
     render() {
+        let todos = [...this.props.todos];
+        todos.sort((a, b) => a.isDone - b.isDone);
+
         return (
             <div className="todo-list">
                 <div className="head">
@@ -19,30 +22,22 @@ class TodoList extends Component {
                 </div>
                 <div className="list">
                     <ul>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <i className="fas fa-check-circle ok"></i>
-                            </div>
-                        </li>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <i className="fas fa-check-circle ok"></i>
-                            </div>
-                        </li>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <i className="fas fa-check-circle ok"></i>
-                            </div>
-                        </li>
-                        <li className="clearfix">
-                            <div className="text">Lorem ipsum dolor sit.</div>
-                            <div className="state">
-                                <div className="circle"></div>
-                            </div>
-                        </li>
+                        {
+                            todos.map(todo => (
+                                <li className="clearfix" key={todo.id}>
+                                    <div className="text">{todo.text}</div>
+                                    <div className="state">
+                                        {
+                                            todo.isDone
+                                                ?
+                                                <i className="fas fa-check-circle ok"></i>
+                                                :
+                                                <div className="circle"></div>
+                                        }
+                                    </div>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </div>
             </div>

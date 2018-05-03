@@ -1,6 +1,7 @@
 /* globals __DEV__ */
 import Phaser from 'phaser';
 import {smartSetHeight} from '../utils';
+import todos from '../todos/Docs';
 
 export default class DocsState extends Phaser.State {
     * gen() {
@@ -40,11 +41,17 @@ export default class DocsState extends Phaser.State {
         yield;
 
 
+        this.game.camera.fade(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
         this.state.start('Scanner');
     }
 
     init() {
         this._gen = this.gen();
+        this.game.phone.clearTodos();
+        this.game.phone.addTodos(todos);
     }
 
     preload() {
@@ -88,19 +95,19 @@ export default class DocsState extends Phaser.State {
         let docs_small = [eng, pass, phot, war, zno_small];
         this.docs_small = docs_small;
 
-        let sertificate = this.create_sprite('sertificate', 1430, 175, 120, true, true);
+        let sertificate = this.create_sprite('sertificate', 1430, 175, 120, true, true, 'DOCS_ENG');
         sertificate.small = eng;
         this.sertificate = sertificate;
 
-        let photos = this.create_sprite('photos', 1170, 525, 40, true, true);
+        let photos = this.create_sprite('photos', 1170, 525, 40, true, true, 'DOCS_PHOTO');
         photos.small = phot;
         this.photos = photos;
 
-        let warticket = this.create_sprite('warticket', 1720, 340, 40, true, true);
+        let warticket = this.create_sprite('warticket', 1720, 340, 40, true, true, 'DOCS_WAR');
         warticket.small = war;
         this.warticket = warticket;
 
-        let zno = this.create_sprite('zno', 660, 783, 50, true, true);
+        let zno = this.create_sprite('zno', 660, 783, 50, true, true, 'DOCS_ZNO');
         zno.small = zno_small;
         this.zno = zno;
 
@@ -110,7 +117,7 @@ export default class DocsState extends Phaser.State {
         let door_opened_left = this.create_sprite('door-opened-left', 0, 243, 582, false, true);
         this.door_opened_left = door_opened_left;
 
-        let passport = this.create_sprite('passport', 364, 435, 23.12345, true, true);
+        let passport = this.create_sprite('passport', 364, 435, 23.12345, true, true, 'DOCS_PASS');
         passport.input.pixelPerfectOver = true;
         passport.small = pass;
         this.passport = passport;
@@ -150,6 +157,8 @@ export default class DocsState extends Phaser.State {
         obj.alpha = 0;
         obj.small.alpha = 1;
 
+        this.game.phone.completeTodo(obj.todoId);
+
         if (this.docs.every(e => e.isFind)) {
             if (this.count <= 8) {
                 this.grade = 100;
@@ -173,7 +182,7 @@ export default class DocsState extends Phaser.State {
         }
     }
 
-    create_sprite(name, pos_X, pos_Y, height, flag_alpha, flag_input) {
+    create_sprite(name, pos_X, pos_Y, height, flag_alpha, flag_input, todoId) {
         let tmp = this.game.add.image(pos_X, pos_Y, name);
         smartSetHeight(tmp, height);
         if (flag_alpha === false) {
@@ -185,6 +194,10 @@ export default class DocsState extends Phaser.State {
         if (flag_input === true) {
             tmp.inputEnabled = true;
         }
+        if (todoId) {
+            tmp.todoId = todoId;
+        }
+
         return tmp;
     }
 
