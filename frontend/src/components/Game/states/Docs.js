@@ -117,7 +117,7 @@ export default class DocsState extends Phaser.State {
         let door_opened_left = this.create_sprite('door-opened-left', 0, 243, 582, false, true);
         this.door_opened_left = door_opened_left;
 
-        let passport = this.create_sprite('passport', 364, 435, 23.12345, true, true, 'DOCS_PASS');
+        let passport = this.create_sprite('passport', 352, 420, 46, true, true, 'DOCS_PASS');
         passport.input.pixelPerfectOver = true;
         passport.small = pass;
         this.passport = passport;
