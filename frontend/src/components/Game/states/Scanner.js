@@ -7,6 +7,7 @@ const INACTIVE_Y = 940;
 
 export default class Scanner extends Phaser.State {
     * gen() {
+        this.game.input.enabled = false;
         this.game.camera.flash(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
         yield;
@@ -15,11 +16,13 @@ export default class Scanner extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Тепер треба відсканувати всі документи', () => this.next());
         yield;
 
-
+        this.game.input.enabled = true;
+        this.game.phone.setEnabled(true);
         yield;
 
-        // TODO: добавить какую-нибудь фразу
-        // this.game.displayDialogLine('Ви', '', () => this.next());
+
+        this.game.displayDialogLine('Ви', 'Готово. Тепер потрібно зареєструватися на сайті університету.', () => this.next());
+        yield;
 
         this.game.camera.fade(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
@@ -36,9 +39,15 @@ export default class Scanner extends Phaser.State {
         this._gen = this.gen();
 
         this.game.phone.addTodos(todos);
+        this.game.phone.setEnabled(false);
+        this.game.phone.setTime('14:07');
+        this.game.phone.setDate('02.07.18');
     }
 
     preload() {
+        this.load.script('BlurX', 'https://cdn.rawgit.com/photonstorm/phaser-ce/master/filters/BlurX.js');
+        this.load.script('BlurY', 'https://cdn.rawgit.com/photonstorm/phaser-ce/master/filters/BlurY.js');
+
         this.load.image('bg', './assets/images/1-3 (printer)/bg-1-3.png');
         this.load.image('scanner', './assets/images/1-3 (printer)/epson.png');
         this.load.image('start-active', './assets/images/1-3 (printer)/start-active.png');
@@ -60,9 +69,11 @@ export default class Scanner extends Phaser.State {
     }
 
     create() {
+
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
+
 
         let scanline = this.game.add.image(143, 40, 'scanline');
         smartSetHeight(scanline, 890);
@@ -182,10 +193,13 @@ export default class Scanner extends Phaser.State {
         }
 
         if (this.docs.every(e => e.isScanned)) {
-            if (this.count == 5) {
+            if (this.count === 5) {
                 this.grade = 100;
             }
             else if (this.count <= 9) {
+                this.grade = Math.round(40 / (this.count - 5)) + 50;
+            }
+            else {
                 this.grade = 50;
             }
             this.next();

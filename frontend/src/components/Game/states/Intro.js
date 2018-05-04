@@ -15,15 +15,18 @@ export default class IntroState extends Phaser.State {
         this.game.camera.flash(0x000000, 3000, true);
         yield;
 
+
         this.game.displayDialogLine('Телефон', '*Пилик, пилик*', () => this.next());
         yield;
+
 
         this.game.displayDialogLine('Ви', 'О, щось прийшло на пошту. Треба подивитися.', () => this.next());
         yield;
 
+
         this.bgPhone.visible = true;
         this.mobile.visible = true;
-        let continueText = this.game.add.text(1100, 975, 'Клацніть, щоб продовжити', {
+        let continueText = this.game.add.text(1050, 975, 'Клацніть, щоб продовжити...', {
             align: 'center',
             font: 'Pangolin',
             fontSize: 70,
@@ -39,7 +42,9 @@ export default class IntroState extends Phaser.State {
 
             setTimeout(() => this.next(), 2000);
         });
+        this.game.phone.addMessageById('BEGINNING');
         yield;
+
 
         this.david.loadTexture('d-sits-turn');
         this.game.add.tween(this.mom).to({
@@ -94,6 +99,8 @@ export default class IntroState extends Phaser.State {
     init() {
         this._gen = this.gen();
         this.game.phone.setEnabled(false);
+        this.game.phone.setTime('13:56');
+        this.game.phone.setDate('02.07.18');
     }
 
     preload() {
