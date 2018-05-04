@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
-import Game from './Game.js';
 import Phone from './Phone/Phone';
 import GameComponent from './GameComponent';
 import phoneAPI from './phoneAPI';
+import Map from './Phone/Map';
+
 
 import './GameWrapper.sass';
 
@@ -126,6 +127,7 @@ class GameWrapper extends Component {
                         time={this.state.phoneTime}
                         date={this.state.phoneDate}
                     />
+                    <Map />
                 </div>
             </div>
         );
