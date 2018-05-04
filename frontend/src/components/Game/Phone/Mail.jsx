@@ -41,7 +41,7 @@ class Mail extends Component {
                                 messages.map(message => (
                                     <li
                                         className={`message ${message.isRead ? '' : 'unread'}`}
-                                        onClick={this.handleMessageClick(message)}
+                                        onClick={() => this.handleMessageClick(message)}
                                     >
                                         <div className="sender">
                                             <i className="fas fa-user icon-user"></i>
@@ -52,7 +52,7 @@ class Mail extends Component {
                                             {message.theme}
                                         </div>
                                         <div className="text">
-                                            {message.text.slice(0, 100) + '...'}
+                                            {message.preview.slice(0, 100) + '...'}
                                         </div>
                                         <div className="date">{message.date}</div>
                                     </li>
@@ -65,18 +65,24 @@ class Mail extends Component {
         }
 
         return (
-            <div className="messages" id="messages">
-                <div class="letter" id="letter">
-                    <div class="head"><i class="fas fa-arrow-left title" id="letter-back"></i></div>
+            <div className="mail">
+                <div class="letter">
+                    <div class="head">
+                        <i
+                            class="fas fa-arrow-left title"
+                            id="letter-back"
+                            onClick={() => this.setState({activeMessage: null})}
+                        />
+                    </div>
                     <div class="content">
                         <div class="theme">{activeMessage.theme}</div>
                         <div class="info">
                             <div class="logo">
-                                <img src="img/logo-pstu.png" alt="Отправитель" />
+                                <img src="img/logo-pstu.png" alt="Відправник" />
                             </div>
                             <div class="user-info">
-                                <div class="sender">{activeMessage.sender}</div>
-                                <div class="recipient">Кому: мне</div>
+                                <div class="sender">Від: {activeMessage.sender}</div>
+                                <div class="recipient">Кому: мені</div>
                                 <div class="date">{activeMessage.date}</div>
                             </div>
                         </div>

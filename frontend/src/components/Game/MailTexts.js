@@ -1,16 +1,20 @@
-const messages = [
+import React from 'react';
+
+export const messages = [
     {
         id: 'BEGINNING',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet atque blanditiis delectus dolores ea, enim harum maxime, molestias necessitatibus nostrum porro provident, quasi qui rem saepe sit tenetur voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias doloremque dolores ea ex hic magni nam nemo recusandae similique? Delectus eum maxime officia quaerat. Accusamus assumenda deserunt dicta doloremque?',
-        theme: 'фівфіваіва',
-        date: '23123123',
-        sender: 'пту',
+        preview: 'Шановний абітурієнте! Запрошуємо до вступної кампанії нашого університету. Перелік документів, необхідних для вступу наведений нижче',
+        text: <div>Шановний абітурієнте! Запрошуємо до вступної кампанії нашого університету. Перелік документів, необхідних для вступу наведений нижче</div>,
+        theme: 'Вступ до ВНЗ "ПДТУ"',
+        date: '02.07.18',
+        sender: 'ПДТУ',
         isRead: true,
 
         stateKey: 'Intro'
     },
     {
         id: 'REGISTRATION',
+        preview: '',
         text: 'фывфывфыв',
         theme: 'фівфіваіва',
         date: '23123123',
@@ -21,6 +25,7 @@ const messages = [
     },
     {
         id: 'ENTRANCE',
+        preview: '',
         text: 'фывфывфыв',
         theme: 'фівфіваіва',
         date: '23123123',
@@ -31,6 +36,7 @@ const messages = [
     },
     {
         id: 'CONGRATULATIONS',
+        preview: '',
         text: 'фывфывфыв',
         theme: 'фівфіваіва',
         date: '23123123',
@@ -40,3 +46,10 @@ const messages = [
         stateKey: '?'
     },
 ];
+
+export function getMessagesForState(stateKey, stateKeys) {
+    let index = stateKeys.indexOf(stateKey);
+    let prevStateKeys = stateKeys.slice(0, index);
+
+    return messages.filter(message => prevStateKeys.some(key => message.stateKey === key));
+}

@@ -1,4 +1,5 @@
 // Используется в компоненте GameWrapper.jsx
+import {messages} from './MailTexts';
 
 const phoneAPI = {
     addTodo(todo) {
@@ -30,8 +31,19 @@ const phoneAPI = {
         this.setState({phoneMessages: [message, ...this.state.phoneMessages]});
     },
 
-    addMessages(messages) {
+    addMessageById(id) {
+        let message = messages.find(e => e.id === id);
+        if (message) {
+            this.setState({phoneMessages: [message, ...this.state.phoneMessages]});
+        }
+    },
 
+    addMessages(messages) {
+        this.setState({phoneMessages: [...messages, ...this.state.phoneMessages]});
+    },
+
+    setMessages(messages) {
+        this.setState({phoneMessages: [...messages]});
     },
 
     setTime(time) {
