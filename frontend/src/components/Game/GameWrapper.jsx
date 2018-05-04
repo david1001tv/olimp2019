@@ -19,8 +19,8 @@ class GameWrapper extends Component {
         dialogCallback: () => null,
         todos: [],
         phoneMessages: [],
-        phoneTime: '',
-        phoneDate: '',
+        phoneTime: '00:00',
+        phoneDate: '00.00.00',
         phoneEnabled: false,
     };
 
@@ -116,6 +116,7 @@ class GameWrapper extends Component {
                     <button
                         className="show-phone-button"
                         onClick={this.handleShowPhoneButtonClick}
+                        disabled={!this.state.phoneEnabled}
                     >
                     </button>
                     <Phone

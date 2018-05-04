@@ -58,9 +58,9 @@ class Phone extends Component {
                         <div className="date" id="date">{this.props.date}</div>
                         <div className="time" id="time">{this.props.time}</div>
                         <div className="right">
-                            <i className="fas fa-wifi" aria-hidden="true">o</i>
-                            <i className="fas fa-signal">o</i>
-                            <i className="fas fa-battery-half">o</i>
+                            <i className="fas fa-wifi" aria-hidden="true"></i>
+                            <i className="fas fa-signal"></i>
+                            <i className="fas fa-battery-half"></i>
                         </div>
                     </div>
                     {

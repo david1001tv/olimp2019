@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'autobind-decorator';
 
 import Register from './Register';
 
@@ -12,7 +13,14 @@ import linkKnImage from '../../img/1-4 (browser)/link-kn.png';
 class FakeBrowser extends Component {
     state = {
         formIsVisible: false,
+        searchIsSubmitted: false,
     };
+
+    @autobind
+    handleSubmit(e) {
+        e.preventDefault();
+        this.setState({searchIsSubmitted: true});
+    }
 
     render() {
         if (this.state.formIsVisible) {
@@ -28,10 +36,20 @@ class FakeBrowser extends Component {
             <div className="fake-browser">
                 <div className="controls-container">
                     <div className="input-container">
-                        <input
-                            type="text"
-                            placeholder="Введіть запит"
-                        />
+                        <form
+                            onSubmit={this.handleSubmit}
+                        >
+                            <input
+                                type="text"
+                                placeholder="Введіть запит"
+                            />
+                            {
+                                this.state.searchIsSubmitted ?
+                                    <div className="warning">Комп'ютер тільки для навчання</div>
+                                    :
+                                    null
+                            }
+                        </form>
                     </div>
                     <div className="links-container">
                         <a

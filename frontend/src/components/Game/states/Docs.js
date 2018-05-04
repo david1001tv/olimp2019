@@ -50,8 +50,20 @@ export default class DocsState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
+        this.game.phone.setEnabled(true);
         this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);
+
+        this.game.phone.addMessage({
+            id: 'BEGINNING',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam amet atque blanditiis delectus dolores ea, enim harum maxime, molestias necessitatibus nostrum porro provident, quasi qui rem saepe sit tenetur voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium alias doloremque dolores ea ex hic magni nam nemo recusandae similique? Delectus eum maxime officia quaerat. Accusamus assumenda deserunt dicta doloremque?',
+            theme: 'фівфіваіва',
+            date: '02.07.2018',
+            sender: 'пту',
+            isRead: true,
+
+            stateKey: 'Intro'
+        });
     }
 
     preload() {
