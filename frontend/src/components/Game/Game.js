@@ -28,6 +28,9 @@ class Game extends Phaser.Game {
 
         this.state.start('Boot');
     }
+
+    /* setFakeBrowserEnabled(enabled) */
+
     /* displayDialogLine(source, text) */
 
     /* phone */
