@@ -29,14 +29,11 @@ class Game extends Phaser.Game {
         this.state.start('Boot');
     }
 
-    next() {
-        const currentState = this.state.states[this.state.current];
-        if (currentState && currentState.next) {
-            currentState.next();
-        }
-    }
+    /* setFakeBrowserEnabled(enabled) */
 
     /* displayDialogLine(source, text) */
+
+    /* phone */
 }
 
 export default Game;

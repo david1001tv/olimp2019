@@ -36,6 +36,7 @@ export default class CrossState extends Phaser.State {
         bg.width = this.game.width;
 
         this.flag = false;
+        this.flag_kiy = true;
 
         let first_word = this.create_input(1050, 265, 4, 3);
         first_word.coord_x = 1390;
@@ -76,7 +77,7 @@ export default class CrossState extends Phaser.State {
 
         cross_words.forEach((curr, index, cross_words) => {
             curr.forEach((elem, i, curr) => {
-                elem.domElement.element.addEventListener('keyup', () => this.check_word(cross_words, curr, correct_words[index], curr.coord_x, curr.coord_y));
+                elem.domElement.element.addEventListener('keyup', () => this.check_word(cross_words, curr, correct_words[index]));
             });
             curr.ok = this.game.add.image(curr.coord_x, curr.coord_y, 'ok');
             curr.bad = this.game.add.image(curr.coord_x, curr.coord_y, 'bad');
@@ -144,17 +145,14 @@ export default class CrossState extends Phaser.State {
         return word;
     }
 
-    check_word(all, input_obj, str, x, y) {
-        input_obj.forEach(function(curr, index, input_obj) {
-            if(curr.value.toLowerCase() === str[index]) {
-                curr.isCorrect = true;
-            }
-            else {
-                curr.isCorrect = false;
-            }
-        })
-        if(input_obj.every(e => e.isCorrect)){
+    check_word(all, input_obj, str) {
+        if(input_obj.map(e => e.value.toLowerCase()).join('') === str){
             input_obj.isCorrect = true;
+        }
+        else {
+            input_obj.isCorrect = false;
+        }
+        if(input_obj.isCorrect){
             input_obj.ok.alpha = 1;
             input_obj.bad.alpha = 0;
             this.flag = false;
@@ -165,14 +163,19 @@ export default class CrossState extends Phaser.State {
             }
         }
         else {
-            input_obj.isCorrect = false;
-            if(!this.flag){
+            if(!this.flag || !this.flag_kiy){
                 input_obj.ok.alpha = 0;
                 input_obj.bad.alpha = 1;
                 if(str === 'ураїни'){
-                    input_obj.ok.alpha = 0;
-                    input_obj.ok_small.alpha = 0;
-                    input_obj.bad_small.alpha = 1;
+                    if(input_obj[input_obj.length - 1].value.toLowerCase() === 'и'){
+                        input_obj.ok_small.alpha = 1;
+                        input_obj.bad_small.alpha = 0;
+                        this.flag_kiy = false;
+                    }
+                    else {
+                        input_obj.ok_small.alpha = 0;
+                        input_obj.bad_small.alpha = 1;
+                    }
                 }
                 this.flag = true;
             }
