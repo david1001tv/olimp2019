@@ -1,2 +1,2 @@
 export { default } from './Auth';
-export Register from './Register';
+export Register from '../FakeBrowser/Register';

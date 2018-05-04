@@ -21,6 +21,12 @@ export default class CrossState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
+        this.time = 7*60*1000;
+        this.minPoints = 100;
+        this.maxPoints = 200;
+        this.rate = 0; 
+        this.goTimer = setTimeout(() => this.checkRate(), this.time);
+        this.timer = setInterval(() => this.checkTime(), 1000);
     }
 
     preload() {
@@ -69,6 +75,9 @@ export default class CrossState extends Phaser.State {
         let eighth_word = this.create_input(1165, 665, 4, 1);
         eighth_word.coord_x = 1500;
         eighth_word.coord_y = 690;
+
+        this.timerText = this.game.add.text(32, 32, '');
+        this.rateText = this.game.add.text(32, 64, '');
 
         this.check_word_func = this.check_word;
 
@@ -162,6 +171,7 @@ export default class CrossState extends Phaser.State {
                 input_obj.bad_small.alpha = 0;
             }
         }
+
         else {
             if(!this.flag || !this.flag_kiy){
                 input_obj.ok.alpha = 0;
@@ -180,15 +190,34 @@ export default class CrossState extends Phaser.State {
                 this.flag = true;
             }
         }
+
         if(all.every(e => e.isCorrect)){
-            /*TODO: grade*/ 
+            if((this.time)/1000 >= 330) this.rate = this.maxPoints;
+            else {
+                let percent = this.time / (7 * 60 * 1000);
+                this.rate = Math.round(this.minPoints * percent + this.minPoints);
+            }
+            this.rateText.setText(this.rate);
         }
     }
 
-    render() {
-        // if (DEV) {
+    checkRate() {
+        this.rate = this.minPoints;
+        next();
+    }
 
-        // }
+    checkTime(){
+        function leadingZero(number) {
+            return number >= 10 ? number.toString() : '0' + number;
+        }
+        this.time -= 1000;
+        let minutes = Math.floor(this.time / (60*1000));
+        let seconds = this.time / 1000 - minutes * 60;
+        this.timerText.setText(`${leadingZero(minutes)}:${leadingZero(seconds)}`);
+    }
+
+    render() {
+
     }
 
     next() {
