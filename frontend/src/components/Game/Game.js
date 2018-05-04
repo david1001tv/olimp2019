@@ -8,6 +8,8 @@ import DocsState from './states/Docs';
 import ScannerState from './states/Scanner';
 import BrowserState from './states/Browser';
 import CrossState from './states/Cross';
+import WaterAlyoshinState from './states/Water_Alyoshin';
+import WaterMarketState from './states/Water_Market';
 
 
 import config from './config';
@@ -25,6 +27,8 @@ class Game extends Phaser.Game {
         this.state.add('Scanner', ScannerState, false);
         this.state.add('Browser', BrowserState, false);
         this.state.add('Cross', CrossState, false);
+        this.state.add('Water_Alyoshin', WaterAlyoshinState, false);
+        this.state.add('Water_Market', WaterMarketState, false);
 
         this.state.start('Boot');
     }
