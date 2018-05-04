@@ -20,7 +20,7 @@ class HomeScreen extends Component {
     render() {
         return (
             <div className="home" id="home-page">
-                <TodoList />
+                <TodoList todos={this.props.todos} />
                 <div className="apps">
                     <div className="item" id="btn-map" onClick={this.props.onMapClick}>
                         <div className="icon map">

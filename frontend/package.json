@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack -p",
-    "start": "./node_modules/.bin/webpack-dev-server --hot --inline",
+    "start": "./node_modules/.bin/webpack-dev-server --hot --inline --host 0.0.0.0",
     "build-vendor": "./node_modules/.bin/webpack --config vendor.webpack.config.js"
   },
   "keywords": [],

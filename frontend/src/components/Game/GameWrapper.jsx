@@ -5,9 +5,9 @@ import autobind from 'autobind-decorator';
 import Game from './Game.js';
 import Phone from './Phone/Phone';
 import GameComponent from './GameComponent';
+import phoneAPI from './phoneAPI';
 
 import './GameWrapper.sass';
-
 
 class GameWrapper extends Component {
     state = {
@@ -17,11 +17,20 @@ class GameWrapper extends Component {
         dialogIsShown: false,
         phoneIsShown: false,
         dialogCallback: () => null,
+        todos: [],
+        phoneMessages: [],
+        phoneTime: '',
+        phoneDate: '',
+        phoneEnabled: false,
     };
 
     constructor(props) {
         super(props);
         this.textAnimationTimer = null;
+        this.phoneAPI = {...phoneAPI};
+        for (let key in this.phoneAPI) {
+            this.phoneAPI[key] = this.phoneAPI[key].bind(this);
+        }
     }
 
     @autobind
@@ -102,13 +111,20 @@ class GameWrapper extends Component {
                     <GameComponent
                         inputEnabled={!phoneIsShown && !dialogIsShown}
                         displayDialogLine={this.displayDialogLine}
+                        phone={this.phoneAPI}
                     />
                     <button
                         className="show-phone-button"
                         onClick={this.handleShowPhoneButtonClick}
                     >
                     </button>
-                    <Phone isShown={phoneIsShown}/>
+                    <Phone
+                        isShown={phoneIsShown}
+                        todos={this.state.todos}
+                        messages={this.state.phoneMessages}
+                        time={this.state.phoneTime}
+                        date={this.state.phoneDate}
+                    />
                 </div>
             </div>
         );
