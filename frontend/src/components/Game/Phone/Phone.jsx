@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
@@ -9,6 +9,14 @@ import './Phone.sass';
 
 
 class Phone extends Component {
+    static propTypes = {
+        date: PropTypes.string,
+        isShown: PropTypes.any,
+        time: PropTypes.string,
+        todos: PropTypes.any,
+        messages: PropTypes.any,
+    };
+
     state = {
         showMail: false,
     };
@@ -38,8 +46,8 @@ class Phone extends Component {
     }
 
     render() {
-        const { showMail } = this.state;
-        const { isShown } = this.props;
+        const {showMail} = this.state;
+        const {isShown} = this.props;
 
         let className = `phone-wrapper ${isShown ? 'phone-wrapper--shown' : ''}`;
         return (
@@ -47,8 +55,8 @@ class Phone extends Component {
                 <div className="dynamic"></div>
                 <div className="screen">
                     <div className="top-bar">
-                        <div className="date" id="date">24.04.18</div>
-                        <div className="time" id="time">17:56</div>
+                        <div className="date" id="date">{this.props.date}</div>
+                        <div className="time" id="time">{this.props.time}</div>
                         <div className="right">
                             <i className="fas fa-wifi" aria-hidden="true">o</i>
                             <i className="fas fa-signal">o</i>
@@ -63,9 +71,10 @@ class Phone extends Component {
                             <HomeScreen
                                 onMailClick={this.handleMailClick}
                                 onMapClick={this.handleMapClick}
+                                todos={this.props.todos}
                             />
                     }
-                    {showMail ? <Mail /> : null}
+                    {showMail ? <Mail messages={this.props.messages} /> : null}
                 </div>
                 <div className="button" id="btn-home" onClick={this.handleHomeClick}>
                     <div className="square"></div>

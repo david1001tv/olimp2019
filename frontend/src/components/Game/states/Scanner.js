@@ -1,11 +1,41 @@
 import Phaser from 'phaser';
 import {smartSetHeight} from '../utils';
+import todos from '../todos/Scanner';
+
+const INACTIVE_Y = 940;
 
 
 export default class Scanner extends Phaser.State {
+    * gen() {
+        this.game.camera.flash(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+
+        this.game.displayDialogLine('Ви', 'Тепер треба відсканувати всі документи', () => this.next());
+        yield;
+
+
+        yield;
+
+        // TODO: добавить какую-нибудь фразу
+        // this.game.displayDialogLine('Ви', '', () => this.next());
+
+        this.game.camera.fade(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+        this.state.start('Browser');
+    }
+
     init() {
         this.activeDocument = null;
         this.isScanning = false;
+        this.count = 0;// Счётчик нажатий на кнопку сканирования
+
+        this._gen = this.gen();
+
+        this.game.phone.addTodos(todos);
     }
 
     preload() {
@@ -14,6 +44,7 @@ export default class Scanner extends Phaser.State {
         this.load.image('start-active', './assets/images/1-3 (printer)/start-active.png');
         this.load.image('start-passive', './assets/images/1-3 (printer)/start-passive.png');
         this.load.image('scanline', './assets/images/1-3 (printer)/scanline.png');
+        this.load.image('checkmark', './assets/images/1-3 (printer)/checkmark.png');
 
         this.load.image('eng-big', './assets/images/1-3 (printer)/eng-big.png');
         this.load.image('photos-big', './assets/images/1-3 (printer)/photos-big.png');
@@ -29,8 +60,6 @@ export default class Scanner extends Phaser.State {
     }
 
     create() {
-        this.count = 0;//count of scannings
-
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
@@ -42,7 +71,6 @@ export default class Scanner extends Phaser.State {
         let epson = this.game.add.image(52, 15, 'scanner');
         smartSetHeight(epson, 1020);
 
-
         let startButton = this.game.add.image(1500, 750, 'start-active');
         smartSetHeight(startButton, 117);
         startButton.inputEnabled = true;
@@ -51,19 +79,25 @@ export default class Scanner extends Phaser.State {
         this.startButton = startButton;
 
 
-        let eng = this.game.add.image(0, 940, 'eng-small');
-        let photos = this.game.add.image(0, 940, 'photos-small');
-        let pass = this.game.add.image(0, 940, 'pass-small');
-        let war = this.game.add.image(0, 940, 'war-small');
-        let zno = this.game.add.image(0, 940, 'zno-small');
+        let eng = this.game.add.image(0, INACTIVE_Y, 'eng-small');
+        let photos = this.game.add.image(0, INACTIVE_Y, 'photos-small');
+        let pass = this.game.add.image(0, INACTIVE_Y, 'pass-small');
+        let war = this.game.add.image(0, INACTIVE_Y, 'war-small');
+        let zno = this.game.add.image(0, INACTIVE_Y, 'zno-small');
 
         let docs = [eng, photos, pass, war, zno];
+        let todoIds = ['SCAN_ENG', 'SCAN_PHOTO', 'SCAN_PASS', 'SCAN_WAR', 'SCAN_ZNO'];
         this.docs = docs;
+
+        // Позиционирование доков
         let x = 50;
-        for (let i = 0; i < docs.length; i++) {
-            docs[i].x = docs[i].originalX = x;
-            x += docs[i].width + 10;
-        }
+        docs.forEach((doc, index) => {
+            doc.x = doc.originalX = x;
+            x += doc.width + 10;
+
+            doc.todoId = todoIds[index];
+
+        });
 
         docs.forEach((e) => {
             e.inputEnabled = true;
@@ -75,27 +109,38 @@ export default class Scanner extends Phaser.State {
 
         this.stage.disableVisibilityChange = true;
 
-        //this.next();
+        this.next();
     }
 
-    handleDragStart(document) {
-        if (this.activeDocument !== document) {
+    activateDocument(doc) {
+        this.activeDocument = doc;
+        doc.loadTexture(`${doc.key.split('-')[0]}-big`);
+        doc.bringToTop();
+    }
+
+    deactivateDocument(doc) {
+        doc.loadTexture(`${doc.key.split('-')[0]}-small`);
+        doc.x = doc.originalX;
+        doc.y = INACTIVE_Y;
+    }
+
+    handleDragStart(doc) {
+        if (this.activeDocument !== doc) {
             if (this.activeDocument !== null) {
-                this.activeDocument.loadTexture(`${this.activeDocument.key.split('-')[0]}-small`);
-                this.activeDocument.x = this.activeDocument.originalX;
-                this.activeDocument.y = 940;
+                this.deactivateDocument(this.activeDocument);
             }
-            this.activeDocument = document;
-            this.activeDocument.loadTexture(`${this.activeDocument.key.split('-')[0]}-big`);
-            this.activeDocument.bringToTop();
+            this.activateDocument(doc);
         }
     }
 
     handleStartButtonClick() {
         if (!this.isScanning) {
-            this.count++;//count of scannings
+            this.count++;
 
             this.isScanning = true;
+            this.game.input.enabled = false;
+            this.startButton.loadTexture('start-passive');
+
             let forthTween = this.game.add.tween(this.scanline).to({
                 x: 1455,
             }, 1000);
@@ -111,21 +156,36 @@ export default class Scanner extends Phaser.State {
 
     handleScanEnd() {
         this.isScanning = false;
-        let scannerRectangle = new Phaser.Rectangle(149, 87, 1280, 809);
+        this.game.input.enabled = true;
+        this.startButton.loadTexture('start-active');
 
-        if(this.activeDocument !== null) {
-            this.activeDocument.isScanned = true;
-            console.log(Phaser.Rectangle.containsRect(this.activeDocument.getBounds(), scannerRectangle));
+
+        let scannerRectangle = new Phaser.Rectangle(149, 87, 1280, 809);
+        const {activeDocument} = this;
+
+        if (this.activeDocument !== null) {
+            // Проверка на успешное сканирование
+            if (Phaser.Rectangle.containsRect(activeDocument.getBounds(), scannerRectangle)) {
+                activeDocument.isScanned = true;
+                this.deactivateDocument(activeDocument);
+                activeDocument.inputEnabled = false;
+
+                let checkmark = this.game.add.image(activeDocument.originalX + 10, INACTIVE_Y, 'checkmark');
+                smartSetHeight(checkmark, 50);
+
+                this.game.phone.completeTodo(activeDocument.todoId);
+
+                this.activeDocument = null;
+            } else {
+                this.game.displayDialogLine('Ви', 'Ой, щось кривувато вийшло. Спробую ще раз');
+            }
         }
-        else {
-            console.log('Document isn\'t found.');
-        }
-        console.log('Count of scannings: ' + this.count);
-        if(this.docs.every(e => e.isScanned)){
-            if(this.count == 5){
+
+        if (this.docs.every(e => e.isScanned)) {
+            if (this.count == 5) {
                 this.grade = 100;
             }
-            else if(this.count <= 9){
+            else if (this.count <= 9) {
                 this.grade = 50;
             }
             this.next();
@@ -133,6 +193,6 @@ export default class Scanner extends Phaser.State {
     }
 
     next() {
-        //this._gen.next();
+        this._gen.next();
     }
 }

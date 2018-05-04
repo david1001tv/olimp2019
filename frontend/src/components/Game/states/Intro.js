@@ -7,12 +7,38 @@ export default class IntroState extends Phaser.State {
         this.camera.scale.setTo(5, 5);
         this.camera.x = 1128 * 5;
         this.camera.y = 280 * 5 - 300;
-        this.game.add.tween(this.camera).to({ x: -250, y: 0 }, 5000).start();
+        this.game.add.tween(this.camera).to({x: -250, y: 0}, 5000).start();
         this.game.add.tween(this.camera.scale).to({
             x: 1,
             y: 1,
-        }, 5000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
+        }, 5000).start().onComplete.add(() => setTimeout(() => this.next(), 2000));
         this.game.camera.flash(0x000000, 3000, true);
+        yield;
+
+        this.game.displayDialogLine('Телефон', '*Пилик, пилик*', () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Ви', 'О, щось прийшло на пошту. Треба подивитися.', () => this.next());
+        yield;
+
+        this.bgPhone.visible = true;
+        this.mobile.visible = true;
+        let continueText = this.game.add.text(1100, 975, 'Клацніть, щоб продовжити', {
+            align: 'center',
+            font: 'Pangolin',
+            fontSize: 70,
+            fontStyle: 'italic',
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.game.input.onDown.add(() => {
+            this.bgPhone.visible = false;
+            this.mobile.visible = false;
+            continueText.destroy();
+
+            setTimeout(() => this.next(), 2000);
+        });
         yield;
 
         this.david.loadTexture('d-sits-turn');
@@ -75,6 +101,8 @@ export default class IntroState extends Phaser.State {
         this.load.image('d-sits', './assets/images/1-1 (intro)/d-sits.png');
         this.load.image('d-sits-turn', './assets/images/1-1 (intro)/d-sits-turn.png');
         this.load.image('printer', './assets/images/1-1 (intro)/printer.png');
+        this.load.image('bg-phone', './assets/images/mobile/bg-phone.png');
+        this.load.image('mobile', './assets/images/mobile/mobile.png');
     }
 
     create() {
@@ -93,6 +121,15 @@ export default class IntroState extends Phaser.State {
 
         let printer = this.game.add.image(284, 340, 'printer');
         smartSetHeight(printer, 178);
+
+        let bgPhone = this.game.add.image(882, 0, 'bg-phone');
+        bgPhone.visible = false;
+        this.bgPhone = bgPhone;
+
+        let mobile = this.game.add.image(1277, 73, 'mobile');
+        mobile.visible = false;
+        smartSetHeight(mobile, 920);
+        this.mobile = mobile;
 
         this.stage.disableVisibilityChange = true;
 
