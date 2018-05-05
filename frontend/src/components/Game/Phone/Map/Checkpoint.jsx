@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import './Map.sass';
@@ -55,45 +55,44 @@ class Checkpoint extends React.Component {
             top,
             left,
             onClick,
-            state
+            state,
+            popoverText
         } = this.props;
 
         let cursor;
         let pointerEvents;
         if (status === 'unavailable') {
             cursor = 'default';
-            pointerEvents = 'none'
+            pointerEvents = 'none';
         } else {
             cursor = 'pointer';
-            pointerEvents = 'all'
+            pointerEvents = 'all';
         }
 
         return (
-            <React.Fragment>
-                <div
-                    style={{
-                        position: 'absolute',
-                        left,
-                        top,
-                        width: checkpointTypes[type].width,
-                        height: checkpointTypes[type].height,
-                        backgroundSize: 'cover',
-                        backgroundImage: `url(${checkpointTypes[type].image[status]})`,
-                        cursor,
-                        pointerEvents
-                    }}
-                    onClick={() => onClick(state, status)}
-                    ref="target"
-                />
-                <Popover
-                    placement='bottom'
-                    container={this}
-                    target={this.refs.target}
-                    show={true}
-                >
-                    <div>content</div>
-                </Popover>
-            </React.Fragment>
+            <div
+                style={{
+                    position: 'absolute',
+                    left,
+                    top,
+                    width: checkpointTypes[type].width,
+                    height: checkpointTypes[type].height,
+                    backgroundSize: 'cover',
+                    backgroundImage: `url(${checkpointTypes[type].image[status]})`,
+                    cursor,
+                    pointerEvents
+                }}
+                onClick={() => onClick(state, status)}
+                ref="target"
+                className="map-quests__checkpoint"
+            >
+                {
+                    popoverText ?
+                        <div className="map-quests__checkpoint-popover">{popoverText}</div>
+                        :
+                        null
+                }
+            </div>
         );
     }
 };
@@ -104,7 +103,8 @@ Checkpoint.propTypes = {
     top: PropTypes.string,
     left: PropTypes.string,
     onClick: PropTypes.func,
-    state: PropTypes.string
+    state: PropTypes.string,
+    popoverText: PropTypes.string
 };
 
 export default Checkpoint;

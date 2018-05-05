@@ -8,6 +8,30 @@
   background-size: cover
   z-index: 2
 
+  &__checkpoint-popover
+    font-family: "Neucha"
+    font-size: 1.5em
+    visibility: hidden
+    position: absolute
+    top: -80px
+    left: 50% // выравнивание по центру
+    transform: translate(-50%, 0) // выравнивание по центру
+    right: 0
+    margin-left: auto
+    margin-right: auto
+    transition: top 0.25s ease-out
+    background: white
+    padding: 3px
+    width: 140px
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px
+    //border-radius: 255px 22px 181px 14px/33px 225px 25px 308px
+    border: solid 7px #989898
+  &__checkpoint:hover
+    .map-quests__checkpoint-popover
+      visibility: visible
+      top: -90px
+
+
   .arrow-button
     background-image: url(../../../../img/map/arrow.png)
     width: 6.5%
@@ -48,7 +72,6 @@
       color: #ffcc00
     &--inactive
       color: #cdcdcd
-
 
     @media (max-width: 960px)
       h3

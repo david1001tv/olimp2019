@@ -48,6 +48,7 @@ class Map extends Component {
                     status={COMPLETED}
                     state="Docs"
                     onClick={this.handleClick}
+                    popoverText="Збір документів"
                 />
                 <Checkpoint
                     left="16.35416667%"
@@ -56,6 +57,7 @@ class Map extends Component {
                     status={AVAILABLE}
                     state="Scanner"
                     onClick={this.handleClick}
+                    popoverText="Скани документів"
                 />
                 <Checkpoint
                     left="23.48958333%"
@@ -64,6 +66,7 @@ class Map extends Component {
                     status={UNAVAILABLE}
                     state="Register"
                     onClick={this.handleClick}
+                    popoverText="Реєстрація"
                 />
                 <div
                     className="map-label map-label--second map-label map-label--inactive no-select"
