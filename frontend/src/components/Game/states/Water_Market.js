@@ -28,6 +28,14 @@ export default class WaterState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Так, залюбки.', () => this.next());
         yield;
 
+        let graphics = this.game.add.graphics(0, 0);
+        graphics.lineStyle(2, 0xFFFFFF, 1);
+        graphics.beginFill(0xFFFFFF, 1);
+        let rectOne = graphics.drawRect(0, 0, 2000, 2000);
+        rectOne.alpha = 0.5;
+        graphics.endFill();
+        window.graphics = graphics;
+
         let notebook = this.game.add.image(300, 385, 'notebook');
         smartSetHeight(notebook, 700);
 
@@ -110,7 +118,7 @@ export default class WaterState extends Phaser.State {
         /*this.game.add.image(x, y, 'waterThreeLiter');
         this.game.add.image(x, y, 'waterFiveLiter');*/
         this.game.displayDialogLine('Ви', 'Дякую! До побачення.', () => this.next());
-        yield
+        yield;
 
         //this.state.start('English');
     }
@@ -125,6 +133,13 @@ export default class WaterState extends Phaser.State {
     }
 
     create() {
+        let graphics = this.game.add.graphics(0, 0);
+        graphics.lineStyle(2, 0xFFFFFF, 1);
+        graphics.beginFill(0xFFFFFF, 1);
+        let rectOne = graphics.drawRect(250, 770, 780, 300);
+        graphics.endFill();
+        window.graphics = graphics;
+
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
@@ -134,6 +149,10 @@ export default class WaterState extends Phaser.State {
         this.stage.disableVisibilityChange = true;
 
         this.next();
+    }
+
+    render(){
+        
     }
 
     next() {
