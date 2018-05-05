@@ -23,10 +23,10 @@ export default class BootState extends Phaser.State {
 
     render() {
         if (config.webfonts.length && this.fontsReady) {
-            this.state.start('Water_Market');
+            this.state.start('Bubble');
         }
         if (!config.webfonts.length) {
-            this.state.start('Water_Market');
+            this.state.start('Bubble');
         }
     }
 
