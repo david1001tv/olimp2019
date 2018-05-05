@@ -3,7 +3,7 @@ import WebFont from 'webfontloader';
 import config from '../config';
 import {getMessagesForState} from '../MailTexts';
 
-let INITIAL_STATE = 'Intro';
+let INITIAL_STATE = 'Scanner';
 
 export default class BootState extends Phaser.State {
     init() {

@@ -5,7 +5,7 @@ import autobind from 'autobind-decorator';
 import Phone from './Phone/Phone';
 import GameComponent from './GameComponent';
 import phoneAPI from './phoneAPI';
-import Map from './Phone/Map';
+import Map from './Phone/Map/Map';
 
 
 import './GameWrapper.sass';
@@ -23,6 +23,7 @@ class GameWrapper extends Component {
         phoneTime: '00:00',
         phoneDate: '00.00.00',
         phoneEnabled: false,
+        mapIsShown: false
     };
 
     constructor(props) {
@@ -86,7 +87,14 @@ class GameWrapper extends Component {
     }
 
     render() {
-        const {dialogIsShown, messageText, messageSource, charPosition, phoneIsShown} = this.state;
+        const {
+            dialogIsShown,
+            messageText,
+            messageSource,
+            charPosition,
+            phoneIsShown,
+            mapIsShown
+        } = this.state;
         return (
             <div
                 id="game-container-wrapper"
@@ -126,8 +134,17 @@ class GameWrapper extends Component {
                         messages={this.state.phoneMessages}
                         time={this.state.phoneTime}
                         date={this.state.phoneDate}
+                        onMapOpen={() => this.setState({mapIsShown: true})}
                     />
-                    <Map />
+                    {
+                        mapIsShown
+                            ?
+                            <Map
+                                onClose={() => this.setState({mapIsShown: false})}
+                            />
+                            :
+                            null
+                    }
                 </div>
             </div>
         );

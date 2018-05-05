@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'react-md/dist/react-md.green-indigo.min.css';
+import './index.sass';
 import 'regenerator-runtime/runtime';
 import validate from 'validate.js';
 import { BrowserRouter as Router } from 'react-router-dom';
