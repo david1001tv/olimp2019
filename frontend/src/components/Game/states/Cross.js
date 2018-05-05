@@ -44,35 +44,35 @@ export default class CrossState extends Phaser.State {
         this.flag_kiy = false;
         this.flagBackspace = false;
 
-        let first_word = this.create_input(1050, 265, 4, 3);
+        let first_word = this.create_input(1050, 270, 4, 3);
         first_word.coord_x = 1390;
         first_word.coord_y = 275;
 
-        let second_word = this.create_input(1160, 325, 3, 1);
+        let second_word = this.create_input(1163, 330, 3, 1);
         second_word.coord_x = 1450;
         second_word.coord_y = 330;
 
-        let third_word = this.create_input(1110, 385, 5, 2);
+        let third_word = this.create_input(1110, 388, 5, 2);
         third_word.coord_x = 1510;
         third_word.coord_y = 385;
 
-        let fourth_word = this.create_input(1220, 435, 4, 0);
+        let fourth_word = this.create_input(1220, 445, 4, 0);
         fourth_word.coord_x = 1570;
         fourth_word.coord_y = 445;
 
-        let fifth_word = this.create_input(1110, 490, 5, 2);
+        let fifth_word = this.create_input(1110, 502, 5, 2);
         fifth_word.coord_x = 1500;
         fifth_word.coord_y = 510;
         
-        let sixth_word = this.create_input(1050, 550, 4, 3);
+        let sixth_word = this.create_input(1050, 560, 4, 3);
         sixth_word.coord_x = 1390;
         sixth_word.coord_y = 565;
         
-        let seventh_word = this.create_input(1170, 610, 6, 1);
+        let seventh_word = this.create_input(1165, 618, 6, 1);
         seventh_word.coord_x = 1630;
         seventh_word.coord_y = 630;
         
-        let eighth_word = this.create_input(1165, 665, 4, 1);
+        let eighth_word = this.create_input(1165, 675, 4, 1);
         eighth_word.coord_x = 1500;
         eighth_word.coord_y = 690;
 
@@ -120,10 +120,10 @@ export default class CrossState extends Phaser.State {
             }
             word[i] = this.game.add.inputField(x, y, {
                 fillAlpha: 0,
-                padding: 12,
+                padding: 10,
                 width: 25,
                 fill: '#5700ff',
-                font: '40px Pangolin',
+                font: '35px Pangolin',
                 max: 1
             });
         }
