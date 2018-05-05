@@ -4,7 +4,7 @@ import {smartSetHeight} from '../utils';
 
 export default class WaterState extends Phaser.State {
     * gen() {
-        this.camera.scale.setTo(5, 5);
+        /*this.camera.scale.setTo(5, 5);
         this.camera.x = 1128 * 5;
         this.camera.y = 280 * 5 - 300;
         this.game.add.tween(this.camera).to({ x: -250, y: 0 }, 5000).start();
@@ -13,7 +13,7 @@ export default class WaterState extends Phaser.State {
             y: 1,
         }, 5000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
         this.game.camera.flash(0x000000, 3000, true);
-        yield;
+        yield;*/
 
         this.game.displayDialogLine('Продавець', 'Доброго дня! Чим я можу допомогти?', () => this.next());
         yield;
@@ -42,7 +42,7 @@ export default class WaterState extends Phaser.State {
         //first question
         let firstQuestion = this.addText("1) Вам необхідно обчислити об'єм двох тар у \nлітрах.\
 Вам відомо, що кожна тара - це циліндр. \nВисота першого цилінда 225 мм, діаметр 130 мм.\
-        \nДля другого целіндра висота дорівнює 325 мм, \nа діаметр 140 мм.", 500, 440, 30);
+        \nДля другого циліндра висота дорівнює 325 мм, \nа діаметр 140 мм.", 500, 440, 30);
 
         let firstAnswer = this.addText("а) 4 літра і 8 літрів;", 800, 650, 32);
         firstAnswer.isRight = false;
@@ -110,17 +110,17 @@ export default class WaterState extends Phaser.State {
 
         this.deleteText(thirdQuestion, answers);
         notebook.destroy();
+        rectOne.destroy();
         console.log("grade:" + this.grade);
         this.game.displayDialogLine('Продавець', 'Дякую! А ось як раз і ваша вода набралась. Прошу.', () => this.next());
         yield;
 
-        /*TODO: appearance of bottles*/
-        /*this.game.add.image(x, y, 'waterThreeLiter');
-        this.game.add.image(x, y, 'waterFiveLiter');*/
+        let bottles = this.game.add.image(440, 380, 'bottles');
+        smartSetHeight(bottles, 300);
         this.game.displayDialogLine('Ви', 'Дякую! До побачення.', () => this.next());
         yield;
 
-        //this.state.start('English');
+        this.state.start('Tranlsate');
     }
 
     init() {
@@ -130,16 +130,10 @@ export default class WaterState extends Phaser.State {
     preload() {
         this.load.image('bg', './assets/images/2-2 (water)/bg-2-2.png');
         this.load.image('notebook', './assets/images/2-2 (water)/hands-note.png')
+        this.load.image('bottles', './assets/images/2-2 (water)/bottles.png')
     }
 
     create() {
-        let graphics = this.game.add.graphics(0, 0);
-        graphics.lineStyle(2, 0xFFFFFF, 1);
-        graphics.beginFill(0xFFFFFF, 1);
-        let rectOne = graphics.drawRect(250, 770, 780, 300);
-        graphics.endFill();
-        window.graphics = graphics;
-
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;

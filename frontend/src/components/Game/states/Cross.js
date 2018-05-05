@@ -41,8 +41,8 @@ export default class CrossState extends Phaser.State {
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
 
-        this.flag = false;
-        this.flag_kiy = true;
+        this.flag_kiy = false;
+        this.flagBackspace = false;
 
         let first_word = this.create_input(1050, 265, 4, 3);
         first_word.coord_x = 1390;
@@ -128,6 +128,8 @@ export default class CrossState extends Phaser.State {
             });
         }
 
+        word.flag = false;
+
         let regEx = /[а-яА-ЯіІїЇєЄ]/;
 
         word.forEach(function (curr, index, first_word) {
@@ -144,9 +146,15 @@ export default class CrossState extends Phaser.State {
                 else if(e.keyCode == 8){
                     curr.setText('');
                     curr.startFocus();
-                    if(first_word[index-1] !== undefined){
+                    if(first_word[index-1] !== undefined && this.flagBackspace === true){
                         curr.endFocus();
                         first_word[index-1].startFocus();
+                    }
+                    if(this.flagBackspace === true){
+                        this.flagBackspace = false;
+                    }
+                    else {
+                        this.flagBackspace = true;
                     }
                 }
             });
@@ -164,30 +172,29 @@ export default class CrossState extends Phaser.State {
         if(input_obj.isCorrect){
             input_obj.ok.alpha = 1;
             input_obj.bad.alpha = 0;
-            this.flag = false;
+            input_obj.flag = false;
             if(str === 'ураїни'){
                 input_obj.ok.alpha = 1;
                 input_obj.ok_small.alpha = 1;
                 input_obj.bad_small.alpha = 0;
             }
         }
-
         else {
-            if(!this.flag || !this.flag_kiy){
+            if(!input_obj.flag || !this.flag_kiy){
                 input_obj.ok.alpha = 0;
                 input_obj.bad.alpha = 1;
                 if(str === 'ураїни'){
                     if(input_obj[input_obj.length - 1].value.toLowerCase() === 'и'){
                         input_obj.ok_small.alpha = 1;
                         input_obj.bad_small.alpha = 0;
-                        this.flag_kiy = false;
+                        this.flag_kiy = true;
                     }
                     else {
                         input_obj.ok_small.alpha = 0;
                         input_obj.bad_small.alpha = 1;
                     }
                 }
-                this.flag = true;
+                input_obj.flag = true;
             }
         }
 
@@ -198,6 +205,7 @@ export default class CrossState extends Phaser.State {
                 this.rate = Math.round(this.minPoints * percent + this.minPoints);
             }
             this.rateText.setText(this.rate);
+            this.state.start('BubbleGood');
         }
     }
 
