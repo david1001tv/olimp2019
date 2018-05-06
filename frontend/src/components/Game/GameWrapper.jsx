@@ -16,14 +16,15 @@ class GameWrapper extends Component {
         messageSource: '',
         charPosition: 0,
         dialogIsShown: false,
-        phoneIsShown: false,
         dialogCallback: () => null,
         todos: [],
+        phoneIsShown: false,
         phoneMessages: [],
         phoneTime: '00:00',
         phoneDate: '00.00.00',
         phoneEnabled: false,
-        mapIsShown: false
+        mapIsShown: false,
+        mapIsCloseable: false
     };
 
     constructor(props) {
@@ -86,6 +87,11 @@ class GameWrapper extends Component {
         }
     }
 
+    @autobind
+    handleMapSelect(key, isReplaying) {
+        this.gameComponent.startState(key, isReplaying);
+    }
+
     render() {
         const {
             dialogIsShown,
@@ -121,6 +127,7 @@ class GameWrapper extends Component {
                         inputEnabled={!phoneIsShown && !dialogIsShown}
                         displayDialogLine={this.displayDialogLine}
                         phone={this.phoneAPI}
+                        ref={ref => this.gameComponent = ref}
                     />
                     <button
                         className="show-phone-button"
@@ -141,6 +148,8 @@ class GameWrapper extends Component {
                             ?
                             <Map
                                 onClose={() => this.setState({mapIsShown: false})}
+                                onSelect={this.handleMapSelect}
+                                isCloseable={this.state.mapIsCloseable}
                             />
                             :
                             null

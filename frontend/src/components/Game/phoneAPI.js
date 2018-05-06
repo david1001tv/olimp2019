@@ -55,7 +55,19 @@ const phoneAPI = {
     },
 
     setEnabled(enabled) {
-        this.setState({phoneEnabled: enabled});
+        const {phoneIsShown} = this.state;
+        if (phoneIsShown)
+            this.setState({phoneEnabled: enabled, phoneIsShown: false});
+        else
+            this.setState({phoneEnabled: enabled});
+    },
+
+    setMapIsShown(isShown) {
+        this.setState({mapIsShown: isShown});
+    },
+
+    setMapIsCloseable(isCloseable) {
+        this.setState({mapIsCloseable: isCloseable});
     }
 };
 

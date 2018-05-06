@@ -1,21 +1,31 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'autobind-decorator';
 
 import './Map.sass';
+import ProgressManager from '~etc/ProgressManager';
 
 
-import checkpointCompleted from '../../../../img/map/checkpoint-completed.png';
-import finishCompleted from '../../../../img/map/finish-completed.png';
-import flagCompleted from '../../../../img/map/flag-completed.png';
+import checkpointCompleted from '~img/map/checkpoint-completed.png';
+import finishCompleted from '~img/map/finish-completed.png';
+import flagCompleted from '~img/map/flag-completed.png';
 
-import checkpointAvailable from '../../../../img/map/checkpoint-available.png';
-import finishAvailable from '../../../../img/map/finish-available.png';
-import flagAvailable from '../../../../img/map/flag-available.png';
+import checkpointAvailable from '~img/map/checkpoint-available.png';
+import finishAvailable from '~img/map/finish-available.png';
+import flagAvailable from '~img/map/flag-available.png';
 
-import checkpointUnavailable from '../../../../img/map/checkpoint-unavailable.png';
-import finishUnavailable from '../../../../img/map/finish-unavailable.png';
-import flagUnavailable from '../../../../img/map/flag-unavailable.png';
+import checkpointUnavailable from '~img/map/checkpoint-unavailable.png';
+import finishUnavailable from '~img/map/finish-unavailable.png';
+import flagUnavailable from '~img/map/flag-unavailable.png';
 
+
+export const COMPLETED = 'completed';
+export const AVAILABLE = 'available';
+export const UNAVAILABLE = 'unavailable';
+
+export const CHECKPOINT = 'checkpoint';
+export const FINISH = 'finish';
+export const FLAG = 'flag';
 
 let checkpointTypes = {
     checkpoint: {
@@ -48,25 +58,33 @@ let checkpointTypes = {
 };
 
 class Checkpoint extends React.Component {
+    @autobind
+    handleClick() {
+        const {state, status} = this.props;
+        this.props.onClick(state, status);
+    }
+    
     render() {
         const {
             type,
-            status,
             top,
             left,
-            onClick,
             state,
-            popoverText
+            popoverText,
+            onClick
         } = this.props;
 
         let cursor;
         let pointerEvents;
-        if (status === 'unavailable') {
-            cursor = 'default';
-            pointerEvents = 'none';
-        } else {
+        let status = ProgressManager.getStatus(state);
+        let isClickable = status === AVAILABLE || (type === CHECKPOINT && status === COMPLETED);
+
+        if (isClickable) {
             cursor = 'pointer';
             pointerEvents = 'all';
+        } else {
+            cursor = 'default';
+            pointerEvents = 'none';
         }
 
         return (
@@ -99,7 +117,7 @@ class Checkpoint extends React.Component {
 
 Checkpoint.propTypes = {
     type: PropTypes.string,
-    status: PropTypes.string,
+    // status: PropTypes.string,
     top: PropTypes.string,
     left: PropTypes.string,
     onClick: PropTypes.func,
@@ -108,12 +126,4 @@ Checkpoint.propTypes = {
 };
 
 export default Checkpoint;
-
-export const COMPLETED = 'completed';
-export const AVAILABLE = 'available';
-export const UNAVAILABLE = 'unavailable';
-
-export const CHECKPOINT = 'checkpoint';
-export const FINISH = 'finish';
-export const FLAG = 'flag';
 

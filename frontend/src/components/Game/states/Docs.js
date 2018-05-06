@@ -45,7 +45,7 @@ export default class DocsState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.state.start('Scanner');
+        this.game.nextState();
     }
 
     init() {

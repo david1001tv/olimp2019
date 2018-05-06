@@ -8,6 +8,7 @@ import './FakeBrowser.sass';
 import linkRegisterImage from '../../img/1-4 (browser)/link-register.png';
 import linkPstuImage from '../../img/1-4 (browser)/link-pstu.png';
 import linkKnImage from '../../img/1-4 (browser)/link-kn.png';
+import PubSub from 'pubsub-js';
 
 
 class FakeBrowser extends Component {
@@ -22,12 +23,19 @@ class FakeBrowser extends Component {
         this.setState({searchIsSubmitted: true});
     }
 
+    @autobind
+    handleRegistrationSuccess() {
+        PubSub.publish('browser', 'form-submitted');
+    }
+
     render() {
         if (this.state.formIsVisible) {
             return (
                 <div className="fake-browser">
                     <div className="form-container">
-                        <Register />
+                        <Register
+                            onSuccess={this.handleRegistrationSuccess}
+                        />
                     </div>
                 </div>
             )

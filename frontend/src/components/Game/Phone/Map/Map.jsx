@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'autobind-decorator';
 
 import './Map.sass';
 import Checkpoint, {
@@ -14,19 +15,28 @@ import Checkpoint, {
 class Map extends Component {
     static propTypes = {
         onClose: PropTypes.func,
+        onSelect: PropTypes.func,
+        isCloseable: PropTypes.bool
     };
 
-    handleClick(a, b) {
-        console.log(a, b);
+    @autobind
+    handleClick(key, status) {
+        console.log(key, status);
+        let isReplaying = status === COMPLETED;
+        this.props.onSelect(key, isReplaying);
     }
 
     render() {
         return (
             <div className="map-quests">
-                <div
-                    className="arrow-button"
-                    onClick={this.props.onClose}
-                />
+                {
+                    this.props.isCloseable && (
+                        <div
+                            className="arrow-button"
+                            onClick={this.props.onClose}
+                        />
+                    )
+                }
                 <div
                     className="map-label map-label--first map-label map-label--active no-select"
                 >
@@ -37,15 +47,14 @@ class Map extends Component {
                     left="4.3229%"
                     top="23.7963%"
                     type={FLAG}
-                    status={COMPLETED}
                     state="Intro"
                     onClick={this.handleClick}
+                    popoverText="Етап 1"
                 />
                 <Checkpoint
                     left="10.3125%"
                     top="34.35185%"
                     type={CHECKPOINT}
-                    status={COMPLETED}
                     state="Docs"
                     onClick={this.handleClick}
                     popoverText="Збір документів"
@@ -54,7 +63,6 @@ class Map extends Component {
                     left="16.35416667%"
                     top="38.05555556%"
                     type={CHECKPOINT}
-                    status={AVAILABLE}
                     state="Scanner"
                     onClick={this.handleClick}
                     popoverText="Скани документів"
@@ -63,10 +71,25 @@ class Map extends Component {
                     left="23.48958333%"
                     top="45.27777778%"
                     type={CHECKPOINT}
-                    status={UNAVAILABLE}
-                    state="Register"
+                    state="Browser"
                     onClick={this.handleClick}
                     popoverText="Реєстрація"
+                />
+                <Checkpoint
+                    left="35%"
+                    top="40.09259%"
+                    type={FLAG}
+                    state="FLAG_2"
+                    onClick={this.handleClick}
+                    popoverText="Етап 2"
+                />
+                <Checkpoint
+                    left="35.625%"
+                    top="57.59259%"
+                    type={CHECKPOINT}
+                    state="Cross"
+                    onClick={this.handleClick}
+                    popoverText="Кросворд"
                 />
                 <div
                     className="map-label map-label--second map-label map-label--inactive no-select"

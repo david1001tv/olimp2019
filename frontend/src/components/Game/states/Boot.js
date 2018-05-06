@@ -3,16 +3,14 @@ import WebFont from 'webfontloader';
 import config from '../config';
 import {getMessagesForState} from '../MailTexts';
 
-let INITIAL_STATE = 'Scanner';
-
 export default class BootState extends Phaser.State {
-    init() {
+    init(nextState) {
+        this.nextState = nextState;
         this.fontsReady = false;
         this.fontsLoaded = this.fontsLoaded.bind(this);
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.scale.parentIsWindow = true;
-        window.getMessagesForState = getMessagesForState;
-        this.game.phone.setMessages(getMessagesForState(INITIAL_STATE, Object.keys(this.game.state.states)));
+        this.game.phone.setMessages(getMessagesForState(this.nextState, Object.keys(this.game.state.states)));
     }
 
     preload() {
@@ -28,10 +26,10 @@ export default class BootState extends Phaser.State {
 
     render() {
         if (config.webfonts.length && this.fontsReady) {
-            this.state.start(INITIAL_STATE);
+            this.state.start(this.nextState);
         }
         if (!config.webfonts.length) {
-            this.state.start(INITIAL_STATE);
+            this.state.start(this.nextState);
         }
     }
 

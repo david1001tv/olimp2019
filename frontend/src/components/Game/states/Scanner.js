@@ -28,7 +28,7 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.state.start('Browser');
+        this.game.nextState();
     }
 
     init() {
@@ -45,8 +45,6 @@ export default class Scanner extends Phaser.State {
     }
 
     preload() {
-        this.load.script('BlurX', 'https://cdn.rawgit.com/photonstorm/phaser-ce/master/filters/BlurX.js');
-        this.load.script('BlurY', 'https://cdn.rawgit.com/photonstorm/phaser-ce/master/filters/BlurY.js');
 
         this.load.image('bg', './assets/images/1-3 (printer)/bg-1-3.png');
         this.load.image('scanner', './assets/images/1-3 (printer)/epson.png');

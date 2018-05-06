@@ -93,7 +93,7 @@ export default class IntroState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.state.start('Docs');
+        this.game.nextState();
     }
 
     init() {
