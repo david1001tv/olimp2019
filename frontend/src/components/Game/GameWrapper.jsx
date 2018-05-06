@@ -89,9 +89,12 @@ class GameWrapper extends Component {
         return (
             <div
                 id="game-container-wrapper"
-                onClick={this.handleGameContainerClick}
             >
-                <div id="game-container" className={phoneIsShown ? 'blurred' : ''}>
+                <div
+                    id="game-container"
+                    className={phoneIsShown ? 'blurred' : ''}
+                    onClick={this.handleGameContainerClick}
+                >
                     {
                         dialogIsShown ?
                             <div id="dialog-container">

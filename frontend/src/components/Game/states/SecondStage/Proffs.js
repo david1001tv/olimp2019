@@ -23,7 +23,7 @@ export default class ProffsState extends Phaser.State {
     init() {
         this._gen = this.gen();
         this.game.phone.clearTodos();
-        this.game.phone.addTodos(todos);
+        // this.game.phone.addTodos(todos);
     }
 
     preload() {
@@ -90,7 +90,7 @@ export default class ProffsState extends Phaser.State {
         this.game.phone.completeTodo(obj.todoId);
         this.fivecopTalk.alpha = 1;
         this.fivecopQuite.alpha = 0;
-        this.game.displayDialogLine('П\'ятикоп', obj.dialog, () => this.endTalk());
+        setTimeout(() => this.game.displayDialogLine('П\'ятикоп', obj.dialog, () => this.endTalk()), 150);
     }
 
     endTalk(){
