@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import {smartSetHeight} from '../utils';
+import {smartSetHeight} from '../../utils';
 
 
 export default class WaterState extends Phaser.State {

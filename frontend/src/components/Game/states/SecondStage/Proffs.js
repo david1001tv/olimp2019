@@ -1,7 +1,6 @@
 /* globals __DEV__ */
 import Phaser from 'phaser';
-import {smartSetHeight} from '../utils';
-import todos from '../todos/Docs';
+import {smartSetHeight} from '../../utils';
 
 export default class ProffsState extends Phaser.State {
     * gen() {

@@ -1,6 +1,5 @@
 import Phaser from 'phaser';
-import {smartSetHeight} from '../utils';
-import todos from '../todos/Docs';
+import {smartSetHeight} from '../../utils';
 
 export default class TranslateState extends Phaser.State {
     * gen() {

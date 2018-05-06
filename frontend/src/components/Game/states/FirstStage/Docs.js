@@ -1,7 +1,7 @@
 /* globals __DEV__ */
 import Phaser from 'phaser';
-import {smartSetHeight} from '../utils';
-import todos from '../todos/Docs';
+import {smartSetHeight} from '../../utils';
+import todos from '../../todos/Docs';
 
 export default class DocsState extends Phaser.State {
     * gen() {

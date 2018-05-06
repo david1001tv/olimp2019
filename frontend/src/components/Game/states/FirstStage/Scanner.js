@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import {smartSetHeight} from '../utils';
-import todos from '../todos/Scanner';
+import {smartSetHeight} from '../../utils';
+import todos from '../../todos/Scanner';
 
 const INACTIVE_Y = 940;
 

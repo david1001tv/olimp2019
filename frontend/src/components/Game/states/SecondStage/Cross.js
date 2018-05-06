@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 import PhaserInput from 'phaser-input';
-import {smartSetHeight} from '../utils';
+import {smartSetHeight} from '../../utils';
 
 export default class CrossState extends Phaser.State {
     * gen() {
