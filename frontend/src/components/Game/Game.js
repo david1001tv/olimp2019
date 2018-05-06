@@ -3,17 +3,17 @@ import 'p2';
 import Phaser from 'phaser';
 
 import BootState from './states/Boot';
-import IntroState from './states/Intro';
-import DocsState from './states/Docs';
-import ScannerState from './states/Scanner';
-import BrowserState from './states/Browser';
-import GrannyBadState from './states/GrannyBad';
-import CrossState from './states/Cross';
-import GrannyGoodState from './states/GrannyGood';
-import WaterAlyoshinState from './states/WaterAlyoshin';
-import WaterMarketState from './states/WaterMarket';
-import TranslateState from './states/Translate';
-import ProffsState from './states/Proffs';
+import IntroState from './states/FirstStage/Intro';
+import DocsState from './states/FirstStage/Docs';
+import ScannerState from './states/FirstStage/Scanner';
+import BrowserState from './states/FirstStage/Browser';
+import GrannyBadState from './states/SecondStage/GrannyBad';
+import CrossState from './states/SecondStage/Cross';
+import GrannyGoodState from './states/SecondStage/GrannyGood';
+import WaterAlyoshinState from './states/SecondStage/WaterAlyoshin';
+import WaterMarketState from './states/SecondStage/WaterMarket';
+import TranslateState from './states/SecondStage/Translate';
+import ProffsState from './states/SecondStage/Proffs';
 
 
 import config from './config';
