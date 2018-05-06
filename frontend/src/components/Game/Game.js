@@ -13,6 +13,7 @@ import GrannyGoodState from './states/GrannyGood';
 import WaterAlyoshinState from './states/WaterAlyoshin';
 import WaterMarketState from './states/WaterMarket';
 import TranslateState from './states/Translate';
+import ProffsState from './states/Proffs';
 
 
 import config from './config';
@@ -35,6 +36,7 @@ class Game extends Phaser.Game {
         this.state.add('WaterAlyoshin', WaterAlyoshinState, false);
         this.state.add('WaterMarket', WaterMarketState, false);
         this.state.add('Translate', TranslateState, false);
+        this.state.add('Proffs', ProffsState, false);
 
         this.state.start('Boot');
     }
