@@ -7,11 +7,11 @@ import IntroState from './states/Intro';
 import DocsState from './states/Docs';
 import ScannerState from './states/Scanner';
 import BrowserState from './states/Browser';
-import BubbleState from './states/Bubble';
+import GrannyBadState from './states/GrannyBad';
 import CrossState from './states/Cross';
-import BubbleGoodState from './states/BubbleGood';
-import WaterAlyoshinState from './states/Water_Alyoshin';
-import WaterMarketState from './states/Water_Market';
+import GrannyGoodState from './states/GrannyGood';
+import WaterAlyoshinState from './states/WaterAlyoshin';
+import WaterMarketState from './states/WaterMarket';
 import TranslateState from './states/Translate';
 
 
@@ -29,11 +29,11 @@ class Game extends Phaser.Game {
         this.state.add('Docs', DocsState, false);
         this.state.add('Scanner', ScannerState, false);
         this.state.add('Browser', BrowserState, false);
-        this.state.add('Bubble', BubbleState, false);
+        this.state.add('GrannyBad', GrannyBadState, false);
         this.state.add('Cross', CrossState, false);
-        this.state.add('BubbleGood', BubbleGoodState, false);
-        this.state.add('Water_Alyoshin', WaterAlyoshinState, false);
-        this.state.add('Water_Market', WaterMarketState, false);
+        this.state.add('GrannyGood', GrannyGoodState, false);
+        this.state.add('WaterAlyoshin', WaterAlyoshinState, false);
+        this.state.add('WaterMarket', WaterMarketState, false);
         this.state.add('Translate', TranslateState, false);
 
         this.state.start('Boot');

@@ -205,7 +205,7 @@ export default class CrossState extends Phaser.State {
                 this.rate = Math.round(this.minPoints * percent + this.minPoints);
             }
             this.rateText.setText(this.rate);
-            this.state.start('BubbleGood');
+            this.state.start('GrannyGood');
         }
     }
 

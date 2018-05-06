@@ -1,12 +1,12 @@
 import Phaser from 'phaser';
 import {smartSetHeight} from '../utils';
 
-export default class BubbleGoodState extends Phaser.State {
+export default class GrannyGoodState extends Phaser.State {
     * gen() {
         this.game.displayDialogLine('Бабця', ' Добре, дійсно розумний, але неохайний. Іншого разу приходь у нормальному вигляді. А зараз проходь.', () => this.next());
         yield;
         
-        this.state.start('Water_Alyoshin');
+        this.state.start('WaterAlyoshin');
     }
 
     init() {

@@ -32,7 +32,7 @@ export default class WaterState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Гаразд, я швидко.', () => this.next());
         yield;
         
-        this.state.start('Water_Market');
+        this.state.start('WaterMarket');
     }
 
     init() {

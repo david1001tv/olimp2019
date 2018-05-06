@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import {smartSetHeight} from '../utils';
 
-export default class BubbleState extends Phaser.State {
+export default class GrannyBadState extends Phaser.State {
     * gen() {
         console.log(0);
         console.log(this.camera);
