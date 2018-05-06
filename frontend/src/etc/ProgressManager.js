@@ -9,8 +9,12 @@ const states = [
     'Docs',
     'Scanner',
     'Browser',
-    'FLAG_2',
-    'Cross'
+    'GrannyBad',
+    'Cross',
+    'WaterAlyoshin',
+    'WaterMarket',
+    'Translate',
+    'Proffs',
 ];
 
 class ProgressManager {

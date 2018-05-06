@@ -79,7 +79,7 @@ class Map extends Component {
                     left="35%"
                     top="40.09259%"
                     type={FLAG}
-                    state="FLAG_2"
+                    state="GrannyBad"
                     onClick={this.handleClick}
                     popoverText="Етап 2"
                 />
@@ -89,7 +89,31 @@ class Map extends Component {
                     type={CHECKPOINT}
                     state="Cross"
                     onClick={this.handleClick}
-                    popoverText="Кросворд"
+                    popoverText="Прохідна"
+                />
+                <Checkpoint
+                    left="39.0625%"
+                    top="66.2963%"
+                    type={CHECKPOINT}
+                    state="WaterAlyoshin"
+                    onClick={this.handleClick}
+                    popoverText="Приймальна комісія"
+                />
+                <Checkpoint
+                    left="44.5%"
+                    top="71.7%"
+                    type={CHECKPOINT}
+                    state="Translate"
+                    onClick={this.handleClick}
+                    popoverText="Переклад"
+                />
+                <Checkpoint
+                    left="51.6%"
+                    top="70.8%"
+                    type={CHECKPOINT}
+                    state="Proffs"
+                    onClick={this.handleClick}
+                    popoverText="Знайомство"
                 />
                 <div
                     className="map-label map-label--second map-label map-label--inactive no-select"
