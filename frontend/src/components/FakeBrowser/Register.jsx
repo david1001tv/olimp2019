@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
 import {GoogleLogin} from 'react-google-login';
 import {Button, TextField, LinearProgress} from 'react-md';
 import autobind from 'autobind-decorator';
@@ -45,6 +47,10 @@ class Register extends Component {
         },
     };
 
+    static propTypes = {
+        onSuccess: PropTypes.func,
+    };
+    
     state = {
         data: {
             password: '',
@@ -78,6 +84,7 @@ class Register extends Component {
         this.setState({isLoading: true});
         try {
             await register(this.state.data);
+            this.props.onSuccess();
         } catch (e) {
             console.error(e);
         } finally {
@@ -102,6 +109,7 @@ class Register extends Component {
                 lastName: basicProfile.getFamilyName(),
                 email: basicProfile.getEmail()
             });
+            this.props.onSuccess();
         } catch (e) {
             console.error(e);
         } finally {

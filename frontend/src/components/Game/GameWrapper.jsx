@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
 
-import Game from './Game.js';
 import Phone from './Phone/Phone';
 import GameComponent from './GameComponent';
 import phoneAPI from './phoneAPI';
+import Map from './Phone/Map/Map';
+
 
 import './GameWrapper.sass';
 
@@ -15,13 +16,15 @@ class GameWrapper extends Component {
         messageSource: '',
         charPosition: 0,
         dialogIsShown: false,
-        phoneIsShown: false,
         dialogCallback: () => null,
         todos: [],
+        phoneIsShown: false,
         phoneMessages: [],
-        phoneTime: '',
-        phoneDate: '',
+        phoneTime: '00:00',
+        phoneDate: '00.00.00',
         phoneEnabled: false,
+        mapIsShown: false,
+        mapIsCloseable: false
     };
 
     constructor(props) {
@@ -84,8 +87,20 @@ class GameWrapper extends Component {
         }
     }
 
+    @autobind
+    handleMapSelect(key, isReplaying) {
+        this.gameComponent.startState(key, isReplaying);
+    }
+
     render() {
-        const {dialogIsShown, messageText, messageSource, charPosition, phoneIsShown} = this.state;
+        const {
+            dialogIsShown,
+            messageText,
+            messageSource,
+            charPosition,
+            phoneIsShown,
+            mapIsShown
+        } = this.state;
         return (
             <div
                 id="game-container-wrapper"
@@ -115,10 +130,12 @@ class GameWrapper extends Component {
                         inputEnabled={!phoneIsShown && !dialogIsShown}
                         displayDialogLine={this.displayDialogLine}
                         phone={this.phoneAPI}
+                        ref={ref => this.gameComponent = ref}
                     />
                     <button
                         className="show-phone-button"
                         onClick={this.handleShowPhoneButtonClick}
+                        disabled={!this.state.phoneEnabled}
                     >
                     </button>
                     <Phone
@@ -127,7 +144,19 @@ class GameWrapper extends Component {
                         messages={this.state.phoneMessages}
                         time={this.state.phoneTime}
                         date={this.state.phoneDate}
+                        onMapOpen={() => this.setState({mapIsShown: true})}
                     />
+                    {
+                        mapIsShown
+                            ?
+                            <Map
+                                onClose={() => this.setState({mapIsShown: false})}
+                                onSelect={this.handleMapSelect}
+                                isCloseable={this.state.mapIsCloseable}
+                            />
+                            :
+                            null
+                    }
                 </div>
             </div>
         );

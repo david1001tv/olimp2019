@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'autobind-decorator';
+import progressManager from '../../etc/ProgressManager';
+
 
 import Game from './Game';
-import autobind from 'autobind-decorator';
 import FakeBrowser from '~components/FakeBrowser';
 
 
@@ -18,7 +20,7 @@ class GameComponent extends Component {
     };
 
     state = {
-        fakeBrowserIsShown: false, // DEBUG
+        fakeBrowserIsShown: false,
     };
 
     constructor(props) {
@@ -35,10 +37,12 @@ class GameComponent extends Component {
 
 
     componentDidMount() {
-        this.game = new Game();
+        this.game = new Game(this.props.phone, progressManager);
         this.game.displayDialogLine = this.props.displayDialogLine;
         this.game.phone = this.props.phone;
         this.game.setFakeBrowserEnabled = this.setFakeBrowserEnabled;
+
+        this.startState = this.game.startState.bind(this.game);
     }
 
     @autobind

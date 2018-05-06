@@ -20,7 +20,9 @@ declare module phoneAPI {
     function clearTodos();
 
     function addMessage(message: Message);
+    function addMessageById(id: string);
     function addMessages(message: Message[]);
+    function setMessages(message: Message[]);
 
     function setTime(time: string);
     function setDate(date: string);

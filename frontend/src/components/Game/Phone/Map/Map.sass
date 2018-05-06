@@ -1,0 +1,89 @@
+.map-quests
+  position: absolute
+  top: 0
+  left: 0
+  height: 100%
+  width: 100%
+  background-image: url(../../../../img/map/bg-map.png)
+  background-size: cover
+  z-index: 2
+
+  &__checkpoint-popover
+    font-family: "Neucha"
+    font-size: 1.5em
+    visibility: hidden
+    position: absolute
+    top: -55px
+    left: 50% // выравнивание по центру
+    transform: translate(-50%, 0) // выравнивание по центру
+    right: 0
+    margin-left: auto
+    margin-right: auto
+    transition: top 0.25s ease-out
+    background: white
+    padding: 3px
+    width: 170px
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px
+    //border-radius: 255px 22px 181px 14px/33px 225px 25px 308px
+    border: solid 7px #989898
+  &__checkpoint:hover
+    .map-quests__checkpoint-popover
+      visibility: visible
+      top: -65px
+
+
+  .arrow-button
+    background-image: url(../../../../img/map/arrow.png)
+    width: 6.5%
+    height: 5.7%
+    background-size: cover
+    position: absolute
+    top: 0
+    left: 0
+    cursor: pointer
+
+  .map-label
+    font-family: "Neucha"
+    position: absolute
+    h3
+      //font-size: 6.1%
+      margin: 0
+      font-size: 50px
+    h4
+      margin: 0
+      font-size: 25px
+      //font-size: 3.8%
+    &--first
+      left: 4.5%
+      top: 5.0%
+      width: 21.9%
+      height: 16.8%
+    &--second
+      left: 42.8%
+      top: 5.0%
+      width: 20.3%
+      height: 22.8%
+    &--third
+      left: 75.8%
+      top: 5.0%
+      width: 22.6%
+      height: 16.7%
+    &--active
+      color: #ffcc00
+    &--inactive
+      color: #cdcdcd
+
+    @media (max-width: 960px)
+      h3
+        margin: 0
+        font-size: 35px
+      h4
+        margin: 0
+        font-size: 20px
+    @media (max-width: 700px)
+      h3
+        margin: 0
+        font-size: 30px
+      h4
+        margin: 0
+        font-size: 13px

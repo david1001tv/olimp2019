@@ -15,6 +15,7 @@ class Phone extends Component {
         time: PropTypes.string,
         todos: PropTypes.any,
         messages: PropTypes.any,
+        onMapOpen: PropTypes.func,
     };
 
     state = {
@@ -35,7 +36,7 @@ class Phone extends Component {
 
     @autobind
     handleMapClick() {
-
+        this.props.onMapOpen();
     }
 
     @autobind
@@ -58,9 +59,9 @@ class Phone extends Component {
                         <div className="date" id="date">{this.props.date}</div>
                         <div className="time" id="time">{this.props.time}</div>
                         <div className="right">
-                            <i className="fas fa-wifi" aria-hidden="true">o</i>
-                            <i className="fas fa-signal">o</i>
-                            <i className="fas fa-battery-half">o</i>
+                            <i className="fas fa-wifi" aria-hidden="true"></i>
+                            <i className="fas fa-signal"></i>
+                            <i className="fas fa-battery-half"></i>
                         </div>
                     </div>
                     {

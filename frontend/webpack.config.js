@@ -26,6 +26,8 @@ module.exports = {
         alias: {
             '~components': path.resolve(__dirname, './src/components'),
             '~api': path.resolve(__dirname, './src/api.js'),
+            '~img': path.resolve(__dirname, './src/img'),
+            '~etc': path.resolve(__dirname, './src/etc'),
             'phaser': phaser,
             'pixi': pixi,
             'p2': p2,

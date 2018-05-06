@@ -28,7 +28,7 @@ export default class DocsState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Якщо я забуду що мені потрібно, то я зможу подивитись це в телефоні.', () => this.next());
         yield;
 
-
+        this.game.phone.setEnabled(true);
         this.door_opened_right.events.onInputDown.add(this.handleDoors, this);
         this.door_opened_left.events.onInputDown.add(this.handleDoors, this);
         this.door_closed.events.onInputDown.add(this.handleDoors, this);
@@ -45,13 +45,18 @@ export default class DocsState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.state.start('Scanner');
+        this.game.nextState();
     }
 
     init() {
         this._gen = this.gen();
+        this.game.phone.setEnabled(true);
         this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);
+        this.game.phone.setEnabled(false);
+        this.game.phone.setTime('14:03');
+        this.game.phone.setDate('02.07.18');
+
     }
 
     preload() {

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import autobind from 'autobind-decorator';
 
 import Register from './Register';
 
@@ -7,19 +8,34 @@ import './FakeBrowser.sass';
 import linkRegisterImage from '../../img/1-4 (browser)/link-register.png';
 import linkPstuImage from '../../img/1-4 (browser)/link-pstu.png';
 import linkKnImage from '../../img/1-4 (browser)/link-kn.png';
+import PubSub from 'pubsub-js';
 
 
 class FakeBrowser extends Component {
     state = {
         formIsVisible: false,
+        searchIsSubmitted: false,
     };
+
+    @autobind
+    handleSubmit(e) {
+        e.preventDefault();
+        this.setState({searchIsSubmitted: true});
+    }
+
+    @autobind
+    handleRegistrationSuccess() {
+        PubSub.publish('browser', 'form-submitted');
+    }
 
     render() {
         if (this.state.formIsVisible) {
             return (
                 <div className="fake-browser">
                     <div className="form-container">
-                        <Register />
+                        <Register
+                            onSuccess={this.handleRegistrationSuccess}
+                        />
                     </div>
                 </div>
             )
@@ -28,10 +44,20 @@ class FakeBrowser extends Component {
             <div className="fake-browser">
                 <div className="controls-container">
                     <div className="input-container">
-                        <input
-                            type="text"
-                            placeholder="Введіть запит"
-                        />
+                        <form
+                            onSubmit={this.handleSubmit}
+                        >
+                            <input
+                                type="text"
+                                placeholder="Введіть запит"
+                            />
+                            {
+                                this.state.searchIsSubmitted ?
+                                    <div className="warning">Комп'ютер тільки для навчання</div>
+                                    :
+                                    null
+                            }
+                        </form>
                     </div>
                     <div className="links-container">
                         <a
