@@ -44,7 +44,7 @@ export default class GrannyBadState extends Phaser.State {
         this.game.displayDialogLine('Бабця', 'Подумав він! Раз такий розумний допоможи розгадати кросворд.', () => this.next());
         yield;
 
-        this.state.start('Cross');
+        this.game.nextState();
     }
 
     init() {

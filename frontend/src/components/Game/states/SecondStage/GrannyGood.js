@@ -6,7 +6,7 @@ export default class GrannyGoodState extends Phaser.State {
         this.game.displayDialogLine('Бабця', ' Добре, дійсно розумний, але неохайний. Іншого разу приходь у нормальному вигляді. А зараз проходь.', () => this.next());
         yield;
         
-        this.state.start('WaterAlyoshin');
+        this.game.nextState();
     }
 
     init() {
@@ -17,6 +17,7 @@ export default class GrannyGoodState extends Phaser.State {
         this.load.image('bg', './assets/images/2-1 (crossword)/bg-2-1.png');
         this.load.image('bubble', './assets/images/2-1 (crossword)/bubble-3.png');
         this.load.image('d-big', './assets/images/2-1 (crossword)/d-big.png');
+        this.load.image('shadow', './assets/images/2-1 (crossword)/shadow.png');
     }
 
     create() {
