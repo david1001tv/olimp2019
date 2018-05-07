@@ -2,10 +2,8 @@ import Phaser from 'phaser';
 import PhaserInput from 'phaser-input';
 import {smartSetHeight} from '../../utils';
 
-var player;
-var platforms;
-var cursors;
-var platforms2;
+let player;
+let cursors;
 
 let walls;
 
