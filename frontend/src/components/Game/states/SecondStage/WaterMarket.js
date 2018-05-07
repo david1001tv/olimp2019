@@ -94,7 +94,7 @@ export default class WaterState extends Phaser.State {
         this.testAPI.deleteText(thirdQuestion, answers);
         this.testAPI.destroyNote();
         console.log("grade:" + this.grade);
-        this.game.displayDialogLine('Продавець', 'Дякую! А ось як раз і ваша вода набралась. Прошу.', () => this.next());
+        setTimeout(() => this.game.displayDialogLine('Продавець', 'Дякую! А ось як раз і ваша вода набралась. Прошу.', () => this.next()), 100);
         let bottles = this.game.add.image(440, 380, 'bottles');
         smartSetHeight(bottles, 300);
         yield;
