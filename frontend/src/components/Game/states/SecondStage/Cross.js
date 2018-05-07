@@ -76,8 +76,7 @@ export default class CrossState extends Phaser.State {
         eighth_word.coord_x = 1500;
         eighth_word.coord_y = 690;
 
-        this.timerText = this.game.add.text(32, 32, '');
-        this.rateText = this.game.add.text(32, 64, '');
+        this.timerText = this.game.add.text(32, 32, '', { fill: '#fff'});
 
         this.check_word_func = this.check_word;
 
@@ -204,14 +203,13 @@ export default class CrossState extends Phaser.State {
                 let percent = this.time / (7 * 60 * 1000);
                 this.rate = Math.round(this.minPoints * percent + this.minPoints);
             }
-            this.rateText.setText(this.rate);
             this.game.nextState();
         }
     }
 
     checkRate() {
         this.rate = this.minPoints;
-        next();
+        this.game.nextState();
     }
 
     checkTime(){
