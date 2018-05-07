@@ -13,9 +13,9 @@ export default class ProffsState extends Phaser.State {
         this.fivecopQuite.alpha = 1;
         yield;
         
-        /*this.game.camera.fade(0x000000, 1500, true);
+        this.game.camera.fade(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
-        yield;*/
+        yield;
 
         //this.state.start('');
     }
@@ -78,8 +78,8 @@ export default class ProffsState extends Phaser.State {
         доцент, кандидат економічних наук за спеціальністю «Економіко-математичне моделювання». Не любить \
         запізнення, вимоглива, але вона дуже добра. До неї завжди можна звернутись по допомогу.";
 
-        let photos = [photoAlyoshin, photoAngel, photoFedosova, photoFivecop, photoLevitskaya, photoMiron, photoPron];
-        photos.forEach(e => {
+        this.photos = [photoAlyoshin, photoAngel, photoFedosova, photoFivecop, photoLevitskaya, photoMiron, photoPron];
+        this.photos.forEach(e => {
             e.events.onInputDown.add(this.handleClick, this);
         });
         this.stage.disableVisibilityChange = true;
@@ -87,15 +87,27 @@ export default class ProffsState extends Phaser.State {
     }
 
     handleClick(obj) {
-        this.game.phone.completeTodo(obj.todoId);
+        obj.isAcquainted = true;
         this.fivecopTalk.alpha = 1;
         this.fivecopQuite.alpha = 0;
         setTimeout(() => this.game.displayDialogLine('П\'ятикоп', obj.dialog, () => this.endTalk()), 150);
     }
 
+    endClick(){
+        this.state.start('Translate');
+    }
+
     endTalk(){
         this.fivecopTalk.alpha = 0;
         this.fivecopQuite.alpha = 1;
+        if(this.photos.every(e => e.isAcquainted)){
+            let txt = this.game.add.text(220, 1000, 'Продовжити', {
+                font: "40px Pangolin",
+            });
+            txt.inputEnabled = true;
+            txt.input.useHandCursor = true;
+            txt.events.onInputDown.add(this.endClick, this);
+        }
     }
 
     createSprite(name, posX, posY, height, flagAlpha, flagInput, todoId) {
