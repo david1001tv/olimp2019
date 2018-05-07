@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import WebFont from 'webfontloader';
 import config from '../config';
-import {getMessagesForState} from '../MailTexts';
+import { getMessagesForState } from '../MailTexts';
 
 export default class BootState extends Phaser.State {
     init(nextState) {
@@ -26,10 +26,10 @@ export default class BootState extends Phaser.State {
 
     render() {
         if (config.webfonts.length && this.fontsReady) {
-            this.state.start(this.nextState);
+            this.state.start('CodeEditor');
         }
         if (!config.webfonts.length) {
-            this.state.start(this.nextState);
+            this.state.start('CodeEditor');
         }
     }
 
