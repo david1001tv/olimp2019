@@ -32,6 +32,8 @@ class Game extends Phaser.Game {
         this.progressManager = progressManager;
         this.isReplaying = false;
 
+        this.startTime = null;
+
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
         this.state.add('Intro', IntroState, false);
@@ -51,6 +53,8 @@ class Game extends Phaser.Game {
 
     @autobind
     nextState() {
+        console.log(new Date(), new Date() - this.startTime);
+        this.startTime = new Date();
         if (this.isReplaying) {
             this.state.start('Map');
         } else {
@@ -68,6 +72,7 @@ class Game extends Phaser.Game {
         this.phone.setMapIsShown(false);
         this.phone.setMapIsCloseable(true);
 
+        this.startTime = new Date();
         this.state.start('Boot', true, false, stateKey);
     }
 
