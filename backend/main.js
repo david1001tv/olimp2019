@@ -33,6 +33,7 @@ app.set('secret', config.secret);
  */
 
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/history', require('./routes/history'));
 
 /**
  * Start Express server.

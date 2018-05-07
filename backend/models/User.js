@@ -37,5 +37,17 @@ module.exports = (sequelize) => {
         timestamps: false,
         freezeTableName: true,
     });
+
+    User.associate = function (models) {
+        const { HistoryEntry } = models;
+        User.HistoryEntry = User.hasMany(HistoryEntry, {
+            onDelete: 'RESTRICT',
+            foreignKey: {
+                name: 'user_id',
+                allowNull: false,
+            },
+        });
+    };
+
     return User;
 };

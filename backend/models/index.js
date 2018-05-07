@@ -3,11 +3,13 @@ const sequelize = require('./sequelize');
 const models = {};
 
 [
-    require('./HistoryEntry'),
+    require('./State'),
     require('./User'),
+    require('./HistoryEntry'),
 ].forEach((e) => {
     const model = e(sequelize);
-    models[model.name[0].toUpperCase() + model.name.slice(1)] = model;
+    let modelName = model.name.split('_').map(e => e[0].toUpperCase() + e.slice(1)).join('');
+    models[modelName] = model;
 });
 
 Object.keys(models).forEach((modelName) => {
