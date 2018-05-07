@@ -7,12 +7,16 @@ const testAPI = {
         graphics.lineStyle(2, 0xFFFFFF, 1);
         graphics.beginFill(0xFFFFFF, 1);
         this.rectOne = graphics.drawRect(0, 0, 2000, 2000);
-        this.rectOne.alpha = 0.5;
         graphics.endFill();
 
         this.notebook = this.game.add.image(300, 385, 'notebook');
         smartSetHeight(this.notebook, 700);
         return graphics;
+    },
+
+    displayNote: function(x, y) {
+        this.rectOne.alpha = x;
+        this.notebook.alpha = y;
     },
 
     destroyNote: function() {
@@ -46,7 +50,7 @@ const testAPI = {
     },
 
     deleteText: function(objQuestion, objAnswers){
-        objQuestion.destroy();
+        if(objQuestion !== null) objQuestion.destroy();
         objAnswers.forEach(e => {
             e.destroy();
         });

@@ -20,6 +20,7 @@ export default class WaterState extends Phaser.State {
         yield;
 
         window.graphics = this.testAPI.addNote();
+        this.testAPI.displayNote(0.5, 1);
 
         //first question
         let firstQuestion = this.testAPI.addText("1) Вам необхідно обчислити об'єм двох тар у \nлітрах.\

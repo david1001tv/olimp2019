@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import {smartSetHeight} from '../../utils';
+import testAPI from '../../testAPI';
 
 export default class TranslateState extends Phaser.State {
     * gen() {
@@ -21,6 +22,36 @@ export default class TranslateState extends Phaser.State {
     this.alyoshin_2.alpha = 1;
     this.game.displayDialogLine('Альошин', 'О, ти повернувся. Іди допоможи перекласти.', () => this.next());
     yield;
+
+    this.game.displayDialogLine('Альошин', 'Можешь дізнатися, чи приніс він усі документи?', () => this.next());
+    yield;
+    window.graphics = this.testAPI.addNote();
+    this.testAPI.displayNote(0.5, 1);
+
+    let firstAnswer = this.testAPI.addText("а) Dude, he doesn’t want to see you  and even\n said me to tell you to get the hell out of here.", 500, 470, 32);
+    firstAnswer.isRight = false;
+
+    let secondAnswer = this.testAPI.addText("б) Are you brought all the necessary documents?", 500, 570, 32);
+    secondAnswer.isRight = true;
+
+    let thirdAnswer = this.testAPI.addText("в) Did you take all your relatives with you?", 500, 630, 32);
+    thirdAnswer.isRight = false;
+
+    let fourthAnswer = this.testAPI.addText("г) How are you doing?  Ya ne shary how to\n translate", 500, 690, 32);
+    fourthAnswer.isRight = false;
+
+    let answers = [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer];
+
+    this.testAPI.addCheck(answers);
+    yield;
+
+    this.testAPI.deleteText(null, answers);
+    this.testAPI.displayNote(0, 0);
+
+    setTimeout(() => this.game.displayDialogLine('Індус', "I took all the documents that are required and want to ask a few questions about PSTU. \
+    I came at the faculty of IT what can you tell me about it’s stuff?", () => this.next()), 100);
+    yield;
+    this.testAPI.displayNote(0.5, 1);
 
     this.game.camera.fade(0x000000, 1500, true);
     setTimeout(() => this.next(), 1500);
@@ -61,6 +92,13 @@ create() {
     smartSetHeight(indian, 750);
 
     this.stage.disableVisibilityChange = true;
+
+    this.grade = 0;
+
+    this.testAPI = {...testAPI};
+    for (let key in this.testAPI) {
+        this.testAPI[key] = this.testAPI[key].bind(this);
+    }
     this.next();
 }
 
