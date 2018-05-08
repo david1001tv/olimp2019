@@ -108,7 +108,7 @@ module.exports = {
             files: {
                 js: ['vendor.js', 'common.js', 'main.js'],
             },
-
+            favicon: 'src/favicon.ico'
         }),
         new webpack.DefinePlugin({
             __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
