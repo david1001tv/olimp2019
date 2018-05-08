@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
             },
         });
         HistoryEntry.State = HistoryEntry.belongsTo(State, {
-            onDelete: 'RESTRICT',
+            onDelete: 'CASCADE',
             foreignKey: {
                 name: 'state_id',
                 allowNull: false,

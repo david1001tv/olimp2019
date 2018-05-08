@@ -13,6 +13,10 @@ module.exports = (sequelize) => {
             allowNull: false,
             unique: true,
         },
+        index: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        }
     }, {
         timestamps: false,
         freezeTableName: true,
@@ -21,7 +25,7 @@ module.exports = (sequelize) => {
     State.associate = function (models) {
         const { HistoryEntry } = models;
         State.HistoryEntry = State.hasMany(HistoryEntry, {
-            onDelete: 'RESTRICT',
+            onDelete: 'CASCADE',
             foreignKey: {
                 name: 'state_id',
                 allowNull: false,
