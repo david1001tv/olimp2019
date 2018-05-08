@@ -1,0 +1,34 @@
+const { User } = require('../models');
+const config = require('../config');
+
+module.exports = {
+    setLike: async function(req, res) {
+        let user = await User.findById(req.decoded.userId);
+        if(user.liked === null){
+            user.liked = true;
+        }
+        else {
+            user.liked = !user.liked;
+        }
+        await user.save();
+        res.status(200).json({
+            success: true,
+            userLiked: user.liked
+        });
+    },
+
+    isSetLike: async function(req, res) {
+        let user = await User.findById(req.decoded.userId);
+        res.status(200).json({
+            success: true,
+            userLiked: user.liked
+        });
+    },
+
+    getAllLikes: async function(req, res) {
+        res.status(200).json({
+            success: true,
+            count: await User.count({where: {liked: true}}),
+        });
+    }
+}
