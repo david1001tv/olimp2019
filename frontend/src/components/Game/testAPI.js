@@ -24,14 +24,35 @@ const testAPI = {
         this.rectOne.destroy();
     },
 
+    destroyIncorrect: function() {
+        this.bad.forEach(e => e.destroy());
+    },
+    
     checkAnswers: function(obj) {
-        if(obj.isHalf === true){
-            this.grade += 50;
+        if(this.flag === false) {
+            if(obj.isHalf === true){
+                this.grade += 50;
+            }
+            if(obj.isRight === true){
+                this.grade += 50;
+            }
+            this.next();
         }
-        if(obj.isRight === true){
-            this.grade += 50;
+        else {
+            if(obj.isRight === false) {
+                let bad = this.game.add.image(obj.coord_x, obj.coord_y, 'bad');
+                smartSetHeight(bad, 40);
+                this.bad.push(bad);
+                if(obj.check === false) {
+                    this.grade -= 50;
+                    obj.check = true;
+                }
+            }
+            else {
+                this.grade += 50;
+                this.next();
+            }
         }
-        this.next();
     },
 
     addCheck: function(obj){

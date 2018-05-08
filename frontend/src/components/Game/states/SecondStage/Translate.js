@@ -30,21 +30,31 @@ export default class TranslateState extends Phaser.State {
 
     let firstAnswer = this.testAPI.addText("а) Dude, he doesn’t want to see you  and even\n said me to tell you to get the hell out of here.", 500, 470, 32);
     firstAnswer.isRight = false;
+    firstAnswer.coord_x = 450;
+    firstAnswer.coord_y = 470;
+    firstAnswer.check = false;
 
     let secondAnswer = this.testAPI.addText("б) Are you brought all the necessary documents?", 500, 570, 32);
     secondAnswer.isRight = true;
 
     let thirdAnswer = this.testAPI.addText("в) Did you take all your relatives with you?", 500, 630, 32);
     thirdAnswer.isRight = false;
+    thirdAnswer.coord_x = 450;
+    thirdAnswer.coord_y = 630;
+    firstAnswer.check = false;
 
     let fourthAnswer = this.testAPI.addText("г) How are you doing?  Ya ne shary how to\n translate", 500, 690, 32);
     fourthAnswer.isRight = false;
+    fourthAnswer.coord_x = 450;
+    fourthAnswer.coord_y = 690;
+    firstAnswer.check = false;
 
     let answers = [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer];
 
     this.testAPI.addCheck(answers);
     yield;
 
+    this.testAPI.destroyIncorrect();
     this.testAPI.deleteText(null, answers);
     this.testAPI.displayNote(0, 0);
 
@@ -70,6 +80,7 @@ preload() {
     this.load.image('alyoshin_2', './assets/images/2-3(indy)/alyoshin-3.png');
     this.load.image('indy', './assets/images/2-3(indy)/indian.png');
     this.load.image('notebook', './assets/images/2-2 (water)/hands-note.png');
+    this.load.image('bad', './assets/images/2-1 (crossword)/bad.png');
 }
 
 create() {
@@ -94,6 +105,8 @@ create() {
     this.stage.disableVisibilityChange = true;
 
     this.grade = 0;
+    this.flag = true;
+    this.bad = [];
 
     this.testAPI = {...testAPI};
     for (let key in this.testAPI) {
