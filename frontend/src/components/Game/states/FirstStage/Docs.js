@@ -45,12 +45,11 @@ export default class DocsState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.nextState();
+        this.game.nextState(this.grade);
     }
 
     init() {
         this._gen = this.gen();
-        this.game.phone.setEnabled(true);
         this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);
         this.game.phone.setEnabled(false);

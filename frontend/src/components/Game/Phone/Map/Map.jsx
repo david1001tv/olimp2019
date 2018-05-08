@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
+import {getHistory} from '~api';
+import progressManager from '~etc/ProgressManager';
 
 import './Map.sass';
 import Checkpoint, {
@@ -24,6 +26,13 @@ class Map extends Component {
         console.log(key, status);
         let isReplaying = status === COMPLETED;
         this.props.onSelect(key, isReplaying);
+    }
+
+    componentDidMount() {
+        getHistory().then(history => {
+            progressManager.setHistory(history);
+            this.forceUpdate();
+        });
     }
 
     render() {

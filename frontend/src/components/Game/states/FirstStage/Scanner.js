@@ -159,7 +159,7 @@ export default class Scanner extends Phaser.State {
             backTween.onComplete.add(this.handleScanEnd, this);
 
             forthTween.chain(backTween);
-            forthTween.start();
+            forthTween.start(this.grade);
         }
     }
 

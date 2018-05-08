@@ -45,6 +45,7 @@ class Landing extends Component {
                     </footer>
                 </div>
                 <DialogContainer
+                    focusOnMount={false}
                     visible={formIsVisible}
                     onHide={() => this.setState({formIsVisible: false})}
                 >

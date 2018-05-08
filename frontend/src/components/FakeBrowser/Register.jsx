@@ -7,8 +7,7 @@ import autobind from 'autobind-decorator';
 import validate from 'validate.js';
 import './Register.sass';
 
-import googleLogo from '../../img/google-logo.png';
-import {register, googleRegister} from '~api';
+import {register, googleRegister, isAuthenticated} from '~api';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
 import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 
@@ -83,6 +82,12 @@ class Register extends Component {
         },
         isLoading: false,
     };
+
+    componentDidMount() {
+        if (isAuthenticated()) {
+            this.props.onSuccess();
+        }
+    }
 
     @autobind
     async handleSubmit(e) {

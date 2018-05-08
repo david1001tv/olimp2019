@@ -19,9 +19,10 @@ const states = [
 
 class ProgressManager {
     constructor() {
-        // this._checkpoints = states.map(key => ({key: key, status: 'unavailable'}));
-        this._checkpoints = states.map(key => ({key: key, status: 'available'})); // DEBUG
+        this._checkpoints = states.map(key => ({key: key, status: 'unavailable'}));
+        // this._checkpoints = states.map(key => ({key: key, status: 'available'})); // DEBUG
         this._checkpoints[0].status = 'available';
+        this._checkpoints[3].status = 'available'; // DEBUG
     }
 
     getStatus(key) {
@@ -37,6 +38,16 @@ class ProgressManager {
             searchRes.status = 'completed';
             this._checkpoints[stateIndex + 1].status = 'available';
         }
+    }
+
+    setHistory(history) {
+        history.forEach(entry => {
+            let index = this._checkpoints.findIndex(e => e.key === entry.state);
+            if (index !== -1) {
+                this._checkpoints[index].status = 'completed';
+                this._checkpoints[index + 1].status = 'available';
+            }
+        });
     }
 }
 

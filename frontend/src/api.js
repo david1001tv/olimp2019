@@ -62,3 +62,26 @@ export async function googleLogIn(credentials) {
     token = response.token;
     localStorage.setItem('token', token);
 }
+
+export async function sendHistory(state, data) {
+    const response = await fetch(`${API_URL}/history/state/${state}`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    });
+}
+
+export async function getHistory(){
+    const response = await fetch(`${API_URL}/history/all`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    }).then(res => res.json());
+
+    return response;
+}
