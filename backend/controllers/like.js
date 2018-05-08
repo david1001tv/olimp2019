@@ -4,7 +4,7 @@ const config = require('../config');
 module.exports = {
     setLike: async function (req, res) {
         try {
-            let user = await User.findById(req.decoded.userId);
+            let user = await User.findById(req.decodedToken.userId);
             if (user.liked === null) {
                 user.liked = true;
             }
@@ -23,7 +23,7 @@ module.exports = {
 
     isSetLike: async function (req, res) {
         try {
-            let user = await User.findById(req.decoded.userId);
+            let user = await User.findById(req.decodedToken.userId);
             res.status(200).json({
                 success: true,
                 userLiked: user.liked
