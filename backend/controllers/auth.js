@@ -1,69 +1,70 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { OAuth2Client } = require('google-auth-library');
-const validate = require("validate.js");
+const {OAuth2Client} = require('google-auth-library');
+const validate = require('validate.js');
+const Sequelize = require('sequelize');
 
-const { User } = require('../models');
+const {User} = require('../models');
 const config = require('../config');
 
 const googleAuthClient = new OAuth2Client(config.googleClientId);
 
 function getJwt(userId) {
-    return jwt.sign({ userId }, config.secret, {
+    return jwt.sign({userId}, config.secret, {
         expiresIn: '48h',
     });
 }
 
 module.exports = {
     registerValidator: function (req, res, next) {
-        const { body } = req;
-        //валидация данных
+        const {body} = req;
+        // валидация данных
         var constraints = {
             email: {
                 presence: {
                     allowEmpty: false,
-                    message: "Емаіл відсутній"
+                    message: 'Емаіл відсутній'
                 },
                 email: {
-                    message: "Емаіл не відповідає формату"
+                    message: 'Емаіл не відповідає формату'
                 }
             },
             firstName: {
                 presence: {
                     allowEmpty: false,
-                    message: "Им'я відсутнє"
+                    message: 'Им\'я відсутнє'
                 }
             },
             lastName: {
                 presence: {
                     allowEmpty: false,
-                    message: "Прізвище відсутнє"
+                    message: 'Прізвище відсутнє'
                 }
             },
             password: {
                 presence: {
                     allowEmpty: false,
-                    message: "Пароль відсутній"
+                    message: 'Пароль відсутній'
                 },
                 length: {
                     minimum: 6,
                     maximum: 30,
-                    message: "Пароль занадто короткий/довгий"
+                    message: 'Пароль занадто короткий/довгий'
                 }
             }
         };
         let errors = validate(body, constraints);
-        //проверка есть ли ошибки
+
         if (errors !== undefined) {
-            console.log("Validation errors", errors);
-            res.status(400).send(errors);
+            console.log('Validation errors', errors);
+            res.status(400).json({errors});
         } else {
             next();
         }
     },
 
     register: async function (req, res) {
-        const { body } = req;
+        const {body} = req;
         try {
             //запись в БД
             const hashedPassword = await bcrypt.hash(body.password, 8);
@@ -72,61 +73,69 @@ module.exports = {
                 lastName: body.lastName,
                 email: body.email,
                 password: hashedPassword
-            })).dataValues;
+            }));
 
             res.status(200).json({
                 success: true,
                 token: getJwt(user.id)
             });
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
+            if (error instanceof Sequelize.UniqueConstraintError) {
+                res.status(409).json({
+                    errors: {
+                        email: ['Користувач з таким e-mail вже зареєстрований'],
+                    }
+                });
+                return;
+            }
             res.status(500).send();
         }
     },
 
     googleRegisterValidator: async function (req, res, next) {
-        const { body } = req;
+        const {body} = req;
         //валидация данных
         var constraints = {
             email: {
                 presence: {
                     allowEmpty: false,
-                    message: "Емаіл відсутній"
+                    message: 'Емаіл відсутній'
                 },
                 email: {
-                    message: "Емаіл не відповідає формату"
+                    message: 'Емаіл не відповідає формату'
                 }
             },
             firstName: {
                 presence: {
                     allowEmpty: false,
-                    message: "Им'я відсутнє"
+                    message: 'Им\'я відсутнє'
                 }
             },
             lastName: {
                 presence: {
                     allowEmpty: false,
-                    message: "Прізвище відсутнє"
+                    message: 'Прізвище відсутнє'
                 }
             },
             idToken: {
                 presence: {
                     allowEmpty: false,
-                    message: "Токен відсутній"
+                    message: 'Токен відсутній'
                 },
             },
             userId: {
                 presence: {
                     allowEmpty: false,
-                    message: "Id користовача відсутній"
+                    message: 'Id користовача відсутній'
                 },
             }
         };
         let errors = validate(body, constraints);
         //проверка есть ли ошибки
         if (errors != undefined) {
-            console.log("Validation errors", errors);
-            res.status(400).send(errors);
+            console.log('Validation errors', errors);
+            res.status(400).send({errors});
         }
         //проверка токена
         try {
@@ -151,7 +160,7 @@ module.exports = {
     },
 
     googleRegister: async function (req, res) {
-        const { body } = req;
+        const {body} = req;
         //запись в БД
         try {
             const user = (await User.create({
@@ -167,6 +176,15 @@ module.exports = {
                 token: getJwt(user.id)
             });
         } catch (e) {
+            if (error instanceof Sequelize.UniqueConstraintError) {
+                let errorText = 'Невідома помилка';
+                if (error.get('email')[0] && !error.get('google_id')[0])
+                    errorText = 'Ви вже зареєстровані через пошту. Увійдіть через неї.';
+                if (error.get('google_id')[0])
+                    errorText = 'Цей акаунт вже використовується.';
+                res.status(409).json({ errors: { generic: errorText } });
+                return;
+            }
             console.error(e);
             res.status(500).send();
         }
@@ -179,24 +197,24 @@ module.exports = {
             email: {
                 presence: {
                     allowEmpty: false,
-                    message: "Емаіл відсутній"
+                    message: 'Емаіл відсутній'
                 },
                 email: {
-                    message: "Емаіл не відповідає формату"
+                    message: 'Емаіл не відповідає формату'
                 }
             },
             password: {
                 presence: {
                     allowEmpty: false,
-                    message: "Пароль відсутній"
+                    message: 'Пароль відсутній'
                 }
             }
         };
         let errors = validate(body, constraints);
         //проверка наличия ошибок
-        if(errors !== undefined) {
-            console.log("Validation errors", errors);
-            res.status(400).send(errors);
+        if (errors !== undefined) {
+            console.log('Validation errors', errors);
+            res.status(400).send({ errors });
         }
         else {
             next();
@@ -204,7 +222,7 @@ module.exports = {
     },
 
     login: async function (req, res) {
-        const { body } = req;
+        const {body} = req;
         try {
             const user = await User.findOne({
                 where: {
@@ -212,21 +230,24 @@ module.exports = {
                 }
             });
 
-            if (user === null)
-                var err_msg = "Невірний логін";
-                res.status(400).send(err_msg);
+            if (user === null) {
+                res.status(400).json({errors: { generic: ['Невірний e-mail або пароль'] } });
+                return;
+            }
 
-            if (user.dataValues.password === null)
-                res.status(400).json({ error: 'Войдите через Google+' });
+            if (user.password === null) {
+                res.status(400).json({errors: { generic: ['Увійдіть через Google+'] } });
+                return;
+            }
 
-            if (await bcrypt.compare(body.password, user.dataValues.password))
+            if (await bcrypt.compare(body.password, user.password))
                 res.status(200).json({
                     success: true,
                     token: getJwt(user.id)
                 });
-            else{
-                var err_msg = "Невірний пароль";
-                res.status(400).send();
+            else {
+                res.status(400).json({errors: { generic: ['Невірний e-mail або пароль'] } });
+                return;
             }
         } catch (e) {
             console.error(e);
@@ -235,7 +256,7 @@ module.exports = {
     },
 
     googleLoginValidator: async function (req, res, next) {
-        const { body } = req;
+        const {body} = req;
         //валидация данных
         var constraints = {
             idToken: {
@@ -251,9 +272,9 @@ module.exports = {
         };
         let errors = validate(body, constraints);
         //проверка на наличие ошибок
-        if(errors !== undefined) {
-            console.log("Validation errors", errors);
-            res.status(400).send(errors);
+        if (errors !== undefined) {
+            console.log('Validation errors', errors);
+            res.status(400).send({errors});
         }
 
         try {
@@ -279,7 +300,7 @@ module.exports = {
     },
 
     googleLogin: async function (req, res) {
-        const { body } = req;
+        const {body} = req;
         try {
             const user = await User.findOne({
                 where: {
@@ -288,7 +309,7 @@ module.exports = {
             });
 
             if (user === null) {
-                res.status(400).send();
+                res.status(400).send({ errors: { generic: ['Акаунт не знайдено'] } });
             }
             else {
                 res.status(200).json({

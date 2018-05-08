@@ -28,6 +28,7 @@ module.exports = (sequelize) => {
         google_id: {
             type: DataTypes.STRING,
             allowNull: true,
+            unique: true,
         },
         liked: {
             type: DataTypes.BOOLEAN,
