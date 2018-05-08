@@ -1,3 +1,4 @@
+
 import Phaser from 'phaser';
 import PhaserInput from 'phaser-input';
 import {smartSetHeight} from '../../utils';
@@ -8,6 +9,7 @@ let pandas;
 let pandas2;
 let result = 'Move with the cursors';
 let walls;
+
 
 export default class LabyrinthState extends Phaser.State {
     * gen() {
@@ -56,12 +58,14 @@ export default class LabyrinthState extends Phaser.State {
         pandas.physicsBodyType = Phaser.Physics.P2JS;
         pandas2.physicsBodyType = Phaser.Physics.P2JS;
 
-        //let text = this.game.add.text(100, 100, '- button nuked -', { font: '64px'});
+        //let text = game.add.text(100, 100, '- button nuked -');
 
+       // let word = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
         let d1 = [ 210, 800, 275, 975, 865, 1045, 1035, 1045, 1210, 1045, 1320, 1045, 1223, 890, 605, 694, 605, 733, 560, 245, 480, 137, 480, 33, 630, 33, 630, 137, 975, 310, 1465, 312, 1750, 33];
         for (let i = 0; i < 34; i = i+2)
         {
-                let panda = pandas.create(d1[i],d1[i+1],'panda');
+                let panda = pandas.create( d1[i],d1[i+1], 'panda');
+                //let text = game.add.text( d1[i], d1[i+1], 'desyrel', word[i]);
                 panda.body.setRectangle(66, 33);
                 panda.body.setCollisionGroup(pandaCollisionGroup);
                 panda.body.collides([pandaCollisionGroup, playerCollisionGroup]);
@@ -92,18 +96,11 @@ export default class LabyrinthState extends Phaser.State {
     }
 
     wrongPanda() {
-        //result = 'You last hit: The wall :)';
-        player.body.velocity.x = 0;
-        player.body.velocity.y = 0;
-        this.game.displayDialogLine('Message', 'text');
+        result = 'You last hit: The wall :)';
+        //this.game.displayDialogLine('Message', 'text');
     }
 
     update() {
-
-        if (this.wrongPanda) {
-
-            //this.game.displayDialogLine('Message', 'text');
-        }
 
         player.body.velocity.x = 0;
         player.body.velocity.y = 0;
@@ -128,7 +125,7 @@ export default class LabyrinthState extends Phaser.State {
     }
 
     render() {
-       // this.game.debug.text(result, 32, 32);
+        this.game.debug.text(result, 32, 32);
     }
 
     next() {
