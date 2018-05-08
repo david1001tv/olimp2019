@@ -51,7 +51,7 @@ module.exports = {
         //проверка есть ли ошибки
         if (errors != undefined) {
             console.log('Validation errors', errors);
-            res.status(400).send({errors});
+            res.status(400).json({errors});
         }
         //проверка токена
         try {

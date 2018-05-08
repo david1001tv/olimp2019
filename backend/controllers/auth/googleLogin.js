@@ -27,7 +27,7 @@ module.exports = {
         //проверка на наличие ошибок
         if (errors !== undefined) {
             console.log('Validation errors', errors);
-            res.status(400).send({errors});
+            res.status(400).json({errors});
         }
 
         try {
@@ -62,7 +62,7 @@ module.exports = {
             });
 
             if (user === null) {
-                res.status(400).send({ errors: { generic: ['Акаунт не знайдено'] } });
+                res.status(400).json({ errors: { generic: ['Акаунт не знайдено'] } });
             }
             else {
                 res.status(200).json({
