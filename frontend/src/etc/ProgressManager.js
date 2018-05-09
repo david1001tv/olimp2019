@@ -1,8 +1,10 @@
-const checkpointStates = [
-    'Docs',
-    'Scanner',
-    'Browser'
-];
+import { isAuthenticated, sendHistory } from '~api';
+import PubSub from 'pubsub-js';
+import autobind from 'autobind-decorator';
+
+export const COMPLETED = 'completed';
+export const AVAILABLE = 'available';
+export const UNAVAILABLE = 'unavailable';
 
 const states = [
     'Intro',
@@ -17,17 +19,58 @@ const states = [
     'Proffs',
 ];
 
+const stages = [
+    {
+        start: 'Intro',
+        end: 'Browser'
+    },
+    {
+        start: 'GrannyBad',
+        end: 'Proffs',
+    },
+    {
+        start: '???',
+        end: '???',
+    }
+];
+
 class ProgressManager {
     constructor() {
+        this._entriesQueue = localStorage.getItem('entriesQueue');
+        if (this._entriesQueue === null)
+            this._entriesQueue = [];
+        else
+            this._entriesQueue = JSON.parse(this._entriesQueue);
+        if (this._entriesQueue.length && isAuthenticated())
+            this.sendQueue();
+
         this._checkpoints = states.map(key => ({key: key, status: 'unavailable'}));
         // this._checkpoints = states.map(key => ({key: key, status: 'available'})); // DEBUG
         this._checkpoints[0].status = 'available';
         this._checkpoints[3].status = 'available'; // DEBUG
+
+        PubSub.subscribe('auth', this.sendQueue);
     }
 
     getStatus(key) {
         let searchRes = this._checkpoints.find(e => e.key === key);
         return searchRes ? searchRes.status : null;
+    }
+
+    /**
+     * @param index {number} Номер этапа, начинается с 1
+     */
+    getStageStatus(index) {
+        let stage = stages[index - 1];
+        let start = this.getStatus(stage.start);
+        let end = this.getStatus(stage.end);
+        if (end === COMPLETED) {
+            return COMPLETED
+        }
+        if (start !== UNAVAILABLE) {
+            return AVAILABLE;
+        }
+        return UNAVAILABLE;
     }
 
     completeState(key, score) {
@@ -48,6 +91,35 @@ class ProgressManager {
                 this._checkpoints[index + 1].status = 'available';
             }
         });
+    }
+
+    saveHistoryEntry(state, time, score) {
+        if (isAuthenticated()) {
+            sendHistory(state, { time, score });
+        } else {
+            let searchRes = this._entriesQueue.find(entry => entry.state === state);
+            if (searchRes) {
+                searchRes.time = time;
+                searchRes.score = score;
+            }
+            else {
+                this._entriesQueue.push({state, time, score});
+            }
+            localStorage.setItem('entriesQueue', JSON.stringify(this._entriesQueue));
+        }
+    }
+
+    @autobind
+    async sendQueue() {
+        for (let entry of this._entriesQueue) {
+            await sendHistory(entry.state, {
+                time: entry.time,
+                score: entry.score,
+            });
+        }
+
+        this._entriesQueue = [];
+        localStorage.setItem('entriesQueue', JSON.stringify(this._entriesQueue));
     }
 }
 

@@ -45,7 +45,7 @@ export default class DocsState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.nextState(this.grade);
+        this.game.nextState(this.score);
     }
 
     init() {
@@ -82,7 +82,7 @@ export default class DocsState extends Phaser.State {
     }
 
     create() {
-        this.grade = 0;
+        this.score = 0;
         this.count = 0;
         //this.flags = [false, false, false, false, false];
 
@@ -165,22 +165,22 @@ export default class DocsState extends Phaser.State {
 
         if (this.docs.every(e => e.isFind)) {
             if (this.count <= 8) {
-                this.grade = 100;
+                this.score = 100;
             }
             else if (this.count <= 9) {
-                this.grade = 90;
+                this.score = 90;
             }
             else if (this.count <= 10) {
-                this.grade = 80;
+                this.score = 80;
             }
             else if (this.count <= 11) {
-                this.grade = 70;
+                this.score = 70;
             }
             else if (this.count <= 12) {
-                this.grade = 60;
+                this.score = 60;
             }
             else {
-                this.grade = 50;
+                this.score = 50;
             }
             this.next();
         }

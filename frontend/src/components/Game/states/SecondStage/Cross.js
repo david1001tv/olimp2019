@@ -203,13 +203,13 @@ export default class CrossState extends Phaser.State {
                 let percent = this.time / (7 * 60 * 1000);
                 this.rate = Math.round(this.minPoints * percent + this.minPoints);
             }
-            this.game.nextState();
+            this.game.nextState(this.rate);
         }
     }
 
     checkRate() {
         this.rate = this.minPoints;
-        this.game.nextState();
+        this.game.nextState(this.rate);
     }
 
     checkTime(){

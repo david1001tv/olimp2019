@@ -1,43 +1,56 @@
 let token = localStorage.getItem('token');
+// let token = '';
 const API_URL = `${window.location.protocol}//${window.location.hostname}:8090/api`;
+import PubSub from 'pubsub-js';
 
 export function isAuthenticated() {
-  return !!token;
+    return !!token;
 }
 
-export async function logOut() {
-  token = '';
-  localStorage.setItem('token', '');
-  // todo: add API request
+export function logOut() {
+    token = '';
+    localStorage.setItem('token', '');
+}
+
+function authSuccess(_token) {
+    token = _token;
+    localStorage.setItem('token', token);
+    PubSub.publish('auth');
 }
 
 export async function logIn(credentials) {
-  const response = await fetch(`${API_URL}/auth/login`, {
-    method: 'POST',
-    body: JSON.stringify(credentials),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }).then(res => res.json());
+    const response = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        body: JSON.stringify(credentials),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(res => res.json());
 
-  token = response.token;
-  localStorage.setItem('token', token);
+    if (response.token) {
+        authSuccess(response.token)
+    }
+
+    return response;
 }
 
 export async function register(data) {
-  const response = await fetch(`${API_URL}/auth/register`, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }).then(res => res.json());
+    const response = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(res => res.json());
 
-    token = response.token;
-    localStorage.setItem('token', token);
+    if (response.token) {
+        authSuccess(response.token)
+    }
+
+    return response;
 }
 
-export async function googleRegister (data) {
+export async function googleRegister(data) {
     const response = await fetch(`${API_URL}/auth/google-register`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -46,8 +59,11 @@ export async function googleRegister (data) {
         },
     }).then(res => res.json());
 
-    token = response.token;
-    localStorage.setItem('token', token);
+    if (response.token) {
+        authSuccess(response.token)
+    }
+
+    return response;
 }
 
 export async function googleLogIn(credentials) {
@@ -59,8 +75,11 @@ export async function googleLogIn(credentials) {
         },
     }).then(res => res.json());
 
-    token = response.token;
-    localStorage.setItem('token', token);
+    if (response.token) {
+        authSuccess(response.token)
+    }
+
+    return response;
 }
 
 export async function sendHistory(state, data) {
@@ -74,7 +93,7 @@ export async function sendHistory(state, data) {
     });
 }
 
-export async function getHistory(){
+export async function getHistory() {
     const response = await fetch(`${API_URL}/history/all`, {
         method: 'GET',
         headers: {

@@ -93,7 +93,7 @@ create() {
 
     this.stage.disableVisibilityChange = true;
 
-    this.grade = 0;
+    this.score = 0;
 
     this.testAPI = {...testAPI};
     for (let key in this.testAPI) {

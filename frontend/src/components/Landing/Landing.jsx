@@ -2,15 +2,22 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DialogContainer } from 'react-md';
 import { Link } from 'react-router-dom';
-
+import autobind from 'autobind-decorator';
 
 import Login from './Login';
 import './Landing.sass';
+import {logOut} from '~api';
+
 
 class Landing extends Component {
     state = {
         formIsVisible: false,
     };
+
+    @autobind
+    handleStartButtonClick() {
+        logOut();
+    }
 
     render() {
         const {formIsVisible} = this.state;
@@ -28,6 +35,7 @@ class Landing extends Component {
                             <button
                                 className="btn bnt-start"
                                 id="start"
+                                onClick={this.handleStartButtonClick}
                             >
                                 <Link style={{display: 'block', height: '100%'}} to="/game" />
                             </button>

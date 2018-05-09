@@ -5,8 +5,6 @@ import validate from 'validate.js';
 import autobind from 'autobind-decorator';
 import {GoogleLogin} from 'react-google-login';
 
-import googleLoginButton from '../../img/buttons/button-google-released.png';
-
 import {logIn, isAuthenticated, googleLogIn} from '~api';
 
 class Login extends Component {
@@ -60,7 +58,11 @@ class Login extends Component {
 
         this.setState({isLoading: true});
         try {
-            await logIn(data);
+            let response = await logIn(data);
+
+            if (response.errors) {
+                this.setState({ errors: { ...this.state.errors, ...response.errors } });
+            }
         } catch (e) {
             console.error(e);
         } finally {
@@ -92,10 +94,14 @@ class Login extends Component {
         this.setState({isLoading: true});
         try {
             let basicProfile = res.getBasicProfile();
-            await googleLogIn({
+            let response = await googleLogIn({
                 idToken: res.tokenId,
                 userId: basicProfile.getId(),
             });
+
+            if (response.errors) {
+                this.setState({ errors: { ...this.state.errors, ...response.errors } });
+            }
         } catch (e) {
             console.error(e);
         } finally {
@@ -106,7 +112,7 @@ class Login extends Component {
     render() {
         console.log('Login render', isAuthenticated());
         if (isAuthenticated()) {
-            return <Redirect to="/game" />
+            return <Redirect from="/" to="/game" />
         }
 
         const {email, password} = this.state.data;
@@ -133,6 +139,9 @@ class Login extends Component {
                 <form
                     onSubmit={this.handleSubmit}
                 >
+                    <div className="md-text--error md-headline md-text-center">
+                        {this.state.errors.generic.map(e => <div>{e}</div>)}
+                    </div>
                     <div>
                         <div>
                             <TextField

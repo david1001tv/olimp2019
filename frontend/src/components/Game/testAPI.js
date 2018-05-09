@@ -26,10 +26,10 @@ const testAPI = {
 
     checkAnswers: function(obj) {
         if(obj.isHalf === true){
-            this.grade += 50;
+            this.score += 50;
         }
         if(obj.isRight === true){
-            this.grade += 50;
+            this.score += 50;
         }
         this.next();
     },

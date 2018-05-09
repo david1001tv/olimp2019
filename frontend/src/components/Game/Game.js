@@ -2,7 +2,7 @@ import 'pixi';
 import 'p2';
 import Phaser from 'phaser';
 import autobind from 'autobind-decorator';
-import {sendHistory} from '~api';
+import progressManager from '~etc/ProgressManager';
 
 import MapState from './states/Map';
 import BootState from './states/Boot';
@@ -55,7 +55,7 @@ class Game extends Phaser.Game {
     @autobind
     nextState(score = null) {
         let time = new Date() - this.startTime;
-        sendHistory(this.state.current, {time, score});
+        progressManager.saveHistoryEntry(this.state.current, time, score);
         this.startTime = new Date();
         if (this.isReplaying) {
             this.state.start('Map');
