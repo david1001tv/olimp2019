@@ -79,7 +79,20 @@ module.exports = {
         const {body} = req;
         //запись в БД
         try {
-            const user = (await User.create({
+            let user;
+            user = (await User.findOne({ where: { email: body.email } }));
+
+            if (user) {
+                let errorText = 'Невідома помилка';
+                if (user.password !== null)
+                    errorText = 'Ви вже зареєстровані через пошту. Увійдіть через неї.';
+                if (user.google_id !== null)
+                    errorText = 'Цей акаунт вже використовується.';
+                res.status(409).json({errors: {generic: [errorText]}});
+                return;
+            }
+
+            user = (await User.create({
                 firstName: body.firstName,
                 lastName: body.lastName,
                 email: body.email,
@@ -92,15 +105,6 @@ module.exports = {
                 token: getJwt(user.id)
             });
         } catch (error) {
-            if (error instanceof Sequelize.UniqueConstraintError) {
-                let errorText = 'Невідома помилка';
-                if (error.get('email')[0] && !error.get('google_id')[0])
-                    errorText = 'Ви вже зареєстровані через пошту. Увійдіть через неї.';
-                if (error.get('google_id')[0])
-                    errorText = 'Цей акаунт вже використовується.';
-                res.status(409).json({ errors: { generic: [errorText] } });
-                return;
-            }
             console.error(e);
             res.status(500).send();
         }
