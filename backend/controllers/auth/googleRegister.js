@@ -91,7 +91,7 @@ module.exports = {
                 success: true,
                 token: getJwt(user.id)
             });
-        } catch (e) {
+        } catch (error) {
             if (error instanceof Sequelize.UniqueConstraintError) {
                 let errorText = 'Невідома помилка';
                 if (error.get('email')[0] && !error.get('google_id')[0])
