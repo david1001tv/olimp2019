@@ -98,7 +98,7 @@ module.exports = {
                     errorText = 'Ви вже зареєстровані через пошту. Увійдіть через неї.';
                 if (error.get('google_id')[0])
                     errorText = 'Цей акаунт вже використовується.';
-                res.status(409).json({ errors: { generic: errorText } });
+                res.status(409).json({ errors: { generic: [errorText] } });
                 return;
             }
             console.error(e);
