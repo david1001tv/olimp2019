@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
     HistoryEntry.associate = function (models) {
         const { User, State } = models;
         HistoryEntry.User = HistoryEntry.belongsTo(User, {
-            onDelete: 'RESTRICT',
+            onDelete: 'CASCADE',
             foreignKey: {
                 name: 'user_id',
                 allowNull: false,

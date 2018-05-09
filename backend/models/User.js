@@ -42,7 +42,7 @@ module.exports = (sequelize) => {
     User.associate = function (models) {
         const { HistoryEntry } = models;
         User.HistoryEntry = User.hasMany(HistoryEntry, {
-            onDelete: 'RESTRICT',
+            onDelete: 'CASCADE',
             foreignKey: {
                 name: 'user_id',
                 allowNull: false,
