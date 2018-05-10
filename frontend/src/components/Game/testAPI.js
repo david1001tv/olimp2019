@@ -26,6 +26,7 @@ const testAPI = {
 
     destroyIncorrect: function() {
         this.bad.forEach(e => e.destroy());
+        this.bad.length = 0;
     },
     
     checkAnswers: function(obj) {
@@ -44,12 +45,12 @@ const testAPI = {
                 smartSetHeight(bad, 30);
                 this.bad.push(bad);
                 if(obj.check === false) {
-                    this.grade -= 50;
                     obj.check = true;
                 }
             }
             else {
-                this.grade += 50;
+                if(this.bad.length == 0) this.grade += 12.5;
+                else this.grade += (12.5 - 3.125 * this.bad.length);
                 this.next();
             }
         }
@@ -70,11 +71,13 @@ const testAPI = {
         return tmp;
     },
 
-    deleteText: function(objQuestion, objAnswers){
+    deleteText: function(objQuestion, objAnswers) {
         if(objQuestion !== null) objQuestion.destroy();
-        objAnswers.forEach(e => {
-            e.destroy();
-        });
+        if(objAnswers !== null) {
+            objAnswers.forEach(e => {
+                e.destroy();
+            });
+        }
     }
 }
 
