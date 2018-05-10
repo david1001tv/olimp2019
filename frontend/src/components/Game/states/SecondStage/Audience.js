@@ -2,7 +2,7 @@
 import Phaser from 'phaser';
 import {smartSetHeight} from '../../utils';
 
-export default class FedosovaState extends Phaser.State {
+export default class AudienceState extends Phaser.State {
     * gen() {
         this.game.displayDialogLine('Федосова', 'Доброго дня, Давиде!', () => this.next());
         yield;
@@ -16,7 +16,7 @@ export default class FedosovaState extends Phaser.State {
         this.setVisible(this.daveOne);
         this.setVisible(this.daveTwo);
         yield;
-        this.game.displayDialogLine('Федосова', 'Це добре. Давай зараз подиимось на твої бали.', () => this.next());
+        this.game.displayDialogLine('Федосова', 'Це добре. Давай зараз подивимось на твої бали.', () => this.next());
         this.setVisible(this.daveOne);
         this.setVisible(this.daveTwo);
         this.setVisible(this.fedOne);
@@ -24,6 +24,7 @@ export default class FedosovaState extends Phaser.State {
         yield;
         this.game.displayDialogLine('Ви', 'Так, добре.', () => this.next());
         yield;
+        this.game.nextState(this.score);
     }
 
     init() {
