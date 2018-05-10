@@ -17,6 +17,7 @@ import WaterAlyoshinState from './states/SecondStage/WaterAlyoshin';
 import WaterMarketState from './states/SecondStage/WaterMarket';
 import TranslateState from './states/SecondStage/Translate';
 import ProffsState from './states/SecondStage/Proffs';
+import AudienceState from './states/SecondStage/Fedosova';
 
 
 import config from './config';
@@ -48,8 +49,9 @@ class Game extends Phaser.Game {
         this.state.add('WaterMarket', WaterMarketState, false);
         this.state.add('Translate', TranslateState, false);
         this.state.add('Proffs', ProffsState, false);
+        this.state.add('Audience', AudienceState, false);
 
-        this.state.start('Boot', true, false, 'Map');
+        this.state.start('Boot', true, false, 'Audience');
     }
 
     @autobind
