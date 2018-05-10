@@ -21,11 +21,12 @@ export default class LabyrinthState extends Phaser.State {
     preload() {
         this.game.stage.backgroundColor = '#85b5e1';
 
-        this.game.load.image('player', 'assets/d-walk-1.png');
-        this.game.load.image('walls', 'assets/walls.png');
-        this.game.load.physics('physicsData', 'assets/maze.json');
-        this.game.load.image('panda', 'assets/door.png');
-        this.game.load.image('panda2', 'assets/door2.png');
+        // this.game.load.image('player', 'assets/d-walk-1.png');
+        this.game.load.spritesheet('player', 'assets/images/3-1 (labyrinth)/mummy.png', 37, 45, 18);
+        this.game.load.image('walls', 'assets/images/3-1 (labyrinth)/walls.png');
+        this.game.load.physics('physicsData', 'assets/images/3-1 (labyrinth)/maze.json');
+        this.game.load.image('panda', 'assets/images/3-1 (labyrinth)/door.png');
+        this.game.load.image('panda2', 'assets/images/3-1 (labyrinth)/door2.png');
     }
 
     create() {
@@ -80,8 +81,8 @@ export default class LabyrinthState extends Phaser.State {
                 panda2.body.static = true;
         }
 
-            player = this.game.add.sprite(50, 30, 'player');
-
+            //player = this.game.add.sprite(50, 30, 'player');
+            player = this.game.add.sprite(200, 360, 'player', 5);
             this.game.physics.p2.enable(player, false);
             player.body.collideWorldBounds = true;
             player.body.fixedRotation = true;
