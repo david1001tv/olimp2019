@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import {smartSetHeight} from '../../utils';
+import { smartSetHeight } from '../../utils';
 
 export default class GrannyBadState extends Phaser.State {
     * gen() {
@@ -12,8 +12,8 @@ export default class GrannyBadState extends Phaser.State {
         }, 3000).start().onComplete.add(() => {
             this.next();
         });
-        this.game.camera.flash(0x000000, 3000, true);
-        yield;
+        // this.game.camera.flash(0x000000, 3000, true);
+        // yield;
 
         let dStand = this.game.add.image(1660, 240, 'd-stand');
         smartSetHeight(dStand, 830);
@@ -48,8 +48,13 @@ export default class GrannyBadState extends Phaser.State {
 
         let bg2 = this.game.add.image(0, 0, 'bg2');
         smartSetHeight(bg2, 1080);
-    
-        let code = this.game.add.text(550, 260, 'che? niche', {
+
+        this.game.inputCode = 'iaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonv'
+        let tmpCode = 'gojakwvfasfsavapfkvgafdvwarfvcwesdfceweq\nfoanverfsaferafverfvewvwgvwdfvasvovopn\nfoijffaefaergrrgnoasfsdavsdinvowvnoi\nvrowfasfvweveasdvadanvrjnvoj\n\tjfisdofjcnwcfasdfdsvosnv\n\tfjuwihjnvuiavuvgdfgerhbtvwev\n\tvasnvojnjumyjhawewdovwovwwaeowjodvnwojvnojswn\n\t\tvjfovmigearsggraojraemvoerk\n\t\tiaovbjmaieofjvmbiaeorbmjoirmjb\n\t\tjafviowerpvjre\n\t\t\tfvergasrgvegzvsdrev\n\t\tkoresmvsokmnorekmodfv'
+        if (!this.game.inputCode) {
+            this.game.inputCode = tmpCode;
+        } else this.formatCode();
+        let code = this.game.add.text(550, 260, this.game.inputCode, {
             font: "20px 'Source Code Pro",
             fill: '#000'
         });
@@ -64,11 +69,18 @@ export default class GrannyBadState extends Phaser.State {
         let veres = this.game.add.image(1600, 140, 'veres');
         smartSetHeight(veres, 925);
 
-        this.game.displayDialogLine('Верескун', 'Добого дня. Вибачте, що вiдволiкаю. Я хотiв би повiдомити, що незабаром вiдбудеться "Дебют першокурсника", де студенти можуть показати свої здiбностi та гарно провести час.', () => this.next());
+        proninaAngry.destroy();
+        let proninaSmile = this.game.add.image(1055, 260, 'pronina-smile');
+        smartSetHeight(proninaSmile, 305);
+
+        this.game.displayDialogLine('Верескун', 'Добого дня. Вибачте, що вiдволiкаю. Я хотiв би повiдомити, що незабаром вiдбудеться "Дебют першокурсника".', () => this.next());
         yield;
-        
+
+        this.game.displayDialogLine('Верескун', 'На ньому студенти можуть показати свої здiбностi, гарно провести чаc та заробити додатковi бали.', () => this.next());
+        yield;
+
         this.game.displayDialogLine('Ви', 'Здрастуйте. Це гарна новина! Я обов`язково вiзьму участь у цьому заходi.', () => this.next());
-        yield; 
+        yield;
 
         yield;
 
@@ -110,5 +122,29 @@ export default class GrannyBadState extends Phaser.State {
 
     next() {
         this._gen.next();
+    }
+
+    randomInteger(min, max) {
+        var rand = min - 0.5 + Math.random() * (max - min + 1)
+        rand = Math.round(rand);
+        return rand;
+    }
+
+    formatCode() {
+        for (let i = 40; i < this.game.inputCode.length; i += this.randomInteger(35, 60)) {
+            let tmpArr = this.game.inputCode.split('');
+            tmpArr.splice(i, 0, '\n');
+            this.game.inputCode = tmpArr.join('');
+        }
+        let tmpArr = this.game.inputCode.split('\n');
+        console.log(tmpArr);
+        for (let i = 0; i < tmpArr.length; i++) {
+            if (i < 2) tmpArr[i] = '\n' + tmpArr[i];
+            if (i <= 7) tmpArr[i] = '\n\t\t' + tmpArr[i];
+            if (i > 7 && i <= 9) tmpArr[i] = '\n\t\t\t\t' + tmpArr[i];
+            if (i > 9 && i <= 13) tmpArr[i] = '\n\t\t\t\t\t\t' + tmpArr[i];
+            if (i > 13) tmpArr[i] = '\n' + tmpArr[i];
+        }
+        this.game.inputCode = tmpArr.join('');
     }
 }
