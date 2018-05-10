@@ -19,7 +19,7 @@ export default class WaterState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Так, залюбки.', () => this.next());
         yield;
 
-        window.graphics = this.testAPI.addNote();
+        window.graphics = this.testAPI.addNote(300, 385, 700);
         this.testAPI.displayNote(0.5, 1);
 
         //first question

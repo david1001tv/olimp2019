@@ -2,15 +2,15 @@
 import {smartSetHeight} from './utils';
 const testAPI = {
 
-    addNote: function() {
+    addNote: function(x, y, size) {
         let graphics = this.game.add.graphics(0, 0);
         graphics.lineStyle(2, 0xFFFFFF, 1);
         graphics.beginFill(0xFFFFFF, 1);
         this.rectOne = graphics.drawRect(0, 0, 2000, 2000);
         graphics.endFill();
 
-        this.notebook = this.game.add.image(300, 385, 'notebook');
-        smartSetHeight(this.notebook, 700);
+        this.notebook = this.game.add.image(x, y, 'notebook');
+        smartSetHeight(this.notebook, size);
         return graphics;
     },
 
@@ -41,7 +41,7 @@ const testAPI = {
         else {
             if(obj.isRight === false) {
                 let bad = this.game.add.image(obj.coord_x, obj.coord_y, 'bad');
-                smartSetHeight(bad, 40);
+                smartSetHeight(bad, 30);
                 this.bad.push(bad);
                 if(obj.check === false) {
                     this.grade -= 50;

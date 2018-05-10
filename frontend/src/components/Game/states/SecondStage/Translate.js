@@ -4,16 +4,10 @@ import testAPI from '../../testAPI';
 
 export default class TranslateState extends Phaser.State {
     * gen() {
-    this.camera.scale.setTo(5, 5);
-        this.camera.x = 1128 * 5;
-        this.camera.y = 280 * 5 - 300;
-        this.game.add.tween(this.camera).to({ x: -250, y: 0 }, 5000).start();
-        this.game.add.tween(this.camera.scale).to({
-            x: 1,
-            y: 1,
-        }, 5000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
-        this.game.camera.flash(0x000000, 3000, true);
-        yield;
+
+    setTimeout(() => this.next(), 3000);
+    this.game.camera.flash(0x000000, 3000, true);
+    yield;
 
     this.game.displayDialogLine('Альошин', 'Та не розумію я вас! Я у школі вивчав німецьку!', () => this.next());
     yield;
@@ -23,30 +17,48 @@ export default class TranslateState extends Phaser.State {
     this.game.displayDialogLine('Альошин', 'О, ти повернувся. Іди допоможи перекласти.', () => this.next());
     yield;
 
+    //здесь анимация перехода с камерой
+    this.camera.scale.setTo(1, 1);
+    this.camera.x = 1128 * 5;
+    this.camera.y = 350 * 5 - 300;
+    let firstStep = this.game.add.tween(this.camera).to({ x: 2820, y: -600 }, 800);
+    let secondStep = this.game.add.tween(this.camera).to({ x: 500, y: -600 }, 800);
+    let thirdStep = this.game.add.tween(this.camera).to({ x: 1400, y: -600 }, 800);
+        
+    firstStep.chain(secondStep, thirdStep);
+    let zoom = this.game.add.tween(this.camera.scale).to({
+        x: 1.5,
+        y: 1.5,
+    }, 2000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
+    firstStep.start();
+    yield;
+
+    this.alyoshin_1.alpha = 1;
+    this.alyoshin_2.alpha = 0;
     this.game.displayDialogLine('Альошин', 'Можешь дізнатися, чи приніс він усі документи?', () => this.next());
     yield;
-    window.graphics = this.testAPI.addNote();
+    window.graphics = this.testAPI.addNote(780, 240, 500);
     this.testAPI.displayNote(0.5, 1);
 
-    let firstAnswer = this.testAPI.addText("а) Dude, he doesn’t want to see you  and even\n said me to tell you to get the hell out of here.", 500, 470, 32);
+    let firstAnswer = this.testAPI.addText("а) Dude, he doesn’t want to see you  and even\n said me to tell you to get the hell out of here.", 935, 300, 24);
     firstAnswer.isRight = false;
-    firstAnswer.coord_x = 450;
-    firstAnswer.coord_y = 470;
+    firstAnswer.coord_x = 890;
+    firstAnswer.coord_y = 300;
     firstAnswer.check = false;
 
-    let secondAnswer = this.testAPI.addText("б) Are you brought all the necessary documents?", 500, 570, 32);
+    let secondAnswer = this.testAPI.addText("б) Are you brought all the necessary\n documents?", 935, 370, 24);
     secondAnswer.isRight = true;
 
-    let thirdAnswer = this.testAPI.addText("в) Did you take all your relatives with you?", 500, 630, 32);
+    let thirdAnswer = this.testAPI.addText("в) Did you take all your relatives with you?", 935, 440, 24);
     thirdAnswer.isRight = false;
-    thirdAnswer.coord_x = 450;
-    thirdAnswer.coord_y = 630;
+    thirdAnswer.coord_x = 890;
+    thirdAnswer.coord_y = 440;
     firstAnswer.check = false;
 
-    let fourthAnswer = this.testAPI.addText("г) How are you doing?  Ya ne shary how to\n translate", 500, 690, 32);
+    let fourthAnswer = this.testAPI.addText("г) How are you doing?  Ya ne shary how to\n translate", 935, 475, 24);
     fourthAnswer.isRight = false;
-    fourthAnswer.coord_x = 450;
-    fourthAnswer.coord_y = 690;
+    fourthAnswer.coord_x = 890;
+    fourthAnswer.coord_y = 475;
     firstAnswer.check = false;
 
     let answers = [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer];
