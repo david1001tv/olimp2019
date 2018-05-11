@@ -12,8 +12,8 @@ export default class LaboratoryState extends Phaser.State {
         }, 3000).start().onComplete.add(() => {
             this.next();
         });
-        // this.game.camera.flash(0x000000, 3000, true);
-        // yield;
+        this.game.camera.flash(0x000000, 3000, true);
+        yield;
 
         let dStand = this.game.add.image(1660, 240, 'd-stand');
         smartSetHeight(dStand, 830);
@@ -135,7 +135,6 @@ export default class LaboratoryState extends Phaser.State {
             this.game.inputCode = tmpArr.join('');
         }
         let tmpArr = this.game.inputCode.split('\n');
-        console.log(tmpArr);
         for (let i = 0; i < tmpArr.length; i++) {
             if (i < 2) tmpArr[i] = '\n' + tmpArr[i];
             if (i <= 7) tmpArr[i] = '\n\t\t' + tmpArr[i];
