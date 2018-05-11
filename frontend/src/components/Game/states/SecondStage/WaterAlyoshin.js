@@ -37,6 +37,8 @@ export default class WaterState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
+        this.game.phone.clearTodos();
+        this.game.phone.setEnabled(false);
     }
 
     preload() {

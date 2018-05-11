@@ -18,7 +18,7 @@ export default class BrowserState extends Phaser.State {
         this.game.setFakeBrowserEnabled(true);
         this.game.phone.setEnabled(true);
         this.game.phone.clearTodos();
-        this.game.phone.setTime('14:07');
+        this.game.phone.setTime('14:11');
         this.game.phone.setDate('02.07.18');
         this.game.phone.addTodo({
             id: 'BROWSER',

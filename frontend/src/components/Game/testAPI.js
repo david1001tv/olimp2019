@@ -30,6 +30,9 @@ const testAPI = {
     },
 
     checkAnswers: function(obj) {
+        if(obj.todoId !== undefined){
+            this.game.phone.completeTodo(obj.todoId);
+        }
         if(this.flag === false) {
             if(obj.isHalf === true){
                 this.grade += 50;
@@ -64,10 +67,13 @@ const testAPI = {
         });
     },
 
-    addText: function(str, posX, posY, fontSize){
+    addText: function(str, posX, posY, fontSize, todoId){
         let tmp = this.game.add.text(posX, posY, str, {
                 font: fontSize+"px Pangolin",
         });
+        if(todoId !== undefined){
+            tmp.todoId = todoId;
+        }
         return tmp;
     },
 
