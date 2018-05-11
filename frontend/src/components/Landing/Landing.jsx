@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { DialogContainer } from 'react-md';
-import { Link } from 'react-router-dom';
+import {DialogContainer} from 'react-md';
+import {Link} from 'react-router-dom';
 import autobind from 'autobind-decorator';
 
 import Login from './Login';
@@ -30,18 +30,14 @@ class Landing extends Component {
                             <div class="page-title">Квест “Абітурієнт”</div>
                         </header>
                         <div className="page-subtitle">Вітаємо вас на нашому учбово-розважальному порталі!</div>
-                        <div className="game-info">Пориньте в історію вступу до установи вищої освіти. Ваше завдання полягає у подоланні тернистого шляху абітурієнта, який проходить вступну кампанію та знайомиться зі специфікою своєї професії!</div>
+                        <div className="game-info">Пориньте в історію вступу до установи вищої освіти. Ваше завдання
+                            полягає у подоланні тернистого шляху абітурієнта, який проходить вступну кампанію та
+                            знайомиться зі специфікою своєї професії!
+                        </div>
                         <div className="buttons">
-                            <button
-                                className="btn bnt-start"
-                                id="start"
-                                onClick={this.handleStartButtonClick}
-                            >
-                                <Link style={{display: 'block', height: '100%'}} to="/game" />
-                            </button>
+                            <Link className="btn btn-start" to="/game" />
                             <button
                                 className="btn btn-continue"
-                                id="continue"
                                 onClick={() => this.setState({formIsVisible: true})}
                             />
                         </div>
@@ -57,10 +53,11 @@ class Landing extends Component {
                     visible={formIsVisible}
                     onHide={() => this.setState({formIsVisible: false})}
                 >
-                    <Login />
-                </DialogContainer>
+                    <Login/>
+                </DialogContainer>;
             </div>
-        );
+        )
+            ;
     }
 }
 
