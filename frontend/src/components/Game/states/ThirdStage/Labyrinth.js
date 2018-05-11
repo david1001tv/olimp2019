@@ -8,6 +8,7 @@ let player;
 let cursors;
 let horizontalDoors;
 let verticalDoors;
+let rightDoors;
 
 export default class LabyrinthState extends Phaser.State {
     * gen() {
@@ -35,6 +36,7 @@ export default class LabyrinthState extends Phaser.State {
         var wallCollisionGroup = this.game.physics.p2.createCollisionGroup();
         var playerCollisionGroup = this.game.physics.p2.createCollisionGroup();
         var doorsCollisionGroup = this.game.physics.p2.createCollisionGroup();
+        let rightDoorCollisionGroup = this.game.physics.p2.createCollisionGroup();
         this.game.physics.p2.updateBoundsCollisionGroup();
 
         let wall = this.game.add.sprite(960, 540, 'walls');
@@ -48,16 +50,26 @@ export default class LabyrinthState extends Phaser.State {
         wall.body.collides(playerCollisionGroup);
         this.wall = wall;
 
+        rightDoors = this.game.add.group();
         horizontalDoors = this.game.add.group();
         verticalDoors = this.game.add.group();
         horizontalDoors.enableBody = true;
         verticalDoors.enableBody = true;
+        rightDoors.enableBody = true;
         horizontalDoors.physicsBodyType = Phaser.Physics.P2JS;
         verticalDoors.physicsBodyType = Phaser.Physics.P2JS;
+        rightDoors.physicsBodyType = Phaser.Physics.P2JS;
 
+        let rightDoor = rightDoors.create(1713, 380, 'door-vertical');
+        let text0 = this.game.add.text(1728, 360, '330');
+        text0.rotation = 1.575;
+        rightDoor.body.setRectangle(33,66);
+        rightDoor.body.setCollisionGroup(rightDoorCollisionGroup);
+        rightDoor.body.collides(playerCollisionGroup);
+        rightDoor.body.static = true;
 
-        let d1 = [210, 800, '234', 275, 975, ' 46', 865, 1045, ' 64', 1035, 1045, '  3', 1210, 1045, ' 30', 1320, 1045, ' Ж ', 1223, 890, ' 58', 605, 694, ' 56', 605, 733, ' 57', 560, 245, ' 55', 480, 137, '408', 480, 33, '176', 630, 33, '356', 630, 137, '113', 975, 310, '225', 1465, 312, '238', 1750, 33, '115'];
-        for (let i = 0; i < 51; i = i + 3) {
+        let d1 = [ 210, 800, '234', 275, 975, '234', 865, 1045, ' 46', 1035, 1045, ' 64', 1210, 1045, ' 3 ', 1320, 1045, ' 30', 1223, 890, '255', 605, 694, '356', 605, 733, '176', 560, 245, '408', 480, 137, ' 58', 480, 33, ' 56', 630, 33, ' 57', 630, 137, ' 55', 975, 310, '113', 1465, 312, '238', 1750, 33, '115'];
+        for (let i = 0; i < 51; i = i+3) {
             let door = horizontalDoors.create(d1[i], d1[i + 1], 'door-horizontal');
             this.game.add.text(d1[i] - 22, d1[i + 1] - 15, d1[i + 2]);
             door.body.setRectangle(66, 33);
@@ -66,9 +78,8 @@ export default class LabyrinthState extends Phaser.State {
             door.body.static = true;
         }
 
-        // let d2 = [ 105, 840, 140, 663, 310, 420, 310, 591, 521, 734, 1012, 520, 1185, 662, 1080, 138, 1433, 765, 1745, 770, 1713, 380, 1677, 145];
-        let d2 = [105, 840, '124', 140, 663, '230', 310, 420, ' 14', 310, 591, '320', 521, 734, '117', 1012, 520, '338', 1185, 662, '500', 1080, 138, '508', 1433, 765, ' M ', 1745, 770, '330', 1713, 380, '34', 1677, 145, '416'];
-        for (let i = 0; i < 36; i = i + 3) {
+        let d2 = [ 105, 840, '124', 140, 663, '230', 310, 420, '320', 310, 591, ' 14', 521, 734, '117', 1012, 520, '338', 1185, 662, '500', 1080, 138, ' M ', 1433, 765, '508', 1745, 770, '416', 1677, 145, '34'];
+        for (let i = 0; i  < 33; i = i+3) {
             let door = verticalDoors.create(d2[i], d2[i + 1], 'door-vertical');
             let text = this.game.add.text(d2[i] + 15, d2[i + 1] - 20, d2[i + 2]);
             text.rotation = 1.575;
@@ -88,6 +99,7 @@ export default class LabyrinthState extends Phaser.State {
 
         player.body.collides(wallCollisionGroup);
         player.body.collides(doorsCollisionGroup, this.handleWrongDoor, this);
+        player.body.collides(rightDoorCollisionGroup, this.handleRightDoor, this);
 
         cursors = this.game.input.keyboard.createCursorKeys();
 
@@ -102,12 +114,36 @@ export default class LabyrinthState extends Phaser.State {
         player.animations.stop('walk');
     }
 
+    handleRightDoor() {
+        
+    }
+
     handleWrongDoor() {
         this.game.paused = true;
-        this.game.displayDialogLine('asdasd', 'Test Test Test Test Test Test', () => {
+        let rand = Math.floor(Math.random() * (7));
+        rand = this.phrase(rand);
+        this.game.displayDialogLine( rand[0], rand[1], () => {
             this.game.paused = false;
             player.animations.stop('walk');
         });
+    }
+
+    phrase (rand) {
+        if (rand == 0)
+        return [ ' Старшокусник', ' Гей, друже, ты помилився дверима, твої дверi двома поверхами нижче'];
+        if (rand == 1)
+        return [ ' Викладач', ' Це не ваша аудиторiя, пройдiть далi по коридору'];
+        if (rand == 2)
+        return [ ' Викладач', ' Хлопче, я тобi сказав, не сюди!'];
+        if (rand == 3)
+        return [ ' Викладач', ' Група КН займається у аудиторii 330, прямуйте туди'];
+        if (rand == 4)
+        return [ ' Викладач', ' Ви з МА? Якщо нi - ви помилилися аудиторiєю'];
+        if (rand == 5)
+        return [ ' Ви', ' Хм, схоже я помилився аудиторiєю'];
+        if (rand == 6)
+        return [ ' Викладач', ' Зачинiть дверi з тiєї сторони'];
+
     }
 
     update() {
