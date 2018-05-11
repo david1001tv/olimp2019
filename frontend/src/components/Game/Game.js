@@ -21,6 +21,9 @@ import AudienceState from './states/SecondStage/Audience';
 import GradesState from './states/SecondStage/Grades';
 import DanceState from './states/ThirdStage/Dance';
 import LabyrinthState from './states/ThirdStage/Labyrinth';
+import ToLaboratoryState from './states/ThirdStage/ToLaboratory';
+import CodeEditorState from './states/ThirdStage/CodeEditor';
+import LaboratoryState from './states/ThirdStage/Laboratory';
 
 
 import config from './config';
@@ -56,6 +59,9 @@ class Game extends Phaser.Game {
         this.state.add('Grades', GradesState, false);
         this.state.add('Dance', DanceState, false);
         this.state.add('Labyrinth', LabyrinthState, false);
+        this.state.add('ToLaboratory', ToLaboratoryState, false);
+        this.state.add('CodeEditor', CodeEditorState, false);
+        this.state.add('Laboratory', LaboratoryState, false);
 
         this.state.start('Boot', true, false, 'Dance');
     }
@@ -92,4 +98,3 @@ class Game extends Phaser.Game {
 }
 
 export default Game;
-
