@@ -5,6 +5,7 @@ import Auth from '~components/Auth';
 import PrivateRoute from '~components/PrivateRoute';
 import GameComponent from '~components/Game';
 import Landing from '~components/Landing';
+import Final from '~components/Final';
 
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
                     <Route path="/auth" component={Auth} />
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/game" component={GameComponent} />
+                    <Route exact path="/final" component={Final} />
                 </Switch>
             </main>
         );

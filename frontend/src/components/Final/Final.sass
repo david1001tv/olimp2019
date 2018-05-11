@@ -1,0 +1,106 @@
+html, body
+	height: 100%
+
+iframe
+	display: block
+	margin: 50px auto 20px
+	width: 100%
+	height: 657px
+
+.final-container
+	width: 1170px
+	margin: 0 auto
+	height: 100%
+	display: flex
+	flex-direction: column
+
+	.soc
+		display: flex
+		justify-content: space-between
+		.like
+			margin: auto 0
+			width: 140px
+			height: 47px
+			background-image: url(../../img/like-unclicked.png)
+			background-size: 100%
+			cursor: pointer
+			transition: all .2s
+			&:hover
+				background-image: url(../../img/like-hover.png)
+			&:active
+				background-image: url(../../img/like-active.png)
+		.share
+			div
+				display: inline-block
+				width: 3.5em
+				height: 3.5em
+				background-size: 100%
+				background-repeat: no-repeat
+				cursor: pointer
+				margin: 0 3px
+				transition: .2s
+			.facebook
+				background-image: url(../../img/logo/facebook.png)
+				&:hover
+					background-image: url(../../img/logo/facebook-hover.png)
+			.twitter
+				background-image: url(../../img/logo/twitter.png)
+				&:hover
+					background-image: url(../../img/logo/twitter-hover.png)
+			.google
+				background-image: url(../../img/logo/google.png)
+				&:hover
+					background-image: url(../../img/logo/google-hover.png)
+			.linkedin
+				margin-right: 0
+				background-image: url(../../img/logo/linkedin.png)
+				&:hover
+					background-image: url(../../img/logo/linkedin-hover.png)
+	.block-title
+		font-size: 2em
+		font-family: "Pangolin", Arial, serif
+		text-align: center
+	.leaderboard
+		margin: 50px 0 70px
+		text-align: center
+		table
+			background-color: #f6f6f6
+			margin: 20px 0
+			width: 100%
+			font-size: 2em
+			color: #3b3b3b
+			padding-bottom: 15px
+			th
+				background-color: #3b3b3b
+				color: #fff
+				padding: 7px 0
+			td
+				padding: 5px 0
+			tr:nth-of-type(2) td
+				padding-top: 15px
+		.export
+			float: right
+			font-family: "Pangolin", Arial, serif
+			font-size: 1em
+			text-align: right
+			cursor: pointer
+			text-decoration: underline
+			color: #3b3b3b
+	.comments
+		margin: 50px 0
+
+@media screen and (max-width: 1200px)
+	.final-container
+		width: 970px
+	iframe
+		height: 545px
+
+@media screen and (max-width: 992px)
+	.final-container
+		width: 750px
+	iframe
+		height: 422px
+
+@media screen and (max-width: 768px)
+	.final-container
+		width: 97%
