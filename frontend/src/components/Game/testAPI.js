@@ -73,11 +73,9 @@ const testAPI = {
 
     deleteText: function(objQuestion, objAnswers) {
         if(objQuestion !== null) objQuestion.destroy();
-        if(objAnswers !== null) {
-            objAnswers.forEach(e => {
-                e.destroy();
-            });
-        }
+        objAnswers.forEach(e => {
+            e.destroy();
+        });
     }
 }
 
