@@ -17,6 +17,11 @@ const states = [
     'WaterMarket',
     'Translate',
     'Proffs',
+    'Audience',
+    'Grades',
+    'Labyrinth',
+    'CodeEditor',
+    'Dance',
 ];
 
 const stages = [
@@ -44,8 +49,8 @@ class ProgressManager {
         if (this._entriesQueue.length && isAuthenticated())
             this.sendQueue();
 
-        this._checkpoints = states.map(key => ({key: key, status: 'unavailable'}));
-        // this._checkpoints = states.map(key => ({key: key, status: 'available'})); // DEBUG
+        // this._checkpoints = states.map(key => ({key: key, status: 'unavailable'}));
+        this._checkpoints = states.map(key => ({key: key, status: 'available'})); // DEBUG
         this._checkpoints[0].status = 'available';
         this._checkpoints[3].status = 'available'; // DEBUG
 
