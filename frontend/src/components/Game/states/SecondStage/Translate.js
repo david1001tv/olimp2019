@@ -336,7 +336,8 @@ export default class TranslateState extends Phaser.State {
     this.game.camera.fade(0x000000, 1500, true);
     setTimeout(() => this.next(), 1500);
     yield;
-    
+    this.camera.scale.setTo(1, 1);
+    this.game.nextState(this.grade);
 }
 
 init() {
