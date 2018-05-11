@@ -94,7 +94,7 @@ export default class ProffsState extends Phaser.State {
     }
 
     endClick(){
-        this.state.start('Translate');
+        //this.state.start('Translate');
     }
 
     endTalk(){

@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { smartSetHeight } from '../../utils';
 
-export default class GrannyBadState extends Phaser.State {
+export default class LaboratoryState extends Phaser.State {
     * gen() {
         window.CAMERA = this.camera;
         this.camera.x = 1128;
@@ -13,7 +13,7 @@ export default class GrannyBadState extends Phaser.State {
             this.next();
         });
         // this.game.camera.flash(0x000000, 3000, true);
-        // yield;
+        //yield;
 
         let dStand = this.game.add.image(1660, 240, 'd-stand');
         smartSetHeight(dStand, 830);
