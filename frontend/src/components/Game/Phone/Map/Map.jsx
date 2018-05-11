@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
+import {getHistory} from '~api';
+import progressManager from '~etc/ProgressManager';
 
 import './Map.sass';
 import Checkpoint, {
@@ -26,6 +28,13 @@ class Map extends Component {
         this.props.onSelect(key, isReplaying);
     }
 
+    componentDidMount() {
+        getHistory().then(history => {
+            progressManager.setHistory(history);
+            this.forceUpdate();
+        });
+    }
+
     render() {
         return (
             <div className="map-quests">
@@ -38,7 +47,7 @@ class Map extends Component {
                     )
                 }
                 <div
-                    className="map-label map-label--first map-label map-label--active no-select"
+                    className={`map-label map-label--first map-label map-label--${progressManager.getStageStatus(1)} no-select`}
                 >
                     <h3>Етап 1</h3>
                     <h4>Домашні пригоди</h4>
@@ -75,6 +84,12 @@ class Map extends Component {
                     onClick={this.handleClick}
                     popoverText="Реєстрація"
                 />
+                <div
+                    className={`map-label map-label--second map-label map-label--${progressManager.getStageStatus(2)} no-select`}
+                >
+                    <h3>Етап 2</h3>
+                    <h4>Скрізь терни до зірок</h4>
+                </div>
                 <Checkpoint
                     left="35%"
                     top="40.09259%"
@@ -97,7 +112,7 @@ class Map extends Component {
                     type={CHECKPOINT}
                     state="WaterAlyoshin"
                     onClick={this.handleClick}
-                    popoverText="Приймальна комісія"
+                    popoverText="Комісія"
                 />
                 <Checkpoint
                     left="44.5%"
@@ -115,15 +130,9 @@ class Map extends Component {
                     onClick={this.handleClick}
                     popoverText="Знайомство"
                 />
-                <div
-                    className="map-label map-label--second map-label map-label--inactive no-select"
-                >
-                    <h3>Етап 2</h3>
-                    <h4>Скрізь терни до зірок</h4>
-                </div>
 
                 <div
-                    className="map-label map-label--third map-label map-label--inactive no-select"
+                    className="map-label map-label--third map-label map-label--unavailable no-select"
                 >
                     <h3>Етап 3</h3>
                     <h4>Gaudeamus igitur</h4>

@@ -16,7 +16,7 @@ module.exports = {
                     });
                 }
                 // if everything is good, save to request for use in other routes
-                req.decoded = decoded;
+                req.decodedToken = decoded;
                 next();
             });
         } else {

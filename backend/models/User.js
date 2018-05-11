@@ -28,6 +28,7 @@ module.exports = (sequelize) => {
         google_id: {
             type: DataTypes.STRING,
             allowNull: true,
+            unique: true,
         },
         liked: {
             type: DataTypes.BOOLEAN,
@@ -37,5 +38,17 @@ module.exports = (sequelize) => {
         timestamps: false,
         freezeTableName: true,
     });
+
+    User.associate = function (models) {
+        const { HistoryEntry } = models;
+        User.HistoryEntry = User.hasMany(HistoryEntry, {
+            onDelete: 'CASCADE',
+            foreignKey: {
+                name: 'user_id',
+                allowNull: false,
+            },
+        });
+    };
+
     return User;
 };

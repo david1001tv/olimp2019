@@ -28,7 +28,7 @@ const testAPI = {
         this.bad.forEach(e => e.destroy());
         this.bad.length = 0;
     },
-    
+
     checkAnswers: function(obj) {
         if(this.flag === false) {
             if(obj.isHalf === true){

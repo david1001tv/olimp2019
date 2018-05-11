@@ -1,19 +1,25 @@
 const express = require('express');
 
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const app = require('./../main.js');
-const config = require('./../config');
 const {
-  registerValidator,
-  register,
+    registerValidator,
+    register,
+} = require('../controllers/auth/register');
+
+const {
   googleRegisterValidator,
   googleRegister,
+} = require('../controllers/auth/googleRegister');
+
+const {
   login,
   loginValidator,
+} = require('../controllers/auth/login');
+
+const {
   googleLogin,
   googleLoginValidator,
-} = require('../controllers/auth');
+} = require('../controllers/auth/googleLogin');
 
 /*
  /api/auth/

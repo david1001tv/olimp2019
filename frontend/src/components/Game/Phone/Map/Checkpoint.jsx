@@ -4,7 +4,11 @@ import autobind from 'autobind-decorator';
 
 import './Map.sass';
 import ProgressManager from '~etc/ProgressManager';
-
+import {
+    COMPLETED,
+    AVAILABLE,
+    UNAVAILABLE,
+} from '~etc/ProgressManager';
 
 import checkpointCompleted from '~img/map/checkpoint-completed.png';
 import finishCompleted from '~img/map/finish-completed.png';
@@ -17,11 +21,6 @@ import flagAvailable from '~img/map/flag-available.png';
 import checkpointUnavailable from '~img/map/checkpoint-unavailable.png';
 import finishUnavailable from '~img/map/finish-unavailable.png';
 import flagUnavailable from '~img/map/flag-unavailable.png';
-
-
-export const COMPLETED = 'completed';
-export const AVAILABLE = 'available';
-export const UNAVAILABLE = 'unavailable';
 
 export const CHECKPOINT = 'checkpoint';
 export const FINISH = 'finish';

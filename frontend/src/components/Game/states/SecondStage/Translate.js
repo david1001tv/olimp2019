@@ -24,7 +24,7 @@ export default class TranslateState extends Phaser.State {
     let firstStep = this.game.add.tween(this.camera).to({ x: 2520, y: -600 }, 800);
     let secondStep = this.game.add.tween(this.camera).to({ x: 200, y: -600 }, 800);
     let thirdStep = this.game.add.tween(this.camera).to({ x: 920, y: -600 }, 800);
-        
+
     firstStep.chain(secondStep, thirdStep);
     let zoom = this.game.add.tween(this.camera.scale).to({
         x: 1.5,
@@ -292,7 +292,7 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.destroyIncorrect();
     this.testAPI.deleteText(text, answers);
     this.testAPI.displayNote(0, 0);
-    
+
     //eighth question
     setTimeout(() => this.game.displayDialogLine('Альошин', "Ми можемо надати йому житло у гуртожитку.", () => this.next()), 100);
     yield;

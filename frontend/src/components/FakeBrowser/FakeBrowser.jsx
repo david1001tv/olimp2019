@@ -25,7 +25,7 @@ class FakeBrowser extends Component {
 
     @autobind
     handleRegistrationSuccess() {
-        PubSub.publish('browser', 'form-submitted');
+        setTimeout(() => PubSub.publish('browser', 'form-submitted'), 500); // говно
     }
 
     render() {

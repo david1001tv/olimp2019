@@ -28,7 +28,7 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.nextState();
+        this.game.nextState(this.score);
     }
 
     init() {
@@ -38,6 +38,7 @@ export default class Scanner extends Phaser.State {
 
         this._gen = this.gen();
 
+        this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);
         this.game.phone.setEnabled(false);
         this.game.phone.setTime('14:07');
@@ -159,7 +160,7 @@ export default class Scanner extends Phaser.State {
             backTween.onComplete.add(this.handleScanEnd, this);
 
             forthTween.chain(backTween);
-            forthTween.start();
+            forthTween.start(this.score);
         }
     }
 
@@ -192,13 +193,13 @@ export default class Scanner extends Phaser.State {
 
         if (this.docs.every(e => e.isScanned)) {
             if (this.count === 5) {
-                this.grade = 100;
+                this.score = 100;
             }
             else if (this.count <= 9) {
-                this.grade = Math.round(40 / (this.count - 5)) + 50;
+                this.score = Math.round(40 / (this.count - 5)) + 50;
             }
             else {
-                this.grade = 50;
+                this.score = 50;
             }
             this.next();
         }
