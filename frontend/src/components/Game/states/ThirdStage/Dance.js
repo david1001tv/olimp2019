@@ -7,6 +7,12 @@ const ARROWS_LEFT = 100;
 const ARROWS_SIDE_PADDING = 30;
 const ARROW_SIZE = 150;
 
+const LEFT_ARROW = 0;
+const UP_ARROW = 1;
+const DOWN_ARROW = 2;
+const RIGHT_ARROW = 3;
+
+
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -17,6 +23,45 @@ let rotation = [
     180,
     90
 ];
+
+class Hand {
+    constructor(verticalFrame, changingFrame, horizontalFrame) {
+        this.activeFrame = verticalFrame;
+        this.verticalFrame = verticalFrame;
+        this.changingFrame = changingFrame;
+        this.horizontalFrame = horizontalFrame;
+
+        [...arguments].forEach(e => {
+            e.visible = false;
+        });
+
+        this.activeFrame.visible = true;
+    }
+
+    moveToVertical() {
+        if (this.activeFrame !== this.verticalFrame) {
+            this.activeFrame = this.verticalFrame;
+            this.horizontalFrame.visible = false;
+            this.changingFrame.visible = true;
+            setTimeout(() => {
+                this.verticalFrame.visible = true;
+                this.changingFrame.visible = false
+            }, 50);
+        }
+    }
+
+    moveToHorizontal() {
+        if (this.activeFrame !== this.horizontalFrame) {
+            this.activeFrame = this.horizontalFrame;
+            this.verticalFrame.visible = false;
+            this.changingFrame.visible = true;
+            setTimeout(() => {
+                this.horizontalFrame.visible = true;
+                this.changingFrame.visible = false
+            }, 50);
+        }
+    }
+}
 
 export default class Scanner extends Phaser.State {
     * gen() {
@@ -36,7 +81,7 @@ export default class Scanner extends Phaser.State {
     constructor() {
         super();
 
-        this.score = 0;
+        this.score = 50;
     }
 
     init() {
@@ -49,12 +94,17 @@ export default class Scanner extends Phaser.State {
 
     preload() {
         this.load.image('bg', './assets/images/3-4(final)/bg-3-4.png');
+        this.load.image('scorebar', './assets/images/3-4(final)/scorebar.png');
         this.load.image('rector', './assets/images/3-4(final)/rector.png');
         this.load.image('d-head', './assets/images/3-4(final)/d-head.png');
         this.load.image('d-body', './assets/images/3-4(final)/d-body.png');
         this.load.image('d-shadow', './assets/images/3-4(final)/d-shadow.png');
+        this.load.image('d-righthand-right', './assets/images/3-4(final)/d-righthand-right.png');
+        this.load.image('d-righthand-down', './assets/images/3-4(final)/d-righthand-down.png');
         this.load.image('d-righthand-changing', './assets/images/3-4(final)/d-righthand-changing.png');
+        this.load.image('d-lefthand-left', './assets/images/3-4(final)/d-lefthand-left.png');
         this.load.image('d-lefthand-changing', './assets/images/3-4(final)/d-lefthand-changing.png');
+        this.load.image('d-lefthand-top', './assets/images/3-4(final)/d-lefthand-top.png');
         this.load.image('arrow', './assets/images/3-4(final)/arrow.png');
         this.load.image('arrow-button-pressed', './assets/images/3-4(final)/arrow-button-pressed.png');
         this.load.image('arrow-button-released', './assets/images/3-4(final)/arrow-button-released.png');
@@ -71,12 +121,14 @@ export default class Scanner extends Phaser.State {
         this.game.add.image(871, 488, 'd-body');
         this.game.add.image(900, 367, 'd-head');
 
+        this.scoreBar = this.game.add.sprite(1673, 65, 'scorebar');
+        this.scoreRect = new Phaser.Rectangle(1673, 65 + this.score, 100, this.score);
+        // this.scoreBar.crop(this.scoreRect);
+
+
         legs.animations.add('dance');
         legs.animations.play('dance', 3, true);
 
-        let righthand = this.game.add.sprite(915, 411, 'd-righthand', 'd-righthand-down');
-        righthand.animations.add('dance');
-        righthand.animations.play('dance', 3, true);
 
         this.staticArrows = [];
         this.activeArrows = [[], [], [], []];
@@ -96,36 +148,38 @@ export default class Scanner extends Phaser.State {
 
         this.sendArrow();
 
-        // setInterval(() => {
-        //     let arrow = this.generateArrow(randomInt(0, 3));
-        //     this.game.add.tween(arrow)
-        //         .to({y: 0}, randomInt(750, 1500))
-        //         .start()
-        //         .onComplete
-        //         .add((e) => {
-        //             console.log('score', this.score);
-        //             this.activeArrows[e.index].splice(this.activeArrows[e.index].indexOf(e), 1);
-        //             this.score--;
-        //             e.destroy();
-        //         });
-        // }, 1500);
 
-        this.cursors.left.onDown.add(e => this.handleKeyDown(0));
-        this.cursors.up.onDown.add(e => this.handleKeyDown(1));
-        this.cursors.down.onDown.add(e => this.handleKeyDown(2));
-        this.cursors.right.onDown.add(e => this.handleKeyDown(3));
+        this.rightHand = new Hand(
+            this.game.add.image(915, 516, 'd-righthand-down'),
+            this.game.add.image(966, 464, 'd-righthand-changing'),
+            this.game.add.image(1013, 411, 'd-righthand-right'),
+        );
 
-        this.cursors.left.onUp.add(e => this.handleKeyUp(0));
-        this.cursors.up.onUp.add(e => this.handleKeyUp(1));
-        this.cursors.down.onUp.add(e => this.handleKeyUp(2));
-        this.cursors.right.onUp.add(e => this.handleKeyUp(3));
+        this.leftHand = new Hand(
+            this.game.add.image(802, 381, 'd-lefthand-top'),
+            this.game.add.image(800, 393, 'd-lefthand-changing'),
+            this.game.add.image(829, 426, 'd-lefthand-left'),
+        );
+
+        this.cursors.left.onDown.add(e => this.handleKeyDown(LEFT_ARROW));
+        this.cursors.up.onDown.add(e => this.handleKeyDown(UP_ARROW));
+        this.cursors.down.onDown.add(e => this.handleKeyDown(DOWN_ARROW));
+        this.cursors.right.onDown.add(e => this.handleKeyDown(RIGHT_ARROW));
+
+        this.cursors.left.onUp.add(e => this.handleKeyUp(LEFT_ARROW));
+        this.cursors.up.onUp.add(e => this.handleKeyUp(UP_ARROW));
+        this.cursors.down.onUp.add(e => this.handleKeyUp(DOWN_ARROW));
+        this.cursors.right.onUp.add(e => this.handleKeyUp(RIGHT_ARROW));
+
+        this.staticArrows.forEach((e, index) => {
+            e.inputEnabled = true;
+            e.events.onInputDown.add(() => this.handleKeyDown(index));
+            e.events.onInputUp.add(() => this.handleKeyUp(index));
+        });
 
         this.next();
     }
 
-    render() {
-
-    }
 
     handleKeyDown(index) {
         let staticArrow = this.staticArrows[index];
@@ -138,14 +192,30 @@ export default class Scanner extends Phaser.State {
         });
 
         if (overlappingArrow) {
-            this.score++;
+            this.updateScore(1);
             this.activeArrows[index].splice(this.activeArrows[index].indexOf(overlappingArrow), 1);
             overlappingArrow.destroy();
         } else {
-            this.score--;
+            this.updateScore(-1);
         }
         this.staticArrows[index].loadTexture('arrow-button-pressed');
         console.log('score', this.score);
+
+        switch (index) {
+            case LEFT_ARROW:
+                this.leftHand.moveToHorizontal();
+                break;
+            case UP_ARROW:
+                this.leftHand.moveToVertical();
+                break;
+            case DOWN_ARROW:
+                this.rightHand.moveToVertical();
+                break;
+            case RIGHT_ARROW:
+                this.rightHand.moveToHorizontal();
+                break;
+        }
+
     }
 
     handleKeyUp(index) {
@@ -175,10 +245,26 @@ export default class Scanner extends Phaser.State {
             .add((e) => {
                 console.log('score', this.score);
                 this.activeArrows[e.index].splice(this.activeArrows[e.index].indexOf(e), 1);
-                this.score--;
+                this.updateScore(-1);
                 e.destroy();
             });
         setTimeout(() => this.sendArrow(), randomInt(500, 1000));
+    }
+
+    updateScore(diff) {
+        this.score += diff;
+
+        let color;
+        let greenColor = Math.floor(this.score / 100 * 255);
+        let redColor = 255 - greenColor;
+        color = redColor << 8;
+        color = color | greenColor;
+        color = color << 8;
+        this.scoreBar.tint = color;
+
+        this.scoreRect.y = 65 + 100 - this.score;
+        this.scoreRect.height = this.score;
+        // this.scoreBar.crop(this.scoreRect);
     }
 
     next() {
