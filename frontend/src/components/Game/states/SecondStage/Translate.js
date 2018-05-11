@@ -21,15 +21,15 @@ export default class TranslateState extends Phaser.State {
     this.camera.scale.setTo(1, 1);
     this.camera.x = 1128 * 5;
     this.camera.y = 350 * 5 - 300;
-    let firstStep = this.game.add.tween(this.camera).to({ x: 2820, y: -600 }, 800);
-    let secondStep = this.game.add.tween(this.camera).to({ x: 500, y: -600 }, 800);
-    let thirdStep = this.game.add.tween(this.camera).to({ x: 1400, y: -600 }, 800);
+    let firstStep = this.game.add.tween(this.camera).to({ x: 2520, y: -600 }, 800);
+    let secondStep = this.game.add.tween(this.camera).to({ x: 200, y: -600 }, 800);
+    let thirdStep = this.game.add.tween(this.camera).to({ x: 920, y: -600 }, 800);
         
     firstStep.chain(secondStep, thirdStep);
     let zoom = this.game.add.tween(this.camera.scale).to({
         x: 1.5,
         y: 1.5,
-    }, 2000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
+    }, 3000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
     firstStep.start();
     yield;
 
