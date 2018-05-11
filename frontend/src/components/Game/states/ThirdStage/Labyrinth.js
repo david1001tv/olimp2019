@@ -21,11 +21,11 @@ export default class LabyrinthState extends Phaser.State {
     preload() {
         this.game.stage.backgroundColor = '#fff3e0';
 
-        this.game.load.atlas('player', 'assets/walking-spritesheet.png', 'assets/walking-spritesheet.json');
-        this.game.load.image('walls', 'assets/walls.png');
-        this.game.load.physics('physicsData', 'assets/maze.json');
-        this.game.load.image('door-horizontal', 'assets/door-horizontal.png');
-        this.game.load.image('door-vertical', 'assets/door-vertical.png');
+        this.game.load.atlas('player', 'assets/images/3-1 (labyrinth)/walking-spritesheet.png', 'assets/images/3-1 (labyrinth)/walking-spritesheet.json');
+        this.game.load.image('walls', 'assets/images/3-1 (labyrinth)/walls.png');
+        this.game.load.physics('physicsData', 'assets/images/3-1 (labyrinth)/maze.json');
+        this.game.load.image('door-horizontal', 'assets/images/3-1 (labyrinth)/door-horizontal.png');
+        this.game.load.image('door-vertical', 'assets/images/3-1 (labyrinth)/door-vertical.png');
     }
 
     create() {
@@ -78,7 +78,7 @@ export default class LabyrinthState extends Phaser.State {
             door.body.static = true;
         }
 
-        player = this.game.add.sprite(50, 30, 'player');
+        player = this.game.add.sprite(50, 950, 'player');
         player.animations.add('walk');
 
         this.game.physics.p2.enable(player, false);
