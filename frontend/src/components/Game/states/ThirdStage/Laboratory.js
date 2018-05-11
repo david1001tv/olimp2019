@@ -13,7 +13,7 @@ export default class LaboratoryState extends Phaser.State {
             this.next();
         });
         // this.game.camera.flash(0x000000, 3000, true);
-        //yield;
+        // yield;
 
         let dStand = this.game.add.image(1660, 240, 'd-stand');
         smartSetHeight(dStand, 830);
@@ -44,17 +44,14 @@ export default class LaboratoryState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Начебто все працювало. Зараз гляну, що там.', () => this.next());
         yield;
 
-        // this.bg1.destroy();
-
         let bg2 = this.game.add.image(0, 0, 'bg2');
         smartSetHeight(bg2, 1080);
 
-        this.game.inputCode = 'iaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonviaogjvoinheiarbviaengvjrwijvnawonvnweonv'
         let tmpCode = 'gojakwvfasfsavapfkvgafdvwarfvcwesdfceweq\nfoanverfsaferafverfvewvwgvwdfvasvovopn\nfoijffaefaergrrgnoasfsdavsdinvowvnoi\nvrowfasfvweveasdvadanvrjnvoj\n\tjfisdofjcnwcfasdfdsvosnv\n\tfjuwihjnvuiavuvgdfgerhbtvwev\n\tvasnvojnjumyjhawewdovwovwwaeowjodvnwojvnojswn\n\t\tvjfovmigearsggraojraemvoerk\n\t\tiaovbjmaieofjvmbiaeorbmjoirmjb\n\t\tjafviowerpvjre\n\t\t\tfvergasrgvegzvsdrev\n\t\tkoresmvsokmnorekmodfv'
         if (!this.game.inputCode) {
             this.game.inputCode = tmpCode;
         } else this.formatCode();
-        let code = this.game.add.text(550, 260, this.game.inputCode, {
+        let code = this.game.add.text(750, 260, this.game.inputCode, {
             font: "20px 'Source Code Pro",
             fill: '#000'
         });
@@ -72,6 +69,9 @@ export default class LaboratoryState extends Phaser.State {
         proninaAngry.destroy();
         let proninaSmile = this.game.add.image(1055, 260, 'pronina-smile');
         smartSetHeight(proninaSmile, 305);
+        dPass.destroy();
+        dPass = this.game.add.image(1190, 270, 'd-pass');
+        smartSetHeight(dPass, 410);
 
         this.game.displayDialogLine('Верескун', 'Добого дня. Вибачте, що вiдволiкаю. Я хотiв би повiдомити, що незабаром вiдбудеться "Дебют першокурсника".', () => this.next());
         yield;
@@ -82,9 +82,7 @@ export default class LaboratoryState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Здрастуйте. Це гарна новина! Я обов`язково вiзьму участь у цьому заходi.', () => this.next());
         yield;
 
-        yield;
-
-        // this.state.start('Cross');
+        this.state.start('Dance');
     }
 
     init() {
