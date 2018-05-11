@@ -16,6 +16,7 @@ import WaterAlyoshinState from './states/SecondStage/WaterAlyoshin';
 import WaterMarketState from './states/SecondStage/WaterMarket';
 import TranslateState from './states/SecondStage/Translate';
 import ProffsState from './states/SecondStage/Proffs';
+import ToLaboratoryState from './states/ThirdStage/ToLaboratory';
 import CodeEditorState from './states/ThirdStage/CodeEditor';
 import LaboratoryState from './states/ThirdStage/Laboratory';
 
@@ -47,6 +48,7 @@ class Game extends Phaser.Game {
         this.state.add('WaterMarket', WaterMarketState, false);
         this.state.add('Translate', TranslateState, false);
         this.state.add('Proffs', ProffsState, false);
+        this.state.add('ToLaboratory', ToLaboratoryState, false);
         this.state.add('CodeEditor', CodeEditorState, false);
         this.state.add('Laboratory', LaboratoryState, false);
 
