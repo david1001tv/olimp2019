@@ -40,6 +40,7 @@ export default class IntroState extends Phaser.State {
             this.mobile.visible = false;
             continueText.destroy();
 
+            this.game.input.onDown.removeAll();
             setTimeout(() => this.next(), 2000);
         });
         this.game.phone.addMessageById('BEGINNING');

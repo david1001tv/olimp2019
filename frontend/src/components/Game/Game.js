@@ -12,6 +12,7 @@ import docsToScanState from './states/FirstStage/docsToScan';
 import ScannerState from './states/FirstStage/Scanner';
 import scanToBrowserState from './states/FirstStage/scanToBrowser';
 import BrowserState from './states/FirstStage/Browser';
+import TransitionToSecondStageState from './states/FirstStage/TransitionToSecondStage';
 import GrannyBadState from './states/SecondStage/GrannyBad';
 import CrossState from './states/SecondStage/Cross';
 import GrannyGoodState from './states/SecondStage/GrannyGood';
@@ -53,6 +54,7 @@ class Game extends Phaser.Game {
         this.state.add('Scanner', ScannerState, false);
         this.state.add('scanToBrowser', scanToBrowserState, false);
         this.state.add('Browser', BrowserState, false);
+        this.state.add('TransitionToSecondStage', TransitionToSecondStageState, false);
         this.state.add('GrannyBad', GrannyBadState, false);
         this.state.add('Cross', CrossState, false);
         this.state.add('GrannyGood', GrannyGoodState, false);

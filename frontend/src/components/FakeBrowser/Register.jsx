@@ -8,22 +8,8 @@ import validate from 'validate.js';
 import './Register.sass';
 
 import {register, googleRegister, isAuthenticated} from '~api';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker} from "react-google-maps";
-import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 
-const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-    <GoogleMap
-        defaultZoom={8}
-        defaultCenter={{ lat: 47.095447, lng: 37.541188 }}
-    >
-        <MarkerWithLabel
-            position={{ lat: 47.095447, lng: 37.541188 }}
-            labelAnchor={new google.maps.Point(0, 0)}
-        >
-            <div>PSTU</div>
-        </MarkerWithLabel>
-    </GoogleMap>
-))
+
 
 class Register extends Component {
     static validationConstraints = {
@@ -246,13 +232,6 @@ class Register extends Component {
                         </button>
                     </div>
                 </form>
-                <MyMapComponent
-                    isMarkerShown
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `400px` }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
-                />
             </div>
         );
     }

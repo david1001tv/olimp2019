@@ -8,10 +8,13 @@ export default class BrowserState extends Phaser.State {
     }
 
     @autobind
-    handleFormSubmit(_, msg) {
-        if (msg === 'form-submitted') {
+    handleBrowserEvent(_, event) {
+        if (event === 'form-submitted') {
+            this.game.phone.completeTodo('BROWSER');
+        } else if (event === 'continue') {
             this.game.nextState();
         }
+
     }
 
     init() {
@@ -25,7 +28,7 @@ export default class BrowserState extends Phaser.State {
             text: 'Зареєструватися на сайті університету'
         });
 
-        this.token = PubSub.subscribe('browser', this.handleFormSubmit);
+        this.token = PubSub.subscribe('browser', this.handleBrowserEvent);
     }
 
     preload() {

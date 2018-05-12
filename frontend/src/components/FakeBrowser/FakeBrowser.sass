@@ -1,3 +1,5 @@
+@import "../../etc/stroke.scss"
+
 .fake-browser
   z-index: 1
   position: absolute
@@ -51,6 +53,23 @@
     overflow-y: scroll
     background-color: white
     padding-bottom: 40px
+
+  .btn-continue
+    cursor: pointer
+    background: transparent
+    border: none
+    outline: none
+    font-family: Neucha
+    font-size: 42px
+    position: absolute
+    bottom: 2%
+    right: 50px
+    color: white
+    @include text-stroke(4, #000)
+    @media (max-width: 1000px)
+      font-size: 30px
+    @media (min-width: 1300px)
+      font-size: 60px
 
 .register-link
   cursor: pointer
