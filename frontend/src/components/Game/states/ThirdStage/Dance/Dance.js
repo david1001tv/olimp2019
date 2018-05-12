@@ -33,7 +33,7 @@ let tints = [
 ];
 
 export default class Scanner extends Phaser.State {
-    * gen() {
+    async * gen() {
         this.game.input.enabled = false;
         this.game.camera.flash(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
@@ -49,10 +49,11 @@ export default class Scanner extends Phaser.State {
         this.game.add.tween(fullDavid).to({alpha: 1}, 1500).start().onComplete.add(() => this.next());
         yield;
 
+        await this.game.music.play();
         // 3.. 2.. 1...
         this.startCountdown();
         setTimeout(() => this.next(), 4000);
-        this.legs.animations.play('dance', 3, true);
+        this.legs.animations.play('dance', 2, true);
         yield;
 
         this.createCursors();
@@ -65,6 +66,7 @@ export default class Scanner extends Phaser.State {
 
 
         this.cleanUpCursors();
+        this.game.music.pause();
         this.game.nextState();
     }
 
@@ -168,7 +170,7 @@ export default class Scanner extends Phaser.State {
         this.scoreBar.crop(this.scoreRect);
         this.updateScore(0);
 
-        this.legs.animations.add('dance');
+        this.legs.animations.add('dance', [0, 1]);
 
 
         this.staticArrows = [];
@@ -215,6 +217,7 @@ export default class Scanner extends Phaser.State {
         this.game.add.image(0, 0, 'bg');
         this.rector = this.game.add.image(830, 155, 'rector');
         smartSetHeight(this.rector, 830);
+        this.game.music = new Audio('assets/audio/dance.mp3');
 
         this.next();
     }
@@ -313,6 +316,10 @@ export default class Scanner extends Phaser.State {
             this.scoreBar.updateCrop();
 
         }
+    }
+
+    shutdown() {
+        this.game.music.pause();
     }
 
     next() {

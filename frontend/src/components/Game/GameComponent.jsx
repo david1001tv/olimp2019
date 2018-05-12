@@ -45,6 +45,12 @@ class GameComponent extends Component {
         this.startState = this.game.startState.bind(this.game);
     }
 
+    componentWillUnmount() {
+        if (this.game.music) {
+            this.game.music.pause();
+        }
+    }
+
     @autobind
     setFakeBrowserEnabled(enabled) {
         this.setState({fakeBrowserIsShown: enabled})

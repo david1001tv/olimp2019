@@ -18,11 +18,12 @@ export default class Hand {
     }
 
     moveToVertical() {
-        if (this.activeFrame !== this.verticalFrame) {
-            this.activeFrame = this.verticalFrame;
+        if (this.activeFrame === this.horizontalFrame) {
+            this.activeFrame = this.changingFrame;
             this.horizontalFrame.visible = false;
             this.changingFrame.visible = true;
             setTimeout(() => {
+                this.activeFrame = this.verticalFrame;
                 this.verticalFrame.visible = true;
                 this.changingFrame.visible = false
             }, 50);
@@ -30,11 +31,12 @@ export default class Hand {
     }
 
     moveToHorizontal() {
-        if (this.activeFrame !== this.horizontalFrame) {
-            this.activeFrame = this.horizontalFrame;
+        if (this.activeFrame === this.verticalFrame) {
+            this.activeFrame = this.changingFrame;
             this.verticalFrame.visible = false;
             this.changingFrame.visible = true;
             setTimeout(() => {
+                this.activeFrame = this.horizontalFrame;
                 this.horizontalFrame.visible = true;
                 this.changingFrame.visible = false
             }, 50);
