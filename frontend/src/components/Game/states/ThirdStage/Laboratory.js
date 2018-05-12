@@ -3,23 +3,16 @@ import { smartSetHeight } from '../../utils';
 
 export default class LaboratoryState extends Phaser.State {
     * gen() {
-        window.CAMERA = this.camera;
-        this.camera.x = 1128;
-        this.camera.y = 280;
-        this.game.add.tween(this.camera.scale).to({
-            x: 1,
-            y: 1,
-        }, 3000).start().onComplete.add(() => {
-            this.next();
-        });
-        // this.game.camera.flash(0x000000, 3000, true);
-        // yield;
-
         let dStand = this.game.add.image(1660, 240, 'd-stand');
         smartSetHeight(dStand, 830);
 
         let proninaWorks = this.game.add.image(1055, 260, 'pronina-works');
         smartSetHeight(proninaWorks, 305);
+
+        this.game.camera.flash(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
 
         this.game.displayDialogLine('Ви', 'Ольго Iгорiвно, можна здати лабораторну роботу?', () => this.next());
         yield;
@@ -79,10 +72,18 @@ export default class LaboratoryState extends Phaser.State {
         this.game.displayDialogLine('Верескун', 'На ньому студенти можуть показати свої здiбностi, гарно провести чаc та заробити додатковi бали.', () => this.next());
         yield;
 
+        dPass.loadTexture('d-impressed');
+
         this.game.displayDialogLine('Ви', 'Здрастуйте. Це гарна новина! Я обов`язково вiзьму участь у цьому заходi.', () => this.next());
         yield;
 
-        this.state.start('Dance');
+
+        this.game.camera.fade(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+
+        this.game.nextState();
     }
 
     init() {
@@ -106,6 +107,7 @@ export default class LaboratoryState extends Phaser.State {
         this.load.image('pronina-angry', './assets/images/3-2(programmer)/pronina-angry.png');
         this.load.image('d-stand', './assets/images/3-2(programmer)/d-backhand.png');
         this.load.image('d-pass', './assets/images/3-2(programmer)/d-pass.png');
+        this.load.image('d-impressed', './assets/images/3-2(programmer)/d-impressed.png');
         this.load.image('veres', './assets/images/3-2(programmer)/veres.png')
     }
 

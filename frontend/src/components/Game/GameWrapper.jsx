@@ -112,7 +112,7 @@ class GameWrapper extends Component {
                 >
                     {
                         dialogIsShown ?
-                            <div id="dialog-container">
+                            <div id="dialog-container" className="no-select">
                                 <div id="message-source">{messageSource}</div>
                                 <div id="message-text">{messageText.slice(0, charPosition)}</div>
                                 {

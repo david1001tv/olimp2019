@@ -12,11 +12,33 @@ let rightDoors;
 
 export default class LabyrinthState extends Phaser.State {
     * gen() {
+        this.game.camera.flash(0x000000, 1500);
+        setTimeout(() => this.next(), 1500);
+        yield;
 
+
+        this.game.displayDialogLine('Ви', 'За розкладом заняття мають проходити в аудиторії № 330. Але як туди потрапити?');
+        yield;
+
+        yield;
+
+        this.game.camera.fade(0x000000, 1500);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+
+        this.game.nextState();
     }
 
     init() {
+        this._gen = this.gen();
+
         this.game.phone.setEnabled(true);
+        this.game.phone.clearTodos();
+        this.game.phone.addTodo({
+            id: 'LABYRINTH',
+            text: 'Пройти до 330-ї аудиторії'
+        });
     }
 
     preload() {
@@ -30,7 +52,6 @@ export default class LabyrinthState extends Phaser.State {
     }
 
     create() {
-
         this.game.physics.startSystem(Phaser.Physics.P2JS);
         this.game.physics.p2.setImpactEvents(true);
         var wallCollisionGroup = this.game.physics.p2.createCollisionGroup();
@@ -108,6 +129,21 @@ export default class LabyrinthState extends Phaser.State {
         cursors.left.onUp.add(this.stopPlayerWalkAnimation);
         cursors.up.onUp.add(this.stopPlayerWalkAnimation);
         cursors.right.onUp.add(this.stopPlayerWalkAnimation);
+
+
+        this.game.input.onDown.add(e => {
+           console.log(e);
+
+           player.body.static = true;
+           player.x = e.position.x;
+           player.body.x = e.position.x;
+           player.y = e.position.y;
+           player.body.y = e.position.y;
+           player.body.static = false;
+           ;
+        });
+
+        this.next();
     }
 
     stopPlayerWalkAnimation() {
@@ -115,7 +151,7 @@ export default class LabyrinthState extends Phaser.State {
     }
 
     handleRightDoor() {
-        
+        this.next();
     }
 
     handleWrongDoor() {
@@ -182,10 +218,6 @@ export default class LabyrinthState extends Phaser.State {
             else
                 player.angle = 0;
         }
-    }
-
-    render() {
-        this.game.debug.body(this.wall);
     }
 
     next() {

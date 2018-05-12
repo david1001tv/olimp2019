@@ -4,6 +4,10 @@ import { smartSetHeight } from '../../utils';
 
 export default class CodeEditorState extends Phaser.State {
     * gen() {
+        this.game.camera.flash(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
         this.game.displayDialogLine('Ви', 'Час писати код програми', () => this.next());
         yield;
 
@@ -26,6 +30,13 @@ export default class CodeEditorState extends Phaser.State {
         this.visibleCode = this.addText('', 120, 210, 25, '#39FF00');
 
         fakeInput.domElement.element.addEventListener('keypress', () => this.fillCode(fakeInput, cursorInput, code, event));
+        yield;
+
+        this.game.camera.fade(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+        this.game.nextState();
     }
 
     init() {
@@ -96,7 +107,7 @@ export default class CodeEditorState extends Phaser.State {
             document.getElementById('game-container').onclick = null;
             let compiledText = this.addText("Compiled successfully", 120, 940, 30);
             this.game.phone.completeTodo('CODE_EDITOR');
-            setTimeout(() => this.state.start('Laboratory'), 2000);
+            this.next();
         }
     }
 

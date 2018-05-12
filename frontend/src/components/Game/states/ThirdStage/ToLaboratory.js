@@ -3,6 +3,11 @@ import { smartSetHeight } from '../../utils';
 
 export default class ToLaboratoryState extends Phaser.State {
     * gen() {
+        this.game.camera.flash(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+
         this.game.displayDialogLine('Ви', 'Ольго Iгорiвно, вибачаюсь за запізнення, я…', () => this.next());
         yield;
 

@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import {smartSetHeight} from '../utils';
 
 
-export default class IntroState extends Phaser.State {
+export default class MapState extends Phaser.State {
     init() {
         this.game.phone.setMapIsShown(true);
         this.game.phone.setMapIsCloseable(false);
