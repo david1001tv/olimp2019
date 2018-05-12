@@ -11,6 +11,7 @@ export default class BootState extends Phaser.State {
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.scale.parentIsWindow = true;
         this.game.phone.setMessages(getMessagesForState(this.nextState, Object.keys(this.game.state.states)));
+        this.stage.disableVisibilityChange = true;
     }
 
     preload() {
