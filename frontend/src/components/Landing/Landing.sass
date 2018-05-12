@@ -2,6 +2,13 @@
 *:focus
 	outline: none
 
+html
+	min-height: 100%
+	background-color: #fff
+
+body
+	height: 100%
+
 div, ul, li, span
 	padding: 0
 	margin: 0
@@ -12,8 +19,8 @@ body main>div
 	height: 100%
 
 .wrapper
+	height: 100%
 	font: 18px "Pangolin"
-	background-color: #fff
 	background-image: url(../../img/bg.jpg)
 	background-size: 100%
 	background-repeat: no-repeat
@@ -21,7 +28,6 @@ body main>div
 	background-attachment: fixed
 	display: flex
 	flex-direction: column
-	height: 100%
 	button
 		background-color: transparent
 		border: none
@@ -90,8 +96,8 @@ footer
 	width: auto
 	padding: 10px 70px
 
-	.md-dialog-content .login-form form div div .md-text-field-container label,
-	.md-dialog-content .login-form form div div .md-text-field-container input
+	.md-dialog-content form div div .md-text-field-container label,
+	.md-dialog-content form div div .md-text-field-container input
 		font-family: "Pangolin", Arial, serif
 		font-size: 1.1em
 	.title h3
@@ -131,6 +137,16 @@ footer
     background-image: url(../../img/buttons/button-google-released.png)
     &:active
       background-image: url(../../img/buttons/button-google-pressed.png)
+  &__google
+    width: 340px
+    background-image: url(../../img/buttons/button-google-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-google-pressed.png)
+  &__feedback
+    width: 325px
+    background-image: url(../../img/buttons/button-feedback-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-feedback-pressed.png)
 
 @media screen and (max-width: 630px)
 	.md-dialog
@@ -138,12 +154,8 @@ footer
 	.drawn-btn
 		height: 65px
 	.drawn-btn__log-in
-    width: 250px
-    background-image: url(../../img/buttons/button-enter-released.png)
-    &:active
-      background-image: url(../../img/buttons/button-enter-pressed.png)
+		width: 250px
 	.drawn-btn__google
-    width: 250px
-    background-image: url(../../img/buttons/button-google-released.png)
-    &:active
-      background-image: url(../../img/buttons/button-google-pressed.png)
+		width: 250px
+	.drawn-btn__feedback
+		width: 230px

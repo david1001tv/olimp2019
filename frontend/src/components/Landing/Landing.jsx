@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import autobind from 'autobind-decorator';
 
 import Login from './Login';
+import Feedback from './Feedback';
 import './Landing.sass';
 import {logOut} from '~api';
 
@@ -12,6 +13,7 @@ import {logOut} from '~api';
 class Landing extends Component {
     state = {
         formIsVisible: false,
+        feedbackIsVisible: false
     };
 
     @autobind
@@ -20,7 +22,7 @@ class Landing extends Component {
     }
 
     render() {
-        const {formIsVisible} = this.state;
+        const {formIsVisible, feedbackIsVisible} = this.state;
 
         return (
             <div>
@@ -45,7 +47,11 @@ class Landing extends Component {
                     <footer>
                         <div className="likes">Ця гра сподобалась XX користувачів.</div>
                         <div className="copyright">Команда ДВНЗ “ПДТУ”, 2018 ©</div>
-                        <button className="btn-feedback" id="btn-feedback">Зворотній зв'язок</button>
+                        <button className="btn-feedback"
+                                id="btn-feedback"
+                                onClick={() => this.setState({feedbackIsVisible: true})}>
+                                Зворотній зв'язок
+                        </button>
                     </footer>
                 </div>
                 <DialogContainer
@@ -53,8 +59,15 @@ class Landing extends Component {
                     visible={formIsVisible}
                     onHide={() => this.setState({formIsVisible: false})}
                 >
-                    <Login/>
-                </DialogContainer>;
+                    <Login />
+                </DialogContainer>
+                <DialogContainer
+                    focusOnMount={false}
+                    visible={feedbackIsVisible}
+                    onHide={() => this.setState({feedbackIsVisible: false})}
+                >
+                    <Feedback />
+                </DialogContainer>
             </div>
         )
             ;
