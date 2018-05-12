@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import { DialogContainer } from 'react-md';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Feedback from '../Landing/Feedback';
 
 import './Final.sass';
 
 class Final extends Component {
+    state = {
+        feedbackIsVisible: false
+    };
+
     render() {
+        const {feedbackIsVisible} = this.state;
         return (
             <div>
                 <div class="wrapper">
@@ -54,10 +61,21 @@ class Final extends Component {
                     <footer>
                         <div className="likes">Ця гра сподобалась 543 515 користувачів.</div>
                         <div className="copyright">Команда ДВНЗ “ПДТУ”, 2018 ©</div>
-                        <button className="btn-feedback" id="btn-feedback">Зворотній зв'язок</button>
+                        <button className="btn-feedback"
+                                id="btn-feedback"
+                                onClick={() => this.setState({feedbackIsVisible: true})}>
+                                Зворотній зв'язок
+                        </button>
                     </footer>
                 </div>
             </div>
+            <DialogContainer
+                    focusOnMount={false}
+                    visible={feedbackIsVisible}
+                    onHide={() => this.setState({feedbackIsVisible: false})}
+                >
+                <Feedback />
+            </DialogContainer>
         </div>
         );
     }
