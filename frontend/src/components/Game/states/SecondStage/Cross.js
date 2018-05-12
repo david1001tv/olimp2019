@@ -21,6 +21,14 @@ export default class CrossState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
+        this.game.phone.clearTodos();
+        this.game.phone.addTodo({
+            id: "CROSS",
+            text: "Розв\'язати кросворд"
+        });
+        this.game.phone.setEnabled(true);
+        this.game.phone.setTime('10:22');
+        this.game.phone.setDate('21.07.18');
         this.time = 7*60*1000;
         this.minPoints = 100;
         this.maxPoints = 200;
@@ -203,6 +211,7 @@ export default class CrossState extends Phaser.State {
                 let percent = this.time / (7 * 60 * 1000);
                 this.rate = Math.round(this.minPoints * percent + this.minPoints);
             }
+            this.game.phone.completeTodo("CROSS");
             this.game.nextState(this.rate);
         }
     }

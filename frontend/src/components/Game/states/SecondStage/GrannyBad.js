@@ -49,6 +49,8 @@ export default class GrannyBadState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
+        this.game.phone.setEnabled(false);
+        this.game.phone.clearTodos();
     }
 
     preload() {

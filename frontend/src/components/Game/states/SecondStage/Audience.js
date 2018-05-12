@@ -10,27 +10,39 @@ export default class AudienceState extends Phaser.State {
         кафедру!', () => this.next());
         yield;
         this.game.displayDialogLine('Федосова', 'Ми теж раді кожному студенту, який поступив до нас, та, \
-        тим паче вже запам\'ятав імена викладачів.', () => this.next());
+        тим паче, вже запам\'ятав імена викладачів.', () => this.next());
         yield;
         this.game.displayDialogLine('Ви', 'Дякую. Я вже намагаюсь бути кращим студентом.', () => this.next());
         this.setVisible(this.daveOne);
         this.setVisible(this.daveTwo);
         yield;
-        this.game.displayDialogLine('Федосова', 'Це добре. Давай зараз подивимось на твої бали.', () => this.next());
+        this.game.displayDialogLine('Федосова', 'Це добре. Такі цілеспрямовані та амбіціозні студенти нам і \
+        потрібні. Що ти можешь розповісти про себе? Ти вже стикався з программуванням?', () => this.next());
         this.setVisible(this.daveOne);
         this.setVisible(this.daveTwo);
+        yield;
+        this.game.displayDialogLine('Ви', 'Про себе.. Хм.. Я займаюсь спортом. Люблю читати. \
+        Я вважаю, що головне - це отримувати знання та знати, як застосовувати їх на практиці.', () => this.next());
+        yield;
+        this.game.displayDialogLine('Ви', 'Стосовно программування - я почав цікавитися цим рік тому. \
+        Щось намагався робити. Сподіваюсь, що мої знання не будуть зайвими.', () => this.next());
+        yield;
+        this.game.displayDialogLine('Федосова', 'Дуже гарно. В тебе є потенціал. Але важлива і інша річ. \
+        Давай зараз подивимось на твої бали.', () => this.next());
+        yield;
         this.setVisible(this.fedOne);
         this.setVisible(this.fedTwo);
+        this.game.displayDialogLine('Ви', 'Так, вони теж важливі. Добре, давайте подивимось.', () => this.next());
         yield;
-        this.game.displayDialogLine('Ви', 'Так, добре.', () => this.next());
-        yield;
-        this.game.nextState(this.score);
+        this.game.nextState();
     }
 
     init() {
         this._gen = this.gen();
+        this.game.phone.setEnabled(false);
         this.game.phone.clearTodos();
-        // this.game.phone.addTodos(todos);
+        this.game.phone.setTime('14:40');
+        this.game.phone.setDate('21.07.18');
     }
 
     preload() {

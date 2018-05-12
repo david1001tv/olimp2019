@@ -17,6 +17,7 @@ export default class TranslateState extends Phaser.State {
     this.game.displayDialogLine('Альошин', 'О, ти повернувся. Іди допоможи перекласти.', () => this.next());
     yield;
 
+    this.game.phone.setEnabled(false);
     //здесь анимация перехода с камерой
     this.camera.scale.setTo(1, 1);
     this.camera.x = 1128 * 5;
@@ -39,6 +40,8 @@ export default class TranslateState extends Phaser.State {
     //first question
     this.game.displayDialogLine('Альошин', 'Можеш дізнатися, чи приніс він усі документи?', () => this.next());
     yield;
+    this.game.phone.setEnabled(true);
+
     window.graphics = this.testAPI.addNote(780, 240, 500);
     this.testAPI.displayNote(0.5, 1);
 
@@ -329,8 +332,14 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.displayNote(0, 0);
     console.log("grade:" + this.grade);
 
+    this.game.phone.completeTodo("TRANSLATE");
     setTimeout(() => this.game.displayDialogLine('Індус', "I want to receive a  full – time education please. And yes I will need a dormitory \
     to live in.  I promise I will attend all the classes and work hard.  Thank you for your help.", () => this.next()), 100);
+    yield;
+
+    setTimeout(() => this.game.displayDialogLine('Альошин', "Дякую тобі за допомогу! Нам такі на КН знадобляться. \
+    До речі, можеш ближче ознайомитись за нашою кафедрою. Приходь о 14:00 у хол цього корпусу, Олена Євгенівна \
+    хотіла познайомити абітуриєнтів із викладачами.", () => this.next()), 100);
     yield;
 
     this.game.camera.fade(0x000000, 1500, true);
@@ -343,6 +352,13 @@ export default class TranslateState extends Phaser.State {
 init() {
     this._gen = this.gen();
     this.game.phone.clearTodos();
+    this.game.phone.addTodo({
+        id: "TRANSLATE",
+        text: "Допомогти з перекладом"
+    });
+    this.game.phone.setEnabled(false);
+    this.game.phone.setTime('11:00');
+    this.game.phone.setDate('21.07.18');
 }
 
 preload() {

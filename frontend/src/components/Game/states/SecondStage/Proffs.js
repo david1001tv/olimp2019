@@ -4,26 +4,40 @@ import {smartSetHeight} from '../../utils';
 
 export default class ProffsState extends Phaser.State {
     * gen() {
-        this.game.displayDialogLine('П\'ятикоп', 'Доброго дня! Мене звуть П\'ятикоп Олена Євгенівна. \
-Зараз я хочу познайомити Вас з викладачами нашої кафедри. Оберіть будь-кого з нашого стенду і я розповім вам \
-про нього', () => this.next());
+        this.game.displayDialogLine('П\'ятикоп', 'Ось тут знаходиться наша кафедра. Вона завжди відкрита для вас. \
+        А зараз я хочу познайомити вас з викладачами нашої кафедри. Оберіть будь-кого з нашого стенду і я розповім \
+        вам про нього.', () => this.next());
         yield;
 
+        this.game.phone.setEnabled(true);
         this.fivecopTalk.alpha = 0;
         this.fivecopQuite.alpha = 1;
         yield;
+
+        /*this.game.displayDialogLine('П\'ятикоп', 'Здається про всіх розповіла. Зовсім забула. Ірина Василівна \
+        хотіла з вами поспілкуватись. Наступні двері - то її кабінет. Прошу.', () => this.next());
+        yield;*/
         
+        this.endTalk();
         this.game.camera.fade(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
         yield;
 
-        //this.state.start('');
+        this.game.nextState();
     }
 
     init() {
         this._gen = this.gen();
         this.game.phone.clearTodos();
-        // this.game.phone.addTodos(todos);
+        this.game.phone.setEnabled(false);
+        this.game.phone.addTodo({
+            id: "PROFFS",
+            text: "Познайомитись зі всіми викладачами"
+        });
+        this.game.phone.setTime('14:10');
+        this.game.phone.setDate('21.07.18');
+
+        this.isNext = true;
     }
 
     preload() {
@@ -42,9 +56,9 @@ export default class ProffsState extends Phaser.State {
     }
 
     create() {
-        let bg = this.game.add.image(0, 0, 'bg');
-        bg.height = this.game.width * bg.height / bg.width;
-        bg.width = this.game.width;
+        this.bg = this.game.add.image(0, 0, 'bg');
+        this.bg.height = this.game.width * this.bg.height / this.bg.width;
+        this.bg.width = this.game.width;
 
         this.fivecopQuite = this.createSprite('fivecop-2', 1550, 250, 1500, false, false);
         this.fivecopTalk = this.createSprite('fivecop-1', 1550, 250, 1500, true, false);
@@ -93,20 +107,27 @@ export default class ProffsState extends Phaser.State {
         setTimeout(() => this.game.displayDialogLine('П\'ятикоп', obj.dialog, () => this.endTalk()), 150);
     }
 
-    endClick(){
-        this.game.nextState();
+    endClick(obj){
+        this.fivecopTalk.alpha = 1;
+        this.fivecopQuite.alpha = 0;
+        setTimeout(() => this.game.displayDialogLine('П\'ятикоп', obj.dialog, () => this.next()), 150);
     }
 
     endTalk(){
         this.fivecopTalk.alpha = 0;
         this.fivecopQuite.alpha = 1;
-        if(this.photos.every(e => e.isAcquainted)){
+        this.game.canvas.style.cursor = "default";
+        if(this.photos.every(e => e.isAcquainted) && this.isNext === true){
+            this.game.phone.completeTodo("PROFFS");
             let txt = this.game.add.text(220, 1000, 'Продовжити', {
                 font: "40px Pangolin",
             });
+            txt.dialog = 'Здається про всіх розповіла. Зовсім забула. Ірина Василівна \
+            хотіла з вами поспілкуватись. Наступні двері - то її кабінет. Прошу.';
             txt.inputEnabled = true;
             txt.input.useHandCursor = true;
             txt.events.onInputDown.add(this.endClick, this);
+            this.isNext = false;
         }
     }
 
