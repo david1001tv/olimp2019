@@ -104,3 +104,17 @@ export async function getHistory() {
 
     return response;
 }
+
+
+export async function sendFeedback(data) {
+    const response = await fetch(`${API_URL}/feedback`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    }).then(res => res.json());
+
+    return response;
+}

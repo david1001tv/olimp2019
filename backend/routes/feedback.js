@@ -11,7 +11,7 @@ const limiter = new RateLimit({
     max: 3, // за время windowMs клиент может послать 3 запроса
     delayMs: 0, // запросы обрабатываются без задержки
     message: JSON.stringify({
-        error: 'Ліміт повідомлень для вашої IP-адреси вичерпано, спробуйте пізніше'
+        errors: {generic: ['Ліміт повідомлень для вашої IP-адреси вичерпано, спробуйте пізніше']}
     })
 });
 /*
@@ -31,7 +31,7 @@ const validationConstraints = {
             message: 'e-mail не відповідає формату'
         }
     },
-    text: {
+    message: {
         presence: {
             allowEmpty: false,
             message: 'Текст відсутній'
@@ -58,11 +58,11 @@ router.post('/', feedbackValidator, async function (req, res) {
         from: `feedback@${config.mail.domain}`,
         to: config.mail.receiver,
         subject: 'Зворотній зв\'язок',
-        text: `${req.body.email} пише: ${req.body.text}`,
+        text: `${req.body.email} пише: ${req.body.message}`,
     }, function(err, reply) {
         if (err) {
             console.error(err);
-            res.status(500).send();
+            res.status(500).json({errors: {generic: ['Невідома помилка']}});
         } else {
             res.status(200).send();
         }

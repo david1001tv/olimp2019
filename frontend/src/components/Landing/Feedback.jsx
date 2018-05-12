@@ -4,7 +4,7 @@ import {Button, TextField, LinearProgress, Paper} from 'react-md';
 import validate from 'validate.js';
 import autobind from 'autobind-decorator';
 
-// import {logIn, isAuthenticated, googleLogIn} from '~api';
+import {sendFeedback} from '~api';
 
 class Feedback extends Component {
     static validationConstraints = {
@@ -17,38 +17,33 @@ class Feedback extends Component {
                 message: 'Не може бути порожнім',
             },
         },
-        // password: {
-        //     presence: {
-        //         allowEmpty: false,
-        //         message: 'Не може бути порожнім',
-        //     },
-        //     length: {
-        //         minimum: 6,
-        //         maximum: 30,
-        //         tooShort: "Занадто короткий",
-        //         tooLong: "Занадто довгий",
-        //     }
-        // },
+        message: {
+            presence: {
+                allowEmpty: false,
+                message: 'Не може бути порожнім',
+            },
+        },
     };
 
     state = {
         data: {
             email: '',
-            // password: '',
+            message: '',
         },
         errors: {
             email: [],
-            // password: [],
+            message: [],
             generic: [],
         },
         isLoading: false,
     };
 
-    handleSubmit = async (e) => {
+    @autobind
+    async handleSubmit(e) {
         const {errors, data} = this.state;
         e.preventDefault();
 
-        const validationResult = validate(data, Login.validationConstraints);
+        const validationResult = validate(data, Feedback.validationConstraints);
 
         if (validationResult !== undefined) {
             this.setState({errors: {...errors, ...validationResult}});
@@ -57,7 +52,7 @@ class Feedback extends Component {
 
         this.setState({isLoading: true});
         try {
-            let response = await logIn(data);
+            let response = await sendFeedback(this.state.data);
 
             if (response.errors) {
                 this.setState({ errors: { ...this.state.errors, ...response.errors } });
@@ -88,34 +83,10 @@ class Feedback extends Component {
         });
     };
 
-    // @autobind
-    // async handleGoogleResponseSuccess(res) {
-    //     this.setState({isLoading: true});
-    //     try {
-    //         let basicProfile = res.getBasicProfile();
-    //         let response = await googleLogIn({
-    //             idToken: res.tokenId,
-    //             userId: basicProfile.getId(),
-    //         });
-
-    //         if (response.errors) {
-    //             this.setState({ errors: { ...this.state.errors, ...response.errors } });
-    //         }
-    //     } catch (e) {
-    //         console.error(e);
-    //     } finally {
-    //         this.setState({isLoading: false});
-    //     }
-    // }
-
     render() {
         console.log('Feedback render');
-        // if (isAuthenticated()) {
-        //     return <Redirect from="/" to="/game" />
-        // }
 
-        // const {email, password} = this.state.data;
-        const {email} = this.state.data;
+        const {email, message} = this.state.data;
 
         return (
             <div className="feedback-form">
@@ -125,11 +96,8 @@ class Feedback extends Component {
                 <div className="md-text-center">
                 </div>
                 <form
-                    // onSubmit={this.handleSubmit}
+                    onSubmit={this.handleSubmit}
                 >
-                    <div className="md-text--error md-headline md-text-center">
-                        {this.state.errors.generic.map(e => <div>{e}</div>)}
-                    </div>
                     <div>
                         <div>
                             <TextField
@@ -146,13 +114,18 @@ class Feedback extends Component {
                         <div>
                             <TextField
                                 id="message"
-                                // value={password}
-                                // onChange={value => this.handleChange(value, 'password')}
+                                value={message}
+                                onChange={value => this.handleChange(value, 'message')}
                                 label="Повiдомлення"
                                 multiLine={true}
-                                rows={1}
+                                rows={2}
+                                error={!!this.state.errors.message.length}
+                                errorText={this.state.errors.message.map(e => <div>{e}</div>)}
                             />
                         </div>
+                    </div>
+                    <div className="md-text--error md-headline md-text-center">
+                        {this.state.errors.generic.map(e => <div>{e}</div>)}
                     </div>
                     <div className="md-text-center">
                         {this.state.isLoading ? <LinearProgress /> : null}
@@ -169,5 +142,4 @@ class Feedback extends Component {
     }
 }
 
-// export default withRouter(Login);
 export default Feedback;
