@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import autobind from 'autobind-decorator';
+import logoPstu from '~img/logo-pstu.png';
 
 import './Mail.sass';
 
@@ -78,7 +79,7 @@ class Mail extends Component {
                         <div class="theme">{activeMessage.theme}</div>
                         <div class="info">
                             <div class="logo">
-                                <img src="img/logo-pstu.png" alt="Відправник" />
+                                <img src={logoPstu} alt="Відправник" />
                             </div>
                             <div class="user-info">
                                 <div class="sender">Від: {activeMessage.sender}</div>
