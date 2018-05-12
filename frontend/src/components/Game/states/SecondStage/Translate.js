@@ -337,6 +337,11 @@ export default class TranslateState extends Phaser.State {
     to live in.  I promise I will attend all the classes and work hard.  Thank you for your help.", () => this.next()), 100);
     yield;
 
+    setTimeout(() => this.game.displayDialogLine('Альошин', "Дякую тобі за допомогу! Нам такі на КН знадобляться. \
+    До речі, можеш ближче ознайомитись за нашою кафедрою. Приходь о 14:00 у хол цього корпусу, Олена Євгенівна \
+    хотіла познайомити абітуриєнтів із викладачами.", () => this.next()), 100);
+    yield;
+
     this.game.camera.fade(0x000000, 1500, true);
     setTimeout(() => this.next(), 1500);
     yield;

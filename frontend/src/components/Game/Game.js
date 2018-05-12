@@ -18,6 +18,7 @@ import GrannyGoodState from './states/SecondStage/GrannyGood';
 import WaterAlyoshinState from './states/SecondStage/WaterAlyoshin';
 import WaterMarketState from './states/SecondStage/WaterMarket';
 import TranslateState from './states/SecondStage/Translate';
+import fivecopMeetState from './states/SecondStage/5copMeet';
 import ProffsState from './states/SecondStage/Proffs';
 import AudienceState from './states/SecondStage/Audience';
 import GradesState from './states/SecondStage/Grades';
@@ -58,6 +59,7 @@ class Game extends Phaser.Game {
         this.state.add('WaterAlyoshin', WaterAlyoshinState, false);
         this.state.add('WaterMarket', WaterMarketState, false);
         this.state.add('Translate', TranslateState, false);
+        this.state.add('fivecopMeet', fivecopMeetState, false);
         this.state.add('Proffs', ProffsState, false);
         this.state.add('Audience', AudienceState, false);
         this.state.add('Grades', GradesState, false);

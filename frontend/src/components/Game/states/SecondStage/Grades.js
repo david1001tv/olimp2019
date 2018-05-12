@@ -5,35 +5,79 @@ import { getHistory } from '~api';
 
 export default class GradesState extends Phaser.State {
     * gen() {
+        this.game.displayDialogLine('Федосова', 'Так, це бал твого атестату, ми його перевели уже до 200-бальної \
+        системи.', () => this.next());
+        yield;
         let att = this.history.find(e => e.state === 'Docs').score + this.history.find(e => e.state === 'Scanner').score;
         this.game.add.text(650, 340, att, {
             font: "30px Pangolin",
         });
+        yield;
+
+        this.game.displayDialogLine('Федосова', 'Наступне в нас ЗНО з української мови.', () => this.next());
+        yield;
         let ukr = this.history.find(e => e.state === 'Cross').score;
         this.game.add.text(770, 410, ukr, {
             font: "30px Pangolin",
         });
+        yield;
+
+        this.game.displayDialogLine('Федосова', 'Далі математика.', () => this.next());
+        yield;
         let math = this.history.find(e => e.state === 'WaterMarket').score;
         this.game.add.text(705, 480, math, {
             font: "30px Pangolin",
         });
+        yield;
+
+        this.game.displayDialogLine('Федосова', 'Остання англійська мова.', () => this.next());
+        yield;
         let eng = this.history.find(e => e.state === 'Translate').score;
         this.game.add.text(695, 550, eng, {
             font: "30px Pangolin",
         });
-        let rait = 0.1 * att + 0.4 * math + 0.25 * ukr + 0.25 * eng;
+        yield;
+
+        this.game.displayDialogLine('Федосова', 'Тепер ми можем побачити твій загальний рейтинг.', () => this.next());
+        yield;
+        let rait = (0.1 * att) + (0.4 * math) + (0.2 * ukr) + (0.3 * eng);
         this.game.add.text(570, 620, rait, {
             font: "30px Pangolin",
         });
-        this.game.displayDialogLine('Федосова', 'Зараз, поставлю печать.', () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Федосова', 'Начебто усе. Зараз, поставлю печать.', () => this.next());
         yield;
         this.firstTween.start(); 
+        this.game.phone.setEnabled(true);
+        yield;
+
+        this.game.phone.completeTodo("RAIT");
+        this.isNext = this.game.add.text(1700, 1000, "Далі", {
+            font: "50px Pangolin",
+        });
+        this.isNext.inputEnabled = true;
+        this.isNext.input.useHandCursor = true;
+        this.isNext.events.onInputDown.add(this.handleClick, this);
+        yield;
+
+        this.game.camera.fade(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+        this.game.nextState();
     }
 
     init() {
         this._gen = this.gen();
         this.game.phone.clearTodos();
-        // this.game.phone.addTodos(todos);
+        this.game.phone.setEnabled(false);
+        this.game.phone.addTodo({
+            id: "RAIT",
+            text: "Подивитись свої бали"
+        });
+        this.game.phone.setTime('15:00');
+        this.game.phone.setDate('21.07.18');
     }
 
     preload() {
@@ -48,8 +92,6 @@ export default class GradesState extends Phaser.State {
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
 
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTUyNTk0NTk3MiwiZXhwIjoxNTI2MTE4NzcyfQ.c6yQJ9narbKmcoH1wmwbHmktZE0QX4JPn6-ctaZJNQE";
-        localStorage.setItem('token', token);
         this.history = [];
         getHistory().then(history => {
             this.history = history.map(e => e);
@@ -113,5 +155,10 @@ export default class GradesState extends Phaser.State {
 
     next() {
         this._gen.next();
+    }
+
+    handleClick(){
+        setTimeout(() => this.game.displayDialogLine('Федосова', 'Ось і все. Можеш йти. Про зачислення \
+        тебе повідомлять.', () => this.next()), 150);
     }
 }
