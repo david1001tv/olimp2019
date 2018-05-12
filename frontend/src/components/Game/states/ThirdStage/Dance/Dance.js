@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import {smartSetHeight} from '../../utils';
+import {smartSetHeight} from '../../../utils';
+import Hand from './Hand';
 
 const ARROWS_BOTTOM = 950;
 const STATIC_ARROWS_TOP = 100;
@@ -24,44 +25,12 @@ let rotation = [
     90
 ];
 
-class Hand {
-    constructor(verticalFrame, changingFrame, horizontalFrame) {
-        this.activeFrame = verticalFrame;
-        this.verticalFrame = verticalFrame;
-        this.changingFrame = changingFrame;
-        this.horizontalFrame = horizontalFrame;
-
-        [...arguments].forEach(e => {
-            e.visible = false;
-        });
-
-        this.activeFrame.visible = true;
-    }
-
-    moveToVertical() {
-        if (this.activeFrame !== this.verticalFrame) {
-            this.activeFrame = this.verticalFrame;
-            this.horizontalFrame.visible = false;
-            this.changingFrame.visible = true;
-            setTimeout(() => {
-                this.verticalFrame.visible = true;
-                this.changingFrame.visible = false
-            }, 50);
-        }
-    }
-
-    moveToHorizontal() {
-        if (this.activeFrame !== this.horizontalFrame) {
-            this.activeFrame = this.horizontalFrame;
-            this.verticalFrame.visible = false;
-            this.changingFrame.visible = true;
-            setTimeout(() => {
-                this.horizontalFrame.visible = true;
-                this.changingFrame.visible = false
-            }, 50);
-        }
-    }
-}
+let tints = [
+    0xbb0000,
+    0x7BCF5F,
+    0xF2ED5E,
+    0x0000bb,
+];
 
 export default class Scanner extends Phaser.State {
     * gen() {
@@ -70,11 +39,32 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
+        this.game.displayDialogLine('Волошин В. С.', 'Тут якийсь крутий текст', () => this.next());
+        yield;
 
-        this.game.input.enabled = true;
+        this.game.add.tween(this.rector).to({alpha: 0}, 1500).start().onComplete.add(() => this.next());
+        yield;
+
+        let fullDavid = this.createDavid();
+        this.game.add.tween(fullDavid).to({alpha: 1}, 1500).start().onComplete.add(() => this.next());
+        yield;
+
+        // 3.. 2.. 1...
+        this.startCountdown();
+        setTimeout(() => this.next(), 4000);
+        this.legs.animations.play('dance', 3, true);
+        yield;
+
+        this.createCursors();
+        this.sendArrow();
+        yield;
+
+        this.game.camera.fade(0x000000, 2500, true);
+        setTimeout(() => this.next(), 2500);
         yield;
 
 
+        this.cleanUpCursors();
         this.game.nextState();
     }
 
@@ -95,6 +85,7 @@ export default class Scanner extends Phaser.State {
     preload() {
         this.load.image('bg', './assets/images/3-4(final)/bg-3-4.png');
         this.load.image('scorebar', './assets/images/3-4(final)/scorebar.png');
+        this.load.image('scorebar-container', './assets/images/3-4(final)/scorebar-container.png');
         this.load.image('rector', './assets/images/3-4(final)/rector.png');
         this.load.image('d-head', './assets/images/3-4(final)/d-head.png');
         this.load.image('d-body', './assets/images/3-4(final)/d-body.png');
@@ -109,57 +100,35 @@ export default class Scanner extends Phaser.State {
         this.load.image('arrow-button-pressed', './assets/images/3-4(final)/arrow-button-pressed.png');
         this.load.image('arrow-button-released', './assets/images/3-4(final)/arrow-button-released.png');
         this.game.load.atlasJSONHash('d-legs', './assets/images/3-4(final)/legs.png', './assets/images/3-4(final)/legs.json');
-        this.game.load.atlasJSONHash('d-righthand', './assets/images/3-4(final)/hand-sprites.png', './assets/images/3-4(final)/hand-sprites.json');
     }
 
-    create() {
-        let bg = this.game.add.image(0, 0, 'bg');
+    startCountdown() {
+        let count = 3;
+        let countdownText = this.game.add.text(this.world.centerX, this.world.centerY, count.toString(), {
+            font: 'Neucha',
+            fontSize: 270,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 10,
+        });
+        let callback = () => {
+            count--;
+            if (count === 0) {
+                countdownText.setText('Go!');
+                setTimeout(() => countdownText.destroy(), 1000);
+            }
+            else {
+                countdownText.setText(count.toString());
+                setTimeout(callback, 1000)
+            }
+        };
 
-        this.game.add.image(823, 933, 'd-shadow');
-        let legs = this.game.add.sprite(807, 700, 'd-legs', 'd-legs-up');
+        setTimeout(callback, 1000)
+        countdownText.anchor.setTo(0.5, 0.5);
+    }
 
-        this.game.add.image(871, 488, 'd-body');
-        this.game.add.image(900, 367, 'd-head');
-
-        this.scoreBar = this.game.add.sprite(1673, 65, 'scorebar');
-        this.scoreRect = new Phaser.Rectangle(1673, 65 + this.score, 100, this.score);
-        // this.scoreBar.crop(this.scoreRect);
-
-
-        legs.animations.add('dance');
-        legs.animations.play('dance', 3, true);
-
-
-        this.staticArrows = [];
-        this.activeArrows = [[], [], [], []];
-
-        for (let i = 0; i < 4; i++) {
-            let staticArrow = this.game.add.image(ARROWS_LEFT + i * (ARROW_SIZE + ARROWS_SIDE_PADDING), STATIC_ARROWS_TOP, 'arrow-button-released');
-            staticArrow.anchor.setTo(0.5, 0.5);
-            staticArrow.angle = rotation[i];
-            this.staticArrows.push(staticArrow);
-        }
-
-        // let rector = this.game.add.image(830, 155, 'rector');
-        // smartSetHeight(rector, 830);
-
-
+    createCursors() {
         this.cursors = this.game.input.keyboard.createCursorKeys();
-
-        this.sendArrow();
-
-
-        this.rightHand = new Hand(
-            this.game.add.image(915, 516, 'd-righthand-down'),
-            this.game.add.image(966, 464, 'd-righthand-changing'),
-            this.game.add.image(1013, 411, 'd-righthand-right'),
-        );
-
-        this.leftHand = new Hand(
-            this.game.add.image(802, 381, 'd-lefthand-top'),
-            this.game.add.image(800, 393, 'd-lefthand-changing'),
-            this.game.add.image(829, 426, 'd-lefthand-left'),
-        );
 
         this.cursors.left.onDown.add(e => this.handleKeyDown(LEFT_ARROW));
         this.cursors.up.onDown.add(e => this.handleKeyDown(UP_ARROW));
@@ -170,12 +139,82 @@ export default class Scanner extends Phaser.State {
         this.cursors.up.onUp.add(e => this.handleKeyUp(UP_ARROW));
         this.cursors.down.onUp.add(e => this.handleKeyUp(DOWN_ARROW));
         this.cursors.right.onUp.add(e => this.handleKeyUp(RIGHT_ARROW));
+    }
+
+    cleanUpCursors() {
+        this.cursors.left.onDown.removeAll();
+        this.cursors.up.onDown.removeAll();
+        this.cursors.down.onDown.removeAll();
+        this.cursors.right.onDown.removeAll();
+
+        this.cursors.left.onUp.removeAll();
+        this.cursors.up.onUp.removeAll();
+        this.cursors.down.onUp.removeAll();
+        this.cursors.right.onUp.removeAll();
+
+    }
+
+    createDavid() {
+        this.game.add.image(823, 933, 'd-shadow');
+        this.legs = this.game.add.sprite(807, 700, 'd-legs', 'd-legs-up');
+
+        let body = this.game.add.image(871, 488, 'd-body');
+        let head = this.game.add.image(900, 367, 'd-head');
+
+        this.game.add.image(1612, 14, 'scorebar-container');
+        this.scoreBar = this.game.add.image(1673, 65, 'scorebar');
+        let scoreHeight = this.score / 100 * this.scoreBar.height;
+        this.scoreRect = new Phaser.Rectangle(0, 0, 100, scoreHeight);
+        this.scoreBar.crop(this.scoreRect);
+        this.updateScore(0);
+
+        this.legs.animations.add('dance');
+
+
+        this.staticArrows = [];
+        this.activeArrows = [[], [], [], []];
+
+        for (let i = 0; i < 4; i++) {
+            let staticArrow = this.game.add.image(ARROWS_LEFT + i * (ARROW_SIZE + ARROWS_SIDE_PADDING), STATIC_ARROWS_TOP, 'arrow-button-released');
+            staticArrow.anchor.setTo(0.5, 0.5);
+            staticArrow.angle = rotation[i];
+            staticArrow.tint = tints[i];
+            this.staticArrows.push(staticArrow);
+        }
+
+
+        this.rightHand = new Hand(
+            this.game.add.image(915, 516, 'd-righthand-down'),
+            this.game.add.image(966, 464, 'd-righthand-changing'),
+            this.game.add.image(1013, 411, 'd-righthand-right'),
+            this.game
+        );
+
+        this.leftHand = new Hand(
+            this.game.add.image(802, 381, 'd-lefthand-top'),
+            this.game.add.image(800, 393, 'd-lefthand-changing'),
+            this.game.add.image(829, 426, 'd-lefthand-left'),
+            this.game
+        );
 
         this.staticArrows.forEach((e, index) => {
             e.inputEnabled = true;
             e.events.onInputDown.add(() => this.handleKeyDown(index));
             e.events.onInputUp.add(() => this.handleKeyUp(index));
         });
+
+        let fullDavid = this.game.add.group();
+        fullDavid.addMultiple([this.legs, body, head]);
+        fullDavid.addMultiple(this.rightHand.group);
+        fullDavid.addMultiple(this.leftHand.group);
+        fullDavid.alpha = 0;
+        return fullDavid;
+    }
+
+    create() {
+        this.game.add.image(0, 0, 'bg');
+        this.rector = this.game.add.image(830, 155, 'rector');
+        smartSetHeight(this.rector, 830);
 
         this.next();
     }
@@ -229,7 +268,7 @@ export default class Scanner extends Phaser.State {
         arrow.anchor.setTo(0.5, 0.5);
         arrow.angle = rotation[index];
         arrow.index = index;
-
+        arrow.tint = tints[index];
 
         this.activeArrows[index].push(arrow);
 
@@ -243,7 +282,6 @@ export default class Scanner extends Phaser.State {
             .start()
             .onComplete
             .add((e) => {
-                console.log('score', this.score);
                 this.activeArrows[e.index].splice(this.activeArrows[e.index].indexOf(e), 1);
                 this.updateScore(-1);
                 e.destroy();
@@ -252,19 +290,29 @@ export default class Scanner extends Phaser.State {
     }
 
     updateScore(diff) {
-        this.score += diff;
+        if (this.score >= 100)
+            this.next();
 
-        let color;
-        let greenColor = Math.floor(this.score / 100 * 255);
-        let redColor = 255 - greenColor;
-        color = redColor << 8;
-        color = color | greenColor;
-        color = color << 8;
-        this.scoreBar.tint = color;
+        if ((this.score > 0 || diff > 0) && this.score < 100) {
+            this.score += diff;
 
-        this.scoreRect.y = 65 + 100 - this.score;
-        this.scoreRect.height = this.score;
-        // this.scoreBar.crop(this.scoreRect);
+            let color;
+            let greenColor = Math.floor(this.score / 100 * 255);
+            let redColor = 255 - greenColor;
+            color = redColor << 8;
+            color = color | greenColor;
+            color = color << 8;
+            this.scoreBar.tint = color;
+
+            let scoreHeight = this.score / 100 * 950;
+
+            this.scoreBar.y = this.game.height - 65 - scoreHeight;
+            this.scoreRect.height = scoreHeight;
+            this.scoreRect.x = 0;
+
+            this.scoreBar.updateCrop();
+
+        }
     }
 
     next() {

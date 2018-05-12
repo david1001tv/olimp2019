@@ -182,7 +182,7 @@ class Map extends Component {
                     type={CHECKPOINT}
                     state="Dance"
                     onClick={this.handleClick}
-                    popoverText="???????"
+                    popoverText="Виступ"
                 />
             </div>
         );
