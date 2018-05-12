@@ -12,7 +12,7 @@ export default class GradesState extends Phaser.State {
         this.game.add.text(650, 340, att, {
             font: "30px Pangolin",
         });
-        yield;
+        //yield;
 
         this.game.displayDialogLine('Федосова', 'Наступне в нас ЗНО з української мови.', () => this.next());
         yield;
@@ -20,7 +20,7 @@ export default class GradesState extends Phaser.State {
         this.game.add.text(770, 410, ukr, {
             font: "30px Pangolin",
         });
-        yield;
+       // yield;
 
         this.game.displayDialogLine('Федосова', 'Далі математика.', () => this.next());
         yield;
@@ -28,7 +28,7 @@ export default class GradesState extends Phaser.State {
         this.game.add.text(705, 480, math, {
             font: "30px Pangolin",
         });
-        yield;
+        //yield;
 
         this.game.displayDialogLine('Федосова', 'Остання англійська мова.', () => this.next());
         yield;
@@ -36,7 +36,7 @@ export default class GradesState extends Phaser.State {
         this.game.add.text(695, 550, eng, {
             font: "30px Pangolin",
         });
-        yield;
+        //yield;
 
         this.game.displayDialogLine('Федосова', 'Тепер ми можем побачити твій загальний рейтинг.', () => this.next());
         yield;
@@ -44,15 +44,14 @@ export default class GradesState extends Phaser.State {
         this.game.add.text(570, 620, rait, {
             font: "30px Pangolin",
         });
-        yield;
+        //yield;
 
         this.game.displayDialogLine('Федосова', 'Начебто усе. Зараз, поставлю печать.', () => this.next());
         yield;
         this.firstTween.start(); 
         this.game.phone.setEnabled(true);
-        yield;
-
         this.game.phone.completeTodo("RAIT");
+
         this.isNext = this.game.add.text(1700, 1000, "Далі", {
             font: "50px Pangolin",
         });

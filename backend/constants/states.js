@@ -1,7 +1,9 @@
 module.exports = [
     'Intro',
     'Docs',
+    'docsToScan',
     'Scanner',
+    'scanToBrowser',
     'Browser',
     'GrannyBad',
     'Cross',
@@ -9,5 +11,13 @@ module.exports = [
     'WaterAlyoshin',
     'WaterMarket',
     'Translate',
+    'fivecopMeet',
     'Proffs',
+    'Audience',
+    'Grades',
+    'Labyrinth',
+    'ToLaboratory',
+    'CodeEditor',
+    'Laboratory',
+    'Dance',
 ];
