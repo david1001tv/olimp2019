@@ -95,7 +95,6 @@ footer
 .md-dialog
 	width: auto
 	padding: 10px 70px
-
 	.md-dialog-content form div div .md-text-field-container label,
 	.md-dialog-content form div div .md-text-field-container input
 		font-family: "Pangolin", Arial, serif
@@ -153,9 +152,24 @@ footer
 		padding: 20px
 	.drawn-btn
 		height: 65px
-	.drawn-btn__log-in
-		width: 250px
+	.drawn-btn__log-in,
 	.drawn-btn__google
 		width: 250px
 	.drawn-btn__feedback
 		width: 230px
+
+@media screen and (max-width: 400px)
+	.wrapper
+		font-size: 14px
+	.md-dialog
+		padding: 10px
+	.md-dialog-content
+		padding: 20px
+	.drawn-btn
+		margin: 5px auto
+		height: 51px
+	.drawn-btn__log-in,
+	.drawn-btn__google
+		width: 200px
+	.drawn-btn__feedback
+		width: 189px

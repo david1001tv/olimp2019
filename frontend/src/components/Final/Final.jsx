@@ -15,15 +15,15 @@ class Final extends Component {
         const {feedbackIsVisible} = this.state;
         return (
             <div>
-                <div class="wrapper">
-                <div class="final-container">
+                <div className="wrapper">
+                <div className="final-container">
                     <div className="content">
                         <header>
                             <div className="page-title">Вітаємо!</div>
                         </header>
                         <div className="page-subtitle">Ви пройшли квест</div>
                         <div className="game-info">Тепер можете подивитись титри від розробників, таблицю лідерів та коментарі. Не забудьте поставити вподобайку!</div>
-                        <iframe src="https://www.youtube.com/embed/DjPRHFw4Go4?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/DjPRHFw4Go4?rel=0" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
                         <div className="soc">
                             <div className="like"></div>
                             <div className="share">
@@ -35,22 +35,24 @@ class Final extends Component {
                         </div>
                         <div className="leaderboard">
                             <div className="block-title">Таблиця лідерів</div>
-                            <table cellspacing="0" id="leaderboard">
-                                <tr>
-                                    <th>Ім’я</th>
-                                    <th>Очки</th>
-                                    <th>Час</th>
-                                </tr>
-                                <tr>
-                                    <td>Вася</td>
-                                    <td>8000</td>
-                                    <td>1:30:43</td>
-                                </tr>
-                                <tr>
-                                    <td>Альошин</td>
-                                    <td>999999</td>
-                                    <td>00:43</td>
-                                </tr>
+                            <table cellSpacing="0" id="leaderboard">
+                                <tbody>
+                                    <tr>
+                                        <th>Ім’я</th>
+                                        <th>Очки</th>
+                                        <th>Час</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Вася</td>
+                                        <td>8000</td>
+                                        <td>1:30:43</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Альошин</td>
+                                        <td>999999</td>
+                                        <td>00:43</td>
+                                    </tr>
+                                </tbody>
                             </table>
                             <button className="export">Експортувати в Excel</button>
                         </div>
