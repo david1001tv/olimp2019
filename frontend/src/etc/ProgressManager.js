@@ -19,6 +19,7 @@ const states = [
     'Proffs',
     'Audience',
     'Grades',
+    'thirdIntro',
     'Labyrinth',
     'CodeEditor',
     'Dance',
@@ -35,8 +36,8 @@ const stages = [
         end: 'Proffs',
     },
     {
-        start: '???',
-        end: '???',
+        start: 'thirdIntro',
+        end: 'Final',
     }
 ];
 
@@ -53,7 +54,6 @@ class ProgressManager {
         this._checkpoints = states.map(key => ({key: key, status: 'unavailable'}));
         // this._checkpoints = states.map(key => ({key: key, status: 'available'})); // DEBUG
         this._checkpoints[0].status = 'available';
-        this._checkpoints[3].status = 'available'; // DEBUG
 
         PubSub.subscribe('auth', this.sendQueue);
     }

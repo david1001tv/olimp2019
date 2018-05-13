@@ -37,10 +37,10 @@ class Mail extends Component {
                         <div className="title">Вхідні</div>
                     </div>
                     <div className="messages" id="messages">
-                        <ul>
+                        <div>
                             {
                                 messages.map(message => (
-                                    <li
+                                    <div
                                         className={`message ${message.isRead ? '' : 'unread'}`}
                                         onClick={() => this.handleMessageClick(message)}
                                     >
@@ -56,10 +56,10 @@ class Mail extends Component {
                                             {message.preview.slice(0, 100) + '...'}
                                         </div>
                                         <div className="date">{message.date}</div>
-                                    </li>
+                                    </div>
                                 ))
                             }
-                        </ul>
+                        </div>
                     </div>
                 </div>
             );

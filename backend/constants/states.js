@@ -5,6 +5,7 @@ module.exports = [
     'Scanner',
     'scanToBrowser',
     'Browser',
+    'TransitionToSecondStage',
     'GrannyBad',
     'Cross',
     'GrannyGood',

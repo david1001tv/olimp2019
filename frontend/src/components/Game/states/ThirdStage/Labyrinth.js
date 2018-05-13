@@ -133,17 +133,16 @@ export default class LabyrinthState extends Phaser.State {
         cursors.right.onUp.add(this.stopPlayerWalkAnimation);
 
 
-        this.game.input.onDown.add(e => {
-           console.log(e);
-
-           player.body.static = true;
-           player.x = e.position.x;
-           player.body.x = e.position.x;
-           player.y = e.position.y;
-           player.body.y = e.position.y;
-           player.body.static = false;
-           ;
-        });
+        // // Телепортация для дебага
+        // this.game.input.onDown.add(e => {
+        //    player.body.static = true;
+        //    player.x = e.position.x;
+        //    player.body.x = e.position.x;
+        //    player.y = e.position.y;
+        //    player.body.y = e.position.y;
+        //    player.body.static = false;
+        //    ;
+        // });
 
         this.next();
     }
@@ -220,6 +219,10 @@ export default class LabyrinthState extends Phaser.State {
             else
                 player.angle = 0;
         }
+    }
+
+    shutdown() {
+        this.game.stage.backgroundColor = '#000000';
     }
 
     next() {
