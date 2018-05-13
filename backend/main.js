@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.set('secret', config.secret);
+app.enable('trust proxy');
 
 /**
  * API routes.
