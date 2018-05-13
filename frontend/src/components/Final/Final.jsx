@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import autobind from 'autobind-decorator';
 import ReactDisqusComments from 'react-disqus-comments';
 import {getLike, toggleLike, getLikeCount} from '~api';
+import Leaderboard from './Leaderboard';
 
 
 import Feedback from '../Landing/Feedback';
@@ -84,26 +85,8 @@ class Final extends Component {
                             </div>
                             <div className="leaderboard">
                                 <div className="block-title">Таблиця лідерів</div>
-                                <table cellSpacing="0" id="leaderboard">
-                                    <tbody>
-                                    <tr>
-                                        <th>Ім’я</th>
-                                        <th>Очки</th>
-                                        <th>Час</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Вася</td>
-                                        <td>8000</td>
-                                        <td>1:30:43</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Альошин</td>
-                                        <td>999999</td>
-                                        <td>00:43</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <button className="export">Експортувати в Excel</button>
+                                <Leaderboard />
+                                <a href="/api/report/excel" target="_blank" className="export">Завантажити повний звіт в Excel</a>
                             </div>
                             <div className="comments">
                                 <div className="block-title">Коментарі</div>

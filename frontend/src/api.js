@@ -33,7 +33,7 @@ export async function logIn(credentials) {
     }).then(res => res.json());
 
     if (response.token) {
-        authSuccess(response.token)
+        authSuccess(response.token);
     }
 
     return response;
@@ -49,7 +49,7 @@ export async function register(data) {
     }).then(res => res.json());
 
     if (response.token) {
-        authSuccess(response.token)
+        authSuccess(response.token);
     }
 
     return response;
@@ -65,7 +65,7 @@ export async function googleRegister(data) {
     }).then(res => res.json());
 
     if (response.token) {
-        authSuccess(response.token)
+        authSuccess(response.token);
     }
 
     return response;
@@ -81,7 +81,7 @@ export async function googleLogIn(credentials) {
     }).then(res => res.json());
 
     if (response.token) {
-        authSuccess(response.token)
+        authSuccess(response.token);
     }
 
     return response;
@@ -150,6 +150,18 @@ export async function getLikeCount() {
 export async function toggleLike() {
     const response = await fetch(`${API_URL}/like`, {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    }).then(res => res.json());
+
+    return response;
+}
+
+export async function getReport() {
+    const response = await fetch(`${API_URL}/report/json`, {
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'x-access-token': token,
