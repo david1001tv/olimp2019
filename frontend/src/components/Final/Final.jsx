@@ -3,7 +3,7 @@ import {DialogContainer} from 'react-md';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import autobind from 'autobind-decorator';
-import {getLike, toggleLike} from '~api';
+import {getLike, toggleLike, getLikeCount} from '~api';
 
 
 import Feedback from '../Landing/Feedback';
@@ -15,12 +15,15 @@ class Final extends Component {
     state = {
         feedbackIsVisible: false,
         liked: true,
+        likeCount: 6
     };
 
     
     componentDidMount() {
         getLike()
             .then(res => this.setState({liked: res.userLiked}));
+        getLikeCount()
+            .then(res => this.setState({likeCount: res.count}));
     }
 
 
@@ -31,7 +34,7 @@ class Final extends Component {
     }
     
     render() {
-        const {feedbackIsVisible, liked} = this.state;
+        const {feedbackIsVisible, liked, likeCount} = this.state;
         return (
             <div>
                 <div className="wrapper">
@@ -107,7 +110,7 @@ class Final extends Component {
                             </div>
                         </div>
                         <footer>
-                            <div className="likes">Ця гра сподобалась 543 515 користувачів.</div>
+                            <div className="likes">Ця гра сподобалась {likeCount} користувачів.</div>
                             <div className="copyright">Команда ДВНЗ “ПДТУ”, 2018 ©</div>
                             <button className="btn-feedback"
                                     id="btn-feedback"
