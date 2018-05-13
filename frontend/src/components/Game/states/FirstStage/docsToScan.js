@@ -8,7 +8,7 @@ export default class docsToScanState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.displayDialogLine('Ви', 'Так, треба буде відсканувати документи. Де цей МФУ?', () => this.next());
+        this.game.displayDialogLine('Ви', 'Щоб відсканувати документи мені потрібен МФУ.', () => this.next());
         yield;
 
         this.game.phone.setEnabled(true);
