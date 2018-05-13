@@ -1,6 +1,11 @@
 let token = localStorage.getItem('token');
 // let token = '';
-const API_URL = `${window.location.protocol}//${window.location.hostname}:8090/api`;
+let API_URL;
+if (window.location.port)
+    API_URL = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/api`;
+else
+    API_URL = `${window.location.protocol}//${window.location.hostname}/api`;
+
 import PubSub from 'pubsub-js';
 
 export function isAuthenticated() {
