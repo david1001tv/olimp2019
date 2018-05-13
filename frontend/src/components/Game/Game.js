@@ -99,6 +99,9 @@ class Game extends Phaser.Game {
         this.phone.setMapIsShown(false);
         this.phone.setMapIsCloseable(true);
 
+        let time = new Date() - this.startTime;
+        progressManager.saveHistoryEntry(this.state.current, time);
+
         this.startTime = new Date();
         this.state.start('Boot', true, false, stateKey);
     }
