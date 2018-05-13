@@ -3,6 +3,7 @@ import {DialogContainer} from 'react-md';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import autobind from 'autobind-decorator';
+import ReactDisqusComments from 'react-disqus-comments';
 import {getLike, toggleLike, getLikeCount} from '~api';
 
 
@@ -55,7 +56,6 @@ class Final extends Component {
                                     onClick={this.handleLikeClick}
                                 ></div>
                                 <div className="share">
-                                    <div className="facebook"></div>
                                     <a
                                         className="facebook"
                                         href="https://www.facebook.com/sharer/sharer.php?u=https%3A//olymp.fruch.pw/"
@@ -107,6 +107,11 @@ class Final extends Component {
                             </div>
                             <div className="comments">
                                 <div className="block-title">Коментарі</div>
+                                <ReactDisqusComments
+                                    shortname="kvest-abituriient"
+                                    identifier="something-unique-12345"
+                                    url="https://www.olymp.fruch.pw/final"
+                                />
                             </div>
                         </div>
                         <footer>
