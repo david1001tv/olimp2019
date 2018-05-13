@@ -222,6 +222,10 @@ export default class LabyrinthState extends Phaser.State {
         }
     }
 
+    shutdown() {
+        this.game.stage.backgroundColor = '#000000';
+    }
+
     next() {
         this._gen.next();
     }

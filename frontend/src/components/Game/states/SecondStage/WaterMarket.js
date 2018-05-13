@@ -104,7 +104,7 @@ export default class WaterState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Дякую! До побачення.', () => this.next());
         yield;
 
-        this.game.nextState();
+        this.game.nextState(this.grade);
     }
 
     init() {

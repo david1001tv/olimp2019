@@ -22,5 +22,4 @@ module.exports = [
     'CodeEditor',
     'Laboratory',
     'Dance',
-    'Final',
 ];

@@ -402,6 +402,10 @@ create() {
     this.next();
 }
 
+    shutdown() {
+        this.game.camera.scale.setTo(1, 1);
+    }
+
 next() {
     this._gen.next();
 }
