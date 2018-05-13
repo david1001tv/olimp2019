@@ -115,7 +115,7 @@ class Final extends Component {
                             </div>
                         </div>
                         <footer>
-                            <div className="likes">Ця гра сподобалась {likeCount} користувачів.</div>
+                            <div className="likes">Ця гра сподобалась {likeCount} користувачам.</div>
                             <div className="copyright">Команда ДВНЗ “ПДТУ”, 2018 ©</div>
                             <button className="btn-feedback"
                                     id="btn-feedback"
