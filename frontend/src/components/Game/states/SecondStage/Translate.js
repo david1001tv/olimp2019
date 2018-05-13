@@ -51,7 +51,7 @@ export default class TranslateState extends Phaser.State {
     firstAnswer.coord_y = 300;
     firstAnswer.check = false;
 
-    let secondAnswer = this.testAPI.addText("б) Are you brought all the necessary\n documents?", 935, 370, 24);
+    let secondAnswer = this.testAPI.addText("б) Did you bring all the necessary\n documents?", 935, 370, 24);
     secondAnswer.isRight = true;
 
     let thirdAnswer = this.testAPI.addText("в) Did you take all your relatives with you?", 935, 440, 24);
@@ -75,8 +75,8 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.deleteText(null, answers);
     this.testAPI.displayNote(0, 0);
 
-    setTimeout(() => this.game.displayDialogLine('Індус', "I took all the documents that are required and want to ask a few questions about PSTU. \
-    I came at the faculty of IT what can you tell me about it’s stuff?", () => this.next()), 100);
+    setTimeout(() => this.game.displayDialogLine('Індієць', "I took all the documents that are required and want to ask a few questions about PSTU. \
+    I came at the faculty of IT what can you tell me about it’s staff?", () => this.next()), 100);
     yield;
 
     //second question
@@ -117,7 +117,7 @@ export default class TranslateState extends Phaser.State {
     yield;
 
     this.testAPI.displayNote(0.5, 1);
-    let text = this.testAPI.addText("In our staff there are well – known professors,\n lecturers and ____ teachers you’ll meet\n them really soon.", 900, 300, 24);
+    let text = this.testAPI.addText("In our staff there are well – known professors,\n lecturers and ____ teachers you’ll meet\n them soon.", 900, 300, 24);
     firstAnswer = this.testAPI.addText("а) Expirienced", 935, 405, 24);
     firstAnswer.isRight = true;
 
@@ -154,23 +154,23 @@ export default class TranslateState extends Phaser.State {
     yield;
 
     this.testAPI.displayNote(0.5, 1);
-    text = this.testAPI.addText("All 4 years of study ____  into terms each of\n them last 16 weeks.", 900, 300, 24);
-    firstAnswer = this.testAPI.addText("а) Divide", 935, 370, 24);
+    text = this.testAPI.addText("All 4 years of study are ____  into terms each of\n them last 16 weeks.", 900, 300, 24);
+    firstAnswer = this.testAPI.addText("а) Divided", 935, 370, 24);
     firstAnswer.isRight = true;
 
-    secondAnswer = this.testAPI.addText("б) Consider", 935, 405, 24);
+    secondAnswer = this.testAPI.addText("б) Considered", 935, 405, 24);
     secondAnswer.isRight = false;
     secondAnswer.coord_x = 890;
     secondAnswer.coord_y = 405;
     secondAnswer.check = false;
 
-    thirdAnswer = this.testAPI.addText("в) Touch", 935, 440, 24);
+    thirdAnswer = this.testAPI.addText("в) Touched", 935, 440, 24);
     thirdAnswer.isRight = false;
     thirdAnswer.coord_x = 890;
     thirdAnswer.coord_y = 440;
     firstAnswer.check = false;
 
-    fourthAnswer = this.testAPI.addText("г) Compare", 935, 475, 24);
+    fourthAnswer = this.testAPI.addText("г) Compared", 935, 475, 24);
     fourthAnswer.isRight = false;
     fourthAnswer.coord_x = 890;
     fourthAnswer.coord_y = 475;
@@ -333,7 +333,7 @@ export default class TranslateState extends Phaser.State {
     console.log("grade:" + this.grade);
 
     this.game.phone.completeTodo("TRANSLATE");
-    setTimeout(() => this.game.displayDialogLine('Індус', "I want to receive a  full – time education please. And yes I will need a dormitory \
+    setTimeout(() => this.game.displayDialogLine('Індієць', "I want to receive a  full – time education please. And yes I will need a dormitory \
     to live in.  I promise I will attend all the classes and work hard.  Thank you for your help.", () => this.next()), 100);
     yield;
 
