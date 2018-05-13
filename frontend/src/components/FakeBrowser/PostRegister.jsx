@@ -43,7 +43,7 @@ class PostRegister extends Component {
                     <div className="md-cell md-cell--12">
                         <MyMapComponent
                             isMarkerShown
-                            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwJV53aoLN-ipjWZ3d6oDqC9IotxGgh1c&v=3.exp&libraries=geometry,drawing,places"
                             loadingElement={<div style={{height: `100%`}}/>}
                             containerElement={<div style={{height: `400px`, width: "70%", margin: "0 auto"}}/>}
                             mapElement={<div style={{height: `100%`}}/>}
