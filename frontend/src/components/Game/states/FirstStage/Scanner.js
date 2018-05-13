@@ -13,7 +13,7 @@ export default class Scanner extends Phaser.State {
         yield;
 
 
-        this.game.displayDialogLine('Ви', 'Тепер треба відсканувати всі документи', () => this.next());
+        this.game.displayDialogLine('Ви', 'Головне, щоб скани вийшли чіткими. Інакше доведеться переробляти.', () => this.next());
         yield;
 
         this.game.input.enabled = true;

@@ -30,7 +30,7 @@ export default class GrannyBadState extends Phaser.State {
         yield;
 
         this.game.displayDialogLine('П\'ятикоп', 'Тоді ходімо, тільки не відставайте, бо для абітурієнтів завжди \
-        важко орієнтуватись у нашому ВУЗі.', () => this.next());
+        важко орієнтуватись у нашому ВУЗі. Він для них немов лабіринт.', () => this.next());
         yield;
 
         this.game.nextState();

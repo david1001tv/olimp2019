@@ -23,6 +23,7 @@ import fivecopMeetState from './states/SecondStage/5copMeet';
 import ProffsState from './states/SecondStage/Proffs';
 import AudienceState from './states/SecondStage/Audience';
 import GradesState from './states/SecondStage/Grades';
+import thirdIntroState from './states/ThirdStage/ThirdIntro';
 import LabyrinthState from './states/ThirdStage/Labyrinth';
 import ToLaboratoryState from './states/ThirdStage/ToLaboratory';
 import CodeEditorState from './states/ThirdStage/CodeEditor';
@@ -65,6 +66,7 @@ class Game extends Phaser.Game {
         this.state.add('Proffs', ProffsState, false);
         this.state.add('Audience', AudienceState, false);
         this.state.add('Grades', GradesState, false);
+        this.state.add('thirdIntro', thirdIntroState, false);
         this.state.add('Labyrinth', LabyrinthState, false);
         this.state.add('ToLaboratory', ToLaboratoryState, false);
         this.state.add('CodeEditor', CodeEditorState, false);
