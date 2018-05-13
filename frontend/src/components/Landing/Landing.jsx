@@ -7,22 +7,27 @@ import autobind from 'autobind-decorator';
 import Login from './Login';
 import Feedback from './Feedback';
 import './Landing.sass';
-import {logOut} from '~api';
+import {logOut, getLikeCount} from '~api';
 
 
 class Landing extends Component {
     state = {
         formIsVisible: false,
-        feedbackIsVisible: false
+        feedbackIsVisible: false,
+        likeCount: 6
     };
 
-    @autobind
     handleStartButtonClick() {
         logOut();
     }
 
+    componentDidMount() {
+        getLikeCount()
+            .then(res => this.setState({likeCount: res.count}));
+    }
+
     render() {
-        const {formIsVisible, feedbackIsVisible} = this.state;
+        const {formIsVisible, feedbackIsVisible, likeCount} = this.state;
 
         return (
             <div>
@@ -45,7 +50,7 @@ class Landing extends Component {
                         </div>
                     </div>
                     <footer>
-                        <div className="likes">Ця гра сподобалась XX користувачів.</div>
+                        <div className="likes">Ця гра сподобалась {likeCount} користувачам.</div>
                         <div className="copyright">Команда ДВНЗ “ПДТУ”, 2018 ©</div>
                         <button className="btn-feedback"
                                 id="btn-feedback"

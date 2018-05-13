@@ -123,3 +123,38 @@ export async function sendFeedback(data) {
 
     return response;
 }
+
+export async function getLike() {
+    const response = await fetch(`${API_URL}/like`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    }).then(res => res.json());
+
+    return response;
+}
+
+export async function getLikeCount() {
+    const response = await fetch(`${API_URL}/like/all`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then(res => res.json());
+
+    return response;
+}
+
+export async function toggleLike() {
+    const response = await fetch(`${API_URL}/like`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    }).then(res => res.json());
+
+    return response;
+}
