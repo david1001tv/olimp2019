@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Feedback from '../Landing/Feedback';
 
+import '../Landing/Landing.sass';
 import './Final.sass';
 
 class Final extends Component {

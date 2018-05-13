@@ -92,6 +92,9 @@ module.exports = {
         open: true,
         openPage: '',
         overlay: true,
+        proxy: {
+            "/api": "http://localhost:8090"
+        }
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js', minChunks: Infinity}),

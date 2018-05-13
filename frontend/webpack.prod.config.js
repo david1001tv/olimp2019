@@ -1,17 +1,18 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-
-definePlugin = new webpack.DefinePlugin({
-    __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
-})
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
 const phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
 const pixi = path.join(phaserModule, 'build/custom/pixi.js');
 const p2 = path.join(phaserModule, 'build/custom/p2.js');
+const phaserInput = path.join(__dirname, '/node_modules/@orange-games/phaser-input/build/phaser-input.js');
 
 module.exports = {
+    cache: true,
+
     entry: {
         main: './src/index.js',
     },
@@ -20,15 +21,17 @@ module.exports = {
         publicPath: '/',
         filename: '[name].js',
     },
-    devtool: 'source-map',
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
             '~components': path.resolve(__dirname, './src/components'),
             '~api': path.resolve(__dirname, './src/api.js'),
+            '~img': path.resolve(__dirname, './src/img'),
+            '~etc': path.resolve(__dirname, './src/etc'),
             'phaser': phaser,
             'pixi': pixi,
             'p2': p2,
+            'phaser-input': phaserInput,
         },
     },
     module: {
@@ -72,30 +75,37 @@ module.exports = {
                     },
                 }],
             },
+            { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
+            { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
+            { test: /p2\.js/, use: ['expose-loader?p2'] },
+            { test: /phaser-input\.js$/, use: ['exports-loader?PhaserInput=true'] },
         ],
     },
-    devServer: {
-        port: 3030,
-        contentBase: path.join(__dirname, 'public'),
-        disableHostCheck: true,
-        historyApiFallback: true,
-        hot: true,
-        hotOnly: true,
-        inline: true,
-        open: true,
-        openPage: '',
-        overlay: true,
-    },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            async: true,
+            children: true
+        }),
+
         new HtmlWebpackPlugin({
             template: './src/index.html',
-            files: {
-                js: ['main.js'],
-            },
+            favicon: 'src/favicon.ico'
         }),
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require('./public/build/vendor-manifest.json'),
+        new BundleAnalyzerPlugin(),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8
+        }),
+        new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            children: true,
+            minChunks: 2,
+            name: 'common.js'
         })
     ],
 };
