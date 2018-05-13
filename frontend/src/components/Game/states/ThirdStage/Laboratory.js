@@ -40,7 +40,7 @@ export default class LaboratoryState extends Phaser.State {
         let bg2 = this.game.add.image(0, 0, 'bg2');
         smartSetHeight(bg2, 1080);
 
-        let tmpCode = 'gojakwvfasfsavapfkvgafdvwarfvcwesdfceweq\nfoanverfsaferafverfvewvwgvwdfvasvovopn\nfoijffaefaergrrgnoasfsdavsdinvowvnoi\nvrowfasfvweveasdvadanvrjnvoj\n\tjfisdofjcnwcfasdfdsvosnv\n\tfjuwihjnvuiavuvgdfgerhbtvwev\n\tvasnvojnjumyjhawewdovwovwwaeowjodvnwojvnojswn\n\t\tvjfovmigearsggraojraemvoerk\n\t\tiaovbjmaieofjvmbiaeorbmjoirmjb\n\t\tjafviowerpvjre\n\t\t\tfvergasrgvegzvsdrev\n\t\tkoresmvsokmnorekmodfv'
+        let tmpCode = 'yjhawewdovwovwwaeowjodvnwojvnojswn\n\t\tvjfovmigearsggraojraemvoerk\n\t\tiaovbjmaieofjvmbiaeorbmjoirmjb\n\t\tjafviowerpvjre\n\t\t\tfvergasrgvegzvsdrev\n\t\tkoresmvsokmnorekmodfv'
         if (!this.game.inputCode) {
             this.game.inputCode = tmpCode;
         } else this.formatCode();
@@ -90,8 +90,8 @@ export default class LaboratoryState extends Phaser.State {
         this._gen = this.gen();
         this.game.phone.clearTodos();
         this.game.phone.setEnabled(true);
-        this.game.phone.setTime('11:09');
-        this.game.phone.setDate('02.09.18');
+        this.game.phone.setTime('09:40');
+        this.game.phone.setDate('01.09.18');
         this.game.phone.addTodo({
             id: 'LABORATORY',
             text: 'Здати лабораторну роботу'
@@ -131,7 +131,7 @@ export default class LaboratoryState extends Phaser.State {
     }
 
     formatCode() {
-        for (let i = 40; i < this.game.inputCode.length; i += this.randomInteger(35, 60)) {
+        for (let i = 20; i < this.game.inputCode.length; i += this.randomInteger(20, 25)) {
             let tmpArr = this.game.inputCode.split('');
             tmpArr.splice(i, 0, '\n');
             this.game.inputCode = tmpArr.join('');
@@ -141,8 +141,8 @@ export default class LaboratoryState extends Phaser.State {
             if (i < 2) tmpArr[i] = '\n' + tmpArr[i];
             if (i <= 7) tmpArr[i] = '\n\t\t' + tmpArr[i];
             if (i > 7 && i <= 9) tmpArr[i] = '\n\t\t\t\t' + tmpArr[i];
-            if (i > 9 && i <= 13) tmpArr[i] = '\n\t\t\t\t\t\t' + tmpArr[i];
-            if (i > 13) tmpArr[i] = '\n' + tmpArr[i];
+            if (i > 9 && i <= 12) tmpArr[i] = '\n\t\t\t\t\t\t' + tmpArr[i];
+            if (i > 12) tmpArr[i] = '\n' + tmpArr[i];
         }
         this.game.inputCode = tmpArr.join('');
     }
