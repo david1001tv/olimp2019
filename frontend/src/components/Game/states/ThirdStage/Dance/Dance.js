@@ -39,7 +39,13 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.displayDialogLine('Волошин В. С.', 'Тут якийсь крутий текст', () => this.next());
+        this.game.displayDialogLine('Волошин В. С.', 'Секрети перемог в навчанні -\n Труд і прилежність назавжди.', () => this.next());
+        yield;
+        this.game.displayDialogLine('Волошин В. С.', 'Успіх в житті це не останнє,\n До чого ТИ дійдеш, зажди.', () => this.next());
+        yield;
+        this.game.displayDialogLine('Волошин В. С.', 'Етапи, іспити, тривоги -\n Нещастя ці такі малі.', () => this.next());
+        yield;
+        this.game.displayDialogLine('Волошин В. С.', 'Ти знайдеш шлях до перемоги,\n У кращем ВИШі на землі!', () => this.next());
         yield;
 
         this.game.add.tween(this.rector).to({alpha: 0}, 1500).start().onComplete.add(() => this.next());
