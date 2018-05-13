@@ -184,6 +184,14 @@ class Map extends Component {
                     onClick={this.handleClick}
                     popoverText="Виступ"
                 />
+                <Checkpoint
+                    left="88.8%"
+                    top="80.5%"
+                    type={FINISH}
+                    state="Final"
+                    onClick={this.handleClick}
+                    popoverText="Кінець"
+                />
             </div>
         );
     }

@@ -6,6 +6,7 @@ import progressManager from '../../etc/ProgressManager';
 
 import Game from './Game';
 import FakeBrowser from '~components/FakeBrowser';
+import {Redirect} from 'react-router-dom';
 
 
 class GameComponent extends Component {
@@ -21,6 +22,7 @@ class GameComponent extends Component {
 
     state = {
         fakeBrowserIsShown: false,
+        redirectToFinal: false,
     };
 
     constructor(props) {
@@ -42,6 +44,8 @@ class GameComponent extends Component {
         this.game.phone = this.props.phone;
         this.game.setFakeBrowserEnabled = this.setFakeBrowserEnabled;
 
+        this.game.state.onStateChange.add(this.handleGameStateChange, this);
+
         this.startState = this.game.startState.bind(this.game);
     }
 
@@ -56,7 +60,19 @@ class GameComponent extends Component {
         this.setState({fakeBrowserIsShown: enabled})
     }
 
+    handleGameStateChange(stateName) {
+        if (stateName === 'Final') {
+            this.setState({redirectToFinal: true})
+        }
+    }
+
     render() {
+        if (this.state.redirectToFinal) {
+            return (
+                <Redirect push from="/game" to="/final" />
+            )
+        }
+        
         if (this.state.fakeBrowserIsShown) {
             return (
                 <FakeBrowser />

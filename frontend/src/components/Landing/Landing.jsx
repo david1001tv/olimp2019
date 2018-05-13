@@ -42,7 +42,7 @@ class Landing extends Component {
                             знайомиться зі специфікою своєї професії!
                         </div>
                         <div className="buttons">
-                            <Link className="btn btn-start" to="/game" />
+                            <Link className="btn btn-start" to="/game" onClick={() => logOut()}/>
                             <button
                                 className="btn btn-continue"
                                 onClick={() => this.setState({formIsVisible: true})}

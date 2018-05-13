@@ -70,6 +70,7 @@ class Game extends Phaser.Game {
         this.state.add('CodeEditor', CodeEditorState, false);
         this.state.add('Laboratory', LaboratoryState, false);
         this.state.add('Dance', DanceState, false);
+        this.state.add('Final', new Phaser.State(), false);
 
         this.state.start('Boot', true, false, 'Map');
     }
@@ -79,15 +80,15 @@ class Game extends Phaser.Game {
         let time = new Date() - this.startTime;
         progressManager.saveHistoryEntry(this.state.current, time, score);
         this.startTime = new Date();
-        if (this.isReplaying) {
-            this.state.start('Map');
-        } else {
+        // if (this.isReplaying) {
+        //     this.state.start('Map');
+        // } else {
             let states = Object.keys(this.state.states);
             this.progressManager.completeState(this.state.current, 0);
             let currentIndex = states.indexOf(this.state.current);
 
             this.state.start('Boot', true, false, states[currentIndex + 1]);
-        }
+        // }
     }
 
     @autobind

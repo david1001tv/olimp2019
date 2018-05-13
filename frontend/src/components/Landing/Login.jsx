@@ -112,7 +112,7 @@ class Login extends Component {
     render() {
         console.log('Login render', isAuthenticated());
         if (isAuthenticated()) {
-            return <Redirect from="/" to="/game" />
+            return <Redirect push from="/" to="/game" />
         }
 
         const {email, password} = this.state.data;
