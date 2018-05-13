@@ -5,6 +5,7 @@ module.exports = [
     'Scanner',
     'scanToBrowser',
     'Browser',
+    'TransitionToSecondStage',
     'GrannyBad',
     'Cross',
     'GrannyGood',
@@ -21,4 +22,5 @@ module.exports = [
     'CodeEditor',
     'Laboratory',
     'Dance',
+    'Final',
 ];

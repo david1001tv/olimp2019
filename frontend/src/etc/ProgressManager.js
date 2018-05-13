@@ -19,6 +19,7 @@ const states = [
     'Proffs',
     'Audience',
     'Grades',
+    'thirdIntro',
     'Labyrinth',
     'CodeEditor',
     'Dance',
@@ -35,8 +36,8 @@ const stages = [
         end: 'Proffs',
     },
     {
-        start: '???',
-        end: '???',
+        start: 'thirdIntro',
+        end: 'Final',
     }
 ];
 
