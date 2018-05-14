@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {DialogContainer} from 'react-md';
 import {Link} from 'react-router-dom';
 import autobind from 'autobind-decorator';
+import photo from '../../img/bg.jpg'
 
 import Login from './Login';
 import Feedback from './Feedback';
@@ -34,7 +35,7 @@ class Landing extends Component {
                 <div className="wrapper">
                     <div className="content">
                         <header>
-                            <div class="page-title">Квест “Абітурієнт”</div>
+                            <div className ="page-title">Квест “Абітурієнт”</div>
                         </header>
                         <div className="page-subtitle">Вітаємо вас на нашому учбово-розважальному порталі!</div>
                         <div className="game-info">Пориньте в історію вступу до установи вищої освіти. Ваше завдання
@@ -73,6 +74,7 @@ class Landing extends Component {
                 >
                     <Feedback />
                 </DialogContainer>
+                <img className="photo" id="photo" src={photo} alt="" />
             </div>
         )
             ;

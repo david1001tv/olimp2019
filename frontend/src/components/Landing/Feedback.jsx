@@ -118,7 +118,7 @@ class Feedback extends Component {
                                 onChange={value => this.handleChange(value, 'message')}
                                 label="Повiдомлення"
                                 multiLine={true}
-                                rows={2}
+                                rows={1}
                                 error={!!this.state.errors.message.length}
                                 errorText={this.state.errors.message.map(e => <div>{e}</div>)}
                             />

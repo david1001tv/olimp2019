@@ -7,7 +7,7 @@ html
 	background-color: #fff
 
 body
-	height: 100%
+	min-height: 100vh
 
 div, ul, li, span
 	padding: 0
@@ -19,7 +19,7 @@ body main>div
 	height: 100%
 
 .wrapper
-	height: 100%
+	min-height: 100vh
 	font: 18px "Pangolin"
 	background-image: url(../../img/bg.jpg)
 	background-size: 100%
@@ -75,6 +75,15 @@ header
 		background-image: url(../../img/buttons/button-continue-released.png)
 		&:active
 			background-image: url(../../img/buttons/button-continue-pressed.png)
+
+.photo
+	display: none
+	position: fixed
+	top: 50%
+	left: 50%
+	width: 90%
+	transform: translate(-50%, -50%)
+
 footer
 	flex: 0 0 auto
 	padding-bottom: 30px
@@ -86,6 +95,11 @@ footer
 	.copyright
 		font-size: 1.7em
 		color: #3C3C3C
+		cursor: pointer
+footer .copyright:hover
+	#photo
+		display: block
+
 	.btn-feedback
 		margin-top: 10px
 		font: 1.1em "Neucha"
