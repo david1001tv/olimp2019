@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {DialogContainer} from 'react-md';
 import {Link} from 'react-router-dom';
 import autobind from 'autobind-decorator';
-import photo from '../../img/bg.jpg'
+import photo from '../../img/photo.jpg'
 
 import Login from './Login';
 import Feedback from './Feedback';
@@ -52,7 +52,11 @@ class Landing extends Component {
                     </div>
                     <footer>
                         <div className="likes">Ця гра сподобалась {likeCount} користувачам.</div>
-                        <div className="copyright">Команда ДВНЗ “ПДТУ”, 2018 ©</div>
+                        <div className="copyright">
+                            <span>Команда ДВНЗ “ПДТУ”, 2018 ©
+                                <img className="photo" id="photo" src={photo} alt="" />
+                            </span>
+                        </div>
                         <button className="btn-feedback"
                                 id="btn-feedback"
                                 onClick={() => this.setState({feedbackIsVisible: true})}>
@@ -74,7 +78,6 @@ class Landing extends Component {
                 >
                     <Feedback />
                 </DialogContainer>
-                <img className="photo" id="photo" src={photo} alt="" />
             </div>
         )
             ;

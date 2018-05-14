@@ -6,6 +6,7 @@ import autobind from 'autobind-decorator';
 import ReactDisqusComments from 'react-disqus-comments';
 import {getLike, toggleLike, getLikeCount} from '~api';
 import Leaderboard from './Leaderboard';
+import photo from '../../img/photo.jpg'
 
 
 import Feedback from '../Landing/Feedback';
@@ -99,7 +100,11 @@ class Final extends Component {
                         </div>
                         <footer>
                             <div className="likes">Ця гра сподобалась {likeCount} користувачам.</div>
-                            <div className="copyright">Команда ДВНЗ “ПДТУ”, 2018 ©</div>
+                            <div className="copyright">
+                                <span>Команда ДВНЗ “ПДТУ”, 2018 ©
+                                <img className="photo" id="photo" src={photo} alt="" />
+                            </span>
+                            </div>
                             <button className="btn-feedback"
                                     id="btn-feedback"
                                     onClick={() => this.setState({feedbackIsVisible: true})}>
