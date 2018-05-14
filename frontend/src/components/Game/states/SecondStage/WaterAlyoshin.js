@@ -21,12 +21,12 @@ export default class WaterState extends Phaser.State {
         this.alyoshin.alpha = 0;
         let alyoshin_2 = this.game.add.image(1280, 273, 'alyoshin-2');
         smartSetHeight(alyoshin_2, 305);
-        this.game.displayDialogLine('Альошин', 'Гей, ти! Ти абітурієнт? Я голова прийомної комісії, реєструю лише VIP-клієнтів.', () => this.next());
+        this.game.displayDialogLine('Альошин С.В.', 'Гей, ти! Ти абітурієнт? Я голова прийомної комісії, реєструю лише VIP-клієнтів.', () => this.next());
         yield;
 
         let alyoshinCoffe = this.game.add.image(1180, 280, 'alyoshin-coffe');
         smartSetHeight(alyoshinCoffe, 110);
-        this.game.displayDialogLine('Альошин', 'В мене закінчилась вода для кави. Ось тримай 5 гривень, збігай набери води. А я прийму твої документи без черги.', () => this.next());
+        this.game.displayDialogLine('Альошин С.В.', 'В мене закінчилась вода для кави. Ось тримай 5 гривень, збігай набери води. А я прийму твої документи без черги.', () => this.next());
         yield;
 
         this.game.displayDialogLine('Ви', 'Гаразд, я швидко.', () => this.next());

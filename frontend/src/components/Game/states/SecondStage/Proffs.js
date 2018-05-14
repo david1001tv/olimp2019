@@ -4,7 +4,7 @@ import {smartSetHeight} from '../../utils';
 
 export default class ProffsState extends Phaser.State {
     * gen() {
-        this.game.displayDialogLine('П\'ятикоп', 'Ось тут знаходиться наша кафедра. Вона завжди відкрита для вас. \
+        this.game.displayDialogLine('П\'ятикоп О.Є.', 'Ось тут знаходиться наша кафедра. Вона завжди відкрита для вас. \
         А зараз я хочу познайомити вас з викладачами нашої кафедри. Оберіть будь-кого з нашого стенду і я розповім \
         вам про нього.', () => this.next());
         yield;
@@ -64,33 +64,41 @@ export default class ProffsState extends Phaser.State {
         this.fivecopTalk = this.createSprite('fivecop-1', 1550, 250, 1500, true, false);
 
         let photoFivecop = this.createSprite('photo-fivecop', 220, 20, 380, true, true);
-        photoFivecop.dialog = "Це я, П\'ятикоп Олена Євгенівна, доцент, кандидат технічних наук за спеціальністю «Інформаційні технології».\
-        Я навчу Вас веб-программуваню, розповім про різні методи покращення вашого продукту під час його розробки.";
+        photoFivecop.dialog = [];
+        photoFivecop.dialog[0] = "Це я, П\'ятикоп Олена Євгенівна, доцент, кандидат технічних наук за спеціальністю «Інформаційні технології».";
+        photoFivecop.dialog[1] = "Я навчу Вас веб-программуваню, розповім про різні методи покращення вашого продукту під час його розробки.";
         let photoMiron = this.createSprite('photo-miron', 580, 20, 380, true, true);
-        photoMiron.dialog = "Це Мироненко Дмитро Сергійович, доцент, кандидат технічних наук за спеціальністю \
-        «Інформаційні технології». З ним Ви зможете вивчити такі важливі галузі майбутньої професії, як\
+        photoMiron.dialog = [];
+        photoMiron.dialog[0] = "Це Мироненко Дмитро Сергійович, доцент, кандидат технічних наук за спеціальністю \
+        «Інформаційні технології».";
+        photoMiron.dialog[1] = "З ним Ви зможете вивчити такі важливі галузі майбутньої професії, як \
         проектування баз даних, також ви  будете створювати додатки мовою C#";
         let photoLevitskaya = this.createSprite('photo-levitisyskaya', 940, 20, 380, true, true);
-        photoLevitskaya.dialog = "Це Левицька Тетяна Олександрівна, доцент, кандидат технічних наук за \
+        photoLevitskaya.dialog = [];
+        photoLevitskaya.dialog[0] = "Це Левицька Тетяна Олександрівна, доцент, кандидат технічних наук за \
         спеціальністю «Металургія чорних і кольорових металів та спеціальних сплавів». Також вона має диплом \
-        про вищу освіту за спеціальністю «Інформатика». Тетяна Олександрівна можа стати вашою другою мамою, \
-        і навчить вас дуже цікавим речам, наприкад, інтелектуальному аналізу даних і комп'ютерній схемотехніці \
-        та архітектурі комп'ютерів";
+        про вищу освіту за спеціальністю «Інформатика».";
+        photoLevitskaya.dialog[1] = "Тетяна Олександрівна можа стати вашою другою мамою, і навчить вас дуже \
+        цікавим речам, наприкад, інтелектуальному аналізу даних і комп'ютерній схемотехніці та архітектурі \
+        комп'ютерів";
         let photoAlyoshin = this.createSprite('photo-alyoshin', 220, 440, 380, true, true);
-        photoAlyoshin.dialog = "Це Альошин Сергій Вікторович, старший викладач, має диплом за спеціальністю \
+        photoAlyoshin.dialog = [];
+        photoAlyoshin.dialog[0] = "Це Альошин Сергій Вікторович, старший викладач, має диплом за спеціальністю \
         «Інформатика». Він розробник автоматизованої інформаційної системи перевірки і контролю знань з \
-        використанням технології DataSnap. З ним ви вивчите системне програмування і таку цікаву галузь, як \
+        використанням технології DataSnap.";
+        photoAlyoshin.dialog[1] = "З ним ви вивчите системне програмування і таку цікаву галузь, як \
         проектування і створювання комп\'ю терних мереж.";
         let photoPron = this.createSprite('photo-pron', 580, 440, 380, true, true);
-        photoPron.dialog = "Це Проніна Ольга Ігорівна, наш асистент. З нею ви будете проводити немало часу \
-        продовж практичних занять. Вона вимоглива, але добра.";
+        photoPron.dialog = ["Це Проніна Ольга Ігорівна, наш асистент. З нею ви будете проводити немало часу \
+        продовж практичних занять. Вона добра, весела та завжди рада дати пораду."];
         let photoAngel = this.createSprite('photo-angel', 940, 440, 380, true, true);
-        photoAngel.dialog = "Це Сукрут Анжела Геннадіївна, старший лаборант. До неї ви можете звернутись, \
-        якщо хочете позайматись додатково в нашій спеціалізованій аудиторії.";
+        photoAngel.dialog = ["Це Сукрут Анжела Геннадіївна, старший лаборант. До неї ви можете звернутись, \
+        якщо хочете позайматись додатково в нашій спеціалізованій аудиторії."];
         let photoFedosova = this.createSprite('photo-fedosochka', 1250, 180, 460, true, true);
-        photoFedosova.dialog = "Це завідувач кафедри, Федосова Ірина Василівна, професор, доктор педагогічних наук, \
-        доцент, кандидат економічних наук за спеціальністю «Економіко-математичне моделювання». Не любить \
-        запізнення, вимоглива, але вона дуже добра. До неї завжди можна звернутись по допомогу.";
+        photoFedosova.dialog = [];
+        photoFedosova.dialog[0] = "Це завідувач кафедри, Федосова Ірина Василівна, професор, доктор педагогічних \
+        наук, доцент, кандидат економічних наук за спеціальністю «Економіко-математичне моделювання».";
+        photoFedosova.dialog[1] = "Не любить запізнення, вимоглива. Але до неї завжди можна звернутись по допомогу.";
 
         this.photos = [photoAlyoshin, photoAngel, photoFedosova, photoFivecop, photoLevitskaya, photoMiron, photoPron];
         this.photos.forEach(e => {
@@ -104,13 +112,21 @@ export default class ProffsState extends Phaser.State {
         obj.isAcquainted = true;
         this.fivecopTalk.alpha = 1;
         this.fivecopQuite.alpha = 0;
-        setTimeout(() => this.game.displayDialogLine('П\'ятикоп', obj.dialog, () => this.endTalk()), 150);
+        if(obj.dialog.length !== 1){
+            setTimeout(
+                () => this.game.displayDialogLine('П\'ятикоп О.Є.', obj.dialog[0],
+                () => this.game.displayDialogLine('П\'ятикоп О.Є.', obj.dialog[1], () => this.endTalk())), 150
+            );
+        }
+        else {
+            setTimeout(() => this.game.displayDialogLine('П\'ятикоп О.Є.', obj.dialog[0], () => this.endTalk()), 150);
+        }
     }
 
     endClick(obj){
         this.fivecopTalk.alpha = 1;
         this.fivecopQuite.alpha = 0;
-        setTimeout(() => this.game.displayDialogLine('П\'ятикоп', obj.dialog, () => this.next()), 150);
+        setTimeout(() => this.game.displayDialogLine('П\'ятикоп О.Є.', obj.dialog, () => this.next()), 150);
     }
 
     endTalk(){
@@ -119,8 +135,13 @@ export default class ProffsState extends Phaser.State {
         this.game.canvas.style.cursor = "default";
         if(this.photos.every(e => e.isAcquainted) && this.isNext === true){
             this.game.phone.completeTodo("PROFFS");
-            let txt = this.game.add.text(220, 1000, 'Продовжити', {
+            let txt = this.game.add.text(120, 950, 'Натисніть сюди, щоб продовжити...', {
                 font: "40px Pangolin",
+                fontSize: 70,
+                fontStyle: 'italic',
+                fill: 'white',
+                stroke: 'black',
+                strokeThickness: 8,
             });
             txt.dialog = 'Здається про всіх розповіла. Зовсім забула. Ірина Василівна \
             хотіла з вами поспілкуватись. Наступні двері - то її кабінет. Прошу.';

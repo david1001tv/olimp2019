@@ -10,6 +10,7 @@ export default class GrannyBadState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Фух, здається встиг. Майже друга. ', () => this.next());
         yield;
 
+        this.shadow.alpha = 1;
         this.game.add.tween(this.fivecopQuite).to({
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
@@ -21,7 +22,7 @@ export default class GrannyBadState extends Phaser.State {
         this.fivecopQuite.alpha = 0;
         this.fivecopTalk.alpha = 1;
         this.game.phone.setEnabled(true);
-        this.game.displayDialogLine('П\'ятикоп', 'Доброго дня! Мене звуть П\'ятикоп Олена Євгенівна. \
+        this.game.displayDialogLine('П\'ятикоп О.Є.', 'Доброго дня! Мене звуть П\'ятикоп Олена Євгенівна. \
         Я викладач кафедри Комп\'ютерних наук. Зараз хочу вам запропонувати пройти зі мною, подивитись де \
         знаходиться кафедра та познайомитись з викладачами.', () => this.next());
         yield;
@@ -29,7 +30,7 @@ export default class GrannyBadState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Доброго дня! Так, я залюбки.', () => this.next());
         yield;
 
-        this.game.displayDialogLine('П\'ятикоп', 'Тоді ходімо, тільки не відставайте, бо для абітурієнтів завжди \
+        this.game.displayDialogLine('П\'ятикоп О.Є.', 'Тоді ходімо, тільки не відставайте, бо для абітурієнтів завжди \
         важко орієнтуватись у нашому ВУЗі. Він для них немов лабіринт.', () => this.next());
         yield;
 
@@ -50,6 +51,7 @@ export default class GrannyBadState extends Phaser.State {
 
         this.load.image('fivecop-1', './assets/images/2-4 (proffs)/fivecop-1.png');
         this.load.image('fivecop-2', './assets/images/2-4 (proffs)/fivecop-2.png');
+        this.load.image('shadow', './assets/images/2-1 (crossword)/shadow.png');
     }
 
     create() {
@@ -60,11 +62,15 @@ export default class GrannyBadState extends Phaser.State {
         let david = this.game.add.image(45, 300, 'd-big');
         smartSetHeight(david, 830);
 
-        this.fivecopQuite = this.game.add.image(1300, 200, 'fivecop-2')
+        this.shadow = this.game.add.image(1285, 895, 'shadow');
+        smartSetHeight(this.shadow, 100);
+        this.shadow.alpha = 0;
+
+        this.fivecopQuite = this.game.add.image(1280, 180, 'fivecop-2')
         smartSetHeight(this.fivecopQuite, 800);
         this.fivecopQuite.alpha = 0;
 
-        this.fivecopTalk = this.game.add.image(1300, 200, 'fivecop-1');
+        this.fivecopTalk = this.game.add.image(1280, 180, 'fivecop-1');
         smartSetHeight(this.fivecopTalk, 800);
         this.fivecopTalk.alpha = 0;
 

@@ -29,10 +29,10 @@ export default class CrossState extends Phaser.State {
         this.game.phone.setEnabled(true);
         this.game.phone.setTime('10:22');
         this.game.phone.setDate('21.07.18');
-        this.time = 7*60*1000;
+        this.time = 7 * 60 * 1000;
         this.minPoints = 100;
         this.maxPoints = 200;
-        this.rate = 0; 
+        this.rate = 0;
         this.goTimer = setTimeout(() => this.checkRate(), this.time);
         this.timer = setInterval(() => this.checkTime(), 1000);
     }
@@ -71,20 +71,26 @@ export default class CrossState extends Phaser.State {
         let fifth_word = this.create_input(1110, 502, 5, 2);
         fifth_word.coord_x = 1500;
         fifth_word.coord_y = 510;
-        
+
         let sixth_word = this.create_input(1050, 560, 4, 3);
         sixth_word.coord_x = 1390;
         sixth_word.coord_y = 565;
-        
+
         let seventh_word = this.create_input(1165, 618, 6, 1);
         seventh_word.coord_x = 1630;
         seventh_word.coord_y = 630;
-        
+
         let eighth_word = this.create_input(1165, 675, 4, 1);
         eighth_word.coord_x = 1500;
         eighth_word.coord_y = 690;
 
-        this.timerText = this.game.add.text(32, 32, '', { fill: '#fff'});
+        this.timerText = this.game.add.text(32, 32, '', {
+            font: "Pangolin",
+            fontSize: 70,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
 
         this.check_word_func = this.check_word;
 
@@ -97,7 +103,7 @@ export default class CrossState extends Phaser.State {
             });
             curr.ok = this.game.add.image(curr.coord_x, curr.coord_y, 'ok');
             curr.bad = this.game.add.image(curr.coord_x, curr.coord_y, 'bad');
-            if(correct_words[index] === 'ураїни'){
+            if (correct_words[index] === 'ураїни') {
                 curr.bad_small = this.game.add.image(1570, 750, 'bad');
                 smartSetHeight(curr.bad_small, 40);
                 curr.bad_small.alpha = 0;
@@ -116,13 +122,13 @@ export default class CrossState extends Phaser.State {
         this.next();
     }
 
-    create_input(x, y, lenght, empty){
+    create_input(x, y, lenght, empty) {
         let i;
         let word = [lenght];
 
-        for(i = 0; i < lenght; i++){
+        for (i = 0; i < lenght; i++) {
             x += 55;
-            if(i == empty){
+            if (i == empty) {
                 x += 55;
             }
             word[i] = this.game.add.inputField(x, y, {
@@ -142,7 +148,7 @@ export default class CrossState extends Phaser.State {
         word.forEach(function (curr, index, first_word) {
             curr.domElement.element.addEventListener('keydown', function (e) {
                 e.preventDefault();
-                if (regEx.test(e.key)){
+                if (regEx.test(e.key)) {
                     curr.setText(e.key);
                     curr.startFocus();
                     if (first_word[index + 1] !== undefined) {
@@ -150,14 +156,14 @@ export default class CrossState extends Phaser.State {
                         first_word[index + 1].startFocus();
                     }
                 }
-                else if(e.keyCode == 8){
+                else if (e.keyCode == 8) {
                     curr.setText('');
                     curr.startFocus();
-                    if(first_word[index-1] !== undefined && this.flagBackspace === true){
+                    if (first_word[index - 1] !== undefined && this.flagBackspace === true) {
                         curr.endFocus();
-                        first_word[index-1].startFocus();
+                        first_word[index - 1].startFocus();
                     }
-                    if(this.flagBackspace === true){
+                    if (this.flagBackspace === true) {
                         this.flagBackspace = false;
                     }
                     else {
@@ -170,28 +176,28 @@ export default class CrossState extends Phaser.State {
     }
 
     check_word(all, input_obj, str) {
-        if(input_obj.map(e => e.value.toLowerCase()).join('') === str){
+        if (input_obj.map(e => e.value.toLowerCase()).join('') === str) {
             input_obj.isCorrect = true;
         }
         else {
             input_obj.isCorrect = false;
         }
-        if(input_obj.isCorrect){
+        if (input_obj.isCorrect) {
             input_obj.ok.alpha = 1;
             input_obj.bad.alpha = 0;
             input_obj.flag = false;
-            if(str === 'ураїни'){
+            if (str === 'ураїни') {
                 input_obj.ok.alpha = 1;
                 input_obj.ok_small.alpha = 1;
                 input_obj.bad_small.alpha = 0;
             }
         }
         else {
-            if(!input_obj.flag || !this.flag_kiy){
+            if (!input_obj.flag || !this.flag_kiy) {
                 input_obj.ok.alpha = 0;
                 input_obj.bad.alpha = 1;
-                if(str === 'ураїни'){
-                    if(input_obj[input_obj.length - 1].value.toLowerCase() === 'и'){
+                if (str === 'ураїни') {
+                    if (input_obj[input_obj.length - 1].value.toLowerCase() === 'и') {
                         input_obj.ok_small.alpha = 1;
                         input_obj.bad_small.alpha = 0;
                         this.flag_kiy = true;
@@ -205,8 +211,8 @@ export default class CrossState extends Phaser.State {
             }
         }
 
-        if(all.every(e => e.isCorrect)){
-            if((this.time)/1000 >= 330) this.rate = this.maxPoints;
+        if (all.every(e => e.isCorrect)) {
+            if ((this.time) / 1000 >= 330) this.rate = this.maxPoints;
             else {
                 let percent = this.time / (7 * 60 * 1000);
                 this.rate = Math.round(this.minPoints * percent + this.minPoints);
@@ -221,12 +227,13 @@ export default class CrossState extends Phaser.State {
         this.game.nextState(this.rate);
     }
 
-    checkTime(){
+    checkTime() {
         function leadingZero(number) {
             return number >= 10 ? number.toString() : '0' + number;
         }
+
         this.time -= 1000;
-        let minutes = Math.floor(this.time / (60*1000));
+        let minutes = Math.floor(this.time / (60 * 1000));
         let seconds = this.time / 1000 - minutes * 60;
         this.timerText.setText(`${leadingZero(minutes)}:${leadingZero(seconds)}`);
     }

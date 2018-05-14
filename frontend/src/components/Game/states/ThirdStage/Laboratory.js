@@ -21,7 +21,7 @@ export default class LaboratoryState extends Phaser.State {
         let proninaSceptic = this.game.add.image(1055, 260, 'pronina-sceptic');
         smartSetHeight(proninaSceptic, 305);
 
-        this.game.displayDialogLine('Пронiна', 'Звiсно, сiдай.', () => this.next());
+        this.game.displayDialogLine('Проніна О.І.', 'Звiсно, сiдай.', () => this.next());
         yield;
 
         proninaSceptic.destroy();
@@ -31,7 +31,7 @@ export default class LaboratoryState extends Phaser.State {
         let dPass = this.game.add.image(1190, 270, 'd-pass');
         smartSetHeight(dPass, 410);
 
-        this.game.displayDialogLine('Пронiна', 'Що це за програма така? Ти, взагалi, бачив, що написав?', () => this.next());
+        this.game.displayDialogLine('Проніна О.І.', 'Що це за програма така? Ти, взагалi, бачив, що написав?', () => this.next());
         yield;
 
         this.game.displayDialogLine('Ви', 'Начебто все працювало. Зараз гляну, що там.', () => this.next());
