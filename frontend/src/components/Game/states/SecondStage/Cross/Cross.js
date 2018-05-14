@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import PhaserInput from 'phaser-input';
-import {smartSetHeight} from '../../utils';
+import CrosswordInput from './CrosswordInput';
+
+import {smartSetHeight} from '../../../utils';
 
 export default class CrossState extends Phaser.State {
     * gen() {
@@ -30,6 +32,7 @@ export default class CrossState extends Phaser.State {
         this.load.image('bg', './assets/images/2-1 (crossword)/bg-newspaper.png');
         this.load.image('ok', './assets/images/2-1 (crossword)/ok.png');
         this.load.image('bad', './assets/images/2-1 (crossword)/bad.png');
+        this.load.image('square', './assets/images/2-1 (crossword)/square.png');
         this.game.plugins.add(PhaserInput.Plugin);
     }
 
@@ -41,40 +44,6 @@ export default class CrossState extends Phaser.State {
         this.flag_kiy = false;
         this.flagBackspace = false;
 
-        let first_word = this.create_input(1050, 270, 4, 3);
-        first_word.coord_x = 1390;
-        first_word.coord_y = 275;
-
-        console.log(first_word);
-
-        let second_word = this.create_input(1163, 330, 3, 1);
-        second_word.coord_x = 1450;
-        second_word.coord_y = 330;
-
-        let third_word = this.create_input(1110, 388, 5, 2);
-        third_word.coord_x = 1510;
-        third_word.coord_y = 385;
-
-        let fourth_word = this.create_input(1220, 445, 4, 0);
-        fourth_word.coord_x = 1570;
-        fourth_word.coord_y = 445;
-
-        let fifth_word = this.create_input(1110, 502, 5, 2);
-        fifth_word.coord_x = 1500;
-        fifth_word.coord_y = 510;
-
-        let sixth_word = this.create_input(1050, 560, 4, 3);
-        sixth_word.coord_x = 1390;
-        sixth_word.coord_y = 565;
-
-        let seventh_word = this.create_input(1165, 618, 6, 1);
-        seventh_word.coord_x = 1630;
-        seventh_word.coord_y = 630;
-
-        let eighth_word = this.create_input(1165, 675, 4, 1);
-        eighth_word.coord_x = 1500;
-        eighth_word.coord_y = 690;
-
         this.timerText = this.game.add.text(32, 32, '', {
             font: "Pangolin",
             fontSize: 70,
@@ -83,35 +52,18 @@ export default class CrossState extends Phaser.State {
             strokeThickness: 8,
         });
 
-        this.check_word_func = this.check_word;
-
-        let cross_words = [first_word, second_word, third_word, fourth_word, fifth_word, sixth_word, seventh_word, eighth_word];
-        this.cross_words = cross_words;
-        let correct_words = ['груа', 'сло', 'вочок', 'орна', 'енїда', 'руїа', 'ураїни', 'кзак'];
-
-        cross_words.forEach((curr, index, cross_words) => {
-            curr.forEach((elem, i, curr) => {
-                elem.domElement.element.onkeyup = () => this.check_word(cross_words, curr, correct_words[index]);
-            });
-            curr.ok = this.game.add.image(curr.coord_x, curr.coord_y, 'ok');
-            curr.bad = this.game.add.image(curr.coord_x, curr.coord_y, 'bad');
-            if (correct_words[index] === 'ураїни') {
-                curr.bad_small = this.game.add.image(1570, 750, 'bad');
-                smartSetHeight(curr.bad_small, 40);
-                curr.bad_small.alpha = 0;
-
-                curr.ok_small = this.game.add.image(1570, 750, 'ok');
-                smartSetHeight(curr.ok_small, 40);
-                curr.ok_small.alpha = 0;
-            }
-            smartSetHeight(curr.ok, 40);
-            smartSetHeight(curr.bad, 40);
-            curr.ok.alpha = 0;
-            curr.bad.alpha = 0;
-        });
-
-        this.stage.disableVisibilityChange = true;
-        this.next();
+        this.inputs = [
+            new CrosswordInput(1103, 278, 'груша', 4, this.game),
+            new CrosswordInput(1216, 335, 'село', 2, this.game),
+            new CrosswordInput(1158, 393, 'вовчок', 3, this.game),
+            new CrosswordInput(1272, 450, 'чорна', 1, this.game),
+            new CrosswordInput(1160, 506, 'енеїда', 3, this.game),
+            new CrosswordInput(1103, 562, 'руїна', 4, this.game),
+            new CrosswordInput(1216, 618, 'україни', 2, this.game),
+            new CrosswordInput(1215, 676, 'козак', 2, this.game),
+        ];
+        this.inputs[0].focusCell(0);
+        this.inputs[0].isFocused = true;
     }
 
     create_input(x, y, lenght, empty) {
@@ -233,13 +185,7 @@ export default class CrossState extends Phaser.State {
 
     shutdown() {
         clearTimeout(this.goTimer);
-        // this.game.world.removeAll();
-        // this.cross_words.forEach(curr => {
-        //     curr.forEach(elem => {
-        //         elem.destroy(true);
-        //         elem.blockInput = false;
-        //     })
-        // })
+        this.inputs.forEach(input => input.destroy());
     }
 
     render() {
