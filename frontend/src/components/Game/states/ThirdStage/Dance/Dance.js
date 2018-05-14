@@ -224,7 +224,6 @@ export default class Scanner extends Phaser.State {
         this.rector = this.game.add.image(830, 155, 'rector');
         smartSetHeight(this.rector, 830);
         this.game.music = new Audio('assets/audio/dance.mp3');
-        this.game.music.currentTime = 120;
         this.game.music.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
