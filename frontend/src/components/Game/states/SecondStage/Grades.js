@@ -79,6 +79,7 @@ export default class GradesState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
+        window.location.reload();
         this.game.startState('Map');
     }
 

@@ -4,17 +4,6 @@ import {smartSetHeight} from '../../utils';
 
 export default class CrossState extends Phaser.State {
     * gen() {
-        console.log(0);
-        console.log(this.camera);
-        window.CAMERA = this.camera;
-        this.camera.x = 1128;
-        this.camera.y = 280;
-        this.game.add.tween(this.camera.scale).to({
-            x: 1,
-            y: 1,
-        }, 3000).start().onComplete.add(() => {
-            this.next();
-        });
         this.game.camera.flash(0x000000, 3000, true);
         yield;
     }
@@ -56,6 +45,8 @@ export default class CrossState extends Phaser.State {
         first_word.coord_x = 1390;
         first_word.coord_y = 275;
 
+        console.log(first_word);
+
         let second_word = this.create_input(1163, 330, 3, 1);
         second_word.coord_x = 1450;
         second_word.coord_y = 330;
@@ -95,11 +86,12 @@ export default class CrossState extends Phaser.State {
         this.check_word_func = this.check_word;
 
         let cross_words = [first_word, second_word, third_word, fourth_word, fifth_word, sixth_word, seventh_word, eighth_word];
+        this.cross_words = cross_words;
         let correct_words = ['груа', 'сло', 'вочок', 'орна', 'енїда', 'руїа', 'ураїни', 'кзак'];
 
         cross_words.forEach((curr, index, cross_words) => {
             curr.forEach((elem, i, curr) => {
-                elem.domElement.element.addEventListener('keyup', () => this.check_word(cross_words, curr, correct_words[index]));
+                elem.domElement.element.onkeyup = () => this.check_word(cross_words, curr, correct_words[index]);
             });
             curr.ok = this.game.add.image(curr.coord_x, curr.coord_y, 'ok');
             curr.bad = this.game.add.image(curr.coord_x, curr.coord_y, 'bad');
@@ -137,7 +129,8 @@ export default class CrossState extends Phaser.State {
                 width: 25,
                 fill: '#5700ff',
                 font: '35px Pangolin',
-                max: 1
+                max: 1,
+                placeHolder: 'Password',
             });
         }
 
@@ -146,7 +139,7 @@ export default class CrossState extends Phaser.State {
         let regEx = /[а-яА-ЯіІїЇєЄ]/;
 
         word.forEach(function (curr, index, first_word) {
-            curr.domElement.element.addEventListener('keydown', function (e) {
+            curr.domElement.element.onkeydown = function (e) {
                 e.preventDefault();
                 if (regEx.test(e.key)) {
                     curr.setText(e.key);
@@ -170,7 +163,7 @@ export default class CrossState extends Phaser.State {
                         this.flagBackspace = true;
                     }
                 }
-            });
+            };
         });
         return word;
     }
@@ -236,6 +229,17 @@ export default class CrossState extends Phaser.State {
         let minutes = Math.floor(this.time / (60 * 1000));
         let seconds = this.time / 1000 - minutes * 60;
         this.timerText.setText(`${leadingZero(minutes)}:${leadingZero(seconds)}`);
+    }
+
+    shutdown() {
+        clearTimeout(this.goTimer);
+        // this.game.world.removeAll();
+        // this.cross_words.forEach(curr => {
+        //     curr.forEach(elem => {
+        //         elem.destroy(true);
+        //         elem.blockInput = false;
+        //     })
+        // })
     }
 
     render() {
