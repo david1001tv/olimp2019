@@ -62,8 +62,13 @@ export default class GradesState extends Phaser.State {
         this.game.phone.setEnabled(true);
         this.game.phone.completeTodo("RAIT");
 
-        this.isNext = this.game.add.text(1700, 1000, "Далі", {
-            font: "50px Pangolin",
+        this.isNext = this.game.add.text(700, 950, "Натисніть сюди, щоб продовжити...", {
+            font: "Pangolin",
+            fontSize: 70,
+            fontStyle: 'italic',
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
         });
         this.isNext.inputEnabled = true;
         this.isNext.input.useHandCursor = true;

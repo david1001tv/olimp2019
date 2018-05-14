@@ -119,8 +119,13 @@ export default class ProffsState extends Phaser.State {
         this.game.canvas.style.cursor = "default";
         if(this.photos.every(e => e.isAcquainted) && this.isNext === true){
             this.game.phone.completeTodo("PROFFS");
-            let txt = this.game.add.text(220, 1000, 'Продовжити', {
+            let txt = this.game.add.text(120, 950, 'Натисніть сюди, щоб продовжити...', {
                 font: "40px Pangolin",
+                fontSize: 70,
+                fontStyle: 'italic',
+                fill: 'white',
+                stroke: 'black',
+                strokeThickness: 8,
             });
             txt.dialog = 'Здається про всіх розповіла. Зовсім забула. Ірина Василівна \
             хотіла з вами поспілкуватись. Наступні двері - то її кабінет. Прошу.';
