@@ -15,7 +15,7 @@ export default class ToLaboratoryState extends Phaser.State {
         let pronAngry = this.game.add.image(1055, 260, 'pronina-angry');
         smartSetHeight(pronAngry, 305);
 
-        this.game.displayDialogLine('Проніна', 'Дякую, що взагалі прийшов. Проходь, сідай за вільний ком\'ютер \
+        this.game.displayDialogLine('Проніна О.І.', 'Дякую, що взагалі прийшов. Проходь, сідай за вільний ком\'ютер \
         та починай робити лабу. Завдання на диску.', () => this.next());
         yield;
 

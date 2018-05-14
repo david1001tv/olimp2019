@@ -4,19 +4,19 @@ import {smartSetHeight} from '../../utils';
 
 export default class AudienceState extends Phaser.State {
     * gen() {
-        this.game.displayDialogLine('Федосова', 'Доброго дня, Давиде!', () => this.next());
+        this.game.displayDialogLine('Федосова І.В. І.В.', 'Доброго дня!', () => this.next());
         yield;
         this.game.displayDialogLine('Ви', 'Вітаю, Ірина... Василівна... Я дуже радий, що поступив на вашу \
         кафедру!', () => this.next());
         yield;
-        this.game.displayDialogLine('Федосова', 'Ми теж раді кожному студенту, який поступив до нас, та, \
+        this.game.displayDialogLine('Федосова І.В.', 'Ми теж раді кожному студенту, який поступив до нас, та, \
         тим паче, вже запам\'ятав імена викладачів.', () => this.next());
         yield;
         this.game.displayDialogLine('Ви', 'Дякую. Я вже намагаюсь бути кращим студентом.', () => this.next());
         this.setVisible(this.daveOne);
         this.setVisible(this.daveTwo);
         yield;
-        this.game.displayDialogLine('Федосова', 'Це добре. Такі цілеспрямовані та амбіціозні студенти нам і \
+        this.game.displayDialogLine('Федосова І.В.', 'Це добре. Такі цілеспрямовані та амбіціозні студенти нам і \
         потрібні. Що ти можешь розповісти про себе? Ти вже стикався з программуванням?', () => this.next());
         this.setVisible(this.daveOne);
         this.setVisible(this.daveTwo);
@@ -27,7 +27,7 @@ export default class AudienceState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Стосовно программування - я почав цікавитися цим рік тому. \
         Щось намагався робити. Сподіваюсь, що мої знання не будуть зайвими.', () => this.next());
         yield;
-        this.game.displayDialogLine('Федосова', 'Дуже гарно. В тебе є потенціал. Але важлива і інша річ. \
+        this.game.displayDialogLine('Федосова І.В.', 'Дуже гарно. В тебе є потенціал. Але важлива і інша річ. \
         Давай зараз подивимось на твої бали.', () => this.next());
         yield;
         this.setVisible(this.fedOne);

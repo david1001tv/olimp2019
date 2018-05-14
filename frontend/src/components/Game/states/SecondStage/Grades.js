@@ -5,7 +5,7 @@ import { getHistory } from '~api';
 
 export default class GradesState extends Phaser.State {
     * gen() {
-        this.game.displayDialogLine('Федосова', 'Так, це бал твого атестату, ми його перевели уже до 200-бальної \
+        this.game.displayDialogLine('Федосова І.В.', 'Так, це бал твого атестату, ми його перевели уже до 200-бальної \
         системи.', () => this.next());
         yield;
         let att = this.history.find(e => e.state === 'Docs').score + this.history.find(e => e.state === 'Scanner').score;
@@ -14,7 +14,7 @@ export default class GradesState extends Phaser.State {
         });
         //yield;
 
-        this.game.displayDialogLine('Федосова', 'Наступне в нас ЗНО з української мови.', () => this.next());
+        this.game.displayDialogLine('Федосова І.В.', 'Наступне в нас ЗНО з української мови.', () => this.next());
         yield;
         let ukr = this.history.find(e => e.state === 'Cross').score;
         this.game.add.text(1020, 530, ukr, {
@@ -22,7 +22,7 @@ export default class GradesState extends Phaser.State {
         });
        // yield;
 
-        this.game.displayDialogLine('Федосова', 'Далі математика.', () => this.next());
+        this.game.displayDialogLine('Федосова І.В.', 'Далі математика.', () => this.next());
         yield;
         let math = this.history.find(e => e.state === 'WaterMarket').score;
         this.game.add.text(1020, 590, math, {
@@ -30,7 +30,7 @@ export default class GradesState extends Phaser.State {
         });
         //yield;
 
-        this.game.displayDialogLine('Федосова', 'Остання англійська мова.', () => this.next());
+        this.game.displayDialogLine('Федосова І.В.', 'Остання англійська мова.', () => this.next());
         yield;
         let eng = this.history.find(e => e.state === 'Translate').score;
         this.game.add.text(1020, 650, eng, {
@@ -38,14 +38,14 @@ export default class GradesState extends Phaser.State {
         });
         //yield;
 
-        this.game.displayDialogLine('Федосова', 'Тепер ми можем побачити твій загальний рейтинг.', () => this.next());
+        this.game.displayDialogLine('Федосова І.В.', 'Тепер ми можем побачити твій загальний рейтинг.', () => this.next());
         yield;
         let rait = (0.1 * att) + (0.4 * math) + (0.2 * ukr) + (0.3 * eng);
         this.game.add.text(980, 710, rait, {
             font: "30px Pangolin",
         });
         //yield;
-        this.game.displayDialogLine('Федосова', 'Тепер підпис...', () => this.next());
+        this.game.displayDialogLine('Федосова І.В.', 'Тепер підпис...', () => this.next());
         yield;
 
         this.game.add.tween(this.signature).to({
@@ -56,7 +56,7 @@ export default class GradesState extends Phaser.State {
         });
         yield;
 
-        this.game.displayDialogLine('Федосова', 'Начебто усе. Зараз, поставлю печать.', () => this.next());
+        this.game.displayDialogLine('Федосова І.В.', 'Начебто усе. Зараз, поставлю печать.', () => this.next());
         yield;
         this.firstTween.start(); 
         this.game.phone.setEnabled(true);
@@ -206,7 +206,7 @@ export default class GradesState extends Phaser.State {
     }
 
     handleClick(){
-        setTimeout(() => this.game.displayDialogLine('Федосова', 'Ось і все. Можеш йти. Про зачислення \
+        setTimeout(() => this.game.displayDialogLine('Федосова І.В.', 'Ось і все. Можеш йти. Про зачислення \
         тебе повідомлять.', () => this.next()), 150);
     }
 }
