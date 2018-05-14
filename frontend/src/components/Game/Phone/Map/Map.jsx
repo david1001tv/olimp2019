@@ -147,7 +147,7 @@ class Map extends Component {
                     popoverText="Оцінювання"
                 />
                 <div
-                    className="map-label map-label--third map-label map-label--unavailable no-select"
+                    className={`map-label map-label--third map-label map-label--${progressManager.getStageStatus(3)} no-select`}
                 >
                     <h3>Етап 3</h3>
                     <h4>Gaudeamus igitur</h4>
