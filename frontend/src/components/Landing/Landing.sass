@@ -77,14 +77,14 @@ header
 			background-image: url(../../img/buttons/button-continue-pressed.png)
 
 #photo
-	display: none
+	display: block
 	opacity: 0
 	position: fixed
-	top: 50%
+	top: 0
 	left: 50%
 	height: 80vh
-	transform: translate(-50%, -50%)
-	transition: opacity 2s
+	transform: translate(-50%, -120%)
+	transition: all .45s
 	border-radius: 7px
 	box-shadow: 3px 3px 8px #666
 
@@ -101,10 +101,12 @@ footer
 		color: #3C3C3C
 		span
 			cursor: pointer
-		& span:hover
-			#photo
-				display: block
-				opacity: 1
+			&:hover
+				#photo
+					display: block
+					opacity: 1
+					top: 50%
+					transform: translate(-50%, -50%)
 	.btn-feedback
 		margin-top: 10px
 		font: 1.1em "Neucha"
