@@ -9,12 +9,12 @@ export default class TranslateState extends Phaser.State {
     this.game.camera.flash(0x000000, 3000, true);
     yield;
 
-    this.game.displayDialogLine('Альошин', 'Та не розумію я вас! Я у школі вивчав німецьку!', () => this.next());
+    this.game.displayDialogLine('Альошин С.В.', 'Та не розумію я вас! Я у школі вивчав німецьку!', () => this.next());
     yield;
 
     this.alyoshin_1.alpha = 0;
     this.alyoshin_2.alpha = 1;
-    this.game.displayDialogLine('Альошин', 'О, ти повернувся. Іди допоможи перекласти.', () => this.next());
+    this.game.displayDialogLine('Альошин С.В.', 'О, ти повернувся. Іди допоможи перекласти.', () => this.next());
     yield;
 
     this.game.phone.setEnabled(false);
@@ -38,7 +38,7 @@ export default class TranslateState extends Phaser.State {
     this.alyoshin_2.alpha = 0;
 
     //first question
-    this.game.displayDialogLine('Альошин', 'Можеш дізнатися, чи приніс він усі документи?', () => this.next());
+    this.game.displayDialogLine('Альошин С.В.', 'Можеш дізнатися, чи приніс він усі документи?', () => this.next());
     yield;
     this.game.phone.setEnabled(true);
 
@@ -112,7 +112,7 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.displayNote(0, 0);
 
     //third question
-    setTimeout(() => this.game.displayDialogLine('Альошин', "У нашому викладацькому штаті є видатні професори, лектори  та  досвідчені \
+    setTimeout(() => this.game.displayDialogLine('Альошин С.В.', "У нашому викладацькому штаті є видатні професори, лектори  та  досвідчені \
     викладачі, ти скоро з ними познайомишся.", () => this.next()), 100);
     yield;
 
@@ -149,7 +149,7 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.displayNote(0, 0);
 
     //fourth question
-    setTimeout(() => this.game.displayDialogLine('Альошин', "Добре, усі 4 роки навчання поділяються на семестри, кожен з яких йде \
+    setTimeout(() => this.game.displayDialogLine('Альошин С.В.', "Добре, усі 4 роки навчання поділяються на семестри, кожен з яких йде \
     протягом 16 тижнів.", () => this.next()), 100);
     yield;
 
@@ -186,7 +186,7 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.displayNote(0, 0);
 
     //fifth question
-    setTimeout(() => this.game.displayDialogLine('Альошин', "Скажи, що семестр включає в себе відвідування лекцій, семінарів, \
+    setTimeout(() => this.game.displayDialogLine('Альошин С.В.', "Скажи, що семестр включає в себе відвідування лекцій, семінарів, \
     консультацій та написання курсовоЇ роботи. ", () => this.next()), 100);
     yield;
 
@@ -223,7 +223,7 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.displayNote(0, 0);
 
     //sixth question
-    setTimeout(() => this.game.displayDialogLine('Альошин', "Зауваж, що практичні заняття проводяться у гарно оснащених \
+    setTimeout(() => this.game.displayDialogLine('Альошин С.В.', "Зауваж, що практичні заняття проводяться у гарно оснащених \
     лабораторіях", () => this.next()), 100);
     yield;
 
@@ -260,7 +260,7 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.displayNote(0, 0);
 
     //seventh question
-    setTimeout(() => this.game.displayDialogLine('Альошин', "Тепер основне: наш університет надає денне або заочне навчання на вимогу \
+    setTimeout(() => this.game.displayDialogLine('Альошин С.В.', "Тепер основне: наш університет надає денне або заочне навчання на вимогу \
     студента.", () => this.next()), 100);
     yield;
 
@@ -297,7 +297,7 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.displayNote(0, 0);
 
     //eighth question
-    setTimeout(() => this.game.displayDialogLine('Альошин', "Ми можемо надати йому житло у гуртожитку.", () => this.next()), 100);
+    setTimeout(() => this.game.displayDialogLine('Альошин С.В.', "Ми можемо надати йому житло у гуртожитку.", () => this.next()), 100);
     yield;
 
     this.testAPI.displayNote(0.5, 1);
@@ -347,7 +347,7 @@ export default class TranslateState extends Phaser.State {
     this.alyoshin_1.alpha = 0;
     this.alyoshin_2.alpha = 1;
 
-    setTimeout(() => this.game.displayDialogLine('Альошин', "Дякую тобі за допомогу! Нам такі на КН знадобляться. \
+    setTimeout(() => this.game.displayDialogLine('Альошин С.В.', "Дякую тобі за допомогу! Нам такі на КН знадобляться. \
     До речі, можеш ближче ознайомитись за нашою кафедрою. Приходь о 14:00 у хол цього корпусу, Олена Євгенівна \
     хотіла познайомити абітуриєнтів із викладачами.", () => this.next()), 100);
     yield;
