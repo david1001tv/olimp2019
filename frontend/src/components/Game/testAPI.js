@@ -35,10 +35,10 @@ const testAPI = {
         }
         if(this.flag === false) {
             if(obj.isHalf === true){
-                this.grade += 50;
+                this.grade += 25;
             }
             if(obj.isRight === true){
-                this.grade += 50;
+                this.grade += 25;
             }
             this.next();
         }

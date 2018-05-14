@@ -337,6 +337,16 @@ export default class TranslateState extends Phaser.State {
     to live in.  I promise I will attend all the classes and work hard.  Thank you for your help.", () => this.next()), 100);
     yield;
 
+    this.game.add.tween(this.indian).to({
+        alpha: 0
+    }, 1500, Phaser.Easing.Cubic.InOut)
+        .start().onComplete.add(() => {
+        this.next();
+    });
+    yield;
+    this.alyoshin_1.alpha = 0;
+    this.alyoshin_2.alpha = 1;
+
     setTimeout(() => this.game.displayDialogLine('Альошин', "Дякую тобі за допомогу! Нам такі на КН знадобляться. \
     До речі, можеш ближче ознайомитись за нашою кафедрою. Приходь о 14:00 у хол цього корпусу, Олена Євгенівна \
     хотіла познайомити абітуриєнтів із викладачами.", () => this.next()), 100);

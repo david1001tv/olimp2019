@@ -127,7 +127,7 @@ export default class WaterState extends Phaser.State {
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
 
-        this.grade = 0;
+        this.grade = 100;
         this.flag = false;
 
         this.testAPI = {...testAPI};
