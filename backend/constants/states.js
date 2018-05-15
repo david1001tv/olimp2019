@@ -16,6 +16,7 @@ module.exports = [
     'Proffs',
     'Audience',
     'Grades',
+    'TransitionToThirdStage',
     'thirdIntro',
     'Labyrinth',
     'ToLaboratory',

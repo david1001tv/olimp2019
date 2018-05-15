@@ -79,8 +79,8 @@ export default class GradesState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        window.location.reload();
-        this.game.startState('Map');
+        //window.location.reload();
+        this.game.nextState();
     }
 
     init() {
@@ -204,7 +204,7 @@ export default class GradesState extends Phaser.State {
         this.tenTween.chain(this.elevenTween);
 
         this.stage.disableVisibilityChange = true;
-        this.next();
+        //this.next();
     }
 
     next() {

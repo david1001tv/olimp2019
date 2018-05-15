@@ -21,7 +21,6 @@ export default class GrannyBadState extends Phaser.State {
 
         this.fivecopQuite.alpha = 0;
         this.fivecopTalk.alpha = 1;
-        this.game.phone.setEnabled(true);
         this.game.displayDialogLine('П\'ятикоп О.Є.', 'Доброго дня! Мене звуть П\'ятикоп Олена Євгенівна. \
         Я викладач кафедри Комп\'ютерних наук. Зараз хочу вам запропонувати пройти зі мною, подивитись де \
         знаходиться кафедра та познайомитись з викладачами.', () => this.next());
