@@ -76,7 +76,7 @@ class Game extends Phaser.Game {
         this.state.add('Dance', DanceState, false);
         this.state.add('Final', new Phaser.State(), false);
 
-        this.state.start('Boot', true, false, 'Cross');
+        this.state.start('Boot', true, false, 'Map');
     }
 
     @autobind
