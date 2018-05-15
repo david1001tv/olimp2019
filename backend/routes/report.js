@@ -32,7 +32,7 @@ router.get('/json', async function (req, res) {
             {model: User, required: true},
         ],
         order: [
-            ['score', 'DESC'],
+            [sequelize.fn('SUM', sequelize.col('score')), 'DESC'],
         ],
         limit: 10,
         group: 'user.id',
@@ -42,7 +42,7 @@ router.get('/json', async function (req, res) {
         name: e.user.lastName + ' ' + e.user.firstName,
         time: e.time,
         score: e.score,
-    })));
+    })).sort((a, b) => b - a));
 });
 
 router.get('/excel', async function (req, res) {
