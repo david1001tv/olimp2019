@@ -169,8 +169,17 @@ footer
 
 @media screen and (max-width: 900px)
 	#photo
-		height: auto
+		height: 0
 		width: 80%
+
+	.copyright
+		span
+			&:hover
+				#photo
+					opacity: 1
+					height: auto !important
+					top: 50%
+
 
 @media screen and (max-width: 630px)
 	.md-dialog
