@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import PhaserInput from 'phaser-input';
 import CrosswordInput from './CrosswordInput';
 
 import {smartSetHeight} from '../../../utils';
@@ -33,7 +32,6 @@ export default class CrossState extends Phaser.State {
         this.load.image('ok', './assets/images/2-1 (crossword)/ok.png');
         this.load.image('bad', './assets/images/2-1 (crossword)/bad.png');
         this.load.image('square', './assets/images/2-1 (crossword)/square.png');
-        this.game.plugins.add(PhaserInput.Plugin);
     }
 
     create() {
