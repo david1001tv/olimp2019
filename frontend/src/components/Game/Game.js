@@ -67,7 +67,7 @@ class Game extends Phaser.Game {
         this.state.add('Proffs', ProffsState, false);
         this.state.add('Audience', AudienceState, false);
         this.state.add('Grades', GradesState, false);
-        this.state.add('TransitionToThirdStageState', TransitionToThirdStageState, false);
+        this.state.add('TransitionToThirdStage', TransitionToThirdStageState, false);
         this.state.add('thirdIntro', thirdIntroState, false);
         this.state.add('Labyrinth', LabyrinthState, false);
         this.state.add('ToLaboratory', ToLaboratoryState, false);
