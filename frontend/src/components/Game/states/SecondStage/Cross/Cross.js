@@ -62,109 +62,36 @@ export default class CrossState extends Phaser.State {
             new CrosswordInput(1216, 618, 'україни', 2, this.game),
             new CrosswordInput(1215, 676, 'козак', 2, this.game),
         ];
-        this.inputs[0].focusCell(0);
-        this.inputs[0].isFocused = true;
-    }
-
-    create_input(x, y, lenght, empty) {
-        let i;
-        let word = [lenght];
-
-        for (i = 0; i < lenght; i++) {
-            x += 55;
-            if (i == empty) {
-                x += 55;
-            }
-            word[i] = this.game.add.inputField(x, y, {
-                fillAlpha: 0,
-                padding: 10,
-                width: 25,
-                fill: '#5700ff',
-                font: '35px Pangolin',
-                max: 1,
-                placeHolder: 'Password',
-            });
-        }
-
-        word.flag = false;
-
-        let regEx = /[а-яА-ЯіІїЇєЄ]/;
-
-        word.forEach(function (curr, index, first_word) {
-            curr.domElement.element.onkeydown = function (e) {
-                e.preventDefault();
-                if (regEx.test(e.key)) {
-                    curr.setText(e.key);
-                    curr.startFocus();
-                    if (first_word[index + 1] !== undefined) {
-                        curr.endFocus();
-                        first_word[index + 1].startFocus();
+        this.inputs.forEach((input, index) => {
+            input.onInputEnd = () => {
+                if (input.value === input.word) {
+                    input.blur();
+                    let nextInput = this.inputs.find((curr, currIndex) => !curr.disabled && currIndex > index);
+                    if (nextInput) {
+                        setTimeout(() => nextInput.focusCell(0), 0);
                     }
+                    input.wrong = false;
+                    input.disabled = true;
+                } else {
+                    input.wrong = true;
                 }
-                else if (e.keyCode == 8) {
-                    curr.setText('');
-                    curr.startFocus();
-                    if (first_word[index - 1] !== undefined && this.flagBackspace === true) {
-                        curr.endFocus();
-                        first_word[index - 1].startFocus();
-                    }
-                    if (this.flagBackspace === true) {
-                        this.flagBackspace = false;
+
+                if (this.inputs.every(input => input.disabled)) {
+                    let rate;
+                    if ((this.time) / 1000 >= 330) {
+                        rate = this.maxPoints;
                     }
                     else {
-                        this.flagBackspace = true;
+                        let percent = this.time / (7 * 60 * 1000);
+                        rate = Math.round(this.minPoints * percent + this.minPoints);
                     }
+                    this.game.phone.completeTodo("CROSS");
+                    setTimeout(() => this.game.nextState(rate), 500);
                 }
             };
         });
-        return word;
-    }
-
-    check_word(all, input_obj, str) {
-        if (input_obj.map(e => e.value.toLowerCase()).join('') === str) {
-            input_obj.isCorrect = true;
-        }
-        else {
-            input_obj.isCorrect = false;
-        }
-        if (input_obj.isCorrect) {
-            input_obj.ok.alpha = 1;
-            input_obj.bad.alpha = 0;
-            input_obj.flag = false;
-            if (str === 'ураїни') {
-                input_obj.ok.alpha = 1;
-                input_obj.ok_small.alpha = 1;
-                input_obj.bad_small.alpha = 0;
-            }
-        }
-        else {
-            if (!input_obj.flag || !this.flag_kiy) {
-                input_obj.ok.alpha = 0;
-                input_obj.bad.alpha = 1;
-                if (str === 'ураїни') {
-                    if (input_obj[input_obj.length - 1].value.toLowerCase() === 'и') {
-                        input_obj.ok_small.alpha = 1;
-                        input_obj.bad_small.alpha = 0;
-                        this.flag_kiy = true;
-                    }
-                    else {
-                        input_obj.ok_small.alpha = 0;
-                        input_obj.bad_small.alpha = 1;
-                    }
-                }
-                input_obj.flag = true;
-            }
-        }
-
-        if (all.every(e => e.isCorrect)) {
-            if ((this.time) / 1000 >= 330) this.rate = this.maxPoints;
-            else {
-                let percent = this.time / (7 * 60 * 1000);
-                this.rate = Math.round(this.minPoints * percent + this.minPoints);
-            }
-            this.game.phone.completeTodo("CROSS");
-            this.game.nextState(this.rate);
-        }
+        this.inputs[0].focusCell(0);
+        this.inputs[0].isFocused = true;
     }
 
     checkRate() {
