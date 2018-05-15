@@ -80,10 +80,10 @@ header
 	display: block
 	opacity: 0
 	position: fixed
-	top: 0
+	top: 50%
 	left: 50%
-	height: 80vh
-	transform: translate(-50%, -120%)
+	height: 0
+	transform: translate(-50%, -50%)
 	transition: all .45s
 	border-radius: 7px
 	box-shadow: 3px 3px 8px #666
@@ -103,10 +103,9 @@ footer
 			cursor: pointer
 			&:hover
 				#photo
-					display: block
 					opacity: 1
 					top: 50%
-					transform: translate(-50%, -50%)
+					height: 80vh
 	.btn-feedback
 		margin-top: 10px
 		font: 1.1em "Neucha"
@@ -167,6 +166,11 @@ footer
     background-image: url(../../img/buttons/button-feedback-released.png)
     &:active
       background-image: url(../../img/buttons/button-feedback-pressed.png)
+
+@media screen and (max-width: 900px)
+	#photo
+		height: auto
+		width: 80%
 
 @media screen and (max-width: 630px)
 	.md-dialog
