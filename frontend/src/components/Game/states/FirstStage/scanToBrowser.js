@@ -45,7 +45,7 @@ export default class scanToBrowserState extends Phaser.State {
 
         this.load.image('d-right', './assets/images/1-2 (point&click)/d-right.png');
         this.load.image('scanner', './assets/images/1-1 (intro)/printer.png');
-        this.load.image('pc', './assets/images/1-1 (intro)/pc.png');
+        this.load.image('pc', './assets/images/1-1 (intro)/pc2.png');
         this.load.image('chair', './assets/images/1-1 (intro)/chair.png');
     }
 
