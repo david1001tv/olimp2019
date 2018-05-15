@@ -46,11 +46,11 @@ class Mail extends Component {
                                     >
                                         <div className="sender">
                                             <i className="fas fa-user icon-user"></i>
-                                            {message.sender}
+                                            <span>{message.sender}</span>
                                         </div>
                                         <div className="theme">
                                             <i className="fas fa-envelope icon-letter"></i>
-                                            {message.theme}
+                                            <span>{message.theme}</span>
                                         </div>
                                         <div className="text">
                                             {message.preview.slice(0, 100) + '...'}

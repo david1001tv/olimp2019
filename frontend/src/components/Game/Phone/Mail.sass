@@ -25,16 +25,27 @@
     .sender
       padding-right: 20%
       font-size: .95em
+      span
+        display: inline-block
+        margin-left: 4%
+    .theme
+      span
+        display: inline-block
+        margin-left: 2%
     .theme,
     .text
-      font: .95em "Open Sans"
+      font-size: .95em
+      font-family: 'Open Sans'
     .text
-      font: .8em "RobotoLight"
+      font-size: .8em
+      font-family: 'Open Sans'
+      font-weight: 300
     .date
       position: absolute
       top: 8%
       right: 3%
-      font: .7em "Exo2Regular"
+      font-size: .7em
+      font-family: 'Open Sans'
     .icon-user,
     .icon-letter
       color: #878787
@@ -43,12 +54,12 @@
   .message.unread
     background-color: #F8F8F8
     color: #000
-    .sender
-      font-family: "OpenSansBold"
-    .theme
-      font-family: "OpenSansBold"
+    .sender,
+    .theme,
     .date
-      font-family: "Exo2Bold"
+      font-family: 'Open Sans', sans-serif
+      font-weight: 700
+    .date
       color: #4773DB
     .icon-user,
     .icon-letter
@@ -66,10 +77,12 @@
       padding-bottom: 10%
       height: 90%
       color: #000
-      font-family: "RobotoLight"
+      font-family: 'Open Sans'
+      font-weight: 300
       overflow-y: scroll
       .theme
-        font-family: "OpenSansSemiBold"
+        font-family: 'Open Sans', sans-serif
+        font-weight: 600
         padding:  6% 7%
         border-bottom: 1px solid #DDDDDD
       .info
@@ -93,6 +106,7 @@
             font-size: .75em
       .text
         padding: 1% 7%
-        font: .9em "RobotoLight"
+        font: .9em 'Open Sans', sans-serif
+        font-weight: 300
         text-align: justify
         color: #4C4C4C
