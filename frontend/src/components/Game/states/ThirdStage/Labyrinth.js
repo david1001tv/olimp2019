@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import PhaserInput from 'phaser-input';
 import {smartSetHeight} from '../../utils';
 
 const PLAYER_SPEED = 250;

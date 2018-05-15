@@ -11,7 +11,7 @@ module.exports = {
     cache: true,
 
     entry: {
-        vendor: ['pixi', 'p2', 'phaser', 'webfontloader', 'react', 'react-dom', 'phaser-input'],
+        vendor: ['pixi', 'p2', 'phaser', 'webfontloader', 'react', 'react-dom'],
         main: './src/index.js',
     },
     output: {
