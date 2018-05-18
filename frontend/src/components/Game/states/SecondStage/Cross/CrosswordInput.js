@@ -105,7 +105,7 @@ export default class CrosswordInput {
             this.focusedCell.value = e.key;
 
             let nextIndex = this.focusedCell.index + 1;
-            if (nextIndex >= this.cells.length) {
+            if (nextIndex >= this.cells.length || this.mark.visible) {
                 this.onInputEnd();
             } else {
                 this.focusCell(this.cells[nextIndex]);
