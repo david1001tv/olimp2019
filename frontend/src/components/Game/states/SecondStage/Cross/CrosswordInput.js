@@ -95,7 +95,7 @@ export default class CrosswordInput {
         if (!this.isFocused)
             return;
 
-        if (e.key.length === 1 && /[А-яіІїЇєЄ']/.test(e.key)) {
+        if (/[А-яіІїЇєЄ']/.test(e.key)) {
             if (this.focusedCell.index === this.prefilledIndex && e.key !== this.focusedCell.value) {
                 this.focusedCell.sprite.tint = TINT_ERROR;
                 return;
@@ -104,20 +104,26 @@ export default class CrosswordInput {
             this.focusedCell.text.setText(e.key);
             this.focusedCell.value = e.key;
 
-            let nextIndex = this.focusedCell.index + 1;
-            if (nextIndex >= this.cells.length || this.mark.visible) {
+            let nextCell = this.cells[this.focusedCell.index + 1];
+            if (this.word.length === this.value.length) {
                 this.onInputEnd();
+                if (this.isWrong && nextCell) {
+                    this.focusCell(nextCell);
+                }
             } else {
-                this.focusCell(this.cells[nextIndex]);
+                this.focusCell(nextCell);
             }
         }
         switch (e.keyCode) {
             case KEY_BACKSPACE:
-                this.mark.visible = false;
+                if (this.focusedCell.index === this.prefilledIndex && this.focusedCell.index === 0)
+                    return;
+
                 if ((this.focusedCell.value === '' || this.focusedCell.index === this.prefilledIndex) && this.focusedCell.index !== 0) {
                     let nextIndex = this.focusedCell.index - 1;
                     this.focusCell(this.cells[nextIndex]);
                 } else {
+                    this.mark.visible = false;
                     this.focusedCell.value = '';
                     this.focusedCell.text.setText('');
                 }
@@ -159,6 +165,10 @@ export default class CrosswordInput {
         } else {
             this.mark.loadTexture('ok');
         }
+    }
+
+    get isWrong() {
+        return this.mark.visible && this.mark.key === 'bad';
     }
 
     set disabled(isDisabled) {
