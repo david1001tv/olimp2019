@@ -23,6 +23,7 @@ class Landing extends Component {
     }
 
     componentDidMount() {
+        logOut();
         getLikeCount()
             .then(res => this.setState({likeCount: res.count}));
     }
