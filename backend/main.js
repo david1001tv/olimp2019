@@ -21,7 +21,7 @@ module.exports = app;
 app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
 app.set('port', config.port || 8090);
 app.use(compression());
-app.use(morgan(':date[web] :method :url :status :response-time ms'));
+app.use(morgan(':date[web] :method :url :status :response-time ms :remote-addr'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
