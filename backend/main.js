@@ -9,7 +9,6 @@ const chalk = require('chalk');
 
 const config = require('./config');
 
-
 const cors = require('cors');
 
 const app = express();
@@ -18,7 +17,7 @@ module.exports = app;
 /**
  * Express configuration.
  */
-app.set('host', process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0');
+app.set('host', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
 app.set('port', config.port || 8090);
 app.use(compression());
 app.use(morgan(':date[web] :method :url :status :response-time ms :remote-addr'));

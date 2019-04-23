@@ -4,3 +4,4 @@ node_modules/
 backend/config.js
 frontend/public/build
 package-lock.json
+npm-debug.log
