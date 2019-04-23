@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack --config webpack.prod.config.js -p",
-    "start": "./node_modules/.bin/webpack-dev-server --hot --inline --host 0.0.0.0"
+    "start": "./node_modules/.bin/webpack-dev-server --hot --inline --host 127.0.0.1"
   },
   "keywords": [],
   "author": "Fruch6807",
