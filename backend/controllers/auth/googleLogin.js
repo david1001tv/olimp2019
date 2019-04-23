@@ -11,7 +11,7 @@ module.exports = {
     googleLoginValidator: async function (req, res, next) {
         const {body} = req;
         //валидация данных
-        var constraints = {
+        const constraints = {
             idToken: {
                 presence: {
                     allowEmpty: false

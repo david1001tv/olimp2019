@@ -12,7 +12,7 @@ module.exports = {
     googleRegisterValidator: async function (req, res, next) {
         const {body} = req;
         //валидация данных
-        var constraints = {
+        const constraints = {
             email: {
                 presence: {
                     allowEmpty: false,
@@ -49,7 +49,7 @@ module.exports = {
         };
         let errors = validate(body, constraints);
         //проверка есть ли ошибки
-        if (errors != undefined) {
+        if (errors !== undefined) {
             console.log('Validation errors', errors);
             res.status(400).json({errors});
         }

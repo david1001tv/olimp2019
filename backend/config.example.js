@@ -1,5 +1,6 @@
 module.exports = {
     port: 8080,
+    host: 'localhost',
     dbName: 'olymp-pstu',
     db: {
         database: 'olymp-pstu',

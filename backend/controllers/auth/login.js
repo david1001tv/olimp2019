@@ -8,7 +8,7 @@ module.exports = {
     loginValidator: function (req, res, next) {
         const {body} = req;
         //валидация данных
-        var constraints = {
+        const constraints = {
             email: {
                 presence: {
                     allowEmpty: false,
