@@ -14,7 +14,7 @@ const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 
 
-let focusChangeListeners = [];
+const focusChangeListeners = [];
 function handleFocusChange() {
     focusChangeListeners.forEach(f => f());
 }
@@ -104,7 +104,7 @@ export default class CrosswordInput {
             this.focusedCell.text.setText(e.key);
             this.focusedCell.value = e.key;
 
-            let nextCell = this.cells[this.focusedCell.index + 1];
+            const nextCell = this.cells[this.focusedCell.index + 1];
             if (this.word.length === this.value.length) {
                 this.onInputEnd();
                 if (this.isWrong && nextCell) {
