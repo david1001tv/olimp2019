@@ -12,5 +12,5 @@
 - run `npm run debug`
 
 **To run frontend:**
-- go to `/fronend` directory and run `npm install`
+- go to `/frontend` directory and run `npm install`
 - run `npm start`
