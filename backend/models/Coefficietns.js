@@ -1,24 +1,24 @@
 const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize) => {
-    const Skills = sequelize.define('skills', {
+    const Coefficients = sequelize.define('coefficients', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
         },
-        first_skill: {
+        first_proff: {
             type: DataTypes.INTEGER,
             defaultValue: null,
             allowNull: true,
         },
-        second_skill: {
+        second_proff: {
             type: DataTypes.INTEGER,
             defaultValue: null,
             allowNull: true,
         },
-        third_skill: {
+        third_proff: {
             type: DataTypes.INTEGER,
             defaultValue: null,
             allowNull: true,
@@ -28,9 +28,9 @@ module.exports = (sequelize) => {
         freezeTableName: true,
     });
 
-    Skills.associate = function (models) {
+    Coefficients.associate = function (models) {
         const {User} = models;
-        Skills.User = Skills.belongsTo(User, {
+        Coefficients.User = Coefficients.belongsTo(User, {
             onDelete: 'CASCADE',
             foreignKey: {
                 name: 'user_id',
@@ -40,5 +40,5 @@ module.exports = (sequelize) => {
         });
     };
 
-    return Skills;
+    return Coefficients;
 };

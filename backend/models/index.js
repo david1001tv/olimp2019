@@ -7,6 +7,8 @@ const models = {};
     require('./State'),
     require('./User'),
     require('./HistoryEntry'),
+    require('./Skills'),
+    require('./Coefficietns'),
 ].forEach((e) => {
     const model = e(sequelize);
     let modelName = model.name.split('_').map(e => e[0].toUpperCase() + e.slice(1)).join('');
