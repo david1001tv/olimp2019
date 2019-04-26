@@ -18,10 +18,11 @@ router.post('/state/:state', async function (req, res) {
         }));
 
         if (!state) {
-            res.status(400).send();
+            res.status(404).send();
             return;
         }
 
+        // выбираем индекс поселднего пройденого этапа
         let lastIndex = (await sequelize.query(`SELECT 
     MAX(idx) AS lastStateIndex
 FROM
@@ -37,6 +38,7 @@ FROM
 
         lastIndex = lastIndex !== undefined ? lastIndex : -1;
 
+        // проверяем на правильность последовательности этапов
         if (state.index > lastIndex + 1) {
             res.status(400).send('States are not sequential');
             return;
@@ -49,6 +51,7 @@ FROM
             }
         }));
 
+        // проверка на то проходил ли чел этот этап раньше
         if (historyEntry) {
             historyEntry.time = req.body.time;
             historyEntry.score = req.body.score;
