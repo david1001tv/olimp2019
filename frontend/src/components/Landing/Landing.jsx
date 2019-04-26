@@ -7,10 +7,11 @@ import photo from '../../img/photo.jpg'
 
 import Login from './Login';
 import Feedback from './Feedback';
-import './Landing.sass';
+//import './Landing.sass';
+import './main.sass';
 import {logOut, getLikeCount} from '~api';
 
-
+  
 class Landing extends Component {
     state = {
         formIsVisible: false,
@@ -32,7 +33,10 @@ class Landing extends Component {
         const {formIsVisible, feedbackIsVisible, likeCount} = this.state;
 
         return (
-            <div>
+
+
+
+             <div>
                 <div className="wrapper">
                     <div className="content">
                         <header>
@@ -52,36 +56,13 @@ class Landing extends Component {
                         </div>
                     </div>
                     <footer>
-                        <div className="likes">Ця гра сподобалась {likeCount} користувачам.</div>
-                        <div className="copyright">
-                            <span>Команда ДВНЗ “ПДТУ”, 2018 ©
-                                <img className="photo" id="photo" src={photo} alt="" />
-                            </span>
-                        </div>
-                        <button className="btn-feedback"
-                                id="btn-feedback"
-                                onClick={() => this.setState({feedbackIsVisible: true})}>
-                                Зворотній зв'язок
-                        </button>
+                      
                     </footer>
                 </div>
-                <DialogContainer
-                    focusOnMount={false}
-                    visible={formIsVisible}
-                    onHide={() => this.setState({formIsVisible: false})}
-                >
-                    <Login />
-                </DialogContainer>
-                <DialogContainer
-                    focusOnMount={false}
-                    visible={feedbackIsVisible}
-                    onHide={() => this.setState({feedbackIsVisible: false})}
-                >
-                    <Feedback />
-                </DialogContainer>
+             
             </div>
-        )
-            ;
+        );
+             
     }
 }
 

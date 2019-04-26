@@ -1,0 +1,196 @@
+* {
+  padding: 0;
+  margin: 0; }
+  *:active, *:focus {
+    outline: none; }
+  * html,
+  * body {
+    height: 100%; }
+
+body {
+  font: 18px "Pangolin";
+  background-image: url(../img/bg.jpg);
+  -webkit-background-size: 100% 100%;
+          background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 0 50%; }
+
+.wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%; }
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer; }
+
+.content {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto; }
+
+header .page-title {
+  padding-top: 30px;
+  font: 4em "Neucha";
+  text-align: center;
+  font-stretch: ultra-expanded; }
+
+.page-subtitle {
+  margin: 40px auto 30px;
+  text-align: center;
+  font-size: 2em; }
+
+.game-info {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 1.3em;
+  text-align: center;
+  color: #3A3A3A; }
+
+.buttons {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 100px 0; }
+  .buttons .btn {
+    margin: 25px 0;
+    width: 100%;
+    text-align: center;
+    width: 340px;
+    height: 94px;
+    -webkit-background-size: 100% 100%;
+            background-size: 100%;
+    background-repeat: no-repeat;
+    margin: 20px auto; }
+  .buttons #start {
+    background-image: url(../img/buttons/button-start-released.png); }
+    .buttons #start:active {
+      background-image: url(../img/buttons/button-start-pressed.png); }
+  .buttons #continue {
+    background-image: url(../img/buttons/button-continue-released.png); }
+    .buttons #continue:active {
+      background-image: url(../img/buttons/button-continue-pressed.png); }
+
+footer {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  padding-bottom: 30px;
+  text-align: center; }
+  footer .likes {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #2B2B2B; }
+  footer .copyright {
+    font-size: 1.7em;
+    color: #3C3C3C; }
+  footer .btn-feedback {
+    margin-top: 10px;
+    font: 1.1em "Neucha";
+    color: #353535;
+    border-bottom: 1px solid #353535; }
+
+#auth {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 30px 10%;
+  background-color: #fff;
+  -webkit-box-shadow: 6px 6px 8px #A3A3A3;
+          box-shadow: 6px 6px 8px #A3A3A3;
+  width: 30%; }
+  #auth .title {
+    text-align: center;
+    font: 3em "Neucha"; }
+  #auth .google-auth {
+    width: 240px;
+    margin: 30px; }
+    #auth .google-auth img {
+      width: 100%; }
+  #auth input {
+    display: block;
+    margin: 10px auto;
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    padding: 3px;
+    font: 1.3em "Pangolin";
+    border-bottom: 2px solid #000;
+    width: 90%; }
+  #auth .submit {
+    width: 240px;
+    height: 90px;
+    margin-top: 40px;
+    -webkit-background-size: 100% 100%;
+            background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../img/buttons/button-enter-released.png);
+    curor: pointer; }
+    #auth .submit:active {
+      background-image: url(../img/buttons/button-enter-pressed.png); }
+
+#feedback {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  -webkit-box-shadow: 6px 6px 8px #A3A3A3;
+          box-shadow: 6px 6px 8px #A3A3A3;
+  width: 600px; }
+  #feedback .title {
+    text-align: center;
+    font: 3em "Neucha"; }
+  #feedback input {
+    display: block;
+    margin: 20px auto;
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    padding: 3px;
+    font: 1.3em "Pangolin";
+    border-bottom: 2px solid #000; }
+  #feedback textarea {
+    margin-top: 20px;
+    width: 280px;
+    padding: 5px;
+    border: 2px solid #D2D2D2;
+    -webkit-border-radius: 3px;
+            border-radius: 3px;
+    text-align: left;
+    font: 1.1em "Pangolin"; }
+  #feedback .submit {
+    width: 240px;
+    height: 90px;
+    margin-top: 40px;
+    -webkit-background-size: 100% 100%;
+            background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../img/buttons/button-feedback-released.png);
+    cursor: pointer; }
+    #feedback .submit:active {
+      background-image: url(../img/buttons/button-feedback-pressed.png); }
