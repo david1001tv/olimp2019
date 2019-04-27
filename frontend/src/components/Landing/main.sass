@@ -1,14 +1,15 @@
-// font-face
-//     font-family: 'Pribambas'
-//     src: url(../../font/Pribambas-Regular.ttf)
+@font-face
+    font-family: "Pribambas"
+    src: url("/../font/Pribambas-Regular.ttf")
     
-// font-face
-//     font-family: 'Leftonade'
-//     src: url(../../font/Leftonade-Regular.otf)
+font-face
+    font-family: "Leftonade"
+    src: url("/../font/Leftonade-Regular.otf")
  
 body
     margin: 0
     padding: 0
+    font-family: 'Pribambas'
 
 
 
@@ -16,11 +17,12 @@ body
 .main
     height: 100%
     background: url(../../img/main_bg.png) no-repeat center top / cover
+    background-repeat: no-repeat
 
 .main-text
     display: flex
     justify-content: center
-    margin-top: 2.62%
+    
 
 .for_t
     width: 61.57%
@@ -40,6 +42,7 @@ body
 
 
 .text_p p
+    font-family: 'Leftonade'
     text-align: center
     font-size: 1.8vw
 
@@ -65,8 +68,8 @@ body
 
 
 .but-start
+    background-image: url(../../img/start.png)
     background-size: 100%
-    /* margin-bottom: 10%; */
     margin-bottom: 4%
     background-position: center
     background-repeat: no-repeat
@@ -115,7 +118,7 @@ body
 
 
 .footer
-    margin-bottom: 7.4%
+    margin-bottom: 7.2%
     height: 100%
     margin-top: 23.94%
     display: flex
@@ -128,7 +131,7 @@ body
     flex-direction: column
 
 
-.butf a
+.butf div
     font-size: 1.9vw
     text-decoration: none
     text-align: center
@@ -155,6 +158,13 @@ body
 
 
 
-.link-f a p
+.link-f div p
     margin: 6.1%
  
+.butf a:hover
+    color: gray
+    transition: 0.5s
+
+
+.link-f div:hover
+    cursor: pointer
