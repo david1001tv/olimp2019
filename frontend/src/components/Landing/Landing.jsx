@@ -55,13 +55,13 @@ class Landing extends Component {
     </div>
     <div className="wrapper">
     <div className="main-button">
-        <div className="but-start">
+    <div className="but-start">
           
-            <a href="#"><p>ПОЧАТИ РУХ</p></a>
-        </div>
-        <div className="but-cont">
-                <a href="#"><p>ПРОДОВЖИТИ</p></a>
-        </div>
+          <button to="/game" onClick={() => logOut()}><p>ПОЧАТИ РУХ</p></button>
+      </div>
+      <div className="but-cont">
+              <button  onClick={() => this.setState({formIsVisible: true})}><p>ПРОДОВЖИТИ</p></button>
+      </div>
     </div>
 
 
