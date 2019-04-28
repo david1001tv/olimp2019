@@ -40,10 +40,10 @@ export default class docsToScanState extends Phaser.State {
     }
 
     preload() {
-        this.load.image('bg', './assets/images/1-1 (intro)/bg-1-1.png');
+        this.load.image('bg', './assets/images/1-1(intro)/bg-1-1.png');
 
         this.load.image('d-right', './assets/images/1-2 (point&click)/d-right.png');
-        this.load.image('scanner', './assets/images/1-1 (intro)/printer.png');
+        this.load.image('scanner', './assets/images/1-1(intro)/printer.png');
     }
 
     create() {
