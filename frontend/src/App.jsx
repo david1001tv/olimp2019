@@ -4,6 +4,10 @@ import {Switch, Route} from 'react-router-dom';
 import PrivateRoute from '~components/PrivateRoute';
 import Loadable from 'react-loadable';
 
+/*
+
+
+*/
 
 const LoadingScreen = () => {
     return (

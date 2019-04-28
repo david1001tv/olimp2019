@@ -1,0 +1,49 @@
+<div>
+    <body className="main">
+    <div className="main-text">
+        <div className="for_t">
+             <h1>
+            Квест “Моя майбутня професiя”
+        </h1>
+        </div>
+       
+    </div>
+    <div className="main-text_p">
+            <div className="text_p">
+               <p>
+                    Пориньте в історію вступу до установи вищої освіти.
+                     Ваше завдання полягає у подоланні тернистого шляху 
+                     абітурієнта, який проходить вступну кампанію та знайомиться
+                      зі специфікою своєї професії!
+               </p>
+               </div>
+    </div>
+    <div className="wrapper">
+    <div className="main-button">
+        <div clclassNameass="but-start">
+          
+            <a href="#"><p>ПОЧАТИ РУХ</p></a>
+        </div>
+        <div className="but-cont">
+                <a href="#"><p>ПОЧАТИ РУХ</p></a>
+        </div>
+    </div>
+
+
+
+</div>
+
+ <div className="footer">
+    <div className="butf">
+        <div className="wrap">
+        <div className="link-f"><a href="#"> <p> Правила Квесту</p></a></div>
+        <div className="link-f"><a href="#"><p> КОМАНДА ДВНЗ “ПДТУ”, 2019 ©</p></a></div>
+        <div className="link-f"><a href="#"><p> Зворотній зв'язок</p></a></div>
+        <div className="link-f"> <a href="#"><p> ОФІЦІЙНИЙ САЙТ ПДТУ</p></a></div>
+    </div>
+    </div>
+</div>
+    </body>
+
+</div>
+

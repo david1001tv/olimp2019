@@ -10,8 +10,9 @@ import './Register.sass';
 import {register, googleRegister, isAuthenticated} from '~api';
 
 
-
+// 
 class Register extends Component {
+    // Валидация данных
     static validationConstraints = {
         password: {
             presence: {
