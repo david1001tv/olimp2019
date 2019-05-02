@@ -31,6 +31,11 @@ import CodeEditorState from './states/ThirdStage/CodeEditor';
 import LaboratoryState from './states/ThirdStage/Laboratory';
 import DanceState from './states/ThirdStage/Dance';
 
+//new
+import QuestionsState from './states/FirstStage/Questions';
+import CutImagesState from './states/SecondStage/CutImages';
+import LayoutPuzzle from './states/SecondStage/LayoutPuzzle';
+import CardsState from './states/SecondStage/Cards';
 
 import config from './config';
 
@@ -50,7 +55,12 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-        this.state.add('Intro', IntroState, false);
+        //this.state.add('Intro', IntroState, false);
+        //this.state.add('Intro', QuestionsState, false);
+        //this.state.add("Intro", CutImagesState, false);
+        //this.state.add("Intro", LayoutPuzzle, false);
+        this.state.add("Intro", CardsState, false);
+        
         this.state.add('Docs', DocsState, false);
         this.state.add('docsToScan', docsToScanState, false);
         this.state.add('Scanner', ScannerState, false);
@@ -76,6 +86,7 @@ class Game extends Phaser.Game {
         this.state.add('Dance', DanceState, false);
         this.state.add('Final', new Phaser.State(), false);
 
+      
         this.state.start('Boot', true, false, 'Map');
     }
 

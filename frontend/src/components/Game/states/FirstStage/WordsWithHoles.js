@@ -1,105 +1,132 @@
 import Phaser from 'phaser';
-import {smartSetHeight} from '../../utils';
+import {smartSetHeight, smartSetWidth} from '../../utils';
 import testAPI from '../../testAPI';
 
-export default class TranslateState extends Phaser.State {
+export default class WWHState extends Phaser.State {
     * gen() {
 
     setTimeout(() => this.next(), 3000);
     this.game.camera.flash(0x000000, 3000, true);
     yield;
 
-    this.game.displayDialogLine('Альошин С.В.', 'Та не розумію я вас! Я у школі вивчав німецьку!', () => this.next());
+    this.game.displayDialogLine('Я', 'Мне надо внимательно прослушать эту лекцию, хотя здесь так шумно от болього количества студентов...', () => this.next());
     yield;
 
-    this.alyoshin_1.alpha = 0;
-    this.alyoshin_2.alpha = 1;
-    this.game.displayDialogLine('Альошин С.В.', 'О, ти повернувся. Іди допоможи перекласти.', () => this.next());
+    //this.teacher_design.alpha = 1;
+    this.game.add.tween(this.teacher_design).to({
+        alpha: 1
+    }, 1500, Phaser.Easing.Cubic.InOut)
+        .start().onComplete.add(() => {
+        this.next();
+    });
+    yield;
+
+    this.game.displayDialogLine('Преподаватель по дизайну', '*Приветствует всех, вступительное слово, что-то про призентацию, тишину в аудитории и бла-бла*', () => this.next());
     yield;
 
     this.game.phone.setEnabled(false);
-    //здесь анимация перехода с камерой
-    this.camera.scale.setTo(1, 1);
-    this.camera.x = 1128 * 5;
-    this.camera.y = 350 * 5 - 300;
-    let firstStep = this.game.add.tween(this.camera).to({ x: 2520, y: -600 }, 500);
-    let secondStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
-    let thirdStep = this.game.add.tween(this.camera).to({ x: 920, y: -600 }, 500);
 
-    firstStep.chain(secondStep, thirdStep);
-    let zoom = this.game.add.tween(this.camera.scale).to({
-        x: 1.5,
-        y: 1.5,
-    }, 1500).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
-    firstStep.start();
+    //this.presentation1.alpha = 1;
+    this.game.add.tween(this.presentation1).to({
+        alpha: 1
+    }, 1500, Phaser.Easing.Cubic.InOut)
+        .start().onComplete.add(() => {
+        this.next();
+    });
     yield;
-
-    this.alyoshin_1.alpha = 1;
-    this.alyoshin_2.alpha = 0;
-
+    
+    
     //first question
-    this.game.displayDialogLine('Альошин С.В.', 'Можеш дізнатися, чи приніс він усі документи?', () => this.next());
-    yield;
+    this.bg_dialog.alpha = 0.5;
     this.game.phone.setEnabled(true);
+    this.cloud.alpha = 1;
 
-    window.graphics = this.testAPI.addNote(780, 240, 500);
-    this.testAPI.displayNote(0.5, 1);
+    /*
+    let character = this.testAPI.addText("Преподаватель", 50, 820, 24);
+    let character_text = this.testAPI.addText("Вставь ... слово", 50, 880, 24);
+    */
 
-    let firstAnswer = this.testAPI.addText("а) Dude, he doesn’t want to see you  and even\n said me to tell you to get the hell out of here.", 935, 300, 24);
-    firstAnswer.isRight = false;
-    firstAnswer.coord_x = 890;
-    firstAnswer.coord_y = 300;
-    firstAnswer.check = false;
+    let character = this.game.add.text(50, 820, 'Препод', {
+        align: 'left',
+        font: 'Pangolin',
+        fontSize: 24,
+        fill: 'white',
+        stroke: 'black',
+        strokeThickness: 8,
+    });
 
-    let secondAnswer = this.testAPI.addText("б) Did you bring all the necessary\n documents?", 935, 370, 24);
-    secondAnswer.isRight = true;
+    let character_text = this.game.add.text(50, 880, 'Жижо текст ... гавгав', {
+        align: 'left',
+        font: 'Pangolin',
+        fontSize: 24,
+        fill: 'white',
+        stroke: 'black',
+        strokeThickness: 8,
+    });
 
-    let thirdAnswer = this.testAPI.addText("в) Did you take all your relatives with you?", 935, 440, 24);
-    thirdAnswer.isRight = false;
-    thirdAnswer.coord_x = 890;
-    thirdAnswer.coord_y = 440;
-    firstAnswer.check = false;
+    let klac = this.game.add.text(1700, 930, 'Жмякни, ёпта...', {
+        align: 'right',
+        font: 'Pangolin',
+        fontSize: 24,
+        fill: 'gray',
+        strokeThickness: 8,
+        
+    });
 
-    let fourthAnswer = this.testAPI.addText("г) How are you doing?  Ya ne shary how to\n translate", 935, 475, 24);
-    fourthAnswer.isRight = false;
-    fourthAnswer.coord_x = 890;
-    fourthAnswer.coord_y = 475;
-    firstAnswer.check = false;
 
+    
+    let firstAnswer = this.testAPI.addAnswers(this.testAPI.addText("а) Вариант ответа А", 50, 570, 24), false, 10, 570, false);
+    let secondAnswer = this.testAPI.addAnswers(this.testAPI.addText("б) Вариант ответа Б", 50, 630, 24), true);
+    let thirdAnswer = this.testAPI.addAnswers(this.testAPI.addText("в) Вариант ответа В", 50, 690, 24), false, 10, 690, false);
+    let fourthAnswer = this.testAPI.addAnswers(this.testAPI.addText("г) Вариант ответа Г", 50, 750, 24), false, 10, 750, false);
+    
     let answers = [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer];
-
     this.testAPI.addCheck(answers);
     yield;
 
     this.testAPI.destroyIncorrect();
     this.testAPI.deleteText(null, answers);
-    this.testAPI.displayNote(0, 0);
+    this.testAPI.deleteText(null, [character, character_text, klac]);
+    
+    this.bg_dialog.alpha = 0;
+    this.cloud.alpha = 0;
 
-    setTimeout(() => this.game.displayDialogLine('Індієць', "I took all the documents that are required and want to ask a few questions about PSTU. \
-    I came at the faculty of IT what can you tell me about it’s staff?", () => this.next()), 100);
+    setTimeout(() => this.game.displayDialogLine('Препод', "Малаца, идём дальше", () => this.next()), 100);
     yield;
 
+    this.presentation1.alpha = 0;
+
+    this.presentation2.alpha = 1;
+
+
+    /*
     //second question
-    this.testAPI.displayNote(0.5, 1);
-    firstAnswer = this.testAPI.addText("а) Він питає, шо роблять на факультеті  ІТ?", 935, 300, 24);
+    this.game.displayDialogLine('Преподаватель по дизайну', '*Текст 2ого предложения с ...*', () => this.next());
+    yield;
+
+    this.game.phone.setEnabled(true);
+    window.graphics = this.testAPI.addNote(0, 650, 250);
+    this.testAPI.displayNote(0, 1);
+
+    firstAnswer = this.testAPI.addText("а) Вариант ответа А", 50, 660, 24);
     firstAnswer.isRight = false;
-    firstAnswer.coord_x = 890;
-    firstAnswer.coord_y = 300;
+    firstAnswer.coord_x = 10;
+    firstAnswer.coord_y = 660;
     firstAnswer.check = false;
 
-    secondAnswer = this.testAPI.addText("б) Він хоче дізнатися про викладацький\n склад факультету.", 935, 335, 24);
+    secondAnswer = this.testAPI.addText("б) Вариант ответа Б", 50, 720, 24);
     secondAnswer.isRight = true;
 
-    thirdAnswer = this.testAPI.addText("в) Його цікавить що вивчають на\n факультеті ІТ.", 935, 405, 24);
+    thirdAnswer = this.testAPI.addText("в) Вариант ответа В", 50, 780, 24);
     thirdAnswer.isRight = false;
-    thirdAnswer.coord_x = 890;
-    thirdAnswer.coord_y = 405;
+    thirdAnswer.coord_x = 10;
+    thirdAnswer.coord_y = 780;
     firstAnswer.check = false;
 
-    fourthAnswer = this.testAPI.addText("г) Питає, чи ви викладаєте на його\n спеціальності.", 935, 475, 24);
+    fourthAnswer = this.testAPI.addText("г) Вариант ответа Г", 50, 850, 24);
     fourthAnswer.isRight = false;
-    fourthAnswer.coord_x = 890;
-    fourthAnswer.coord_y = 475;
+    fourthAnswer.coord_x = 10;
+    fourthAnswer.coord_y = 850;
     firstAnswer.check = false;
 
     answers = [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer];
@@ -110,6 +137,10 @@ export default class TranslateState extends Phaser.State {
     this.testAPI.destroyIncorrect();
     this.testAPI.deleteText(null, answers);
     this.testAPI.displayNote(0, 0);
+
+    setTimeout(() => this.game.displayDialogLine('Препод', "Ты агонь хлопец", () => this.next()), 100);
+    yield;
+
 
     //third question
     setTimeout(() => this.game.displayDialogLine('Альошин С.В.', "У нашому викладацькому штаті є видатні професори, лектори  та  досвідчені \
@@ -357,6 +388,7 @@ export default class TranslateState extends Phaser.State {
     yield;
     this.camera.scale.setTo(1, 1);
     this.game.nextState(this.grade);
+    */
 }
 
 init() {
@@ -372,12 +404,16 @@ init() {
 }
 
 preload() {
-    this.load.image('bg', './assets/images/2-2 (water)/bg-2-2a.png');
-    this.load.image('alyoshin_1', './assets/images/2-3(indy)/alyoshin-4.png');
-    this.load.image('alyoshin_2', './assets/images/2-3(indy)/alyoshin-3.png');
-    this.load.image('indy', './assets/images/2-3(indy)/indian.png');
-    this.load.image('notebook', './assets/images/2-2 (water)/hands-note.png');
-    this.load.image('bad', './assets/images/2-1 (crossword)/bad.png');
+    this.load.image('bg', './assets/images/1-1 (words with holes)/background.png');
+    this.load.image('bg_dialog', './assets/images/1-1 (words with holes)/bg_dialog.png');
+    this.load.image('teacher_design', './assets/images/1-1 (words with holes)/teacher_design.png');
+    this.load.image('cloud', './assets/images/1-1 (words with holes)/cloud.png');
+
+
+    this.load.image('presentation1', './assets/images/1-1 (words with holes)/presentation1.png');
+    this.load.image('presentation2', './assets/images/1-1 (words with holes)/presentation2.png');
+    this.load.image('presentation3', './assets/images/1-1 (words with holes)/presentation3.png');
+    this.load.image('presentation4', './assets/images/1-1 (words with holes)/presentation4.png');
 }
 
 create() {
@@ -386,18 +422,37 @@ create() {
     bg.height = this.game.width * bg.height / bg.width;
     bg.width = this.game.width;
 
-    let alyoshin_1 = this.game.add.image(1310, 280, 'alyoshin_1');
-    this.alyoshin_1 = alyoshin_1;
-    smartSetHeight(alyoshin_1, 340);
+    let teacher_design = this.game.add.image(1620, 380, 'teacher_design');
+    this.teacher_design = teacher_design;
+    this.teacher_design.alpha = 0;
+    smartSetHeight(teacher_design, 700);
 
-    let alyoshin_2 = this.game.add.image(1310, 280, 'alyoshin_2');
-    this.alyoshin_2 = alyoshin_2;
-    this.alyoshin_2.alpha = 0;
-    smartSetHeight(alyoshin_2, 300);
+    let cloud = this.game.add.image(0, 560, 'cloud');
+    this.cloud = cloud;
+    this.cloud.alpha = 0;
 
-    let indian = this.game.add.image(1400, 285, 'indy');
-    this.indian = indian;
-    smartSetHeight(indian, 750);
+
+    let bg_dialog = this.game.add.image(0, 810, 'bg_dialog');
+    this.bg_dialog = bg_dialog;
+    this.bg_dialog.alpha = 0;
+    smartSetHeight(bg_dialog, 200);
+    smartSetWidth(bg_dialog, 1920);
+
+    let presentation1 = this.game.add.image(610, 140, 'presentation1');
+    this.presentation1 = presentation1;
+    this.presentation1.alpha = 0;
+
+    let presentation2 = this.game.add.image(610, 140, 'presentation2');
+    this.presentation2 = presentation2;
+    this.presentation2.alpha = 0;
+
+    let presentation3 = this.game.add.image(610, 140, 'presentation3');
+    this.presentation3 = presentation3;
+    this.presentation3.alpha = 0;
+
+    let presentation4 = this.game.add.image(610, 140, 'presentation4');
+    this.presentation4 = presentation4;
+    this.presentation4.alpha = 0;
 
     this.stage.disableVisibilityChange = true;
 
