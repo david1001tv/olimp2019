@@ -9,6 +9,7 @@ import Login from './Login';
 import Regulations from './Regulations';
 import Feedback from './Feedback';
 import './main.sass';
+import './media.sass';
 import {logOut, getLikeCount} from '~api';
 
   
