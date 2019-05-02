@@ -3,20 +3,23 @@ import {Switch, Route} from 'react-router-dom';
 
 import PrivateRoute from '~components/PrivateRoute';
 import Loadable from 'react-loadable';
-
+import './app.sass';
 /*
 
 
 */
 
+
+
 const LoadingScreen = () => {
     return (
-        <div className="wrapper">
-            <div className="content">
-                <h1 className="md-text-center">
+       
+        <div className="start">
+            
+                <h1 className="text-cen">
                     Завантаження...
-                </h1>
-            </div>
+                 </h1>
+            
         </div>
     );
 };

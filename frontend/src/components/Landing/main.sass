@@ -17,6 +17,7 @@ body
 .main
     height: 100%
     background: url(../../img/main_bg.png) no-repeat center top / cover
+    background-color: #09141f
     background-repeat: no-repeat
 
 .main-text
@@ -76,9 +77,11 @@ body
     background-position: center
     background-repeat: no-repeat
 
+.gogame
+    text-decoration: none
 
 
-.but-start button
+.gogame p
     outline: none
     cursor: pointer
     font-family: 'Pribambas'
@@ -135,7 +138,7 @@ body
 
 
 .footer
-    margin-bottom: 7.2%
+    margin-bottom: 7.8%
     height: 100%
     margin-top: 23.94%
     display: flex
@@ -175,13 +178,91 @@ body
 
 
 
+.link-f div a
+    color: white
+    display: block
+    margin: 4.9%
+    text-decoration: none
+
+.link-f div a:visited
+    color: white
+
 .link-f div p
-    margin: 6.1%
+    margin: 4.9%
+
+.butf p:hover
+    color: gray
+    transition: 0.5s
  
-.butf a:hover
+.link-f div a:hover
     color: gray
     transition: 0.5s
 
 
 .link-f div:hover
     cursor: pointer
+
+.btn-feedback
+	margin-top: 10px
+	font: 1.1em "Neucha"
+	color: #353535
+	border-bottom: 1px solid #353535
+
+.md-dialog
+	width: auto
+	padding: 10px 70px
+	.md-dialog-content form div div .md-text-field-container label,
+	.md-dialog-content form div div .md-text-field-container input
+		font-family: "Neucha", Arial, serif
+		font-size: 1.3em
+	.title h3
+		margin: 0
+		font-size: 3em
+		font-family: "Neucha", Arial, 'Times New Roman'
+		.md-text-field-container *
+			font-size: 30px !important
+
+.drawn-btn
+  background-color: transparent
+  border: none
+  margin: 25px 0
+  text-align: center
+  cursor: pointer
+  height: 90px
+  background-size: 100%
+  background-repeat: no-repeat
+  margin: 20px auto
+  &__start
+    width: 323px
+    background-image: url(../../img/buttons/button-start-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-start-pressed.png)
+  &__continue
+    width: 351px
+    background-image: url(../../img/buttons/button-continue-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-continue-pressed.png)
+  &__log-in
+    width: 339px
+    background-image: url(../../img/buttons/button-enter-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-enter-pressed.png)
+  &__google
+    width: 340px
+    background-image: url(../../img/buttons/button-google-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-google-pressed.png)
+  &__google
+    width: 340px
+    background-image: url(../../img/buttons/button-google-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-google-pressed.png)
+  &__feedback
+    width: 325px
+    background-image: url(../../img/buttons/button-feedback-released.png)
+    &:active
+      background-image: url(../../img/buttons/button-feedback-pressed.png)
+
+
+.md-dialog-container.md-overlay
+    outline: none
