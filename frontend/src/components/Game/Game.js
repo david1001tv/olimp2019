@@ -6,36 +6,36 @@ import progressManager from '~etc/ProgressManager';
 
 import MapState from './states/Map';
 import BootState from './states/Boot';
-import IntroState from './states/FirstStage/Intro';
-import DocsState from './states/FirstStage/Docs';
-import docsToScanState from './states/FirstStage/docsToScan';
-import ScannerState from './states/FirstStage/Scanner';
-import scanToBrowserState from './states/FirstStage/scanToBrowser';
-import BrowserState from './states/FirstStage/Browser';
-import TransitionToSecondStageState from './states/FirstStage/TransitionToSecondStage';
-import GrannyBadState from './states/SecondStage/GrannyBad';
-import CrossState from './states/SecondStage/Cross';
-import GrannyGoodState from './states/SecondStage/GrannyGood';
-import WaterAlyoshinState from './states/SecondStage/WaterAlyoshin';
-import WaterMarketState from './states/SecondStage/WaterMarket';
-import TranslateState from './states/SecondStage/Translate';
-import fivecopMeetState from './states/SecondStage/5copMeet';
-import ProffsState from './states/SecondStage/Proffs';
-import AudienceState from './states/SecondStage/Audience';
-import GradesState from './states/SecondStage/Grades';
-import TransitionToThirdStageState from './states/SecondStage/TransitionToThirdStage';
-import thirdIntroState from './states/ThirdStage/ThirdIntro';
-import LabyrinthState from './states/ThirdStage/Labyrinth';
-import ToLaboratoryState from './states/ThirdStage/ToLaboratory';
-import CodeEditorState from './states/ThirdStage/CodeEditor';
-import LaboratoryState from './states/ThirdStage/Laboratory';
-import DanceState from './states/ThirdStage/Dance';
 
-//new
+//import IntroState from './states/FirstStage/Intro';
+
+//Этап 1
+//Квест 1 "Вставить слова" + 
 import QuestionsState from './states/FirstStage/Questions';
+import TransitionToSecondStageState from './states/FirstStage/TransitionToSecondStage';
+
+//Этап 2
+//Квест 1 "Филворд" -
+//Квест 2 "Собери макет" + 
+import LayoutPuzzleState from './states/SecondStage/LayoutPuzzle';
+//Квест 3 "Ввод тегов" -
+//Квест 4 "Собери проводку" + 
 import CutImagesState from './states/SecondStage/CutImages';
-import LayoutPuzzle from './states/SecondStage/LayoutPuzzle';
+//Квест 5 "Криптография" - 
+//Квест 6 "Робот" - 
+//Квест 7 "Научная работа (карточки)" + 
 import CardsState from './states/SecondStage/Cards';
+//Квест 8 "Тесты" -
+import TransitionToThirdStageState from './states/SecondStage/TransitionToThirdStage';
+
+//Этап 3
+//Квест 1 "Лабиринт" -
+//Квест 2 "Кроссворд" -
+
+//Этап 4
+//Квест 1 "Поиск предметов" -
+//Квест 2 "Три в ряд" -
+//Квест 3 "Тестирование и отлавливание багов" -
 
 import config from './config';
 
@@ -55,38 +55,39 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-        //this.state.add('Intro', IntroState, false);
-        //this.state.add('Intro', QuestionsState, false);
-        //this.state.add("Intro", CutImagesState, false);
-        //this.state.add("Intro", LayoutPuzzle, false);
-        this.state.add("Intro", CardsState, false);
-        
-        this.state.add('Docs', DocsState, false);
-        this.state.add('docsToScan', docsToScanState, false);
-        this.state.add('Scanner', ScannerState, false);
-        this.state.add('scanToBrowser', scanToBrowserState, false);
-        this.state.add('Browser', BrowserState, false);
-        this.state.add('TransitionToSecondStage', TransitionToSecondStageState, false);
-        this.state.add('GrannyBad', GrannyBadState, false);
-        this.state.add('Cross', CrossState, false);
-        this.state.add('GrannyGood', GrannyGoodState, false);
-        this.state.add('WaterAlyoshin', WaterAlyoshinState, false);
-        this.state.add('WaterMarket', WaterMarketState, false);
-        this.state.add('Translate', TranslateState, false);
-        this.state.add('fivecopMeet', fivecopMeetState, false);
-        this.state.add('Proffs', ProffsState, false);
-        this.state.add('Audience', AudienceState, false);
-        this.state.add('Grades', GradesState, false);
-        this.state.add('TransitionToThirdStage', TransitionToThirdStageState, false);
-        this.state.add('thirdIntro', thirdIntroState, false);
-        this.state.add('Labyrinth', LabyrinthState, false);
-        this.state.add('ToLaboratory', ToLaboratoryState, false);
-        this.state.add('CodeEditor', CodeEditorState, false);
-        this.state.add('Laboratory', LaboratoryState, false);
-        this.state.add('Dance', DanceState, false);
-        this.state.add('Final', new Phaser.State(), false);
+        /*
+        //Stage 1
+        //Intro -
+        //Questions +
+        this.state.add('Questions', QuestionsState, false);
 
-      
+        //Stage 2
+        //Fillword -
+        //LayoutPuzzle +
+        this.state.add("LayoutPuzzle", LayoutPuzzleState, false);
+        //Tags -
+        //Wiring +
+        this.state.add("CutImages", CutImagesState, false);
+        //Cryptographic -
+        //Robot -
+        //Cards +
+        this.state.add("Cards", CardsState, false);
+        //Tests -
+
+        //Stage 3
+        //Labyrinth -
+        //Crossword -
+
+        //Stage 4
+        //FindItems -
+        //ThreeInARow -
+        //TestingAndDebugging -
+
+        */
+        
+        this.state.add('Intro', CutImagesState, false);
+
+        this.state.add('Final', new Phaser.State(), false);
         this.state.start('Boot', true, false, 'Map');
     }
 

@@ -8,10 +8,10 @@ export default class WWHState extends Phaser.State {
 }
 
 preload() {
-    this.load.image('bg', './assets/images/2-3 (cut_images)/background.png');
+    this.load.image('bg', './assets/images/2-4 (cut_images)/background.png');
 
     for (let i = 1; i < 26; i++){
-        let image = this.load.image('image'+i, './assets/images/2-3 (cut_images)/image_part_0'+ i +'.png');
+        let image = this.load.image('image'+i, './assets/images/2-4 (cut_images)/image_part_0'+ i +'.png');
     }
 
 }

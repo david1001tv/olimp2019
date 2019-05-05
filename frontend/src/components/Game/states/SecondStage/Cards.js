@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import {smartSetHeight, smartSetWidth} from '../../utils';
 import todos from '../../todos/Scanner';
-import testAPI from '../../testAPI';
+import SSF from '../../states/SecondStageFunctions';
 
 const INACTIVE_Y = 940;
 
@@ -45,17 +45,17 @@ export default class Scanner extends Phaser.State {
 
     preload() {
 
-        this.load.image('bg', './assets/images/2-x (cards)/background.png');
-        this.load.image('no', './assets/images/2-x (cards)/no.png');
-        this.load.image('yes', './assets/images/2-x (cards)/yes.png');
-        this.load.image('card', './assets/images/2-x (cards)/card.png');
+        this.load.image('bg', './assets/images/2-7 (cards)/background.png');
+        this.load.image('no', './assets/images/2-7 (cards)/no.png');
+        this.load.image('yes', './assets/images/2-7 (cards)/yes.png');
+        this.load.image('card', './assets/images/2-7 (cards)/card.png');
 
     }
 
     create() {
-        this.testAPI = {...testAPI};
-        for (let key in this.testAPI) {
-            this.testAPI[key] = this.testAPI[key].bind(this);
+        this.SSF = {...SSF};
+        for (let key in this.SSF) {
+            this.SSF[key] = this.SSF[key].bind(this);
         }
 
         let bg = this.game.add.image(0, 0, 'bg');
@@ -63,8 +63,8 @@ export default class Scanner extends Phaser.State {
         bg.width = this.game.width;
 
         
-        this.testAPI.makeImageDrop(1520 , 0, 'yes');
-        this.testAPI.makeImageDrop(0, 0, 'no');
+        this.SSF.makeImageDrop(1520 , 0, 'yes');
+        this.SSF.makeImageDrop(0, 0, 'no');
 
         this.cards = [];
         this.cardsIsRight = [true, false, true, false, true, false, true, false, true, false];
@@ -72,10 +72,10 @@ export default class Scanner extends Phaser.State {
         let addy = 3;
         for (let i = 0; i < 10; i++){
             if (this.cardsIsRight[i]){
-                this.cards.push(this.testAPI.makeImageDrop(750 + addx, 200 + addy, 'card', 1320, -100, 1500, 2080));
+                this.cards.push(this.SSF.makeImageDrop(750 + addx, 200 + addy, 'card', 1320, -100, 1500, 2080));
             }
             else {
-                this.cards.push(this.testAPI.makeImageDrop(750 + addx, 200 + addy, 'card', -200, -100, 1000, 2080));
+                this.cards.push(this.SSF.makeImageDrop(750 + addx, 200 + addy, 'card', -200, -100, 1000, 2080));
             }
 
             addx += 5;
@@ -95,27 +95,6 @@ export default class Scanner extends Phaser.State {
         this.stage.disableVisibilityChange = true;
         this.next();
     }
-
-    // activatePart(part) {
-    //     this.activePart = part;
-    //     part.loadTexture(`${part.key.split('-')[0]}-big`);
-    //     part.bringToTop();
-    // }
-
-    // deactivatePart(part) {
-    //     part.loadTexture(`${part.key.split('-')[0]}-small`);
-    //     part.x = part.originalX;
-    //     part.y = INACTIVE_Y;
-    // }
-
-    // handleDragStart(part) {
-    //     if (this.activePart !== part) {
-    //         if (this.activePart !== null) {
-    //             this.deactivatePart(this.activePart); 
-    //         }
-    //         this.activatePart(part);
-    //     }     
-    // }
 
     handleCheck(currImg, currPointer, first, second, third, fourth){
 
@@ -144,12 +123,10 @@ export default class Scanner extends Phaser.State {
                     }
 
                     activePart.destroy();
-                    //activePart.inputEnabled = false;
 
                     this.game.displayDialogLine('Ви', '+');
                     this.game.phone.completeTodo(activePart.todoId);
 
-                    //this.activePart = null;
                     this.activePart = this.cards[index + 1];
                 } else {
                     this.game.displayDialogLine('Ви', 'Ой, щось кривувато вийшло. Спробую ще раз');
