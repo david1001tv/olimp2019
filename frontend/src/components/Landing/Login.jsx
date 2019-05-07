@@ -136,7 +136,7 @@ class Login extends Component {
                         clientId="160162546321-8u5mfbbgqa28l3q5d80l8is3ps9gsd0c.apps.googleusercontent.com"
                     />
                 </div>
-                <form
+                {/* <form
                     onSubmit={this.handleSubmit}
                 >
                     <div className="md-text--error md-headline md-text-center">
@@ -177,7 +177,7 @@ class Login extends Component {
                         >
                         </button>
                     </div>
-                </form>
+                </form> */}
             </div>
         );
     }
