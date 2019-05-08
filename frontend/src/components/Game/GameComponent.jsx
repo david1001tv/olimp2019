@@ -6,6 +6,7 @@ import progressManager from '../../etc/ProgressManager';
 
 import Game from './Game';
 import FakeBrowser from '~components/FakeBrowser';
+import PostRegister from '~components/FakeBrowser/PostRegister';
 import {Redirect} from 'react-router-dom';
 
 
@@ -22,6 +23,7 @@ class GameComponent extends Component {
 
     state = {
         fakeBrowserIsShown: false,
+        MapIsShown: false,
         redirectToFinal: false,
     };
 
@@ -43,7 +45,7 @@ class GameComponent extends Component {
         this.game.displayDialogLine = this.props.displayDialogLine;
         this.game.phone = this.props.phone;
         this.game.setFakeBrowserEnabled = this.setFakeBrowserEnabled;
-
+        this.game.MapIsShownEnabled = this.MapIsShownEnabled;
         this.game.state.onStateChange.add(this.handleGameStateChange, this);
 
         this.startState = this.game.startState.bind(this.game);
@@ -59,6 +61,11 @@ class GameComponent extends Component {
     setFakeBrowserEnabled(enabled) {
         this.setState({fakeBrowserIsShown: enabled})
     }
+    @autobind
+    MapIsShownEnabled(enabled) {
+        this.setState({MapIsShown: enabled})
+    }
+
 
     handleGameStateChange(stateName) {
         if (stateName === 'Final') {
@@ -76,6 +83,11 @@ class GameComponent extends Component {
         if (this.state.fakeBrowserIsShown) {
             return (
                 <FakeBrowser />
+            );
+        }
+        if (this.state.MapIsShown) {
+            return (
+                <PostRegister />
             );
         }
 

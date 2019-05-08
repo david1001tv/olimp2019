@@ -39,7 +39,8 @@ import CrossState from './states/ThirdStage/Cross';
 //Квест 3 "Тестирование и отлавливание багов" -
 
 
-import BrowserState from './states/FirstStage/Browser'
+import BrowserState from './states/FirstStage/Browser';
+import RegisterState from './states/FirstStage/regtest';
 
 import config from './config';
 import IntroState from './states/FirstStage/Intro';
@@ -94,9 +95,9 @@ class Game extends Phaser.Game {
         */
         
         this.state.add('Intro', IntroState, false);
-        this.state.add('Browser', BrowserState, false);
+        this.state.add('regtest', RegisterState, false);
 
-        this.state.start('Boot', true, false, 'Map');
+        this.state.start('Boot', true, false, 'Intro');
     }
 
     @autobind

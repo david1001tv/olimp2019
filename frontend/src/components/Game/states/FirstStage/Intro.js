@@ -77,47 +77,51 @@ export default class IntroState extends Phaser.State {
             this.game.displayDialogLine('Ви', 'Треба подивитися', () => this.next());
         }
         yield;
+        this.game.camera.fade(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
 
-        this.game.add.tween(this.booklet).to({
-            alpha: 1
-        }, 1500, Phaser.Easing.Cubic.InOut)
-            .start().onComplete.add(() => {
-                this.game.displayDialogLine('Ви', 'Комп’ютерні науки? Що ж спеціаліст з інформаційних технологій - звучить непогано. Ви уявляєте, як сидите у розкішному кріслі власного кабінету, що займає весь останній поверх хмарочосу', () => this.next());
-        });
-        yield;
-        this.game.displayDialogLine('Ви', 'Ви робите ковток свіжозвареної бразильської кави, що залишив на Вашому столі послужливий особистий помічник, і не кваплячись, з почуттям власної гідності, декількома надрозумними командами програмуєте космічні машини', () => this.next());
-        yield;
-        this.game.displayDialogLine('Ви', 'О, це надзвичайно круто!  Давно забуте почуття наснаги захоплює Вас. З нетерпінням Ви шукаєте на листівці дату - вже завтра!  Треба якнайскоріше зареєструватися', () => this.next());
-        yield;
+        this.game.nextState();
+
+        // this.game.add.tween(this.booklet).to({
+        //     alpha: 1
+        // }, 1500, Phaser.Easing.Cubic.InOut)
+        //     .start().onComplete.add(() => {
+        //         this.game.displayDialogLine('Ви', 'Комп’ютерні науки? Що ж спеціаліст з інформаційних технологій - звучить непогано. Ви уявляєте, як сидите у розкішному кріслі власного кабінету, що займає весь останній поверх хмарочосу', () => this.next());
+        // });
+        // yield;
+        // this.game.displayDialogLine('Ви', 'Ви робите ковток свіжозвареної бразильської кави, що залишив на Вашому столі послужливий особистий помічник, і не кваплячись, з почуттям власної гідності, декількома надрозумними командами програмуєте космічні машини', () => this.next());
+        // yield;
+        // this.game.displayDialogLine('Ви', 'О, це надзвичайно круто!  Давно забуте почуття наснаги захоплює Вас. З нетерпінням Ви шукаєте на листівці дату - вже завтра!  Треба якнайскоріше зареєструватися', () => this.next());
+        // yield;
 
         
         //регистрация
 
-        this.game.displayDialogLine('Ви', 'Ви намагаєтесь згадати, де знаходиться університет. У центрі міста? Біля кінотеатру? Чи може Ви бачили його, коли зустрічалися із друзями в парку? Так і заблукати неважко! Але відчуття тривоги покидає Вас, щойно бачите на зворотному боці листівки карту', () => this.next());
-        yield;
+        // this.game.displayDialogLine('Ви', 'Ви намагаєтесь згадати, де знаходиться університет. У центрі міста? Біля кінотеатру? Чи може Ви бачили його, коли зустрічалися із друзями в парку? Так і заблукати неважко! Але відчуття тривоги покидає Вас, щойно бачите на зворотному боці листівки карту', () => this.next());
+        // yield;
 
 
-        this.game.add.tween(this.booklet).to({
-            alpha: 0
-        }, 1500, Phaser.Easing.Cubic.InOut)
-            .start().onComplete.add(() => {
-                this.game.add.tween(this.booklet_back).to({
-                    alpha: 1
-                }, 1500, Phaser.Easing.Cubic.InOut)
-                    .start().onComplete.add(() => this.next());
-        });
-        yield;
+        // this.game.add.tween(this.booklet).to({
+        //     alpha: 0
+        // }, 1500, Phaser.Easing.Cubic.InOut)
+        //     .start().onComplete.add(() => {
+        //         this.game.add.tween(this.booklet_back).to({
+        //             alpha: 1
+        //         }, 1500, Phaser.Easing.Cubic.InOut)
+        //             .start().onComplete.add(() => this.next());
+        // });
+        // yield;
+        // this.game.setFakeBrowserEnabled(true);
+        // this.game.displayDialogLine('Ви', 'Ви почуваєтесь значно впевненіше. Можливо наступний день стане вирішальним і надасть можливість остаточно визначитися з майбутньою професією.', () => this.next());
+        // yield;
 
-        this.game.displayDialogLine('Ви', 'Ви почуваєтесь значно впевненіше. Можливо наступний день стане вирішальним і надасть можливість остаточно визначитися з майбутньою професією.', () => this.next());
-        yield;
+        // //карта
 
-        //карта
+        // this.game.camera.fade(0x000000, 1500, true);
+        // setTimeout(() => this.next(), 1500);
+        // yield;
 
-        this.game.camera.fade(0x000000, 1500, true);
-        setTimeout(() => this.next(), 1500);
-        yield;
-
-        this.game.nextState();
+        // this.game.nextState();
     }
 
     init() {

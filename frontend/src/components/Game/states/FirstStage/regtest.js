@@ -2,10 +2,9 @@ import Phaser from 'phaser';
 import PubSub from 'pubsub-js';
 import autobind from 'autobind-decorator';
 
-export default class BrowserState extends Phaser.State {
+export default class RegisterState extends Phaser.State {
     * gen() {
-        setTimeout(() => this.next(), 1500);
-        this.game.camera.flash(0x000000, 1500, true);
+
     }
 
     @autobind
