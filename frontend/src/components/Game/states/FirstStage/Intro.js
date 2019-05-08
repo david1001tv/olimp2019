@@ -1,6 +1,33 @@
 import Phaser from 'phaser';
 import {smartSetHeight} from '../../utils';
 
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps';
+import MarkerWithLabel from 'react-google-maps/lib/components/addons/MarkerWithLabel';
+
+const MyMapComponent = withScriptjs(withGoogleMap((props) =>
+    <GoogleMap
+        defaultZoom={17}
+        defaultCenter={{lat: 47.095447, lng: 37.541188}}
+
+    >
+        <MarkerWithLabel
+            position={{lat: 47.095447, lng: 37.541188}}
+            labelAnchor={new google.maps.Point(60, 150)}
+            labelStyle={{
+                backgroundColor: 'white',
+                fontFamily: 'Neucha',
+                fontSize: '18px',
+                padding: '16px',
+                boxShadow: '3px 3px 3px #aaa',
+                borderRadius: '2px'
+            }}
+        >
+            <div>Приймальна комісія ПДТУ</div>
+        </MarkerWithLabel>
+    </GoogleMap>
+));
 
 export default class IntroState extends Phaser.State {
     * gen() {
@@ -18,51 +45,70 @@ export default class IntroState extends Phaser.State {
         this.game.displayDialogLine('Голос', 'Здається, що всі Ваші однолітки вже встигли визначитися і залишилися лише Ви. Але професій так багато, що Ви відчуваєте себе розгубленим. Лікар? Вчитель? Космонавт? Все не те.', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Ви', '* У вас під ногами щось зашаруділо*', () => this.next());
+        this.game.displayDialogLine('Голос', 'Треба щоб і цікавою була, і сучасною, і з високою заробітною платою...', () => this.next());
         yield;
 
-        this.camera.scale.setTo(1, 1);
-        this.camera.x = 1128 * 5;
-        this.camera.y = 350 * 5 - 300;
-        let firstStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
-        let secondStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
-        let thirdStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
-    
-        firstStep.chain(secondStep, thirdStep);
-        this.game.add.tween(this.camera.scale).to({
-            x: 1.2,
-            y: 1.2,
-        }, 2000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
-        firstStep.start();
+        this.game.displayDialogLine('Ви', '*Зненацька щось яскраве промайнуло перед Вашими очима. Це була підхоплена вітром листівка*', () => this.next());
         yield;
+
+        // this.camera.scale.setTo(1, 1);
+        // this.camera.x = 1128 * 5;
+        // this.camera.y = 350 * 5 - 300;
+        // let firstStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
+        // let secondStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
+        // let thirdStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
+    
+        // firstStep.chain(secondStep, thirdStep);
+        // this.game.add.tween(this.camera.scale).to({
+        //     x: 1.2,
+        //     y: 1.2,
+        // }, 2000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
+        // firstStep.start();
+        // yield;
 
         this.buttonYes.alpha = 1;
         this.buttonNo.alpha = 1;
         yield;
 
         if (this.answer == 'No'){
-            this.game.displayDialogLine('Ви', 'А раптом це щось важливе, думаю варто подивитися', () => this.next());
+            this.game.displayDialogLine('Ви', 'Ви збираєтеся пройти повз, але порив вітру кидає листівку прямо Вам в обличчя. “Напевно, це доля”, - гадаєте Ви, придивляючись до тексту', () => this.next());
         }
         else {
             this.game.displayDialogLine('Ви', 'Треба подивитися', () => this.next());
         }
         yield;
 
-        this.booklet.alpha = 1;
-
-        this.game.displayDialogLine('Ви', 'Хм, а це вже цікаво, комп\'ютери... програмування... я завжди цим цікавився', () => this.next());
+        this.game.add.tween(this.booklet).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                this.game.displayDialogLine('Ви', 'Комп’ютерні науки? Що ж спеціаліст з інформаційних технологій - звучить непогано. Ви уявляєте, як сидите у розкішному кріслі власного кабінету, що займає весь останній поверх хмарочосу', () => this.next());
+        });
+        yield;
+        this.game.displayDialogLine('Ви', 'Ви робите ковток свіжозвареної бразильської кави, що залишив на Вашому столі послужливий особистий помічник, і не кваплячись, з почуттям власної гідності, декількома надрозумними командами програмуєте космічні машини', () => this.next());
+        yield;
+        this.game.displayDialogLine('Ви', 'О, це надзвичайно круто!  Давно забуте почуття наснаги захоплює Вас. З нетерпінням Ви шукаєте на листівці дату - вже завтра!  Треба якнайскоріше зареєструватися', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Ви', 'Думаю, мені варто зареєструватися', () => this.next());
-        yield;
         
         //регистрация
 
-        this.game.displayDialogLine('Ви', 'Готово, а де це взагалі знаходиться? Може бути інформація є на зворотному боці буклета?', () => this.next());
+        this.game.displayDialogLine('Ви', 'Ви намагаєтесь згадати, де знаходиться університет. У центрі міста? Біля кінотеатру? Чи може Ви бачили його, коли зустрічалися із друзями в парку? Так і заблукати неважко! Але відчуття тривоги покидає Вас, щойно бачите на зворотному боці листівки карту', () => this.next());
         yield;
 
-        this.booklet.alpha = 0;
-        this.booklet_back.alpha = 1;
+
+        this.game.add.tween(this.booklet).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                this.game.add.tween(this.booklet_back).to({
+                    alpha: 1
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start().onComplete.add(() => this.next());
+        });
+        yield;
+
+        this.game.displayDialogLine('Ви', 'Ви почуваєтесь значно впевненіше. Можливо наступний день стане вирішальним і надасть можливість остаточно визначитися з майбутньою професією.', () => this.next());
         yield;
 
         //карта
@@ -103,37 +149,14 @@ export default class IntroState extends Phaser.State {
 
         this.buttonYes = buttonYes;
         this.buttonNo = buttonNo;
-        
 
-
-        let booklet = this.game.add.image(this.game.world.centerX - 100, this.game.world.centerY - 510, 'booklet');
+        let booklet = this.game.add.image(this.game.world.centerX - 520, 20, 'booklet');
         booklet.alpha = 0;
         this.booklet = booklet;
 
-        let booklet_back = this.game.add.image(this.game.world.centerX - 100, this.game.world.centerY - 510, 'booklet_back');
+        let booklet_back = this.game.add.image(this.game.world.centerX - 520, 20, 'booklet_back');
         booklet_back.alpha = 0;
         this.booklet_back = booklet_back;
-
-        // let mom = this.game.add.image(1612, 200, 'mom');
-        // smartSetHeight(mom, 668);
-        // mom.alpha = 0;
-        // this.mom = mom;
-
-        // let david = this.game.add.image(1128, 280, 'd-sits');
-        // smartSetHeight(david, 551);
-        // this.david = david;
-
-        // let printer = this.game.add.image(284, 340, 'printer');
-        // smartSetHeight(printer, 178);
-
-        // let bgPhone = this.game.add.image(882, 0, 'bg-phone');
-        // bgPhone.visible = false;
-        // this.bgPhone = bgPhone;
-
-        // let mobile = this.game.add.image(1277, 73, 'mobile');
-        // mobile.visible = false;
-        // smartSetHeight(mobile, 920);
-        // this.mobile = mobile;
 
         this.stage.disableVisibilityChange = true;
 
