@@ -30,19 +30,16 @@ class PostRegister extends Component {
     render() {
         return (
             <div className="cartm">
-                <div className="md-grid">
-                    <div className="md-cell md-cell--12">
-                    
+                 
                         <MyMapComponent
                             isMarkerShown
-                            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwJV53aoLN-ipjWZ3d6oDqC9IotxGgh1c&v=3.exp&libraries=geometry,drawing,places"
+                            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUaRQdaiwT83La2mYEU3NjWb4oqQw2p0k&v=3.exp&libraries=geometry,drawing,places"
                             loadingElement={<div style={{height: `100%`}}/>}
-                            containerElement={<div style={{height: `49vh`, width: "88.8%", margin: "0 auto"}}/>}
+                            containerElement={<div style={{width: "84.6%", height: `69.2%`, margin: "0 auto", marginTop: `13.4%`}}/>}
                             mapElement={<div style={{height: `100%`}}/>}
                         />
                         
-                    </div>
-                </div>
+                   
             </div>
         );
     }

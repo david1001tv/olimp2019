@@ -52,7 +52,7 @@ class FakeBrowser extends Component {
         if (this.state.postRegisterIsVisible) {
             return (
                 <div className="fake-browser">
-                    <div className="form-container">
+                    <div className="form-container1">
                         <PostRegister />
                     </div>
                     <button
