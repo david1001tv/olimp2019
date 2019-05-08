@@ -7,6 +7,7 @@ export const AVAILABLE = 'available';
 export const UNAVAILABLE = 'unavailable';
 
 const states = [
+    'ThreeInRow',
     'Intro',
     'Docs',
     'Scanner',

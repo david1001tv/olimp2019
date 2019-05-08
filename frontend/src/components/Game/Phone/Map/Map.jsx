@@ -56,7 +56,7 @@ class Map extends Component {
                     left="4.3229%"
                     top="23.7963%"
                     type={FLAG}
-                    state="Intro"
+                    state="ThreeInRow"
                     onClick={this.handleClick}
                     popoverText="Етап 1"
                 />

@@ -6,7 +6,7 @@ import progressManager from '~etc/ProgressManager';
 
 import MapState from './states/Map';
 import BootState from './states/Boot';
-import IntroState from './states/FirstStage/Intro';
+/*import IntroState from './states/FirstStage/Intro';
 import DocsState from './states/FirstStage/Docs';
 import docsToScanState from './states/FirstStage/docsToScan';
 import ScannerState from './states/FirstStage/Scanner';
@@ -29,7 +29,8 @@ import LabyrinthState from './states/ThirdStage/Labyrinth';
 import ToLaboratoryState from './states/ThirdStage/ToLaboratory';
 import CodeEditorState from './states/ThirdStage/CodeEditor';
 import LaboratoryState from './states/ThirdStage/Laboratory';
-import DanceState from './states/ThirdStage/Dance';
+import DanceState from './states/ThirdStage/Dance';*/
+import ThreeInRowState from './states/SecondStage/ThreeInRow';
 
 
 import config from './config';
@@ -50,8 +51,9 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-        this.state.add('Intro', IntroState, false);
-        this.state.add('Docs', DocsState, false);
+        //this.state.add('Intro', IntroState, false);
+        this.state.add('ThreeInRow', ThreeInRowState, false);
+        /*this.state.add('Docs', DocsState, false);
         this.state.add('docsToScan', docsToScanState, false);
         this.state.add('Scanner', ScannerState, false);
         this.state.add('scanToBrowser', scanToBrowserState, false);
@@ -74,7 +76,7 @@ class Game extends Phaser.Game {
         this.state.add('CodeEditor', CodeEditorState, false);
         this.state.add('Laboratory', LaboratoryState, false);
         this.state.add('Dance', DanceState, false);
-        this.state.add('Final', new Phaser.State(), false);
+        this.state.add('Final', new Phaser.State(), false);*/
 
         this.state.start('Boot', true, false, 'Map');
     }
