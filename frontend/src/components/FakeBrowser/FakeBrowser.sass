@@ -9,6 +9,11 @@
   width: 100%
   background-image: url("../../img/1-4 (browser)/background.png")
   background-size: 100%
+  opacity: 0
+  transition: 1.5s
+  animation: show 3s 1
+  animation-fill-mode: forwards
+  animation-delay: 1s
 
 
 .regmain
@@ -23,6 +28,11 @@
   height: 68.3%
   align-items: flex-end
   display: flex
+  opacity: 0
+  transition: 2s
+  animation: show 3s 1
+  animation-fill-mode: forwards
+  animation-delay: 1s
 
 
 .register-link
@@ -33,6 +43,11 @@
   cursor: pointer
   height: 10%
   z-index: 4
+  opacity: 0
+  transition: 2s
+  animation: show 3s 1
+  animation-fill-mode: forwards
+  animation-delay: 1s
 
 .form-container
 
@@ -129,5 +144,12 @@
 
 
 
+
+@keyframes show
+  0%
+   opacity: 0
+  100%
+   opacity: 1
+	 
 
 
