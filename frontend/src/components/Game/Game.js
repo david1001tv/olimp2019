@@ -39,6 +39,7 @@ import CrossState from './states/ThirdStage/Cross';
 //Квест 3 "Тестирование и отлавливание багов" -
 
 import config from './config';
+import IntroState from './states/FirstStage/Intro';
 
 class Game extends Phaser.Game {
 
@@ -85,11 +86,12 @@ class Game extends Phaser.Game {
         //ThreeInARow -
         //TestingAndDebugging -
 
+        
+        this.state.add('Final', new Phaser.State(), false);
         */
         
-        this.state.add('Intro', CrossState, false);
+        this.state.add('Intro', IntroState, false);
 
-        this.state.add('Final', new Phaser.State(), false);
         this.state.start('Boot', true, false, 'Map');
     }
 
