@@ -1,33 +1,4 @@
 import Phaser from 'phaser';
-import {smartSetHeight} from '../../utils';
-
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps';
-import MarkerWithLabel from 'react-google-maps/lib/components/addons/MarkerWithLabel';
-
-const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-    <GoogleMap
-        defaultZoom={17}
-        defaultCenter={{lat: 47.095447, lng: 37.541188}}
-
-    >
-        <MarkerWithLabel
-            position={{lat: 47.095447, lng: 37.541188}}
-            labelAnchor={new google.maps.Point(60, 150)}
-            labelStyle={{
-                backgroundColor: 'white',
-                fontFamily: 'Neucha',
-                fontSize: '18px',
-                padding: '16px',
-                boxShadow: '3px 3px 3px #aaa',
-                borderRadius: '2px'
-            }}
-        >
-            <div>Приймальна комісія ПДТУ</div>
-        </MarkerWithLabel>
-    </GoogleMap>
-));
 
 export default class IntroState extends Phaser.State {
     * gen() {
@@ -35,7 +6,7 @@ export default class IntroState extends Phaser.State {
         setTimeout(() => this.next(), 3000);
         this.game.camera.flash(0x000000, 3000, true);
         yield;  
-
+        
         this.game.displayDialogLine('Голос', 'Промайнули шкільні тижні, і сьогодні Ви склали останній іспит. Що чекає попереду?', () => this.next());
         yield;
 
@@ -66,12 +37,16 @@ export default class IntroState extends Phaser.State {
         // firstStep.start();
         // yield;
 
-        this.buttonYes.alpha = 1;
-        this.buttonNo.alpha = 1;
+        this.buttonTake_on.inputEnabled = true;
+        this.buttonIgnore_on.inputEnabled = true;
+        this.buttonTake_on.alpha = 1;
+        this.buttonIgnore_on.alpha = 1;
+        this.firstTake.alpha = 1;
+        this.firstIgonre.alpha = 1;
         yield;
 
         if (this.answer == 'No'){
-            this.game.displayDialogLine('Ви', 'Ви збираєтеся пройти повз, але порив вітру кидає листівку прямо Вам в обличчя. “Напевно, це доля”, - гадаєте Ви, придивляючись до тексту', () => this.next());
+            this.game.displayDialogLine('Ви', 'Ви збираєтеся пройти повз, але порив вітру кидає листівку прямо Вам в обличчя. "Напевно, це доля", - гадаєте Ви, придивляючись до тексту', () => this.next());
         }
         else {
             this.game.displayDialogLine('Ви', 'Треба подивитися', () => this.next());
@@ -108,13 +83,15 @@ export default class IntroState extends Phaser.State {
         });
         yield;
 
+        //карта
+        this.game.setGoogleMapEnabled(true);
+
         this.game.displayDialogLine('Ви', 'Ви почуваєтесь значно впевненіше. Можливо наступний день стане вирішальним і надасть можливість остаточно визначитися з майбутньою професією.', () => this.next());
         yield;
 
-        //карта
-
         this.game.camera.fade(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
+        this.game.setGoogleMapEnabled(false);
         yield;
 
         this.game.nextState();
@@ -133,8 +110,14 @@ export default class IntroState extends Phaser.State {
         this.load.image('booklet', './assets/images/1-0 (Intro)/booklet.png');
         this.load.image('booklet_back', './assets/images/1-0 (Intro)/booklet_back.png');
 
-        this.load.image('button_yes', './assets/images/1-0 (Intro)/button_yes.png');
-        this.load.image('button_no', './assets/images/1-0 (Intro)/button_no.png');
+        this.load.image('button_red_on', './assets/images/1-0 (Intro)/Button_Choice_On_Red.png');
+        this.load.image('button_blue_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png');
+
+        this.load.image('cloud1', './assets/images/1-0 (Intro)/cloud1.png');
+        this.load.image('cloud2', './assets/images/1-0 (Intro)/cloud2.png');
+        this.load.image('cloud3', './assets/images/1-0 (Intro)/cloud3.png');
+        this.load.image('cloud4', './assets/images/1-0 (Intro)/cloud4.png');
+
     }
 
     create() {
@@ -142,13 +125,47 @@ export default class IntroState extends Phaser.State {
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
 
-        let buttonYes = this.game.add.button(this.game.world.centerX + 300, 300, 'button_yes', this.actionOnClick, this, 2, 1, 0);
-        let buttonNo = this.game.add.button(this.game.world.centerX - 650, 300, 'button_no', this.actionOnClick, this, 2, 1, 0);
-        buttonYes.alpha = 0;
-        buttonNo.alpha = 0
+        let cloud1 = this.game.add.image(1912, -400, 'cloud2');
+        this.game.add.tween(cloud1).to({ x: -900 }, 90000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, false);
 
-        this.buttonYes = buttonYes;
-        this.buttonNo = buttonNo;
+        let cloud2 = this.game.add.image(1912, -250, 'cloud2');
+        this.game.add.tween(cloud2).to({ x: -1100 }, 40000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, false);
+        
+        let cloud3 = this.game.add.image(1912, -50, 'cloud3');
+        this.game.add.tween(cloud3).to({ x: -900 }, 60000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, false);
+
+
+        //Формы выбора
+        let buttonTake_on = this.game.add.button(this.game.world.centerX + 242, 400, 'button_blue_on', this.actionOnClick, this, 1, 0, 2);
+        buttonTake_on.inputEnabled = false;
+        buttonTake_on.alpha = 0;
+        this.buttonTake_on = buttonTake_on;
+
+
+        let buttonIgnore_on = this.game.add.button(this.game.world.centerX - 850, 400, 'button_red_on', this.actionOnClick, this, 0, 1, 0);
+        buttonIgnore_on.inputEnabled = false;
+        buttonIgnore_on.alpha = 0;
+        this.buttonIgnore_on = buttonIgnore_on;
+        
+        //Текст в формах выбора
+        this.firstTake = this.game.add.text(this.game.world.centerX + 442, 425, 'Схопити', {
+            font: "Pangolin",
+            fontSize: 60,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.firstTake.alpha = 0;
+
+        this.firstIgonre = this.game.add.text(this.game.world.centerX - 700, 425, 'Ігнорувати', {
+            font: "Pangolin",
+            fontSize: 60,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.firstIgonre.alpha = 0;
+
 
         let booklet = this.game.add.image(this.game.world.centerX - 520, 20, 'booklet');
         booklet.alpha = 0;
@@ -164,15 +181,16 @@ export default class IntroState extends Phaser.State {
     }
 
     actionOnClick(obj) {
-        console.log(obj.key);
-        if (obj.key == 'button_yes'){
+        if (obj.key == 'button_blue_on'){
             this.answer = 'Yes';
         }
         else {
             this.answer = 'No';
         }
-        this.buttonYes.destroy();
-        this.buttonNo.destroy();
+        this.buttonTake_on.destroy();
+        this.buttonIgnore_on.destroy();
+        this.firstTake.destroy();
+        this.firstIgonre.destroy();
         this.next();
     }
 

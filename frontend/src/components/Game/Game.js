@@ -10,6 +10,10 @@ import BootState from './states/Boot';
 //import IntroState from './states/FirstStage/Intro';
 
 //Этап 1
+//Интро
+import IntroState from './states/FirstStage/Intro';
+//ПостИнтро
+import PostIntroState from './states/FirstStage/PostIntro';
 //Квест 1 "Вставить слова" + 
 import QuestionsState from './states/FirstStage/Questions';
 import TransitionToSecondStageState from './states/FirstStage/TransitionToSecondStage';
@@ -39,10 +43,7 @@ import CrossState from './states/ThirdStage/Cross';
 //Квест 3 "Тестирование и отлавливание багов" -
 
 
-import BrowserState from './states/FirstStage/Browser'
-
 import config from './config';
-import IntroState from './states/FirstStage/Intro';
 
 class Game extends Phaser.Game {
 
@@ -62,7 +63,8 @@ class Game extends Phaser.Game {
         this.state.add('Boot', BootState, false);
         /*
         //Stage 1
-        //Intro -
+        //Intro +
+        this.state.add('Intro', IntroState, false);
         //Questions +
         this.state.add('Questions', QuestionsState, false);
 
@@ -93,8 +95,8 @@ class Game extends Phaser.Game {
         this.state.add('Final', new Phaser.State(), false);
         */
         
-        this.state.add('Intro', IntroState, false);
-        this.state.add('Browser', BrowserState, false);
+        this.state.add('Intro', QuestionsState, false);
+
 
         this.state.start('Boot', true, false, 'Map');
     }

@@ -1,6 +1,5 @@
 import {smartSetHeight, smartSetWidth} from '../utils';
 const FSF = {
-
     makeImg: function(x,y,img,w,h){
         let slide = this.game.add.image(x,y,img);
         slide.alpha = 0;
@@ -9,7 +8,7 @@ const FSF = {
         return slide;
     },
 
-    makeAnswer: function(text, x,y,size, bad_x, isRight, check, addText){
+    makeAnswer: function(text, x, y, size, bad_x, isRight, check, addText){
     let answer = addText(text,x,y,size);
     answer.isRight = isRight;
     answer.coord_x = bad_x;
@@ -19,10 +18,10 @@ const FSF = {
     },
 
     getMasAnswer: function(text, is_Right, makeAnswer, addText){
-        let firstAnswer = makeAnswer(text[0], 60,600,24, 15, is_Right[0], false,addText);
-        let secondAnswer = makeAnswer(text[1], 60,640,24, 15, is_Right[1], false,addText);
-        let thirdAnswer = makeAnswer(text[2], 60,680,24, 15, is_Right[2], false,addText);
-        let fourthAnswer = makeAnswer(text[3], 60,720,24, 15, is_Right[3], false,addText);
+        let firstAnswer = makeAnswer(text[0], 120, 620, 24, 70, is_Right[0], false,addText);
+        let secondAnswer = makeAnswer(text[1], 120, 660, 24, 70, is_Right[1], false,addText);
+        let thirdAnswer = makeAnswer(text[2], 120, 700, 24, 70, is_Right[2], false,addText);
+        let fourthAnswer = makeAnswer(text[3], 120, 740, 24, 70, is_Right[3], false,addText);
         return [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer];
     },
 
@@ -36,8 +35,8 @@ const FSF = {
     oneTask: function(slide, cloud, teacher_text, answers_text, answers_is_right, 
         addText,makeAnswer,getMasAnswer,addCheck, setTextAlpha){
         let dialog_author,dialog_text,answers;
-        dialog_author=addText("Преподаватель", 140, 900, 24);
-        dialog_text=addText(teacher_text, 140, 950, 24);
+        dialog_author=addText("Викладач", 220, 870, 30);
+        dialog_text=addText(teacher_text, 220, 920, 30);
         answers = getMasAnswer(
             answers_text, 
             answers_is_right, 
@@ -114,7 +113,7 @@ const FSF = {
         this.rectOne = graphics.drawRect(0, 0, 2000, 2000);
         graphics.endFill();
 
-        this.notebook = this.game.add.image(x, y, 'cloud'/*'notebook'*/);
+        this.notebook = this.game.add.image(x, y, 'cloud');
         smartSetHeight(this.notebook, size);
         return graphics;
     },
@@ -132,6 +131,9 @@ const FSF = {
     addText: function(str, posX, posY, fontSize, todoId){
         let tmp = this.game.add.text(posX, posY, str, {
                 font: fontSize+"px Pangolin",
+                fill: 'white',
+                stroke: 'black',
+                strokeThickness: 4,
         });
         if(todoId !== undefined){
             tmp.todoId = todoId;
