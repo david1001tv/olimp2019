@@ -1,100 +1,127 @@
 import Phaser from 'phaser';
 import {smartSetHeight} from '../../utils';
 
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps';
+import MarkerWithLabel from 'react-google-maps/lib/components/addons/MarkerWithLabel';
+
+const MyMapComponent = withScriptjs(withGoogleMap((props) =>
+    <GoogleMap
+        defaultZoom={17}
+        defaultCenter={{lat: 47.095447, lng: 37.541188}}
+
+    >
+        <MarkerWithLabel
+            position={{lat: 47.095447, lng: 37.541188}}
+            labelAnchor={new google.maps.Point(60, 150)}
+            labelStyle={{
+                backgroundColor: 'white',
+                fontFamily: 'Neucha',
+                fontSize: '18px',
+                padding: '16px',
+                boxShadow: '3px 3px 3px #aaa',
+                borderRadius: '2px'
+            }}
+        >
+            <div>Приймальна комісія ПДТУ</div>
+        </MarkerWithLabel>
+    </GoogleMap>
+));
 
 export default class IntroState extends Phaser.State {
     * gen() {
-        this.camera.scale.setTo(5, 5);
-        this.camera.x = 1128 * 5;
-        this.camera.y = 280 * 5 - 300;
-        this.game.add.tween(this.camera).to({x: -250, y: 0}, 5000).start();
-        this.game.add.tween(this.camera.scale).to({
-            x: 1,
-            y: 1,
-        }, 5000).start().onComplete.add(() => setTimeout(() => this.next(), 2000));
+
+        setTimeout(() => this.next(), 3000);
         this.game.camera.flash(0x000000, 3000, true);
+        yield;  
+
+        this.game.displayDialogLine('Голос', 'Промайнули шкільні тижні, і сьогодні Ви склали останній іспит. Що чекає попереду?', () => this.next());
         yield;
 
-
-        this.game.displayDialogLine('Телефон', '*Пилик, пилик*', () => this.next());
+        this.game.displayDialogLine('Голос', 'Хочеться досягти успіху, щоб ніколи не наздогнало почуття жалю за нездійсненним. Настав час планувати майбутнє. Настав час обрати майбутню професію.', () => this.next());
         yield;
 
-
-        this.game.displayDialogLine('Ви', 'О, щось прийшло на пошту. Треба подивитися.', () => this.next());
+        this.game.displayDialogLine('Голос', 'Здається, що всі Ваші однолітки вже встигли визначитися і залишилися лише Ви. Але професій так багато, що Ви відчуваєте себе розгубленим. Лікар? Вчитель? Космонавт? Все не те.', () => this.next());
         yield;
 
-
-        this.bgPhone.visible = true;
-        this.mobile.visible = true;
-        let continueText = this.game.add.text(1050, 975, 'Клацніть, щоб продовжити...', {
-            align: 'center',
-            font: 'Pangolin',
-            fontSize: 70,
-            fontStyle: 'italic',
-            fill: 'white',
-            stroke: 'black',
-            strokeThickness: 8,
-        });
-        this.game.input.onDown.add(() => {
-            this.bgPhone.visible = false;
-            this.mobile.visible = false;
-            continueText.destroy();
-
-            this.game.input.onDown.removeAll();
-            setTimeout(() => this.next(), 2000);
-        });
-        this.game.phone.addMessageById('BEGINNING');
+        this.game.displayDialogLine('Голос', 'Треба щоб і цікавою була, і сучасною, і з високою заробітною платою...', () => this.next());
         yield;
 
-
-        this.david.loadTexture('d-sits-turn');
-        this.game.add.tween(this.mom).to({
-            alpha: 1
-        }, 1500, Phaser.Easing.Cubic.InOut)
-            .start().onComplete.add(() => {
-            this.next();
-        });
+        this.game.displayDialogLine('Ви', '*Зненацька щось яскраве промайнуло перед Вашими очима. Це була підхоплена вітром листівка*', () => this.next());
         yield;
 
+        // this.camera.scale.setTo(1, 1);
+        // this.camera.x = 1128 * 5;
+        // this.camera.y = 350 * 5 - 300;
+        // let firstStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
+        // let secondStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
+        // let thirdStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
+    
+        // firstStep.chain(secondStep, thirdStep);
+        // this.game.add.tween(this.camera.scale).to({
+        //     x: 1.2,
+        //     y: 1.2,
+        // }, 2000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
+        // firstStep.start();
+        // yield;
 
-        this.game.displayDialogLine('Маман', 'Доброго ранку, синку! Тобі вже прийшов лист з університету?', () => this.next());
+        this.buttonYes.alpha = 1;
+        this.buttonNo.alpha = 1;
         yield;
 
-
-        this.game.displayDialogLine('Ви', 'Так, мамо.', () => this.next());
+        if (this.answer == 'No'){
+            this.game.displayDialogLine('Ви', 'Ви збираєтеся пройти повз, але порив вітру кидає листівку прямо Вам в обличчя. “Напевно, це доля”, - гадаєте Ви, придивляючись до тексту', () => this.next());
+        }
+        else {
+            this.game.displayDialogLine('Ви', 'Треба подивитися', () => this.next());
+        }
         yield;
-
-
-        this.game.displayDialogLine('Маман', 'Ти вже обрав спеціальність? Син моєї подруги програміст, вже на першому курсі він отримував 1000$ щомісяця.', () => this.next());
-        yield;
-
-
-        this.game.displayDialogLine('Ви', 'Добре, мамо.', () => this.next());
-        yield;
-
-
-        this.david.loadTexture('d-sits');
-        this.game.add.tween(this.mom).to({
-            alpha: 0
-        }, 1500, Phaser.Easing.Cubic.InOut)
-            .start().onComplete.add(() => {
-            this.next();
-        });
-        yield;
-
-
-        this.game.displayDialogLine('Ви', 'Кожного дня працюю за комп’ютером. Справді добре було б покращити свої навички володіння їм.', () => this.next());
-        yield;
-
-
-        this.game.displayDialogLine('Ви', 'Вирішено! Поступлю на програміста.', () => this.next());
-        yield;
-
         this.game.camera.fade(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
-        yield;
 
         this.game.nextState();
+
+        // this.game.add.tween(this.booklet).to({
+        //     alpha: 1
+        // }, 1500, Phaser.Easing.Cubic.InOut)
+        //     .start().onComplete.add(() => {
+        //         this.game.displayDialogLine('Ви', 'Комп’ютерні науки? Що ж спеціаліст з інформаційних технологій - звучить непогано. Ви уявляєте, як сидите у розкішному кріслі власного кабінету, що займає весь останній поверх хмарочосу', () => this.next());
+        // });
+        // yield;
+        // this.game.displayDialogLine('Ви', 'Ви робите ковток свіжозвареної бразильської кави, що залишив на Вашому столі послужливий особистий помічник, і не кваплячись, з почуттям власної гідності, декількома надрозумними командами програмуєте космічні машини', () => this.next());
+        // yield;
+        // this.game.displayDialogLine('Ви', 'О, це надзвичайно круто!  Давно забуте почуття наснаги захоплює Вас. З нетерпінням Ви шукаєте на листівці дату - вже завтра!  Треба якнайскоріше зареєструватися', () => this.next());
+        // yield;
+
+        
+        //регистрация
+
+        // this.game.displayDialogLine('Ви', 'Ви намагаєтесь згадати, де знаходиться університет. У центрі міста? Біля кінотеатру? Чи може Ви бачили його, коли зустрічалися із друзями в парку? Так і заблукати неважко! Але відчуття тривоги покидає Вас, щойно бачите на зворотному боці листівки карту', () => this.next());
+        // yield;
+
+
+        // this.game.add.tween(this.booklet).to({
+        //     alpha: 0
+        // }, 1500, Phaser.Easing.Cubic.InOut)
+        //     .start().onComplete.add(() => {
+        //         this.game.add.tween(this.booklet_back).to({
+        //             alpha: 1
+        //         }, 1500, Phaser.Easing.Cubic.InOut)
+        //             .start().onComplete.add(() => this.next());
+        // });
+        // yield;
+        // this.game.setFakeBrowserEnabled(true);
+        // this.game.displayDialogLine('Ви', 'Ви почуваєтесь значно впевненіше. Можливо наступний день стане вирішальним і надасть можливість остаточно визначитися з майбутньою професією.', () => this.next());
+        // yield;
+
+        // //карта
+
+        // this.game.camera.fade(0x000000, 1500, true);
+        // setTimeout(() => this.next(), 1500);
+        // yield;
+
+        // this.game.nextState();
     }
 
     init() {
@@ -102,16 +129,16 @@ export default class IntroState extends Phaser.State {
         this.game.phone.setEnabled(false);
         this.game.phone.setTime('13:56');
         this.game.phone.setDate('02.07.18');
+        this.answer = null;
     }
 
     preload() {
-        this.load.image('bg', './assets/images/1-1 (intro)/bg-1-1.png');
-        this.load.image('mom', './assets/images/1-1 (intro)/mom.png');
-        this.load.image('d-sits', './assets/images/1-1 (intro)/d-sits.png');
-        this.load.image('d-sits-turn', './assets/images/1-1 (intro)/d-sits-turn.png');
-        this.load.image('printer', './assets/images/1-1 (intro)/printer.png');
-        this.load.image('bg-phone', './assets/images/mobile/bg-phone.png');
-        this.load.image('mobile', './assets/images/mobile/mobile.png');
+        this.load.image('bg', './assets/images/1-0 (Intro)/background.png');
+        this.load.image('booklet', './assets/images/1-0 (Intro)/booklet.png');
+        this.load.image('booklet_back', './assets/images/1-0 (Intro)/booklet_back.png');
+
+        this.load.image('button_yes', './assets/images/1-0 (Intro)/button_yes.png');
+        this.load.image('button_no', './assets/images/1-0 (Intro)/button_no.png');
     }
 
     create() {
@@ -119,33 +146,42 @@ export default class IntroState extends Phaser.State {
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
 
-        let mom = this.game.add.image(1612, 200, 'mom');
-        smartSetHeight(mom, 668);
-        mom.alpha = 0;
-        this.mom = mom;
+        let buttonYes = this.game.add.button(this.game.world.centerX + 300, 300, 'button_yes', this.actionOnClick, this, 2, 1, 0);
+        let buttonNo = this.game.add.button(this.game.world.centerX - 650, 300, 'button_no', this.actionOnClick, this, 2, 1, 0);
+        buttonYes.alpha = 0;
+        buttonNo.alpha = 0
 
-        let david = this.game.add.image(1128, 280, 'd-sits');
-        smartSetHeight(david, 551);
-        this.david = david;
+        this.buttonYes = buttonYes;
+        this.buttonNo = buttonNo;
 
-        let printer = this.game.add.image(284, 340, 'printer');
-        smartSetHeight(printer, 178);
+        let booklet = this.game.add.image(this.game.world.centerX - 520, 20, 'booklet');
+        booklet.alpha = 0;
+        this.booklet = booklet;
 
-        let bgPhone = this.game.add.image(882, 0, 'bg-phone');
-        bgPhone.visible = false;
-        this.bgPhone = bgPhone;
-
-        let mobile = this.game.add.image(1277, 73, 'mobile');
-        mobile.visible = false;
-        smartSetHeight(mobile, 920);
-        this.mobile = mobile;
+        let booklet_back = this.game.add.image(this.game.world.centerX - 520, 20, 'booklet_back');
+        booklet_back.alpha = 0;
+        this.booklet_back = booklet_back;
 
         this.stage.disableVisibilityChange = true;
 
         this.next();
     }
 
+    actionOnClick(obj) {
+        console.log(obj.key);
+        if (obj.key == 'button_yes'){
+            this.answer = 'Yes';
+        }
+        else {
+            this.answer = 'No';
+        }
+        this.buttonYes.destroy();
+        this.buttonNo.destroy();
+        this.next();
+    }
+
     next() {
         this._gen.next();
     }
+
 }

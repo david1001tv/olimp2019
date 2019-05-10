@@ -160,11 +160,11 @@ class Register extends Component {
                 <div className="md-text-center">
                     <GoogleLogin
                         render={renderProps => (
-                            <button
+                            <div
                                 onClick={renderProps.onClick}
                                 className="drawn-btn drawn-btn__google"
                             >
-                            </button>
+                            </div>
                         )}
                         onSuccess={this.handleGoogleResponseSuccess}
                         onFailure={e => console.error(e)}

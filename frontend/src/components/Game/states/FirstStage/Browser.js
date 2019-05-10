@@ -4,7 +4,8 @@ import autobind from 'autobind-decorator';
 
 export default class BrowserState extends Phaser.State {
     * gen() {
-
+        setTimeout(() => this.next(), 1500);
+        this.game.camera.flash(0x000000, 1500, true);
     }
 
     @autobind
