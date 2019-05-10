@@ -18,10 +18,10 @@ const FSF = {
     },
 
     getMasAnswer: function(text, is_Right, makeAnswer, addText){
-        let firstAnswer = makeAnswer(text[0], 120, 620, 24, 70, is_Right[0], false,addText);
-        let secondAnswer = makeAnswer(text[1], 120, 660, 24, 70, is_Right[1], false,addText);
-        let thirdAnswer = makeAnswer(text[2], 120, 700, 24, 70, is_Right[2], false,addText);
-        let fourthAnswer = makeAnswer(text[3], 120, 740, 24, 70, is_Right[3], false,addText);
+        let firstAnswer = makeAnswer(text[0], 140, 630, 24, 100, is_Right[0], false,addText);
+        let secondAnswer = makeAnswer(text[1], 140, 670, 24, 100, is_Right[1], false,addText);
+        let thirdAnswer = makeAnswer(text[2], 140, 710, 24, 100, is_Right[2], false,addText);
+        let fourthAnswer = makeAnswer(text[3], 140, 750, 24, 100, is_Right[3], false,addText);
         return [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer];
     },
 
@@ -35,7 +35,7 @@ const FSF = {
     oneTask: function(slide, cloud, teacher_text, answers_text, answers_is_right, 
         addText,makeAnswer,getMasAnswer,addCheck, setTextAlpha){
         let dialog_author,dialog_text,answers;
-        dialog_author=addText("Викладач", 220, 870, 30);
+        dialog_author=addText("Анастасія Марківна", 220, 870, 30);
         dialog_text=addText(teacher_text, 220, 920, 30);
         answers = getMasAnswer(
             answers_text, 

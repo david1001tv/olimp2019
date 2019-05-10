@@ -22,21 +22,6 @@ export default class IntroState extends Phaser.State {
         this.game.displayDialogLine('Ви', '*Зненацька щось яскраве промайнуло перед Вашими очима. Це була підхоплена вітром листівка*', () => this.next());
         yield;
 
-        // this.camera.scale.setTo(1, 1);
-        // this.camera.x = 1128 * 5;
-        // this.camera.y = 350 * 5 - 300;
-        // let firstStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
-        // let secondStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
-        // let thirdStep = this.game.add.tween(this.camera).to({ x: 400, y: -600 }, 500);
-    
-        // firstStep.chain(secondStep, thirdStep);
-        // this.game.add.tween(this.camera.scale).to({
-        //     x: 1.2,
-        //     y: 1.2,
-        // }, 2000).start().onComplete.add(() => setTimeout(() => this.next(), 1000));
-        // firstStep.start();
-        // yield;
-
         this.buttonTake_on.inputEnabled = true;
         this.buttonIgnore_on.inputEnabled = true;
         this.buttonTake_on.alpha = 1;
@@ -65,7 +50,6 @@ export default class IntroState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'О, це надзвичайно круто!  Давно забуте почуття наснаги захоплює Вас. З нетерпінням Ви шукаєте на листівці дату - вже завтра!  Треба якнайскоріше зареєструватися', () => this.next());
         yield;
 
-        
         //регистрация
 
         this.game.displayDialogLine('Ви', 'Ви намагаєтесь згадати, де знаходиться університет. У центрі міста? Біля кінотеатру? Чи може Ви бачили його, коли зустрічалися із друзями в парку? Так і заблукати неважко! Але відчуття тривоги покидає Вас, щойно бачите на зворотному боці листівки карту', () => this.next());
@@ -84,8 +68,8 @@ export default class IntroState extends Phaser.State {
         yield;
 
         //карта
-        this.game.setGoogleMapEnabled(true);
-
+        //this.game.setGoogleMapEnabled(true);
+    
         this.game.displayDialogLine('Ви', 'Ви почуваєтесь значно впевненіше. Можливо наступний день стане вирішальним і надасть можливість остаточно визначитися з майбутньою професією.', () => this.next());
         yield;
 
@@ -148,7 +132,7 @@ export default class IntroState extends Phaser.State {
         this.buttonIgnore_on = buttonIgnore_on;
         
         //Текст в формах выбора
-        this.firstTake = this.game.add.text(this.game.world.centerX + 442, 425, 'Схопити', {
+        this.firstTake = this.game.add.text(this.game.world.centerX + 435, 420, 'Схопити', {
             font: "Pangolin",
             fontSize: 60,
             fill: 'white',
@@ -157,7 +141,7 @@ export default class IntroState extends Phaser.State {
         });
         this.firstTake.alpha = 0;
 
-        this.firstIgonre = this.game.add.text(this.game.world.centerX - 700, 425, 'Ігнорувати', {
+        this.firstIgonre = this.game.add.text(this.game.world.centerX - 685, 420, 'Ігнорувати', {
             font: "Pangolin",
             fontSize: 60,
             fill: 'white',

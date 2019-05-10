@@ -5,11 +5,10 @@ var PostIntro = require("./PostIntro.js");
 
 export default class QuestionsState extends Phaser.State {
     * gen() {
-
         setTimeout(() => this.next(), 3000);
         this.game.camera.flash(0x000000, 3000, true);
         yield;
-        
+
         this.game.phone.setEnabled(false);
 
         this.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => this.next());
@@ -18,10 +17,35 @@ export default class QuestionsState extends Phaser.State {
         this.game.displayDialogLine('Ви', 'Але ось Ви помічаєте необхідну, її неможливо сплутати з іншими', () => this.next());
         yield;
 
+        //Уведомление "Подсказка о выборе группы"
+        this.game.add.tween(this.warning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start(); 
+
+        this.game.add.tween(this.secondWarning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
         this.bg.inputEnabled = true;
         yield;
 
+        this.game.add.tween(this.warning).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start(); 
+
+        this.game.add.tween(this.secondWarning).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
         this.game.displayDialogLine('Ви', 'Приєднавшись до групи юнаків і дівчат, Ви непомітно розглядаєте ту, що утримує табличку в доглянутих руках з ніжним манікюром', () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Ви', '*Ви приєдналися до групи абітурієнтів, але Ви навіть не встигли засумувати, як та хто тримала табличку заговорила*', () => this.next());
+        yield;
 
         this.game.add.tween(this.teacher).to({
                 alpha: 1
@@ -34,8 +58,16 @@ export default class QuestionsState extends Phaser.State {
             yield;
         }
 
+        this.game.displayDialogLine('Викладач', 'Ще раз повторюю, звуть мене Анастасія Марківна, дочекаємося інших і через декілька хвилин ми підем до аудиторії', () => this.next());
+        yield;
+
         this.game.displayDialogLine('Ви', '*Невдовзі Ви разом з іншими рушаєте коридорами університету до лекційного залу з підготовленим для презентації екраном*', () => this.next());
         yield;
+
+        this.game.add.tween(this.teacher).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start()
 
         this.game.add.tween(this.bg).to({
             alpha: 0
@@ -48,6 +80,10 @@ export default class QuestionsState extends Phaser.State {
         });
         yield;
 
+        this.game.add.tween(this.teacher).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start()
         
         this.game.add.tween(this.slide1).to({
             alpha: 0.9
@@ -125,13 +161,22 @@ export default class QuestionsState extends Phaser.State {
             this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect,this.FSF.deleteText,oneTask,this.cloud)
-        
+       
+
+        this.game.add.tween(this.cloud).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+        this.game.add.tween(this.fake_dialog).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
 
         //seventh question
         this.game.add.tween(this.slide8).to({
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
-            .start().onComplete.add(() => setTimeout(() => {
+            .start().onComplete.add(() => setTimeout(() => {  
                 this.game.add.tween(this.slide8).to({
                     alpha: 0
                 }, 1500, Phaser.Easing.Cubic.InOut)
@@ -139,6 +184,11 @@ export default class QuestionsState extends Phaser.State {
                 this.next();
             }, 2000));
         yield;
+        
+        this.game.add.tween(this.fake_dialog).to({
+            alpha: 0.8
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
 
         oneTask=this.FSF.oneTask(this.slide9, this.cloud, 
             "Підвищення кваліфікації призначене для ... знань, обраної вами професії", 
@@ -156,6 +206,11 @@ export default class QuestionsState extends Phaser.State {
             this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect,this.FSF.deleteText,oneTask,this.cloud)  
+
+        this.game.add.tween(this.fake_dialog).to({
+            alpha: 0
+        }, 1000, Phaser.Easing.Cubic.InOut)
+            .start();
         
         this.game.add.tween(this.warning).to({
             alpha: 1
@@ -235,13 +290,14 @@ export default class QuestionsState extends Phaser.State {
         this.bg = bg;
 
         //Уведомления
-        let warning = this.game.add.image(0, 0, 'warning_message');
+        let warning = this.game.add.image(700, 0, 'warning_message');
         warning.alpha = 0;
         smartSetHeight(warning, 200);
         this.warning = warning;
 
-        if (this.FSF.testim <= 1) {
-            this.firstWarning = this.game.add.text(25, 45, 'Ви уважно слухали викладача і\nотримали повніше уявлення\nпро професію', {
+        //Уведомление: "Окончание квеста (результат)"
+        if (this.mistakes <= 1) {
+            this.firstWarning = this.game.add.text(725, 45, 'Ви уважно слухали викладача і\nотримали повніше уявлення\nпро професію', {
                 font: "Pangolin",
                 fontSize: 30,
                 fill: 'white',
@@ -249,8 +305,8 @@ export default class QuestionsState extends Phaser.State {
                 strokeThickness: 8,
             });
         }
-        else if (this.FSF.testim > 1 ) {
-            this.firstWarning = this.game.add.text(30, 60, 'Ви здобули базове уявлення про\nпрофесію. Варто бути уважнішим', {
+        else if (this.mistakes > 1 ) {
+            this.firstWarning = this.game.add.text(730, 60, 'Ви здобули базове уявлення про\nпрофесію. Варто бути уважнішим', {
                 font: "Pangolin",
                 fontSize: 30,
                 fill: 'white',
@@ -259,6 +315,16 @@ export default class QuestionsState extends Phaser.State {
             });
         }
         this.firstWarning.alpha = 0;
+
+        //Уведомление: "Подсказка, что необходимо выбрать толпу"
+        this.secondWarning = this.game.add.text(725, 85, 'Менi потрiбно обрати вiрну групу', {
+            font: "Pangolin",
+            fontSize: 33,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.secondWarning.alpha = 0;
 
         let presentation = this.game.add.image(0, 0, 'presentation');
         presentation.height = this.game.width * presentation.height / presentation.width;
@@ -279,7 +345,7 @@ export default class QuestionsState extends Phaser.State {
         this.slide10 = this.FSF.makeImg(405, 140, 'slide10', 1130, 900);
 
 
-        this.teacher = this.FSF.makeImg(1400, 300, 'teacher', 500, 740);
+        this.teacher = this.FSF.makeImg(1329, 100, 'teacher', 600, 900);
         this.fake_dialog = this.FSF.makeImg(0, 850, 'fake_dialog_background', 1920, 400);
         this.cloud = this.FSF.makeImg(10, 580, 'cloud', 400, 200);
 

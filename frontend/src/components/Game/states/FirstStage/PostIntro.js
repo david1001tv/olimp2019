@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import {smartSetHeight, smartSetWidth} from '../../utils';
+import FSF from '../../states/FirstStageFunctions';
 
 export default class IntroState extends Phaser.State {
     * gen() {
@@ -60,6 +61,11 @@ export default class IntroState extends Phaser.State {
             this.game.displayDialogLine('Голос', 'Побачивши Вас і зацікавившись, вона робить кілька кроків назустріч. Безумовно, вона - славна людина й розташовує до себе. Дівчина вітає Вас як доброго знайомого, і Ви неначе потрапляєте під чари її теплих очей', () => this.next());
             yield;
 
+            this.game.add.tween(this.girl).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
+
             this.game.displayDialogLine('Дiвчина', 'Привіт! Мене звати Надія. Ти з абітурієнтів? Впізнаю цю розгубленість у погляді. До якої спеціальності плануєш вступати? Дай вгадати… На туризм?', () => this.next());
             yield;
 
@@ -113,6 +119,11 @@ export default class IntroState extends Phaser.State {
 
             this.game.displayDialogLine('Надія', 'Та мене дивує, що ти досі не запитав про наших викладачів, розклад, фахові предмети. Свого часу мене це цікавило значно більше. Отож, я дам тобі маленьку дружню пораду. Бородач стає душкою, якщо демонструєш бажання з головою поринути в його предмети. Хибеник не перестає сипати термінами, але якщо запитаєш, кожен пояснить по-людськи. Стильна любить всіх з незвичайним поглядом на, здавалося, банальні речі. Сподіваюсь, ти скористаєшся цією підказкою, щоб сподобатись їм. А тепер пробач, мені треба повертатися до своїх. Звертайся до мене за допомогою!', () => this.next());
 
+            this.game.add.tween(this.girl).to({
+                alpha: 0
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
+
             //Повідомлення: "Вітаємо! У Вас з’явилась подруга, що допоможе у майбутньому"
             this.game.add.tween(this.warning).to({
                 alpha: 1
@@ -148,6 +159,10 @@ export default class IntroState extends Phaser.State {
             this.game.displayDialogLine('Ви', 'Він так пильно спостерігав за Вами, що по тілу бігали мурашки. Але Ви не з тих, хто лякається труднощів. Відповівши на його увагу прямим поглядом, Ви впевнено наблизились до суворого чоловіка. Він знову зверхньо посміхнувся', () => this.next());
             yield;
 
+            this.game.add.tween(this.man).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
             this.game.displayDialogLine('Чоловік', 'Так і знав, що підійдеш. Сміливість гідна поваги, та мені цікаво, що це був за боягузливий відступ?', () => this.next());
             yield;
 
@@ -197,6 +212,11 @@ export default class IntroState extends Phaser.State {
             yield;
 
             this.game.displayDialogLine('Чоловік', 'Тобі час йти. Можеш звертатися до мене, тільки не через дрібниці', () => this.next());
+
+            this.game.add.tween(this.man).to({
+                alpha: 0
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
 
             //Повідомлення: "Завдяки своїй сміливості Ви завели знайомство з завідувачем кафедри".
             this.game.add.tween(this.warning).to({
@@ -251,23 +271,31 @@ export default class IntroState extends Phaser.State {
         this.load.image('button_red_on', './assets/images/1-1 (PostIntro)/Button_Choice_On_Red.png');
         this.load.image('button_blue_on', './assets/images/1-1 (PostIntro)/Button_Choice_On_Blue.png');
         
+        this.load.image('firstMeetingMan', './assets/images/1-1 (PostIntro)/man.png');
+        this.load.image('firstMeetingGirl', './assets/images/1-1 (PostIntro)/girl.png');
+
         this.load.image('warning_message', './assets/images/1-1 (PostIntro)/warning_message.png');
 
 
     }
 
     create() {
+        this.FSF = {...FSF};
+        for (let key in this.FSF) {
+            this.FSF[key] = this.FSF[key].bind(this);
+        }
+
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
 
         //Уведомления
-        let warning = this.game.add.image(0, 0, 'warning_message');
+        let warning = this.game.add.image(700, 0, 'warning_message');
         warning.alpha = 0;
         smartSetHeight(warning, 200);
         this.warning = warning;
 
-        this.firstWarning = this.game.add.text(35, 80, 'Цей вибір вплине на Вашу історію', {
+        this.firstWarning = this.game.add.text(735, 80, 'Цей вибір вплине на Вашу історію', {
             font: "Pangolin",
             fontSize: 30,
             fill: 'white',
@@ -276,7 +304,7 @@ export default class IntroState extends Phaser.State {
         });
         this.firstWarning.alpha = 0;
 
-        this.secondWarning = this.game.add.text(35, 70, 'Вітаємо! У Вас з’явилась подруга,\n що допоможе у майбутньому', {
+        this.secondWarning = this.game.add.text(735, 70, 'Вітаємо! У Вас з’явилась подруга,\n що допоможе у майбутньому', {
             font: "Pangolin",
             fontSize: 30,
             fill: 'white',
@@ -285,7 +313,7 @@ export default class IntroState extends Phaser.State {
         });
         this.secondWarning.alpha = 0;
 
-        this.thirdWarning = this.game.add.text(15, 70, 'Завдяки своїй сміливості Ви завели\n знайомство з завідувачем кафедри', {
+        this.thirdWarning = this.game.add.text(715, 70, 'Завдяки своїй сміливості Ви завели\n знайомство з завідувачем кафедри', {
             font: "Pangolin",
             fontSize: 31,
             fill: 'white',
@@ -294,7 +322,10 @@ export default class IntroState extends Phaser.State {
         });
         this.thirdWarning.alpha = 0;
 
-
+        //girl
+        this.girl = this.FSF.makeImg(1329, 100, 'firstMeetingGirl', 600, 900);
+        //man
+        this.man = this.FSF.makeImg(1329, 200, 'firstMeetingMan', 600, 900);
 
         //Вопрос 1
         let buttonGirl_on = this.game.add.button(this.game.world.centerX + 242, 400, 'button_blue_on', this.firstQuest, this, 1, 0, 2);
@@ -316,7 +347,7 @@ export default class IntroState extends Phaser.State {
         });
         this.firstGirl.alpha = 0;
 
-        this.firstMan = this.game.add.text(this.game.world.centerX - 790, 425, 'Підійти до чоловiка', {
+        this.firstMan = this.game.add.text(this.game.world.centerX - 800, 425, 'Підійти до чоловiка', {
             font: "Pangolin",
             fontSize: 60,
             fill: 'white',
@@ -326,17 +357,17 @@ export default class IntroState extends Phaser.State {
         this.firstMan.alpha = 0;
 
         //Вопрос Girl 2
-        let buttonTrust_on = this.game.add.button(this.game.world.centerX + 242, 400, 'button_blue_on', this.secondQuest, this, 1, 0, 2);
+        let buttonTrust_on = this.game.add.button(656, 300, 'button_blue_on', this.secondQuest, this, 1, 0, 2);
         buttonTrust_on.inputEnabled = false;
         buttonTrust_on.alpha = 0;
         this.buttonTrust_on = buttonTrust_on;
 
-        let buttonMistrust_on = this.game.add.button(this.game.world.centerX - 850, 400, 'button_red_on', this.secondQuest, this, 0, 1, 0);
+        let buttonMistrust_on = this.game.add.button(656, 650, 'button_red_on', this.secondQuest, this, 0, 1, 0);
         buttonMistrust_on.inputEnabled = false;
         buttonMistrust_on.alpha = 0;
         this.buttonMistrust_on = buttonMistrust_on;
 
-        this.secondGirl1 = this.game.add.text(this.game.world.centerX + 275, 425, 'Довірити їй свої думки', {
+        this.secondGirl1 = this.game.add.text(685, 325, 'Довірити їй свої думки', {
             font: "Pangolin",
             fontSize: 55,
             fill: 'white',
@@ -345,7 +376,7 @@ export default class IntroState extends Phaser.State {
         });
         this.secondGirl1.alpha = 0;
 
-        this.secondGirl2 = this.game.add.text(this.game.world.centerX - 830, 430, 'Не відкривати серце незнайомці', {
+        this.secondGirl2 = this.game.add.text(672.5, 680, 'Не відкривати серце незнайомці', {
             font: "Pangolin",
             fontSize: 40,
             fill: 'white',
@@ -355,17 +386,17 @@ export default class IntroState extends Phaser.State {
         this.secondGirl2.alpha = 0;
 
         //Вопрос Man 2
-        let buttonDoubts_on = this.game.add.button(this.game.world.centerX + 242, 400, 'button_blue_on', this.thirdQuest, this, 1, 0, 2);
+        let buttonDoubts_on = this.game.add.button(656, 300, 'button_blue_on', this.thirdQuest, this, 1, 0, 2);
         buttonDoubts_on.inputEnabled = false;
         buttonDoubts_on.alpha = 0;
         this.buttonDoubts_on = buttonDoubts_on;
 
-        let buttonResolve_on = this.game.add.button(this.game.world.centerX - 850, 400, 'button_red_on', this.thirdQuest, this, 0, 1, 0);
+        let buttonResolve_on = this.game.add.button(656, 650, 'button_red_on', this.thirdQuest, this, 0, 1, 0);
         buttonResolve_on.inputEnabled = false;
         buttonResolve_on.alpha = 0;
         this.buttonResolve_on = buttonResolve_on;
 
-        this.secondMan1 = this.game.add.text(this.game.world.centerX + 270, 425, 'Розповісти про сумніви', {
+        this.secondMan1 = this.game.add.text(685, 325, 'Розповісти про сумніви', {
             font: "Pangolin",
             fontSize: 55,
             fill: 'white',
@@ -374,7 +405,7 @@ export default class IntroState extends Phaser.State {
         });
         this.secondMan1.alpha = 0;
 
-        this.secondMan2 = this.game.add.text(this.game.world.centerX - 825, 430, 'Спитати, хто він в біса такий', {
+        this.secondMan2 = this.game.add.text(680, 680, 'Спитати, хто він в біса такий', {
             font: "Pangolin",
             fontSize: 45,
             fill: 'white',
