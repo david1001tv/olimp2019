@@ -94,7 +94,7 @@ export default class IntroState extends Phaser.State {
         this.load.image('booklet', './assets/images/1-0 (Intro)/booklet.png');
         this.load.image('booklet_back', './assets/images/1-0 (Intro)/booklet_back.png');
 
-        this.load.image('button_red_on', './assets/images/1-0 (Intro)/Button_Choice_On_Red.png');
+        this.load.image('button_red_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png');
         this.load.image('button_blue_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png');
 
         this.load.image('cloud1', './assets/images/1-0 (Intro)/cloud1.png');

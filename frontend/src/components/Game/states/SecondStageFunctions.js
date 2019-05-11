@@ -1,5 +1,13 @@
 import {smartSetHeight, smartSetWidth} from '../utils';
 const SSF = {
+    
+    makeImg: function(x,y,img,w,h){
+        let slide = this.game.add.image(x,y,img);
+        slide.alpha = 0;
+        smartSetHeight(slide, h);
+        smartSetWidth(slide, w);
+        return slide;
+    },
 
     imageCheck: function(mass){
         let trueMass = mass.filter(function(number) {
