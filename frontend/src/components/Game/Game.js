@@ -45,6 +45,9 @@ import RegisterState from './states/FirstStage/regtest';
 import config from './config';
 import IntroState from './states/FirstStage/Intro';
 
+// потом удалить
+import testGame from './states/FirstStage/testgame';
+
 class Game extends Phaser.Game {
 
     constructor(phoneAPI, progressManager) {
@@ -94,10 +97,10 @@ class Game extends Phaser.Game {
         this.state.add('Final', new Phaser.State(), false);
         */
         
-        this.state.add('Intro', IntroState, false);
-        this.state.add('regtest', RegisterState, false);
-
-        this.state.start('Boot', true, false, 'Intro');
+        // this.state.add('Intro', IntroState, false);
+        // this.state.add('regtest', RegisterState, false);
+        this.state.add('testGame', testGame, false);
+        this.state.start('Boot', true, false, 'testGame');
     }
 
     @autobind

@@ -5,6 +5,9 @@ import validate from 'validate.js';
 import autobind from 'autobind-decorator';
 import {GoogleLogin} from 'react-google-login';
 
+import './login.sass';
+import lineM from '../../img/line.png';
+import logoG from '../../img/logoGo.png';
 import {logIn, isAuthenticated, googleLogIn} from '~api';
 
 class Login extends Component {
@@ -122,7 +125,25 @@ class Login extends Component {
                 <div className="md-text-center title">
                     <h3>Вхід</h3>
                 </div>
-                <div className="md-text-center">
+                <div className="wrapmain">
+                    <img src={lineM} alt="1"/>
+                    <h2>увійти через</h2>
+                    <img src={lineM} alt="2"/>
+                </div>
+                <GoogleLogin
+                        render={renderProps => (
+                            <div className="logGo" onClick={renderProps.onClick}>
+                            <h2>УВІЙТИ ЧЕРЕЗ</h2>
+                            <img src={logoG} alt="3"/>
+                            </div>
+
+                        )}
+                        onSuccess={this.handleGoogleResponseSuccess}
+                        onFailure={e => console.error(e)}
+                        clientId="160162546321-8u5mfbbgqa28l3q5d80l8is3ps9gsd0c.apps.googleusercontent.com"
+                    />
+                
+                {/* <div className="md-text-center">
                     <GoogleLogin
                         render={renderProps => (
                             <button
@@ -135,7 +156,7 @@ class Login extends Component {
                         onFailure={e => console.error(e)}
                         clientId="160162546321-8u5mfbbgqa28l3q5d80l8is3ps9gsd0c.apps.googleusercontent.com"
                     />
-                </div>
+                </div> */}
                 {/* <form
                     onSubmit={this.handleSubmit}
                 >

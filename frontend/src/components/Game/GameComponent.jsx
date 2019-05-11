@@ -10,6 +10,9 @@ import PostRegister from '~components/FakeBrowser/PostRegister';
 import {Redirect} from 'react-router-dom';
 
 
+import Tgame from '../Tgame/Tgame';
+
+
 class GameComponent extends Component {
     static defaultProps = {
         inputEnabled: true,
@@ -23,7 +26,7 @@ class GameComponent extends Component {
 
     state = {
         fakeBrowserIsShown: false,
-        MapIsShown: false,
+        testGame: false,
         redirectToFinal: false,
     };
 
@@ -45,7 +48,7 @@ class GameComponent extends Component {
         this.game.displayDialogLine = this.props.displayDialogLine;
         this.game.phone = this.props.phone;
         this.game.setFakeBrowserEnabled = this.setFakeBrowserEnabled;
-        this.game.MapIsShownEnabled = this.MapIsShownEnabled;
+        this.game.testGameEnabled = this.testGameEnabled;
         this.game.state.onStateChange.add(this.handleGameStateChange, this);
 
         this.startState = this.game.startState.bind(this.game);
@@ -62,8 +65,8 @@ class GameComponent extends Component {
         this.setState({fakeBrowserIsShown: enabled})
     }
     @autobind
-    MapIsShownEnabled(enabled) {
-        this.setState({MapIsShown: enabled})
+    testGameEnabled(enabled) {
+        this.setState({testGame: enabled})
     }
 
 
@@ -85,9 +88,9 @@ class GameComponent extends Component {
                 <FakeBrowser />
             );
         }
-        if (this.state.MapIsShown) {
+        if (this.state.testGame) {
             return (
-                <PostRegister />
+                <Tgame />
             );
         }
 

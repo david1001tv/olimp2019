@@ -21,7 +21,6 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
                 borderRadius: '2px'
             }}
         >
-            <div>Приймальна комісія ПДТУ</div>
         </MarkerWithLabel>
     </GoogleMap>
 ));

@@ -20,11 +20,6 @@ class FakeBrowser extends Component {
         searchIsSubmitted: false,
     };
 
-    @autobind
-    handleSubmit(e) {
-        e.preventDefault();
-        this.setState({searchIsSubmitted: true});
-    }
 
     @autobind
     handleRegistrationSuccess() {
@@ -68,7 +63,6 @@ class FakeBrowser extends Component {
         return (
             <div className="fake-browser">
              <div className="regmain">
-             {/* <img src={bookletImage} className="imgbuklet" alt="main main"/> */}
              <span
                             className="register-link"
                             onClick={() => this.setState({formIsVisible: true})}
