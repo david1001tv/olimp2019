@@ -24,6 +24,7 @@ const SSF = {
         addImg.third = third;
         addImg.fourth = fourth;
         addImg.type = type;
+        addImg.alpha = 0;
 
         return addImg;
     },
