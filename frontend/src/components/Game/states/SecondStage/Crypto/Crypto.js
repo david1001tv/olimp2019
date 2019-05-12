@@ -25,7 +25,18 @@ const CELL_OFFSET_VER = 390;
 
 export default class CryptoState extends Phaser.State {
     * gen() {
-        
+        let context = this;
+        this.generateWord(function() {
+            context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
+        });
+        yield;
+
+        this.generateWord(function() {
+            context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
+        });
+        yield;
+
+        this.game.nextState();
     }
 
     init() {
@@ -76,7 +87,6 @@ export default class CryptoState extends Phaser.State {
         this.offsetBetweenRows = 100;
 
         this.random = new Phaser.RandomDataGenerator([Date.now()]);
-        this.generateWord();
 
         this.keyBoard = this.game.add.group();
 
@@ -89,7 +99,7 @@ export default class CryptoState extends Phaser.State {
         this.next();
     }
 
-    generateWord() {
+    generateWord(callback) {
         this.currentWord = words[this.random.integerInRange(0, words.length - 1)];
         this.input = new CryptoInput(CELL_OFFSET_HOR, CELL_OFFSET_VER, this.currentWord, this.game);
         this.input.onInputEnd = () => {
@@ -103,7 +113,7 @@ export default class CryptoState extends Phaser.State {
                     member.text.destroy();
                     member.value = '';
                 });
-                this.generateWord();
+                callback()
             }
         };
     }
