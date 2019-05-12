@@ -7,8 +7,6 @@ import progressManager from '~etc/ProgressManager';
 import MapState from './states/Map';
 import BootState from './states/Boot';
 
-//import IntroState from './states/FirstStage/Intro';
-
 //Этап 1
 //Интро
 import IntroState from './states/FirstStage/Intro';
@@ -35,7 +33,8 @@ import TransitionToThirdStageState from './states/SecondStage/TransitionToThirdS
 //Этап 3
 //Квест 1 "Лабиринт" -
 //Квест 2 "Кроссворд" +
-import CrossState from './states/ThirdStage/Cross';
+import CrossState from './states/ThirdStage/Cross/Cross';
+import CryptoState from './states/SecondStage/Crypto/Crypto';
 
 //Этап 4
 //Квест 1 "Поиск предметов" -
@@ -61,30 +60,32 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-        /*
+        this.state.add('Intro', CryptoState, false);
+        
+        this.state.start('Boot', true, false, 'Map');
+        
         //Stage 1
-        //Intro +
-        this.state.add('Intro', IntroState, false);
-        //Questions +
-        this.state.add('Questions', QuestionsState, false);
+        /*this.state.add('Intro', IntroState, false);
+        this.state.add('PostIntro', PostIntroState, false);
+        this.state.add('Questions', QuestionsState, false);*/
 
         //Stage 2
         //Fillword -
         //LayoutPuzzle +
-        this.state.add("LayoutPuzzle", LayoutPuzzleState, false);
+        /*this.state.add("LayoutPuzzle", LayoutPuzzleState, false);
         //Tags -
         //Wiring +
         this.state.add("CutImages", CutImagesState, false);
         //Cryptographic -
         //Robot -
         //Cards +
-        this.state.add("Cards", CardsState, false);
+        this.state.add("Cards", CardsState, false);*/
         //Tests -
 
         //Stage 3
         //Labyrinth -
         //Crossword +
-        this.state.add("Cross", CrossState, false);
+        //this.state.add("Cross", CrossState, false);
 
         //Stage 4
         //FindItems -
@@ -92,13 +93,10 @@ class Game extends Phaser.Game {
         //TestingAndDebugging -
 
         
-        this.state.add('Final', new Phaser.State(), false);
-        */
-        
-        this.state.add('Intro', QuestionsState, false);
+        //this.state.add('Final', new Phaser.State(), false);
 
 
-        this.state.start('Boot', true, false, 'Map');
+        //this.state.start('Boot', true, false, 'Map');
     }
 
     @autobind

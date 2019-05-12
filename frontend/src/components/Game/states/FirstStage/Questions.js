@@ -240,7 +240,7 @@ export default class QuestionsState extends Phaser.State {
         smartSetHeight(warning, 200);
         this.warning = warning;
 
-        if (this.FSF.testim <= 1) {
+        if (this.mistakes <= 1) {
             this.firstWarning = this.game.add.text(25, 45, 'Ви уважно слухали викладача і\nотримали повніше уявлення\nпро професію', {
                 font: "Pangolin",
                 fontSize: 30,
@@ -249,7 +249,7 @@ export default class QuestionsState extends Phaser.State {
                 strokeThickness: 8,
             });
         }
-        else if (this.FSF.testim > 1 ) {
+        else if (this.mistakes > 1 ) {
             this.firstWarning = this.game.add.text(30, 60, 'Ви здобули базове уявлення про\nпрофесію. Варто бути уважнішим', {
                 font: "Pangolin",
                 fontSize: 30,

@@ -116,7 +116,7 @@ export default class IntroState extends Phaser.State {
         this.load.image('cloud1', './assets/images/1-0 (Intro)/cloud1.png');
         this.load.image('cloud2', './assets/images/1-0 (Intro)/cloud2.png');
         this.load.image('cloud3', './assets/images/1-0 (Intro)/cloud3.png');
-        this.load.image('cloud4', './assets/images/1-0 (Intro)/cloud4.png');
+        //this.load.image('cloud4', './assets/images/1-0 (Intro)/cloud4.png');
 
     }
 
@@ -156,6 +156,7 @@ export default class IntroState extends Phaser.State {
             strokeThickness: 8,
         });
         this.firstTake.alpha = 0;
+        console.log(this.firstTake);
 
         this.firstIgonre = this.game.add.text(this.game.world.centerX - 700, 425, 'Ігнорувати', {
             font: "Pangolin",
