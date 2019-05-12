@@ -65,6 +65,11 @@ export default class Scanner extends Phaser.State {
             .start(); 
 
         if (this.firstChoice == 'Approved'){
+            this.game.add.tween(this.bg2).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
+
             this.game.displayDialogLine('Голос', 'Зібравшись з силами, Ви взялися до виконання наукової роботи. Варто добре поміркувати, яких порад дотримуватися під час написання', () => this.next());
             yield;
 
@@ -221,6 +226,7 @@ export default class Scanner extends Phaser.State {
     preload() {
 
         this.load.image('bg', './assets/images/2-7 (Cards)/background.png');
+        this.load.image('bg2', './assets/images/2-7 (Cards)/background_2.png');
         this.load.image('no', './assets/images/2-7 (Cards)/no.png');
         this.load.image('yes', './assets/images/2-7 (Cards)/yes.png');
 
@@ -246,6 +252,13 @@ export default class Scanner extends Phaser.State {
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
+
+        let bg2 = this.game.add.image(0, 0, 'bg2');
+        bg2.height = this.game.width * bg2.height / bg2.width;
+        bg2.width = this.game.width;
+        bg2.alpha = 0;
+        this.bg2 = bg2;
+
 
         //Выбор
         let buttonApprove_on = this.game.add.button(656, 300, 'button_blue_on', this.firstSelection, this, 1, 0, 2);
@@ -395,12 +408,12 @@ export default class Scanner extends Phaser.State {
                     this.cards[index2].destroy();
                     }
 
-                    this.game.displayDialogLine('Ви', '+');
+                    this.game.displayDialogLine('Голос', 'Добре! Ви рушите вірним шляхом');
                     this.game.phone.completeTodo(activePart.todoId);
 
                     this.activePart = this.cards[index];
                 } else {
-                    this.game.displayDialogLine('Ви', 'Ой, щось кривувато вийшло. Спробую ще раз');
+                    this.game.displayDialogLine('Ви', 'О ні! Це була жорстока помилка');
                 }
             }
 

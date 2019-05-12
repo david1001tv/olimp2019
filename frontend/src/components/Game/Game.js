@@ -34,8 +34,7 @@ import TransitionToThirdStageState from './states/SecondStage/TransitionToThirdS
 
 //Этап 3
 //Квест 1 "Лабиринт" -
-//Квест 2 "Кроссворд" +
-import CrossState from './states/ThirdStage/Cross';
+//Квест 2 "Кроссворд" -
 
 //Этап 4
 //Квест 1 "Поиск предметов" -
@@ -83,8 +82,7 @@ class Game extends Phaser.Game {
 
         //Stage 3
         //Labyrinth -
-        //Crossword +
-        this.state.add("Cross", CrossState, false);
+        //Crossword -
 
         //Stage 4
         //FindItems -
@@ -101,6 +99,7 @@ class Game extends Phaser.Game {
 
         //this.state.add('Intro4', LayoutPuzzleState, false);
         this.state.add('Intro', CardsState, false);
+
 
 
         this.state.start('Boot', true, false, 'Map');
