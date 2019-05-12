@@ -235,8 +235,8 @@ export default class Scanner extends Phaser.State {
         }
         this.load.image('blur_card', './assets/images/2-7 (Cards)/blur.png');
 
-        this.load.image('button_red_on', './assets/images/2-7 (Cards)/Button_Choice_On_Blue.png');
-        this.load.image('button_blue_on', './assets/images/2-7 (Cards)/Button_Choice_On_Blue.png');
+        this.load.spritesheet('button_red_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_blue_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
 
         this.load.image('teacher', './assets/images/2-7 (Cards)/teacher.png');
         this.load.image('warning_message', './assets/images/2-7 (Cards)/warning_message.png');
@@ -261,12 +261,12 @@ export default class Scanner extends Phaser.State {
 
 
         //Выбор
-        let buttonApprove_on = this.game.add.button(656, 300, 'button_blue_on', this.firstSelection, this, 1, 0, 2);
+        let buttonApprove_on = this.game.add.button(656, 300, 'button_blue_on', this.firstSelection, this, 1, 1, 0);
         buttonApprove_on.inputEnabled = false;
         buttonApprove_on.alpha = 0;
         this.buttonApprove_on = buttonApprove_on;
 
-        let buttonDisapprove_on = this.game.add.button(656, 650, 'button_red_on', this.firstSelection, this, 0, 1, 0);
+        let buttonDisapprove_on = this.game.add.button(656, 650, 'button_red_on', this.firstSelection, this, 1, 1, 0);
         buttonDisapprove_on.inputEnabled = false;
         buttonDisapprove_on.alpha = 0;
         this.buttonDisapprove_on = buttonDisapprove_on;

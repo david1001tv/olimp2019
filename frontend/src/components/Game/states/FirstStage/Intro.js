@@ -94,8 +94,8 @@ export default class IntroState extends Phaser.State {
         this.load.image('booklet', './assets/images/1-0 (Intro)/booklet.png');
         this.load.image('booklet_back', './assets/images/1-0 (Intro)/booklet_back.png');
 
-        this.load.image('button_red_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png');
-        this.load.image('button_blue_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png');
+        this.load.spritesheet('button_red_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_blue_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
 
         this.load.image('cloud1', './assets/images/1-0 (Intro)/cloud1.png');
         this.load.image('cloud2', './assets/images/1-0 (Intro)/cloud2.png');
@@ -120,13 +120,13 @@ export default class IntroState extends Phaser.State {
 
 
         //Формы выбора
-        let buttonTake_on = this.game.add.button(this.game.world.centerX + 242, 400, 'button_blue_on', this.actionOnClick, this, 1, 0, 2);
+        let buttonTake_on = this.game.add.button(this.game.world.centerX + 242, 400, 'button_blue_on', this.actionOnClick, this, 1, 1, 0);
         buttonTake_on.inputEnabled = false;
         buttonTake_on.alpha = 0;
         this.buttonTake_on = buttonTake_on;
 
 
-        let buttonIgnore_on = this.game.add.button(this.game.world.centerX - 850, 400, 'button_red_on', this.actionOnClick, this, 0, 1, 0);
+        let buttonIgnore_on = this.game.add.button(this.game.world.centerX - 850, 400, 'button_red_on', this.actionOnClick, this, 1, 1, 0);
         buttonIgnore_on.inputEnabled = false;
         buttonIgnore_on.alpha = 0;
         this.buttonIgnore_on = buttonIgnore_on;

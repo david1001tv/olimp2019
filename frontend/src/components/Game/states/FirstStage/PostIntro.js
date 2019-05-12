@@ -277,8 +277,8 @@ export default class IntroState extends Phaser.State {
     preload() {
         this.load.image('bg', './assets/images/1-1 (PostIntro)/background.png');
 
-        this.load.image('button_red_on', './assets/images/1-1 (PostIntro)/Button_Choice_On_Blue.png');
-        this.load.image('button_blue_on', './assets/images/1-1 (PostIntro)/Button_Choice_On_Blue.png');
+        this.load.spritesheet('button_red_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_blue_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
         
         this.load.image('firstMeetingMan', './assets/images/1-1 (PostIntro)/man.png');
         this.load.image('firstMeetingGirl', './assets/images/1-1 (PostIntro)/girl.png');
@@ -337,12 +337,12 @@ export default class IntroState extends Phaser.State {
         this.man = this.FSF.makeImg(1329, 200, 'firstMeetingMan', 600, 900);
 
         //Вопрос 1
-        let buttonGirl_on = this.game.add.button(this.game.world.centerX + 242, 400, 'button_blue_on', this.firstQuest, this, 1, 0, 2);
+        let buttonGirl_on = this.game.add.button(this.game.world.centerX + 242, 400, 'button_blue_on', this.firstQuest, this, 1, 1, 0);
         buttonGirl_on.inputEnabled = false;
         buttonGirl_on.alpha = 0;
         this.buttonGirl_on = buttonGirl_on;
 
-        let buttonMan_on = this.game.add.button(this.game.world.centerX - 850, 400, 'button_red_on', this.firstQuest, this, 0, 1, 0);
+        let buttonMan_on = this.game.add.button(this.game.world.centerX - 850, 400, 'button_red_on', this.firstQuest, this, 1, 1, 0);
         buttonMan_on.inputEnabled = false;
         buttonMan_on.alpha = 0;
         this.buttonMan_on = buttonMan_on;
@@ -366,12 +366,12 @@ export default class IntroState extends Phaser.State {
         this.firstMan.alpha = 0;
 
         //Вопрос Girl 2
-        let buttonTrust_on = this.game.add.button(656, 300, 'button_blue_on', this.secondQuest, this, 1, 0, 2);
+        let buttonTrust_on = this.game.add.button(656, 300, 'button_blue_on', this.secondQuest, this, 1, 1, 0);
         buttonTrust_on.inputEnabled = false;
         buttonTrust_on.alpha = 0;
         this.buttonTrust_on = buttonTrust_on;
 
-        let buttonMistrust_on = this.game.add.button(656, 650, 'button_red_on', this.secondQuest, this, 0, 1, 0);
+        let buttonMistrust_on = this.game.add.button(656, 650, 'button_red_on', this.secondQuest, this, 1, 1, 0);
         buttonMistrust_on.inputEnabled = false;
         buttonMistrust_on.alpha = 0;
         this.buttonMistrust_on = buttonMistrust_on;
@@ -395,12 +395,12 @@ export default class IntroState extends Phaser.State {
         this.secondGirl2.alpha = 0;
 
         //Вопрос Man 2
-        let buttonDoubts_on = this.game.add.button(656, 300, 'button_blue_on', this.thirdQuest, this, 1, 0, 2);
+        let buttonDoubts_on = this.game.add.button(656, 300, 'button_blue_on', this.thirdQuest, this, 1, 1, 0);
         buttonDoubts_on.inputEnabled = false;
         buttonDoubts_on.alpha = 0;
         this.buttonDoubts_on = buttonDoubts_on;
 
-        let buttonResolve_on = this.game.add.button(656, 650, 'button_red_on', this.thirdQuest, this, 0, 1, 0);
+        let buttonResolve_on = this.game.add.button(656, 650, 'button_red_on', this.thirdQuest, this, 1, 1, 0);
         buttonResolve_on.inputEnabled = false;
         buttonResolve_on.alpha = 0;
         this.buttonResolve_on = buttonResolve_on;
