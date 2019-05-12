@@ -97,4 +97,12 @@ export default class CryptoInput {
         this.focusedCell = cell;
         cell.focused = true;
     }
+
+    get length() {
+        return this.cells.length;
+    }
+
+    get value() {
+        return this.cells.map(cell => cell.value).join('');
+    }
 }
