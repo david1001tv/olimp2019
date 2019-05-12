@@ -370,9 +370,9 @@ date-time:
     - bell-slash
     - calendar
     - calendar-alt
-    - calendar-check
-    - calendar-minus
-    - calendar-plus
+    - calendar-handleCheckboxClick
+    - calendar-handleMinusClick
+    - calendar-handlePlusClick
     - calendar-times
     - clock
     - hourglass
@@ -529,7 +529,7 @@ health:
     - heartbeat
     - hospital
     - medkit
-    - plus-square
+    - handlePlusClick-square
     - stethoscope
     - user-md
     - wheelchair
@@ -569,14 +569,14 @@ interfaces:
     - calculator
     - calendar
     - calendar-alt
-    - calendar-check
-    - calendar-minus
-    - calendar-plus
+    - calendar-handleCheckboxClick
+    - calendar-handleMinusClick
+    - calendar-handlePlusClick
     - calendar-times
     - certificate
-    - check
-    - check-circle
-    - check-square
+    - handleCheckboxClick
+    - handleCheckboxClick-circle
+    - handleCheckboxClick-square
     - circle
     - clipboard
     - clone
@@ -624,14 +624,14 @@ interfaces:
     - meh
     - microphone
     - microphone-slash
-    - minus
-    - minus-circle
-    - minus-square
+    - handleMinusClick
+    - handleMinusClick-circle
+    - handleMinusClick-square
     - paste
     - pencil-alt
-    - plus
-    - plus-circle
-    - plus-square
+    - handlePlusClick
+    - handlePlusClick-circle
+    - handlePlusClick-square
     - poo
     - qrcode
     - question
@@ -646,8 +646,8 @@ interfaces:
     - rss-square
     - save
     - search
-    - search-minus
-    - search-plus
+    - search-handleMinusClick
+    - search-handlePlusClick
     - share
     - share-alt
     - share-alt-square
@@ -699,7 +699,7 @@ logistics:
     - box
     - warehouse
     - clipboard-list
-    - clipboard-check
+    - clipboard-handleCheckboxClick
   label: Logistics
 maps:
   icons:
@@ -773,15 +773,15 @@ maps:
     - phone-volume
     - plane
     - plug
-    - plus
-    - plus-square
+    - handlePlusClick
+    - handlePlusClick-square
     - print
     - recycle
     - road
     - rocket
     - search
-    - search-minus
-    - search-plus
+    - search-handleMinusClick
+    - search-handlePlusClick
     - ship
     - shopping-bag
     - shopping-basket
@@ -831,7 +831,7 @@ medical:
     - id-card-alt
     - notes-medical
     - pills
-    - plus
+    - handlePlusClick
     - prescription-bottle
     - prescription-bottle-alt
     - procedures
@@ -1018,7 +1018,7 @@ payments-shopping:
     - camera
     - camera-retro
     - cart-arrow-down
-    - cart-plus
+    - cart-handlePlusClick
     - certificate
     - cc-amazon-pay
     - cc-amex
@@ -1106,12 +1106,12 @@ status:
     - bell-slash
     - calendar
     - calendar-alt
-    - calendar-check
-    - calendar-minus
-    - calendar-plus
+    - calendar-handleCheckboxClick
+    - calendar-handleMinusClick
+    - calendar-handlePlusClick
     - calendar-times
     - cart-arrow-down
-    - cart-plus
+    - cart-handlePlusClick
     - exclamation
     - exclamation-circle
     - exclamation-triangle
@@ -1125,12 +1125,12 @@ status:
     - info-circle
     - lock
     - lock-open
-    - minus
-    - minus-circle
-    - minus-square
-    - plus
-    - plus-circle
-    - plus-square
+    - handleMinusClick
+    - handleMinusClick-circle
+    - handleMinusClick-square
+    - handlePlusClick
+    - handlePlusClick-circle
+    - handlePlusClick-square
     - question
     - question-circle
     - shield-alt
@@ -1170,7 +1170,7 @@ users-people:
     - user
     - user-circle
     - user-md
-    - user-plus
+    - user-handlePlusClick
     - user-secret
     - user-times
     - users

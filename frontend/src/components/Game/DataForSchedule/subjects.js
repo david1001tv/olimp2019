@@ -233,7 +233,6 @@ export const subjectsArray = [
         checkbox: { posX: 845, posY: 836, name: 'btn-white' },
     },
 
-
     // other right column
     {
         id: '№',

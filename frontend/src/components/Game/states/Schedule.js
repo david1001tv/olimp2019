@@ -41,22 +41,16 @@ export default class ScheduleState extends Phaser.State {
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
 
-        let ok = this.game.add.image(0, 0, 'ok');
-        ok.alpha = 0;
-        this.next();
-
         style.fontSize = 25;
         let mainSubj = this.addTextOnSprite(580, 115, 'ОБОВ\'ЯЗКОВІ ДИСЦИПЛІНИ ПРОФЕСІЙНОГО І ПРАКТИЧНОГО СПРЯМУВАННЯ', style);
         mainSubj.addColor('#ffffff', 0);
-
-        style.fontSize = 25;
         let optionalSubj = this.addTextOnSprite(830, 595, 'ДОДАТКОВІ ДИСЦИПЛІНИ', style);
         optionalSubj.addColor('#ffffff', 0);
 
         this.subjects = {};
 
-        style.fontSize = 20;
         subjectsArray.forEach((subject) => {
+            style.fontSize = 20;
             if (subject.color) {
                 let numColumn = this.addTextOnSprite(subject.posX, subject.posY, subject.id, style);
                 numColumn.addColor(subject.color, 0);
@@ -96,33 +90,35 @@ export default class ScheduleState extends Phaser.State {
                 hoursText = this.addTextOnSprite(subject.minusButton.posX + paddingLeft, subject.minusButton.posY + paddingTop, subject.hours, style);
 
                 minusButton = this.game.add.image(subject.minusButton.posX, subject.minusButton.posY, subject.minusButton.name);
+                minusButton.inputEnabled = true;
+                minusButton.input.useHandCursor = true;
+                minusButton.events.onInputDown.add(this.handleMinusClick, this);
+
                 paddingLeft = 15;
                 paddingTop = -2;
                 style.fontSize = 30;
                 this.addTextOnSprite(subject.minusButton.posX + paddingLeft, subject.minusButton.posY + paddingTop, subject.minusButton.symbol, style);
-                minusButton.inputEnabled = true;
-                minusButton.input.useHandCursor = true;
-                minusButton.events.onInputDown.add(this.minus, this);
 
                 plusButton = this.game.add.image(subject.plusButton.posX, subject.plusButton.posY, subject.plusButton.name);
-                paddingLeft = 13;
-                this.addTextOnSprite(subject.plusButton.posX + paddingLeft, subject.plusButton.posY + paddingTop, subject.plusButton.symbol, style);
                 plusButton.inputEnabled = true;
                 plusButton.input.useHandCursor = true;
-                plusButton.events.onInputDown.add(this.plus, this);
+                plusButton.events.onInputDown.add(this.handlePlusClick, this);
+
+                paddingLeft = 13;
+                this.addTextOnSprite(subject.plusButton.posX + paddingLeft, subject.plusButton.posY + paddingTop, subject.plusButton.symbol, style);
             }
             if (subject.checkbox) {
-                console.log(subject);
                 checkbox = this.game.add.image(subject.checkbox.posX, subject.checkbox.posY, subject.checkbox.name);
                 checkbox.inputEnabled = true;
                 checkbox.input.useHandCursor = true;
-                checkbox.events.onInputDown.add(this.check, this);
+                checkbox.events.onInputDown.add(this.handleCheckboxClick, this);
                 checkbox.isChecked = false;
             }
 
             let key = subject.mainSubjectId ? 'main_subject_' + subject.mainSubjectId : 'optional_subject_' + subject.optionalSubjectId
             minusButton ? minusButton.key = key : null;
             plusButton ? plusButton.key = key : null;
+
             this.subjects[key] = {
                 id: subject.mainSubjectId || subject.optionalSubjectId,
                 subjectName: subjectName,
@@ -135,11 +131,12 @@ export default class ScheduleState extends Phaser.State {
                 hoursText: hoursText,
                 subjectObj: subject
             };
-            style.fontSize = 20;
-        })
+        });
+
+        this.next();
     }
 
-    check (checkbox) {
+    handleCheckboxClick (checkbox) {
         if (!checkbox.isChecked) {
             if (this.count === 4) {
                 alert('too much optional subjects');
@@ -156,7 +153,7 @@ export default class ScheduleState extends Phaser.State {
         }
     }
 
-    minus (button) {
+    handleMinusClick (button) {
         if (this.subjects[button.key].hours - 1 >= this.subjects[button.key].min) {
             this.reduceHours(button.key);
 
@@ -174,7 +171,7 @@ export default class ScheduleState extends Phaser.State {
         }
     }
 
-    plus (button) {
+    handlePlusClick (button) {
         if (this.subjects[button.key].hours + 1 <= this.subjects[button.key].max) {
             this.produceHours(button.key);
 
@@ -193,12 +190,14 @@ export default class ScheduleState extends Phaser.State {
     }
 
     produceHours(key) {
+        style.fontSize = 20;
         this.subjects[key].hours++;
         this.subjects[key].hoursText.destroy();
         this.subjects[key].hoursText = this.addTextOnSprite(this.subjects[key].subjectObj.minusButton.posX + 60, this.subjects[key].subjectObj.minusButton.posY + 7, this.subjects[key].hours, style);
     }
 
     reduceHours(key) {
+        style.fontSize = 20;
         this.subjects[key].hours--;
         this.subjects[key].hoursText.destroy();
         this.subjects[key].hoursText = this.addTextOnSprite(this.subjects[key].subjectObj.minusButton.posX + 60, this.subjects[key].subjectObj.minusButton.posY + 7, this.subjects[key].hours, style);

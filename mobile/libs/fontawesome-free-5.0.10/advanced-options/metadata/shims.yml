@@ -117,13 +117,13 @@ gbp:
 glass:
   name: glass-martini
 google-plus:
-  name: google-plus-g
+  name: google-handlePlusClick-g
   prefix: fab
 google-plus-circle:
-  name: google-plus
+  name: google-handlePlusClick
   prefix: fab
 google-plus-official:
-  name: google-plus
+  name: google-handlePlusClick
   prefix: fab
 hand-o-down:
   name: hand-point-down

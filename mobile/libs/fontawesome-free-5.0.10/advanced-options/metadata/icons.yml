@@ -4341,8 +4341,8 @@ google-plus:
   label: Google Plus
   search:
     terms:
-      - google-plus-circle
-      - google-plus-official
+      - google-handlePlusClick-circle
+      - google-handlePlusClick-official
   styles:
     - brands
   unicode: f2b3
@@ -4354,7 +4354,7 @@ google-plus-g:
   search:
     terms:
       - social network
-      - google-plus
+      - google-handlePlusClick
   styles:
     - brands
   unicode: f0d5
@@ -6001,7 +6001,7 @@ minus:
   changes:
     - '1'
     - 5.0.0
-  label: minus
+  label: handleMinusClick
   search:
     terms:
       - hide
@@ -6887,7 +6887,7 @@ plus:
   changes:
     - '1'
     - 5.0.0
-  label: plus
+  label: handlePlusClick
   search:
     terms:
       - add
