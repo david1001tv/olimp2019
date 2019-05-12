@@ -41,7 +41,7 @@ import CrossState from './states/ThirdStage/Cross';
 //Квест 1 "Поиск предметов" -
 //Квест 2 "Три в ряд" -
 //Квест 3 "Тестирование и отлавливание багов" -
-
+import Dance from './states/SecondStage/Dance/Dance';
 
 import config from './config';
 
@@ -97,13 +97,13 @@ class Game extends Phaser.Game {
         
         // this.state.add('Intro', IntroState, false);
         // this.state.add('Intro2', PostIntroState, false);
-        // this.state.add('Intro3', QuestionsState, false);
+         this.state.add('Intro3', QuestionsState, false);
 
-        //this.state.add('Intro4', LayoutPuzzleState, false);
-        this.state.add('Intro', CardsState, false);
+        this.state.add('Intro4', LayoutPuzzleState, false);
+        //this.state.add('Intro', CardsState, false);
+        this.state.add('Dance', Dance, false);
 
-
-        this.state.start('Boot', true, false, 'Map');
+        this.state.start('Boot', true, false, 'Dance');
     }
 
     @autobind
