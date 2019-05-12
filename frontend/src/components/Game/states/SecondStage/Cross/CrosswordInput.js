@@ -13,7 +13,6 @@ const KEY_BACKSPACE = 8;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 
-
 const focusChangeListeners = [];
 function handleFocusChange() {
     focusChangeListeners.forEach(f => f());
