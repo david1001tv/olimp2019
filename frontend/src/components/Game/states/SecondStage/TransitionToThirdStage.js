@@ -77,12 +77,12 @@ export default class TransitionToSecondStageState extends Phaser.State {
     }
 
     preload() {
-        this.load.image('bg', './assets/images/1-1 (intro)/bg-1-1.png');
-        this.load.image('pc', './assets/images/1-1 (intro)/pc.png');
-        this.load.image('mom', './assets/images/1-1 (intro)/mom.png');
-        this.load.image('d-sits', './assets/images/1-1 (intro)/d-sits.png');
-        this.load.image('d-sits-turn', './assets/images/1-1 (intro)/d-sits-turn.png');
-        this.load.image('printer', './assets/images/1-1 (intro)/printer.png');
+        this.load.image('bg', './assets/images/1-1(intro)/bg-1-1.png');
+        this.load.image('pc', './assets/images/1-1(intro)/pc.png');
+        this.load.image('mom', './assets/images/1-1(intro)/mom.png');
+        this.load.image('d-sits', './assets/images/1-1(intro)/d-sits.png');
+        this.load.image('d-sits-turn', './assets/images/1-1(intro)/d-sits-turn.png');
+        this.load.image('printer', './assets/images/1-1(intro)/printer.png');
         this.load.image('bg-phone', './assets/images/mobile/bg-phone.png');
         this.load.image('mobile', './assets/images/mobile/mobile3.png');
     }
