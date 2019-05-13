@@ -30,7 +30,7 @@ export default class CrosswordInput {
 
         this.cells = word.split('').map((e, i) => ({
             focused: false,
-            sprite: this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'square'),
+            spriteOpen: this.game.add.spriteOpen(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'square'),
             text: this.game.add.text(x + 10 + (CELL_WIDTH + CELL_PADDING) * i, y, '', {
                 fontSize: 40,
                 font: 'Pangolin',
@@ -39,20 +39,20 @@ export default class CrosswordInput {
             value: ''
         }));
 
-        this.mark = this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * this.word.length, y, 'bad');
+        this.mark = this.game.add.spriteOpen(x + (CELL_WIDTH + CELL_PADDING) * this.word.length, y, 'bad');
         this.mark.visible = false;
 
         smartSetHeight(this.mark, CELL_WIDTH);
 
         this.cells.forEach(cell => {
-            smartSetHeight(cell.sprite, CELL_WIDTH);
-            cell.sprite.alpha = 0.5;
-            cell.sprite.inputEnabled = true;
-            cell.sprite.input.useHandCursor = true;
-            cell.sprite.events.onInputDown.add(() => this.handleClick(cell));
+            smartSetHeight(cell.spriteOpen, CELL_WIDTH);
+            cell.spriteOpen.alpha = 0.5;
+            cell.spriteOpen.inputEnabled = true;
+            cell.spriteOpen.input.useHandCursor = true;
+            cell.spriteOpen.events.onInputDown.add(() => this.handleClick(cell));
         });
 
-        this.cells[prefilledIndex].sprite.tint = TINT_DISABLED;
+        this.cells[prefilledIndex].spriteOpen.tint = TINT_DISABLED;
 
         this.cells[prefilledIndex].value = word[prefilledIndex];
         this.cells[prefilledIndex].text.setText(word[prefilledIndex]);
@@ -73,10 +73,10 @@ export default class CrosswordInput {
             this.isFocused = false;
             this.focusedCell.focused = false;
             if (this.focusedCell.index === this.prefilledIndex) {
-                this.focusedCell.sprite.tint = TINT_DISABLED;
+                this.focusedCell.spriteOpen.tint = TINT_DISABLED;
             }
             else {
-                this.focusedCell.sprite.tint = TINT_ENABLED;
+                this.focusedCell.spriteOpen.tint = TINT_ENABLED;
             }
 
             this.focusedCell = null;
@@ -96,7 +96,7 @@ export default class CrosswordInput {
 
         if (/[А-яіІїЇєЄ']/.test(e.key)) {
             if (this.focusedCell.index === this.prefilledIndex && e.key !== this.focusedCell.value) {
-                this.focusedCell.sprite.tint = TINT_ERROR;
+                this.focusedCell.spriteOpen.tint = TINT_ERROR;
                 return;
             }
 
@@ -147,14 +147,14 @@ export default class CrosswordInput {
         if (this.focusedCell) {
             this.focusedCell.focused = false;
             if (this.focusedCell.index === this.prefilledIndex)
-                this.focusedCell.sprite.tint = TINT_DISABLED;
+                this.focusedCell.spriteOpen.tint = TINT_DISABLED;
             else
-                this.focusedCell.sprite.tint = TINT_ENABLED;
+                this.focusedCell.spriteOpen.tint = TINT_ENABLED;
         }
         this.isFocused = true;
         this.focusedCell = cell;
         cell.focused = true;
-        cell.sprite.tint = TINT_FOCUS;
+        cell.spriteOpen.tint = TINT_FOCUS;
     }
 
     set wrong(isWrong) {
@@ -173,17 +173,17 @@ export default class CrosswordInput {
     set disabled(isDisabled) {
         this.cells.forEach(cell => {
             if (isDisabled) {
-                cell.sprite.events.onInputDown.removeAll();
-                cell.sprite.inputEnabled = false;
-                cell.sprite.useHandCursor = false;
+                cell.spriteOpen.events.onInputDown.removeAll();
+                cell.spriteOpen.inputEnabled = false;
+                cell.spriteOpen.useHandCursor = false;
             } else {
-                cell.sprite.events.onInputDown.add(() => this.handleClick(cell));
+                cell.spriteOpen.events.onInputDown.add(() => this.handleClick(cell));
             }
         })
     }
 
     get disabled() {
-        return !this.cells[0].sprite.inputEnabled;
+        return !this.cells[0].spriteOpen.inputEnabled;
     }
 
     get length() {

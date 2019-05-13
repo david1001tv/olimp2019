@@ -65,7 +65,7 @@ export default class FillwordsState extends Phaser.State {
     }
 
     moveProff(proff, text) {
-        this.game.time.events.add(300, () => {
+        this.game.time.events.add(150, () => {
             this.game.displayDialogLine('Сетевик', text, () => {
                 this.removeProff();
             });

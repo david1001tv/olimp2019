@@ -32,6 +32,7 @@ import LaboratoryState from './states/ThirdStage/Laboratory';
 import DanceState from './states/ThirdStage/Dance';
 import FillwordsState from './states/FirstStage/FillWords';
 import ScheduleState from './states/Schedule';
+import TagsState from './states/Tags/Tags';
 
 
 import config from './config';
@@ -52,7 +53,7 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-        this.state.add('Intro', FillwordsState, false);
+        this.state.add('Intro', TagsState, false);
 
         this.state.start('Boot', true, false, 'Map');
     }

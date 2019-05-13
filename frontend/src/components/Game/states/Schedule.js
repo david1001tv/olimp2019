@@ -25,10 +25,10 @@ export default class ScheduleState extends Phaser.State {
     }
 
     preload() {
-        this.load.image('bg', './assets/images/schedule-bg.png');
-        this.load.image('ok', './assets/images/ok.png');
-        this.load.image('btn-white', './assets/images/btn-white.png');
-        this.load.image('btn-grey', './assets/images/btn-grey.png');
+        this.load.image('bg', './assets/images/schedule/schedule-bg.png');
+        this.load.image('ok', './assets/images/schedule/ok.png');
+        this.load.image('btn-white', './assets/images/schedule/btn-white.png');
+        this.load.image('btn-grey', './assets/images/schedule/btn-grey.png');
     }
 
     create() {

@@ -64,7 +64,7 @@ export default class FillWordsComponent {
             this.cells[key] = {
                 symbol: object.symbol,
                 isChecked: false,
-                sprite: this.game.add.sprite(this.coords.posX + ((CELL_WIDTH + 11.85) * i), this.coords.posY, 'square'),
+                spriteOpen: this.game.add.spriteOpen(this.coords.posX + ((CELL_WIDTH + 11.85) * i), this.coords.posY, 'square'),
                 text: this.game.add.text(this.coords.posX + 25 + ((CELL_WIDTH + 11.85) * i), this.coords.posY + 10, object.symbol, {
                     fontSize: 40,
                 }),
@@ -90,11 +90,11 @@ export default class FillWordsComponent {
                 this.cells['id_' + curr.line + '' + (curr.column + 1)],
                 this.cells['id_' + curr.line + '' + (curr.column - 1)],
             ];
-            this.cells[index].sprite.alpha = 0.5;
-            this.cells[index].sprite.inputEnabled = true;
-            this.cells[index].sprite.input.useHandCursor = true;
-            this.cells[index].sprite.events.onInputDown.add(() => this.handleClick(this.cells[index]));
-            this.cells[index].sprite.events.onInputOver.add(() => this.handleOver(this.cells[index]));
+            this.cells[index].spriteOpen.alpha = 0.5;
+            this.cells[index].spriteOpen.inputEnabled = true;
+            this.cells[index].spriteOpen.input.useHandCursor = true;
+            this.cells[index].spriteOpen.events.onInputDown.add(() => this.handleClick(this.cells[index]));
+            this.cells[index].spriteOpen.events.onInputOver.add(() => this.handleOver(this.cells[index]));
         }
 
         document.addEventListener('mousedown', this.handleOnMouseDown);
@@ -112,6 +112,9 @@ export default class FillWordsComponent {
     }
 
     handleClick(cell) {
+        if (cell.isChecked) {
+            return;
+        }
         this.isMouseDown = true;
         handleFocusChange();
 
@@ -137,7 +140,7 @@ export default class FillWordsComponent {
                 this.cellsStack.push(this.focusedCell);
             } else {
                 const last = this.cellsStack.pop();
-                last.sprite.tint = DEFAULT_TINT;
+                last.spriteOpen.tint = DEFAULT_TINT;
                 last.isChecked = false;
             }
         }
@@ -145,11 +148,12 @@ export default class FillWordsComponent {
 
     @autobind
     handleOnMouseDown(e) {
+        console.log(this.focusedCell);
         if (this.isFocused) {
             if (!this.color) {
                 this.color = '0x' + Math.round((100000 + Math.random() * (999999 - 100000)));
             }
-            this.focusedCell.sprite.tint = this.color;
+            this.focusedCell.spriteOpen.tint = this.color;
         }
     }
 
@@ -157,7 +161,7 @@ export default class FillWordsComponent {
     handleOnMouseUp(e) {
         if (this.cellsStack.length === 1) {
             let last = this.cellsStack.pop();
-            last.sprite.tint = DEFAULT_TINT;
+            last.spriteOpen.tint = DEFAULT_TINT;
         } else {
             let word = '';
             this.cellsStack.forEach(cell => {
@@ -165,7 +169,7 @@ export default class FillWordsComponent {
             });
             if (!words.includes(word)) {
                 this.cellsStack.forEach(cell => {
-                    cell.sprite.tint = DEFAULT_TINT;
+                    cell.spriteOpen.tint = DEFAULT_TINT;
                     cell.isChecked = false;
                 });
             } else {
@@ -185,7 +189,8 @@ export default class FillWordsComponent {
     @autobind
     handleOnMouseOver(e) {
         if (this.isFocused && this.focusedCell) {
-            this.focusedCell.sprite.tint = this.color;
+            this.focusedCell.spriteOpen.tint = this.color;
+            this.focusedCell.isChecked = true;
         }
     }
 

@@ -96,7 +96,7 @@ export default class Scanner extends Phaser.State {
         this.load.image('scorebar-container', './assets/images/3-4(final)/scorebar-container.png');
         this.load.image('rector', './assets/images/3-4(final)/rector.png');
         this.load.image('d-head', './assets/images/3-4(final)/d-head.png');
-        this.load.image('d-body', './assets/images/3-4(final)/d-body.png');
+        this.load.image('d-body', './assets/images/3-4(final)/d-body-2.png');
         this.load.image('d-shadow', './assets/images/3-4(final)/d-shadow.png');
         this.load.image('d-righthand-right', './assets/images/3-4(final)/d-righthand-right.png');
         this.load.image('d-righthand-down', './assets/images/3-4(final)/d-righthand-down.png');
