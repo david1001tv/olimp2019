@@ -8,17 +8,17 @@ const keyBoardTemplate = [
     ['P','Y','X','C','V','B','N','M','L']
 ];
 const words = [
-    'acrobat',
-    'battery',
-    'chariot',
-    'dungeon',
-    'evening',
-    'forever',
-    'geology',
-    'heretic',
-    'justice',
-    'kickoff',
-    'landing'
+    {word:'acrobat', checked: false},
+    {word:'battery', checked: false},
+    {word:'chariot', checked: false},
+    {word:'dungeon', checked: false},
+    {word:'evening', checked: false},
+    {word:'forever', checked: false},
+    {word:'geology', checked: false},
+    {word:'heretic', checked: false},
+    {word:'justice', checked: false},
+    {word:'kickoff', checked: false},
+    {word:'landing', checked: false}
 ];
 const CELL_OFFSET_HOR = 645;
 const CELL_OFFSET_VER = 390;
@@ -30,6 +30,7 @@ export default class CryptoState extends Phaser.State {
             context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
         });
         yield;
+        this.clearInputCells();
 
         this.generateWord(function() {
             context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
@@ -48,6 +49,9 @@ export default class CryptoState extends Phaser.State {
     preload() {
         this.load.image('machine', './assets/images/crypto/background.png');
         this.load.image('input', './assets/images/crypto/input.png');
+        this.load.image('field', './assets/images/crypto/field.png');
+        this.load.image('bad', './assets/images/crypto/bad.png');
+        this.load.image('ok', './assets/images/crypto/ok.png');
         this.load.image('A', './assets/images/crypto/keyboard/A.png');
         this.load.image('B', './assets/images/crypto/keyboard/B.png');
         this.load.image('C', './assets/images/crypto/keyboard/C.png');
@@ -89,6 +93,14 @@ export default class CryptoState extends Phaser.State {
         this.random = new Phaser.RandomDataGenerator([Date.now()]);
 
         this.keyBoard = this.game.add.group();
+        this.field = {
+            sprite: this.game.add.sprite(662, 155, 'field'),
+            text: this.game.add.text(662 + 175, 165, '', {
+                fontSize: 40,
+                font: 'Pangolin',
+            }),
+            mark: null
+        }
 
         this.initSymbols();
 
@@ -100,7 +112,8 @@ export default class CryptoState extends Phaser.State {
     }
 
     generateWord(callback) {
-        this.currentWord = words[this.random.integerInRange(0, words.length - 1)];
+        this.currentWord = words[this.random.integerInRange(0, words.length - 1)].word;
+        this.updateField();
         this.input = new CryptoInput(CELL_OFFSET_HOR, CELL_OFFSET_VER, this.currentWord, this.game);
         this.input.onInputEnd = () => {
             let answer = '';
@@ -108,14 +121,38 @@ export default class CryptoState extends Phaser.State {
                 answer += member.value;
             });
             if(answer === this.input.word) {
-                this.input.cells.forEach((member) => {
-                    member.sprite.destroy();
-                    member.text.destroy();
-                    member.value = '';
-                });
-                callback()
+                this.destroyFieldMark();
+                this.setFieldMark(975, 165, 'ok');
+                setTimeout(callback, 100);
             }
+            else this.setFieldMark(980, 170, 'bad');
         };
+    }
+
+    cipheredWord() {
+        
+    }
+
+    clearInputCells() {
+        this.input.cells.forEach((member) => {
+            member.sprite.destroy();
+            member.text.destroy();
+            member.value = '';
+        });
+    }
+
+    destroyFieldMark() {
+        if(this.field.mark) this.field.mark.destroy();
+    }
+
+    setFieldMark(x, y, sprite) {
+        this.field.mark = this.game.add.sprite(x, y, sprite);
+        this.field.mark.width = this.field.mark.height = 40;
+    }
+
+    updateField() {
+        this.destroyFieldMark();
+        this.field.text.setText(this.currentWord);
     }
 
     initSymbols() {

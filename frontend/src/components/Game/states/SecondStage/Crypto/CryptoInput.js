@@ -2,13 +2,12 @@ import autobind from 'autobind-decorator';
 import {smartSetHeight} from '../../../utils';
 
 const CELL_WIDTH = 65;
-const CELL_PADDING = 40;
+const CELL_PADDING = 43;
 
 const KEY_BACKSPACE = 8;
 
 export default class CryptoInput {
     constructor(x, y, word, game) {
-        console.log(word);
         this.isFocused = true;
         this.game = game;
         this.word = word;
@@ -26,11 +25,6 @@ export default class CryptoInput {
             value: ''
         }));
         this.focusedCell = this.cells[0];
-
-        /*this.mark = this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * this.word.length, y, 'bad');
-        this.mark.visible = false;*/
-
-        //smartSetHeight(this.mark, CELL_WIDTH);
 
         this.cells.forEach(cell => {
             smartSetHeight(cell.sprite, CELL_WIDTH);
