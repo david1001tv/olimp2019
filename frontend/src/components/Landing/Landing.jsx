@@ -4,6 +4,7 @@ import {DialogContainer} from 'react-md';
 import {Link} from 'react-router-dom';
 import autobind from 'autobind-decorator';
 import photo from '../../img/photo.jpg'
+ 
 
 import Login from './Login';
 import Regulations from './Regulations';
@@ -86,6 +87,8 @@ class Landing extends Component {
                     focusOnMount={false}
                     visible={formIsVisible}
                     onHide={() => this.setState({formIsVisible: false})}
+                    dialogClassName="login_main"
+                    contentClassName="container_log"
                 >
                     <Login />
                 </DialogContainer>
