@@ -71,15 +71,17 @@ export default class InputComponent {
         if (this.focusedCell) {
             this.isFocused = false;
             this.focusedCell.focused = false;
-            this.focusedCell.spriteOpen.tint = TINT_DISABLED;
-            this.focusedCell.spriteClose.tint = TINT_DISABLED;
+            if (this.focusedCell.spriteOpen.tint !== TINT_ERROR) {
+                this.focusedCell.spriteOpen.tint = TINT_DISABLED;
+                this.focusedCell.spriteClose.tint = TINT_DISABLED;
+            }
 
             this.focusedCell = null;
         }
     }
 
     handleClick(cell) {
-        if (!cell || cell.disabled) {
+        if (cell && cell.disabled) {
             return;
         }
         handleFocusChange();
@@ -89,6 +91,9 @@ export default class InputComponent {
 
     @autobind
     handleKeyDown(e) {
+        if (this.focusedCell.disabled) {
+            return;
+        }
         switch (true) {
             case e.keyCode === KEY_BACKSPACE:
                 this.focusedCell.input = this.focusedCell.input.slice(0, this.focusedCell.input.length - 1);
@@ -105,7 +110,7 @@ export default class InputComponent {
                 if (!this.isFocused)
                     return;
                 if (/[A-z']/.test(e.key)) {
-                    if ((this.focusedCell.input + e.key).length <= 4) {
+                    if ((this.focusedCell.input + e.key).length <= 7) {
                         this.focusedCell.input += e.key;
                     } else {
                         return;
@@ -135,6 +140,7 @@ export default class InputComponent {
                     this.focusedCell.spriteOpen.tint = TINT_ENABLED;
                     this.focusedCell.spriteClose.tint = TINT_ENABLED;
                     this.focusedCell.disabled = true;
+
                 }
                 return;
             default:
@@ -151,42 +157,5 @@ export default class InputComponent {
         cell.focused = true;
         cell.spriteOpen.tint = TINT_FOCUS;
         cell.spriteClose.tint = TINT_FOCUS;
-    }
-
-    set wrong(isWrong) {
-        this.mark.visible = true;
-        if (isWrong) {
-            this.mark.loadTexture('bad');
-        } else {
-            this.mark.loadTexture('ok');
-        }
-    }
-
-    get isWrong() {
-        return this.mark.visible && this.mark.key === 'bad';
-    }
-
-    set disabled(isDisabled) {
-        this.cells.forEach(cell => {
-            if (isDisabled) {
-                cell.spriteOpen.events.onInputDown.removeAll();
-                cell.spriteOpen.inputEnabled = false;
-                cell.spriteOpen.useHandCursor = false;
-            } else {
-                cell.spriteOpen.events.onInputDown.add(() => this.handleClick(cell));
-            }
-        })
-    }
-
-    get disabled() {
-        return !this.cells[0].spriteOpen.inputEnabled;
-    }
-
-    get length() {
-        return this.cells.length;
-    }
-
-    get value() {
-        return this.cells.map(cell => cell.value).join('');
     }
 }
