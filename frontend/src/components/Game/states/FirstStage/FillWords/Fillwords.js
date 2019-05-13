@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import FillwordsComponent from './FillWordsComponent';
 
 import {smartSetHeight} from '../../../utils';
-import {fillwordsObjects} from '../../../fillword/fillwords';
+import {fillwordsObjects} from '../../../fillwords/fillwords';
 
 export default class FillwordsState extends Phaser.State {
     * gen() {
@@ -22,10 +22,11 @@ export default class FillwordsState extends Phaser.State {
     }
 
     preload() {
-        this.load.image('bg', './assets/images/fillwords-bg.png');
-        this.load.image('icon', './assets/images/fillwords-icon.png');
-        this.load.image('field', './assets/images/fillwords-field.png');
-        this.load.image('square', './assets/images/norm-fillwords-square.png');
+        this.load.image('bg', './assets/images/fillwords/fillwords-bg.png');
+        this.load.image('icon', './assets/images/fillwords/fillwords-icon.png');
+        this.load.image('field', './assets/images/fillwords/fillwords-field.png');
+        this.load.image('square', './assets/images/fillwords/norm-fillwords-square.png');
+        this.load.image('professor', './assets/images/fillwords/professor.png');
     }
 
     create() {
@@ -39,6 +40,12 @@ export default class FillwordsState extends Phaser.State {
         const field = this.game.add.image(600, 80, 'field');
         field.alpha = 0;
         this.field = field;
+
+        this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        const proff = this.game.add.sprite(3000, 0, 'professor');
+        this.physics.arcade.enable(proff);
+        proff.body.bounce.set(1);
+        this.proff = proff;
 
         this.next();
     }
@@ -54,7 +61,16 @@ export default class FillwordsState extends Phaser.State {
     openWindow() {
         this.field.alpha = 1;
         this.icon.inputEnabled = false;
-        this.inputs = new FillwordsComponent(this.game, fillwordsObjects, 642, 142);
+        this.inputs = new FillwordsComponent(this.game, fillwordsObjects, 642, 142, this.moveProff, this.proff);
+    }
+
+    moveProff(proff, text) {
+        this.game.time.events.add(300, () => {
+            this.game.displayDialogLine('Сетевик', text, () => {
+                this.removeProff();
+            });
+        }, this);
+        proff.body.moveTo(700, 1700, Phaser.ANGLE_LEFT);
     }
 
     next() {

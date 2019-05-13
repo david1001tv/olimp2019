@@ -52,31 +52,7 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-        this.state.add('Intro', ScheduleState, false);
-        this.state.add('Docs', DocsState, false);
-        this.state.add('docsToScan', docsToScanState, false);
-        this.state.add('Scanner', ScannerState, false);
-        this.state.add('scanToBrowser', scanToBrowserState, false);
-        this.state.add('Browser', BrowserState, false);
-        this.state.add('TransitionToSecondStage', TransitionToSecondStageState, false);
-        this.state.add('GrannyBad', GrannyBadState, false);
-        this.state.add('Cross', CrossState, false);
-        this.state.add('GrannyGood', GrannyGoodState, false);
-        this.state.add('WaterAlyoshin', WaterAlyoshinState, false);
-        this.state.add('WaterMarket', WaterMarketState, false);
-        this.state.add('Translate', TranslateState, false);
-        this.state.add('fivecopMeet', fivecopMeetState, false);
-        this.state.add('Proffs', ProffsState, false);
-        this.state.add('Audience', AudienceState, false);
-        this.state.add('Grades', GradesState, false);
-        this.state.add('TransitionToThirdStage', TransitionToThirdStageState, false);
-        this.state.add('thirdIntro', thirdIntroState, false);
-        this.state.add('Labyrinth', LabyrinthState, false);
-        this.state.add('ToLaboratory', ToLaboratoryState, false);
-        this.state.add('CodeEditor', CodeEditorState, false);
-        this.state.add('Laboratory', LaboratoryState, false);
-        this.state.add('Dance', DanceState, false);
-        this.state.add('Final', new Phaser.State(), false);
+        this.state.add('Intro', FillwordsState, false);
 
         this.state.start('Boot', true, false, 'Map');
     }

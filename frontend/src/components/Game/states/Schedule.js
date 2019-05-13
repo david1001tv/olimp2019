@@ -16,14 +16,12 @@ export default class ScheduleState extends Phaser.State {
         this.game.phone.setEnabled(true);
         yield;
 
-
         this.game.nextState(this.score);
     }
 
     init() {
         this._gen = this.gen();
         this.game.phone.clearTodos();
-
     }
 
     preload() {
