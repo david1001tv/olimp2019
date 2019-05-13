@@ -19,7 +19,10 @@ import QuestionsState from './states/FirstStage/Questions';
 import TransitionToSecondStageState from './states/FirstStage/TransitionToSecondStage';
 
 //Этап 2
-//Квест 1 "Филворд" -
+//Расписание +
+import ScheduleState from './states/SecondStage/Schedule';
+//Квест 1 "Филворд" +
+import FillwordsState from './states/SecondStage/FillWords';
 //Квест 2 "Собери макет" + 
 import LayoutPuzzleState from './states/SecondStage/LayoutPuzzle';
 //Квест 3 "Ввод тегов" -
@@ -41,6 +44,8 @@ import TransitionToThirdStageState from './states/SecondStage/TransitionToThirdS
 //Квест 2 "Три в ряд" -
 //Квест 3 "Тестирование и отлавливание багов" -
 
+
+import NiceFillwordsState from './states/SecondStage/NiceFillWords';
 
 import config from './config';
 
@@ -93,13 +98,21 @@ class Game extends Phaser.Game {
         this.state.add('Final', new Phaser.State(), false);
         */
         
-        this.state.add('Intro', IntroState, false);
-        this.state.add('Intro2', PostIntroState, false);
-        this.state.add('Intro3', QuestionsState, false);
+        // this.state.add('Intro', IntroState, false);
+        // this.state.add('Intro2', PostIntroState, false);
+        // this.state.add('Intro3', QuestionsState, false);
 
-        this.state.add('Intro4', LayoutPuzzleState, false);
-        this.state.add('Intro5', CardsState, false);
+        // this.state.add('Intro4', LayoutPuzzleState, false);
+        // this.state.add('Intro5', CardsState, false);
 
+
+        this.state.add('Intro', FillwordsState, false);
+
+
+
+
+
+        //this.state.add('Intro', ScheduleState, false);
 
 
 

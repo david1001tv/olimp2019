@@ -1,27 +1,171 @@
 import Phaser from 'phaser';
 import {smartSetHeight, smartSetWidth} from '../../utils';
-import testAPI from '../../testAPI';
+import SSF from '../../states/SecondStageFunctions';
 
 export default class WWHState extends Phaser.State {
     * gen() {
 
-}
+        this.game.input.enabled = false;
+        this.game.camera.flash(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+        this.game.displayDialogLine('Голос', 'Ви відчули недобре, коли розгублений погляд Тараса Денисовича набув осмисленості, зупинившись на Вас', () => this.next());
+        yield;
+
+        this.game.add.tween(this.teacher).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start(); 
+        this.game.displayDialogLine('Тарас Денисович', 'Як там Вас звати? А втім неважливо. Ходімо, Вам видався унікальний шанс реальної практики монтажа локальної мережі', () => this.next());
+        yield;
+        this.game.add.tween(this.teacher).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start(); 
+        this.game.displayDialogLine('Голос', 'Одногрупники побажали Вам удачі. Вам тільки й залишилось, що поспішно направитись вслід за викладачем', () => this.next());
+        yield;
+        this.game.add.tween(this.teacher).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start(); 
+        this.game.displayDialogLine('Тарас Денисович', 'Будь-яка локальна мережа складається з декількох складових: комп\ютери, які Ви будете об\'єднувати; кабель, за допомогою якого Ви будете їх об\'єднувати і центральний пристрій, який управлятиме передачею даних по мережі (комутатор)', () => this.next());
+        yield;
+        this.game.displayDialogLine('Тарас Денисович', 'Ми розглянемо сьогодні найпоширеніший варіант побудови локальної мережі: з використанням топології "зірка", коли комп\'ютери підключаються до комутатора кабелем "вита пара". Та по-перше...', () => this.next());
+        yield;
+
+        this.game.add.tween(this.bg2).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
+        this.startGame();
+
+         // Уведомление "Розплутайте кабелі, повертаючи частини головоломки"
+         this.game.add.tween(this.warning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.warning).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
+
+        this.game.add.tween(this.firstWarning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.firstWarning).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
+
+        this.game.add.tween(this.teacher).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+        yield;
+
+        this.game.add.tween(this.bg2).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+        this.mass.forEach((index) => {
+            this.game.add.tween(index).to({
+                alpha: 0
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
+        });
+
+
+        this.game.add.tween(this.teacher).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start(); 
+        this.game.displayDialogLine('Тарас Денисович', 'Кабелі підєднуємо одним кінцем до роз\'ємів мережних карт всіх комп\'ютерів, а іншим кінцем до роз\'ємів комутатора… Перевіряємо працездатність нашої мережі на фізичному рівні… Все працює! Дякую Вам!', () => this.next());
+        yield;
+
+        //Уведомление "Вітаємо! Ви отримали навички монтажа локальної мережі та поліпшили ставлення викладача!"
+        this.game.add.tween(this.warning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.warning).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
+
+        this.game.add.tween(this.secondWarning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.secondWarning).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
+        this.game.displayDialogLine('Голос', 'Ви витерли піт з чола й зняли з плеча обривок кабелю. Все в житті може стати в нагоді! Але відпочинок Вам не завадить...', () => this.next());
+        yield;
+
+        this.game.camera.fade(0x000000, 1500, true);
+        setTimeout(() => this.next(), 1500);
+        yield;
+
+        this.game.nextState(this.score);
+
+
+
+    }
 
 preload() {
-    this.load.image('bg', './assets/images/2-4 (cut_images)/background.png');
+    this.load.image('bg', './assets/images/2-5 (Cut_images)/background.png');
+    this.load.image('bg2', './assets/images/2-5 (Cut_images)/background2.png');
+
+    this.load.image('teacher', './assets/images/2-5 (Cut_images)/teacher.png');
+    this.load.image('warning_message', './assets/images/2-5 (Cut_images)/warning_message.png');
 
     for (let i = 1; i < 26; i++){
-        let image = this.load.image('image'+i, './assets/images/2-4 (cut_images)/image_part_0'+ i +'.png');
+        this.load.image('image'+i, './assets/images/2-5 (Cut_images)/image_part_0'+ i +'.png');
     }
 
 }
 
 create() {
+    
+    this.SSF = {...SSF};
+    for (let key in this.SSF) {
+        this.SSF[key] = this.SSF[key].bind(this);
+    }
 
     let bg = this.game.add.image(0, 0, 'bg');
     bg.height = this.game.width * bg.height / bg.width;
     bg.width = this.game.width;
+    this.bg = bg;
 
+    let bg2 = this.game.add.image(0, 0, 'bg2');
+    bg2.height = this.game.width * bg2.height / bg2.width;
+    bg2.width = this.game.width;
+    bg2.alpha = 0;
+    this.bg2 = bg2;
+
+    this.teacher = this.SSF.makeImg(1329, 200, 'teacher', 600, 900);
+    
+    this.stage.disableVisibilityChange = true;
+    this.next();
+}
+
+startGame() {
     this.mass = [];
     this.mass_angles = [0, 90, -180, -90];
     let x = 563;
@@ -43,6 +187,8 @@ create() {
 
         smartSetHeight(image, 173);
         smartSetWidth(image, 173);
+        image.alpha = 0;
+
         this.mass.push(image);
 
         x += 173;
@@ -52,15 +198,36 @@ create() {
             count = 0;
         }
         count++;
+        
+    this.game.add.tween(image).to({
+        alpha: 1
+    }, 1500, Phaser.Easing.Cubic.InOut)
+        .start();
     }
 
-    this.stage.disableVisibilityChange = true;
+    //Уведомления
+    let warning = this.game.add.image(700, 0, 'warning_message');
+    warning.alpha = 0;
+    smartSetHeight(warning, 200);
+    this.warning = warning;
 
-    this.testAPI = {...testAPI};
-    for (let key in this.testAPI) {
-        this.testAPI[key] = this.testAPI[key].bind(this);
-    }
-    this.next();
+    this.firstWarning = this.game.add.text(735, 65, 'Розплутайте кабелі,\nповертаючи частини головоломки', {
+        font: "Pangolin",
+        fontSize: 30,
+        fill: 'white',
+        stroke: 'black',
+        strokeThickness: 8,
+    });
+    this.firstWarning.alpha = 0;
+
+    this.secondWarning = this.game.add.text(735, 45, 'Вітаємо! Ви отримали навички\nмонтажа локальної мережі та\nполіпшили ставлення викладача!', {
+        font: "Pangolin",
+        fontSize: 30,
+        fill: 'white',
+        stroke: 'black',
+        strokeThickness: 8,
+    });
+    this.secondWarning.alpha = 0;    
 }
 
 rotate_image (e) {
@@ -68,13 +235,9 @@ rotate_image (e) {
     (key < this.mass_angles.length - 1) ? key++ : key = 0;
     e.angle = this.mass_angles[key];
     
-    console.log(this.testAPI.imageCheck(this.mass));
-    if (this.testAPI.imageCheck(this.mass)){
-        this.game.camera.fade(0x000000, 1500, true);
-        setTimeout(() => this.next(), 1500);
-        // yield;
-        this.camera.scale.setTo(1, 1);
-        this.game.nextState(this.grade);
+    console.log(this.SSF.imageCheck(this.mass));
+    if (this.SSF.imageCheck(this.mass)){
+        this.next();
     }
 
 

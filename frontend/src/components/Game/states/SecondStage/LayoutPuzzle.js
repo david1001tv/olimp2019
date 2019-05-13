@@ -136,34 +136,34 @@ export default class Scanner extends Phaser.State {
 
     preload() {
 
-        this.load.image('bg', './assets/images/2-2 (Layout puzzle)/background.png');
-        this.load.image('teacher', './assets/images/2-2 (Layout puzzle)/teacher.png');
+        this.load.image('bg', './assets/images/2-3 (Layout puzzle)/background.png');
+        this.load.image('teacher', './assets/images/2-3 (Layout puzzle)/teacher.png');
         this.load.image('warning_message', './assets/images/1-1 (PostIntro)/warning_message.png');
-        this.load.image('checkmark', './assets/images/2-2 (Layout puzzle)/checkmark.png');
+        this.load.image('checkmark', './assets/images/2-3 (Layout puzzle)/checkmark.png');
 
-        this.load.image('header-big', './assets/images/2-2 (Layout puzzle)/header-big.png');
-        this.load.image('header-small', './assets/images/2-2 (Layout puzzle)/header-small.png');
+        this.load.image('header-big', './assets/images/2-3 (Layout puzzle)/header-big.png');
+        this.load.image('header-small', './assets/images/2-3 (Layout puzzle)/header-small.png');
         
-        this.load.image('banner-big', './assets/images/2-2 (Layout puzzle)/banner-big.png');
-        this.load.image('banner-small', './assets/images/2-2 (Layout puzzle)/banner-small.png');
+        this.load.image('banner-big', './assets/images/2-3 (Layout puzzle)/banner-big.png');
+        this.load.image('banner-small', './assets/images/2-3 (Layout puzzle)/banner-small.png');
 
-        this.load.image('content-big', './assets/images/2-2 (Layout puzzle)/content-big.png');
-        this.load.image('content-small', './assets/images/2-2 (Layout puzzle)/content-small.png');
+        this.load.image('content-big', './assets/images/2-3 (Layout puzzle)/content-big.png');
+        this.load.image('content-small', './assets/images/2-3 (Layout puzzle)/content-small.png');
 
-        this.load.image('leftmenu-big', './assets/images/2-2 (Layout puzzle)/leftmenu-big.png');
-        this.load.image('leftmenu-small', './assets/images/2-2 (Layout puzzle)/leftmenu-small.png');
+        this.load.image('leftmenu-big', './assets/images/2-3 (Layout puzzle)/leftmenu-big.png');
+        this.load.image('leftmenu-small', './assets/images/2-3 (Layout puzzle)/leftmenu-small.png');
 
-        this.load.image('footer-big', './assets/images/2-2 (Layout puzzle)/footer-big.png');   
-        this.load.image('footer-small', './assets/images/2-2 (Layout puzzle)/footer-small.png');
+        this.load.image('footer-big', './assets/images/2-3 (Layout puzzle)/footer-big.png');   
+        this.load.image('footer-small', './assets/images/2-3 (Layout puzzle)/footer-small.png');
 
-        this.load.image('menu-big', './assets/images/2-2 (Layout puzzle)/menu-big.png');   
-        this.load.image('menu-small', './assets/images/2-2 (Layout puzzle)/menu-small.png');
+        this.load.image('menu-big', './assets/images/2-3 (Layout puzzle)/menu-big.png');   
+        this.load.image('menu-small', './assets/images/2-3 (Layout puzzle)/menu-small.png');
 
-        this.load.image('logo-big', './assets/images/2-2 (Layout puzzle)/logo-big.png');   
-        this.load.image('logo-small', './assets/images/2-2 (Layout puzzle)/logo-small.png');
+        this.load.image('logo-big', './assets/images/2-3 (Layout puzzle)/logo-big.png');   
+        this.load.image('logo-small', './assets/images/2-3 (Layout puzzle)/logo-small.png');
 
 
-        this.load.image('full', './assets/images/2-2 (Layout puzzle)/full.png');
+        this.load.image('full', './assets/images/2-3 (Layout puzzle)/full.png');
 
     }
 
