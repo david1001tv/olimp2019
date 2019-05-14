@@ -3,27 +3,33 @@ import {smartSetHeight} from '../../../utils';
 
 const CELL_WIDTH = 65;
 const CELL_PADDING = 43;
+const CELL_COUNT = 7;
 
 const KEY_BACKSPACE = 8;
 
 export default class CryptoInput {
-    constructor(x, y, word, game) {
+    constructor(x, y, game) {
         this.isFocused = true;
         this.game = game;
-        this.word = word;
+        this.count = CELL_COUNT;
+        this.word = null;
+        this.cells = [];
         this.onInputEnd = () => null;
         this.disableInput = false;
 
-        this.cells = word.split('').map((e, i) => ({
-            focused: false,
-            sprite: this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'input'),
-            text: this.game.add.text(x + 10 + (CELL_WIDTH + CELL_PADDING) * i, y, '', {
-                fontSize: 40,
-                font: 'Pangolin',
-            }),
-            index: i,
-            value: ''
-        }));
+        for(let i = 0; i < this.count; i++) {
+            this.cells[i] = {
+                focused: false,
+                sprite: this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'input'),
+                text: this.game.add.text(x + 10 + (CELL_WIDTH + CELL_PADDING) * i, y, '', {
+                    fontSize: 40,
+                    font: 'Pangolin',
+                }),
+                index: i,
+                value: ''
+            }
+        }
+
         this.focusedCell = this.cells[0];
 
         this.cells.forEach(cell => {
@@ -60,6 +66,12 @@ export default class CryptoInput {
                 if(nextCell) this.focusCell(nextCell);
             }
         }
+    }
+
+    setWord(word) {
+        this.word = word;
+        this.focusedCell = this.cells[0];
+        this.disableInput = false;
     }
 
     isDeleteLetter(keyCode) {

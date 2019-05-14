@@ -35,29 +35,49 @@ const CELL_OFFSET_HOR = 645;
 const CELL_OFFSET_VER = 390;
 const ALPHABET_END = 122;
 const ALPHABET_BEGIN = 97;
-const MARK_HOR_OFFSET = 1090;
-const MARK_VER_OFFSET = 165;
+const MARK_OFFSET_HOR = 1090;
+const MARK_OFFSET_VER = 165;
+const MARK_SIZE = 40;
+const PADDING_BETWEEN_KEYS = 30;
+const PADDING_BETWEEN_ROWS = 100;
+const FIELD_OFFSET_HOR = 662;
+const FIELD_OFFSET_VER = 155;
+const FIELD_TEXT_OFFSET_HOR = 837;
+const FIELD_TEXT_OFFSET_VER = 165;
+const FIELD_TEXT_FONT_SIZE = 40;
+const BASE_KEYBOARD_OFFSET = 552;
+const TOGGLE_KEYBOARD_OFFSET = 50;
 
 export default class CryptoState extends Phaser.State {
     * gen() {
+
         let context = this;
-        this.generateWord(1, function() {
-            context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
-        });
-        yield;
-        this.clearInputCells();
 
-        this.generateWord(2, function() {
-            context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
+        this.generateKey(1);
+        this.teacherAppears('hello');
+        yield;
+        this.teacherDisappears(function() {
+            context.warning.sprite.alpha = context.warning.text.alpha = 1;
+            context.generateWord(1, function() {
+                context.generateKey(2);
+                context.teacherAppears('hello');
+            });
         });
         yield;
-        this.clearInputCells();
-
-        this.generateWord(3, function() {
-            context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
+        this.teacherDisappears(function() {
+            context.clearInputCells();
+            context.generateWord(2, function() {
+                context.teacherAppears('hello');
+            });
         });
         yield;
-        this.clearInputCells();
+        this.teacherDisappears(function() {
+            context.clearInputCells();
+            context.generateWord(3, function() {
+                context.teacherAppears('hello');
+            });
+        });
+        yield;
 
         this.game.nextState();
     }
@@ -70,10 +90,12 @@ export default class CryptoState extends Phaser.State {
 
     preload() {
         this.load.image('machine', './assets/images/crypto/background.png');
+        this.load.image('teacher', './assets/images/crypto/teacher.png');
         this.load.image('input', './assets/images/crypto/input.png');
         this.load.image('field', './assets/images/crypto/field.png');
         this.load.image('bad', './assets/images/crypto/bad.png');
         this.load.image('ok', './assets/images/crypto/ok.png');
+        this.load.image('warning', './assets/images/crypto/warning_message.png');
         this.load.image('A', './assets/images/crypto/keyboard/A.png');
         this.load.image('B', './assets/images/crypto/keyboard/B.png');
         this.load.image('C', './assets/images/crypto/keyboard/C.png');
@@ -104,25 +126,37 @@ export default class CryptoState extends Phaser.State {
 
     create() {
         this.game.add.image(0, 0, 'machine');
+        this.teacher = this.game.add.image(1400, 0, 'teacher');
+        this.teacher.alpha = 0;
+
+        this.warning = { 
+            sprite: this.game.add.sprite(0, 0, 'warning'),
+            text: this.game.add.text(50, 50, 'Слідуючи алгоритму, введіть\nшифр за допомогою миші або\nклавіатури', {
+                fontSize: 30,
+                font: 'Pangolin',
+            })
+        }
+        smartSetHeight(this.warning.sprite, 200);
+        this.warning.sprite.alpha = this.warning.text.alpha = 0;
 
         this.keyWidth = this.game.cache.getImage('A').width;
         this.keyHeight = this.game.cache.getImage('A').height;
 
         this.verticalOffset = 570;
-        this.paddingBetweenKeys = 30;
-        this.offsetBetweenRows = 100;
 
         this.random = new Phaser.RandomDataGenerator([Date.now()]);
 
         this.keyBoard = this.game.add.group();
         this.field = {
-            sprite: this.game.add.sprite(662, 155, 'field'),
-            text: this.game.add.text(662 + 175, 165, '', {
-                fontSize: 40,
+            sprite: this.game.add.sprite(FIELD_OFFSET_HOR, FIELD_OFFSET_VER, 'field'),
+            text: this.game.add.text(FIELD_TEXT_OFFSET_HOR, FIELD_TEXT_OFFSET_VER, '', {
+                fontSize: FIELD_TEXT_FONT_SIZE,
                 font: 'Pangolin',
             }),
             mark: null
         }
+
+        this.input = new CryptoInput(CELL_OFFSET_HOR, CELL_OFFSET_VER, this.game);
 
         this.initSymbols();
 
@@ -133,17 +167,28 @@ export default class CryptoState extends Phaser.State {
         this.next();
     }
 
+    generateKey(algNum) {
+        switch(algNum) {
+            case 1: {
+                this.currentKey = this.random.integerInRange(0, (ALPHABET_END - ALPHABET_BEGIN));
+                break;
+            }
+            case 2: {
+                this.currentKey = vigenereKeys[this.random.integerInRange(0, vigenereKeys.length - 1)];
+                break;
+            }
+        }
+    }
+
     generateWord(algNum, callback) {
         this.currentWord = words[this.random.integerInRange(0, words.length - 1)];
         this.updateField();
         switch(algNum) {
             case 1: {
-                this.currentKey = this.random.integerInRange(0, 25);
                 this.currentWord = this.caesarCipher(this.currentWord, this.currentKey);
                 break;
             }
             case 2: {
-                this.currentKey = vigenereKeys[this.random.integerInRange(0, vigenereKeys.length - 1)];
                 this.currentWord = this.vigenereCipher(this.currentWord, this.currentKey);
                 break;
             }
@@ -152,7 +197,7 @@ export default class CryptoState extends Phaser.State {
                 break;
             }
         }
-        this.input = new CryptoInput(CELL_OFFSET_HOR, CELL_OFFSET_VER, this.currentWord, this.game);
+        this.input.setWord(this.currentWord);
         this.input.onInputEnd = () => {
             let answer = '', mark = '';
             this.input.cells.map((member) => {
@@ -164,8 +209,26 @@ export default class CryptoState extends Phaser.State {
                 setTimeout(callback, 100);
             }
             else mark = 'bad';
-            this.setFieldMark(MARK_HOR_OFFSET, MARK_VER_OFFSET, mark);
+            this.setFieldMark(MARK_OFFSET_HOR, MARK_OFFSET_VER, mark);
         };
+    }
+
+    teacherAppears(text) {
+        this.input.disableInput = true;
+        this.game.add.tween(this.teacher).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut).start().onComplete.add(() => {
+            this.game.displayDialogLine('Препод', text, () => this.next());
+        });
+    }
+
+    teacherDisappears(funcCall) {
+        this.game.add.tween(this.teacher).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut).start().onComplete.add(() => {
+            this.input.disableInput = false;
+            funcCall();
+        });
     }
 
     caesarCipher(str, num) {
@@ -182,7 +245,7 @@ export default class CryptoState extends Phaser.State {
             }
             result += String.fromCharCode(charcode);
         }
-        console.log(result);
+        console.log(result)
         return result;
     }
 
@@ -196,7 +259,7 @@ export default class CryptoState extends Phaser.State {
             num = (key[i].charCodeAt()) - ALPHABET_BEGIN;
             result += this.caesarCipher(str[i], num)
         }
-        console.log(result);
+        console.log(result)
         return result;
     }
 
@@ -210,14 +273,13 @@ export default class CryptoState extends Phaser.State {
             num = (ALPHABET_END - ALPHABET_BEGIN) - (str[i].charCodeAt() - ALPHABET_BEGIN);
             result += this.caesarCipher(String.fromCharCode(ALPHABET_BEGIN), num);
         }
-        console.log(result)
+        console.log(result);
         return result;
     }
 
     clearInputCells() {
         this.input.cells.forEach((member) => {
-            member.sprite.destroy();
-            member.text.destroy();
+            member.text.setText('');
             member.value = '';
         });
     }
@@ -229,7 +291,7 @@ export default class CryptoState extends Phaser.State {
     setFieldMark(x, y, sprite) {
         this.destroyFieldMark();
         this.field.mark = this.game.add.sprite(x, y, sprite);
-        this.field.mark.width = this.field.mark.height = 40;
+        this.field.mark.width = this.field.mark.height = MARK_SIZE;
     }
 
     updateField() {
@@ -243,12 +305,12 @@ export default class CryptoState extends Phaser.State {
             for(let j = 0; j < keyBoardTemplate[i].length; j++) {
                 this.addKey(i, j);
             }
-            this.verticalOffset += this.offsetBetweenRows;
+            this.verticalOffset += PADDING_BETWEEN_ROWS;
         }
     }
 
     addKey(i, j) {
-        let button = this.keyBoard.create(this.horizontalOffset + j*(this.keyWidth + this.paddingBetweenKeys), this.verticalOffset, keyBoardTemplate[i][j]);
+        let button = this.keyBoard.create(this.horizontalOffset + j*(this.keyWidth + PADDING_BETWEEN_KEYS), this.verticalOffset, keyBoardTemplate[i][j]);
         button.value = keyBoardTemplate[i][j];
         button.inputEnabled = true;
         button.events.onInputDown.add(this.keyPressedByMouse, this);
@@ -272,8 +334,7 @@ export default class CryptoState extends Phaser.State {
     }
 
     toggleOffset(i) {
-        let baseOffset = 552, offset = 50;
-        this.horizontalOffset = i%2 === 0 ? baseOffset : baseOffset + offset;
+        this.horizontalOffset = i%2 === 0 ? BASE_KEYBOARD_OFFSET : BASE_KEYBOARD_OFFSET + TOGGLE_KEYBOARD_OFFSET;
     }
 
     next() {
