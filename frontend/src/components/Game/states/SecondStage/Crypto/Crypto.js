@@ -8,34 +8,56 @@ const keyBoardTemplate = [
     ['P','Y','X','C','V','B','N','M','L']
 ];
 const words = [
-    {word:'acrobat', checked: false},
-    {word:'battery', checked: false},
-    {word:'chariot', checked: false},
-    {word:'dungeon', checked: false},
-    {word:'evening', checked: false},
-    {word:'forever', checked: false},
-    {word:'geology', checked: false},
-    {word:'heretic', checked: false},
-    {word:'justice', checked: false},
-    {word:'kickoff', checked: false},
-    {word:'landing', checked: false}
+    'acrobat',
+    'battery', 
+    'chariot', 
+    'dungeon', 
+    'evening', 
+    'forever', 
+    'geology', 
+    'heretic', 
+    'justice', 
+    'kickoff', 
+];
+const vigenereKeys = [
+    'ability',
+    'barrier',
+    'calibre',
+    'dancing',
+    'economy',
+    'failure',
+    'garbage',
+    'haircut',
+    'jackpot',
+    'keyword'
 ];
 const CELL_OFFSET_HOR = 645;
 const CELL_OFFSET_VER = 390;
+const ALPHABET_END = 122;
+const ALPHABET_BEGIN = 97;
+const MARK_HOR_OFFSET = 1090;
+const MARK_VER_OFFSET = 165;
 
 export default class CryptoState extends Phaser.State {
     * gen() {
         let context = this;
-        this.generateWord(function() {
+        this.generateWord(1, function() {
             context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
         });
         yield;
         this.clearInputCells();
 
-        this.generateWord(function() {
+        this.generateWord(2, function() {
             context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
         });
         yield;
+        this.clearInputCells();
+
+        this.generateWord(3, function() {
+            context.game.displayDialogLine('Ви', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => context.next());
+        });
+        yield;
+        this.clearInputCells();
 
         this.game.nextState();
     }
@@ -111,26 +133,85 @@ export default class CryptoState extends Phaser.State {
         this.next();
     }
 
-    generateWord(callback) {
-        this.currentWord = words[this.random.integerInRange(0, words.length - 1)].word;
+    generateWord(algNum, callback) {
+        this.currentWord = words[this.random.integerInRange(0, words.length - 1)];
         this.updateField();
+        switch(algNum) {
+            case 1: {
+                this.currentKey = this.random.integerInRange(0, 25);
+                this.currentWord = this.caesarCipher(this.currentWord, this.currentKey);
+                break;
+            }
+            case 2: {
+                this.currentKey = vigenereKeys[this.random.integerInRange(0, vigenereKeys.length - 1)];
+                this.currentWord = this.vigenereCipher(this.currentWord, this.currentKey);
+                break;
+            }
+            case 3: {
+                this.currentWord = this.atbashCipher(this.currentWord);
+                break;
+            }
+        }
         this.input = new CryptoInput(CELL_OFFSET_HOR, CELL_OFFSET_VER, this.currentWord, this.game);
         this.input.onInputEnd = () => {
-            let answer = '';
+            let answer = '', mark = '';
             this.input.cells.map((member) => {
                 answer += member.value;
             });
             if(answer === this.input.word) {
                 this.destroyFieldMark();
-                this.setFieldMark(975, 165, 'ok');
+                mark = 'ok';
                 setTimeout(callback, 100);
             }
-            else this.setFieldMark(980, 170, 'bad');
+            else mark = 'bad';
+            this.setFieldMark(MARK_HOR_OFFSET, MARK_VER_OFFSET, mark);
         };
     }
 
-    cipheredWord() {
-        
+    caesarCipher(str, num) {
+        str = str.toLowerCase();
+    
+        var result = '';
+        var charcode = 0;
+    
+        for (var i = 0; i < str.length; i++) {
+            charcode = (str[i].charCodeAt()) + num;
+            if(charcode > ALPHABET_END) {
+                num = charcode - ALPHABET_END;
+                charcode = ALPHABET_BEGIN + num;
+            }
+            result += String.fromCharCode(charcode);
+        }
+        console.log(result);
+        return result;
+    }
+
+    vigenereCipher(str, key) {
+        key = key.toLowerCase();
+
+        var result = '';
+        var num = 0;
+
+        for (var i = 0; i < key.length; i++) {
+            num = (key[i].charCodeAt()) - ALPHABET_BEGIN;
+            result += this.caesarCipher(str[i], num)
+        }
+        console.log(result);
+        return result;
+    }
+
+    atbashCipher(str) {
+        str = str.toLowerCase();
+    
+        var result = '';
+        var num = 0;
+    
+        for (var i = 0; i < str.length; i++) {
+            num = (ALPHABET_END - ALPHABET_BEGIN) - (str[i].charCodeAt() - ALPHABET_BEGIN);
+            result += this.caesarCipher(String.fromCharCode(ALPHABET_BEGIN), num);
+        }
+        console.log(result)
+        return result;
     }
 
     clearInputCells() {
@@ -146,6 +227,7 @@ export default class CryptoState extends Phaser.State {
     }
 
     setFieldMark(x, y, sprite) {
+        this.destroyFieldMark();
         this.field.mark = this.game.add.sprite(x, y, sprite);
         this.field.mark.width = this.field.mark.height = 40;
     }
