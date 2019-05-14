@@ -244,9 +244,9 @@ export default class ScheduleState extends Phaser.State {
         bg3.alpha = 0;
         this.bg3 = bg3;
 
-        this.teacher = this.SSF.makeImg(1329, 200, 'teacher', 600, 900);
-        this.teacher2 = this.SSF.makeImg(1329, 200, 'teacher2', 600, 900);
-        this.teacher3 = this.SSF.makeImg(1329, 100, 'teacher3', 600, 900);
+        this.teacher = this.SSF.makeImg(1260, 50, 'teacher', 700, 900); //programmer
+        this.teacher2 = this.SSF.makeImg(1250, 50, 'teacher2', 700, 900); //network
+        this.teacher3 = this.SSF.makeImg(1260, 0, 'teacher3', 700, 900); //design
 
         let buttonGo = this.game.add.button(1190, 830, 'button_go', () => this.next(), this, 1, 1, 0);
         buttonGo.inputEnabled = false;

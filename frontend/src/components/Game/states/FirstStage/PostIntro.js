@@ -332,9 +332,9 @@ export default class IntroState extends Phaser.State {
         this.thirdWarning.alpha = 0;
 
         //girl
-        this.girl = this.FSF.makeImg(1329, 100, 'firstMeetingGirl', 600, 900);
+        this.girl = this.FSF.makeImg(1329, 0, 'firstMeetingGirl', 700, 900);
         //man
-        this.man = this.FSF.makeImg(1329, 200, 'firstMeetingMan', 600, 900);
+        this.man = this.FSF.makeImg(1280, 50, 'firstMeetingMan', 670, 900);
 
         //Вопрос 1
         let buttonGirl_on = this.game.add.button(this.game.world.centerX + 242, 400, 'button_blue_on', this.firstQuest, this, 1, 1, 0);

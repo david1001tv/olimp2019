@@ -254,7 +254,7 @@ export default class Scanner extends Phaser.State {
         });
         this.secondWarning.alpha = 0;   
 
-        this.teacher = this.SSF.makeImg(1329, 100, 'teacher', 600, 900);
+        this.teacher = this.SSF.makeImg(1260, 0, 'teacher', 700, 900);
 
         let mass = [minHeader, minBanner, minLeftMenu, minContent, minFooter, minLogo, minMenu];
 

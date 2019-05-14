@@ -1,5 +1,7 @@
 import autobind from 'autobind-decorator';
 
+import {smartSetHeight} from '../../../utils';
+
 const CELL_WIDTH = 60;
 const DEFAULT_TINT = 0xffffff;
 
@@ -94,6 +96,43 @@ export default class FillWordsComponent {
             this.cells[index].sprite.events.onInputDown.add(() => this.handleClick(this.cells[index]));
             this.cells[index].sprite.events.onInputOver.add(() => this.handleOver(this.cells[index]));
         }
+        //Уведомления
+        let warning2 = this.game.add.image(700, 0, 'warning_message');
+        warning2.alpha = 0;
+        smartSetHeight(warning2, 200);
+        this.warning2 = warning2;
+
+        this.secondWarning = this.game.add.text(725, 40, 'Виділить одним довгим\nнатисканням слово, та викладач\nпояснить його', {
+            font: "Pangolin",
+            fontSize: 30,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.secondWarning.alpha = 0;
+        this.game.add.tween(this.warning2).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.warning2).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
+
+        this.game.add.tween(this.secondWarning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.secondWarning).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
 
         document.addEventListener('mousedown', this.handleOnMouseDown);
         document.addEventListener('mouseup', this.handleOnMouseUp);
@@ -110,6 +149,9 @@ export default class FillWordsComponent {
     }
 
     handleClick(cell) {
+        if (cell.isChecked) {
+            return;
+        }
         this.isMouseDown = true;
         handleFocusChange();
 

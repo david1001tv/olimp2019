@@ -65,15 +65,21 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
+        
         /*
         //Stage 1
         //Intro +
         this.state.add('Intro', IntroState, false);
+        //PostIntro +
+        this.state.add('PostIntro', PostIntroState, false);
         //Questions +
         this.state.add('Questions', QuestionsState, false);
 
         //Stage 2
-        //Fillword -
+        //Schedule +
+        this.state.add("Shedule", ScheduleState, false);
+        //Fillword +
+        this.state.add("Fillword", FillwordsState, false);
         //LayoutPuzzle +
         this.state.add("LayoutPuzzle", LayoutPuzzleState, false);
         //Tags -
@@ -98,23 +104,7 @@ class Game extends Phaser.Game {
         this.state.add('Final', new Phaser.State(), false);
         */
         
-        // this.state.add('Intro', IntroState, false);
-        // this.state.add('Intro2', PostIntroState, false);
-        // this.state.add('Intro3', QuestionsState, false);
-
-        // this.state.add('Intro4', LayoutPuzzleState, false);
-        // this.state.add('Intro5', CardsState, false);
-
-
-        this.state.add('Intro', FillwordsState, false);
-
-
-
-
-
-        //this.state.add('Intro', ScheduleState, false);
-
-
+        this.state.add('Intro', CardsState, false);
 
 
         this.state.start('Boot', true, false, 'Map');

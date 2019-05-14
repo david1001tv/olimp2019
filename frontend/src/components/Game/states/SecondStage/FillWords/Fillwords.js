@@ -65,64 +65,7 @@ export default class FillwordsState extends Phaser.State {
             .start();
 
         this.openWindow();
-
-        this.game.add.tween(this.warning).to({
-            alpha: 1
-        }, 1500, Phaser.Easing.Cubic.InOut)
-            .start().onComplete.add(() => {
-                setTimeout(() => {
-                    this.game.add.tween(this.warning).to({
-                        alpha: 0
-                    }, 1500, Phaser.Easing.Cubic.InOut)
-                        .start();
-                }, 3000);   
-        });
-
-        this.game.add.tween(this.secondWarning).to({
-            alpha: 1
-        }, 1500, Phaser.Easing.Cubic.InOut)
-            .start().onComplete.add(() => {
-                setTimeout(() => {
-                    this.game.add.tween(this.secondWarning).to({
-                        alpha: 0
-                    }, 1500, Phaser.Easing.Cubic.InOut)
-                        .start();
-                }, 3000);   
-        });
         yield;
-
-        // this.game.add.tween(this.warning).to({
-        //     alpha: 1
-        // }, 1500, Phaser.Easing.Cubic.InOut)
-        //     .start().onComplete.add(() => {
-        //         setTimeout(() => {
-        //             this.game.add.tween(this.warning).to({
-        //                 alpha: 0
-        //             }, 1500, Phaser.Easing.Cubic.InOut)
-        //                 .start();
-        //         }, 3000);   
-        // });
-
-        // this.game.add.tween(this.thirdWarning).to({
-        //     alpha: 1
-        // }, 1500, Phaser.Easing.Cubic.InOut)
-        //     .start().onComplete.add(() => {
-        //         setTimeout(() => {
-        //             this.game.add.tween(this.thirdWarning).to({
-        //                 alpha: 0
-        //             }, 1500, Phaser.Easing.Cubic.InOut)
-        //                 .start();
-        //         }, 3000);   
-        // });
-
-        // this.game.displayDialogLine('Голос', 'О це була дійсно корисна пара! Ви згадуєте уривки розмов старшокурсників, що почули біля кафедри, і більше не відчуваєте себе невпевнено', () => this.next());
-        // yield;
-
-        // this.game.camera.fade(0x000000, 1500, true);
-        // setTimeout(() => this.next(), 1500);
-        // yield;
-
-        // this.game.nextState(this.score);
     }
 
     init() {
@@ -159,7 +102,7 @@ export default class FillwordsState extends Phaser.State {
         bg2.alpha = 0;
         this.bg2 = bg2;
 
-        this.teacher = this.SSF.makeImg(1329, 200, 'teacher', 600, 900);
+        this.teacher = this.SSF.makeImg(1250, 50, 'teacher', 700, 900);
 
 
         let icon = this.game.add.image(220, 280, 'icon');
@@ -171,10 +114,6 @@ export default class FillwordsState extends Phaser.State {
         }, this);
         icon.alpha = 0;
         this.icon = icon;
-
-        // const icon = this.game.add.image(220, 280, 'icon');
-        // icon.alpha = 0;
-        // this.icon = icon;
 
         const field = this.game.add.image(600, 80, 'field');
         field.alpha = 0;
@@ -219,21 +158,6 @@ export default class FillwordsState extends Phaser.State {
         this.field.alpha = 1;
         this.icon.inputEnabled = false;
         this.inputs = new FillwordsComponent(this.game, this.teacher, fillwordsObjects, 642, 142);
-
-        //Уведомления
-        let warning2 = this.game.add.image(700, 0, 'warning_message');
-        warning2.alpha = 0;
-        smartSetHeight(warning2, 200);
-        this.warning2 = warning2;
-
-        this.secondWarning = this.game.add.text(725, 40, 'Виділить одним довгим\nнатисканням слово, та викладач\nпояснить його', {
-            font: "Pangolin",
-            fontSize: 30,
-            fill: 'white',
-            stroke: 'black',
-            strokeThickness: 8,
-        });
-        this.secondWarning.alpha = 0;
     }
 
     next() {

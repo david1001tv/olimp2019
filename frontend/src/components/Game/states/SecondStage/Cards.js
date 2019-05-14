@@ -317,7 +317,7 @@ export default class Scanner extends Phaser.State {
         });
         this.answerNo.alpha = 0; 
 
-        this.teacher = this.SSF.makeImg(1329, 200, 'teacher', 600, 900);
+        this.teacher = this.SSF.makeImg(1250, 50, 'teacher', 700, 900);
 
         this.cards = [];
         this.count_back = 8;

@@ -159,7 +159,7 @@ create() {
     bg2.alpha = 0;
     this.bg2 = bg2;
 
-    this.teacher = this.SSF.makeImg(1329, 200, 'teacher', 600, 900);
+    this.teacher = this.SSF.makeImg(1250, 50, 'teacher', 700, 900);
     
     this.stage.disableVisibilityChange = true;
     this.next();

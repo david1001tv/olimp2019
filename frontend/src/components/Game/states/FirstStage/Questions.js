@@ -345,7 +345,8 @@ export default class QuestionsState extends Phaser.State {
         this.slide10 = this.FSF.makeImg(405, 140, 'slide10', 1130, 900);
 
 
-        this.teacher = this.FSF.makeImg(1329, 100, 'teacher', 600, 900);
+        this.teacher = this.FSF.makeImg(1260, 0, 'teacher', 700, 900);
+
         this.fake_dialog = this.FSF.makeImg(0, 850, 'fake_dialog_background', 1920, 400);
         this.cloud = this.FSF.makeImg(10, 580, 'cloud', 400, 200);
 
