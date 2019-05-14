@@ -197,7 +197,7 @@ export default class Scanner extends Phaser.State {
             
         }
         else {
-            this.game.displayDialogLine('Ви', 'Я ленивая жопа', () => this.next());
+            this.game.displayDialogLine('Ви', 'На жаль, мені бракує часу на глибоке вивчення сучасної технології. Тож якось іншим разом, коли будуть сили, натхнення і бажання', () => this.next());
             yield;
         }
 
@@ -235,8 +235,8 @@ export default class Scanner extends Phaser.State {
         }
         this.load.image('blur_card', './assets/images/2-6 (Cards)/blur.png');
 
-        this.load.spritesheet('button_red_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
-        this.load.spritesheet('button_blue_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_red_on', './assets/images/2-6 (Cards)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_blue_on', './assets/images/2-6 (Cards)/Button_Choice_On_Blue.png', 610, 122);
 
         this.load.image('teacher', './assets/images/2-6 (Cards)/teacher.png');
         this.load.image('warning_message', './assets/images/2-6 (Cards)/warning_message.png');

@@ -3,7 +3,7 @@ import {smartSetHeight} from '../../../utils';
 
 
 const CELL_WIDTH = 48;
-const CELL_PADDING = 9;
+const CELL_PADDING = 2;
 const TINT_FOCUS = 0x0000ff;
 const TINT_DISABLED = 0x777777;
 const TINT_ENABLED = 0xffffff;
@@ -14,13 +14,13 @@ const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
 
 
-const focusChangeListeners = [];
+let focusChangeListeners = [];
 function handleFocusChange() {
     focusChangeListeners.forEach(f => f());
 }
 
 export default class CrosswordInput {
-    constructor(x, y, word, prefilledIndex, game) {
+    constructor(x, y, word, prefilledIndex, game, vertical = false) {
         prefilledIndex--;
         this.isFocused = false;
         this.game = game;
@@ -29,19 +29,36 @@ export default class CrosswordInput {
         this.onInputEnd = () => null;
         this.prefilledIndex = prefilledIndex;
 
-        this.cells = word.split('').map((e, i) => ({
-            focused: false,
-            sprite: this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'square'),
-            text: this.game.add.text(x + 10 + (CELL_WIDTH + CELL_PADDING) * i, y, '', {
-                fontSize: 40,
-                font: 'Pangolin',
-            }),
-            index: i,
-            value: ''
-        }));
+        
+        if(vertical){
+            this.cells = word.split('').map((e, i) => ({
+                focused: false,
+                sprite: this.game.add.sprite(x, y  + (CELL_WIDTH + CELL_PADDING) * i, 'square'),
+                text: this.game.add.text(x + 15, y + 0 + (CELL_WIDTH + CELL_PADDING) * i, '', {
+                    fontSize: 40,
+                    font: 'Pangolin',
+                }),
+                index: i,
+                value: ''
+            }));
+            this.mark = this.game.add.sprite(x, y + (CELL_WIDTH + CELL_PADDING) * this.word.length, 'bad');
+            this.mark.visible = false;
+        }else{
+            this.cells = word.split('').map((e, i) => ({
+                focused: false,
+                sprite: this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'square'),
+                text: this.game.add.text(x + 10 + (CELL_WIDTH + CELL_PADDING) * i, y, '', {
+                    fontSize: 40,
+                    font: 'Pangolin',
+                }),
+                index: i,
+                value: ''
+            }));
+            this.mark = this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * this.word.length, y, 'bad');
+            this.mark.visible = false;
+        }
 
-        this.mark = this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * this.word.length, y, 'bad');
-        this.mark.visible = false;
+       
 
         smartSetHeight(this.mark, CELL_WIDTH);
 
@@ -53,10 +70,16 @@ export default class CrosswordInput {
             cell.sprite.events.onInputDown.add(() => this.handleClick(cell));
         });
 
-        this.cells[prefilledIndex].sprite.tint = TINT_DISABLED;
+       
+       
+       if(prefilledIndex == -2 ){
 
+       }else{
+        this.cells[prefilledIndex].sprite.tint = TINT_DISABLED;
         this.cells[prefilledIndex].value = word[prefilledIndex];
         this.cells[prefilledIndex].text.setText(word[prefilledIndex]);
+       }
+      
 
         focusChangeListeners.push(this.blur);
 
@@ -104,7 +127,7 @@ export default class CrosswordInput {
             this.focusedCell.text.setText(e.key);
             this.focusedCell.value = e.key;
 
-            const nextCell = this.cells[this.focusedCell.index + 1];
+            let nextCell = this.cells[this.focusedCell.index + 1];
             if (this.word.length === this.value.length) {
                 this.onInputEnd();
                 if (this.isWrong && nextCell) {

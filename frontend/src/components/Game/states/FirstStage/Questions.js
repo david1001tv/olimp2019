@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 import {smartSetHeight, smartSetWidth} from '../../utils';
 import FSF from '../../states/FirstStageFunctions';
-var PostIntro = require("./PostIntro.js");
 
 export default class QuestionsState extends Phaser.State {
     * gen() {
@@ -53,7 +52,7 @@ export default class QuestionsState extends Phaser.State {
                 .start();
 
 
-        if (PostIntro.GirlOrMan == "Girl"){
+        if (this.friend == 0){
             this.game.displayDialogLine('Ви', '*Здається, Ви знаєте, кто така Стильна*', () => this.next());
             yield;
         }
@@ -257,7 +256,14 @@ export default class QuestionsState extends Phaser.State {
         this.game.phone.setTime('11:00');
         this.game.phone.setDate('21.05.19');
         this.go = false;
-        this.mistakes = 0; //работает плохо
+
+        //кол-во ошибок
+        this.mistakes = 0; 
+
+        //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
+        this.friend = 0;
+
+        
     }
 
     preload() {

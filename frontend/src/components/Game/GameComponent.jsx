@@ -6,8 +6,6 @@ import progressManager from '../../etc/ProgressManager';
 
 import Game from './Game';
 import FakeBrowser from '~components/FakeBrowser';
-import GoogleMap from '~components/Game/states/FirstStage/GoogleMap/PostRegister';
-import Register from '~components/Game/states/FirstStage/Register/registerMain';
 
 import {Redirect} from 'react-router-dom';
 
@@ -67,16 +65,6 @@ class GameComponent extends Component {
         this.setState({fakeBrowserIsShown: enabled});
     }
 
-    @autobind
-    setGoogleMapEnabled(enabled) {
-        this.state.googleMapIsShown = enabled;
-    }
-
-    @autobind
-    setRegisterEnabled(enabled) {
-        this.state.registerIsShown = enabled;
-    }
-
     handleGameStateChange(stateName) {
         if (stateName === 'Final') {
             this.setState({redirectToFinal: true})
@@ -93,18 +81,6 @@ class GameComponent extends Component {
         if (this.state.fakeBrowserIsShown) {
             return (
                 <FakeBrowser />
-            );
-        }
-
-        if (this.state.googleMapIsShown) {
-            return (
-                <GoogleMap />
-            );
-        }
-
-        if (this.state.registerIsShown) {
-            return (
-                <Register />
             );
         }
 

@@ -3,6 +3,14 @@ import CrosswordInput from './CrosswordInput';
 
 import {smartSetHeight} from '../../../utils';
 
+
+const PROGRAMMING = 0;// готово
+const GRAPHICSS = 1;
+const NETWORKS = 2;
+
+let var_name = 2;
+
+
 export default class CrossState extends Phaser.State {
     * gen() {
         this.game.camera.flash(0x000000, 3000, true);
@@ -28,10 +36,21 @@ export default class CrossState extends Phaser.State {
     }
 
     preload() {
-        this.load.image('bg', './assets/images/3-2 (crossword)/bg-newspaper.png');
-        this.load.image('ok', './assets/images/3-2 (crossword)/ok.png');
-        this.load.image('bad', './assets/images/3-2 (crossword)/bad.png');
-        this.load.image('square', './assets/images/3-2 (crossword)/square.png');
+        if(var_name == PROGRAMMING){
+            // програмач
+            this.load.image('bg', './assets/images/3-2 (Cross)/program_fon.png');
+        }else if(var_name == GRAPHICSS){
+            // графика
+            this.load.image('bg', './assets/images/3-2 (Cross)/grafika_fon.png');
+        }else if(var_name == NETWORKS){
+             // сети
+            this.load.image('bg', './assets/images/3-2 (Cross)/seti_fon.png');
+        }
+
+        // this.load.image('bg', './assets/images/3-2 (Cross)/bg-newspaper.png');
+        this.load.image('ok', './assets/images/3-2 (Cross)/ok.png');
+        this.load.image('bad', './assets/images/3-2 (Cross)/bad.png');
+        this.load.image('square', './assets/images/3-2 (Cross)/square.png');
     }
 
     create() {
@@ -50,16 +69,45 @@ export default class CrossState extends Phaser.State {
             strokeThickness: 8,
         });
 
-        this.inputs = [
-            new CrosswordInput(1103, 278, 'груша', 4, this.game),
-            new CrosswordInput(1216, 335, 'село', 2, this.game),
-            new CrosswordInput(1158, 393, 'вовчок', 3, this.game),
-            new CrosswordInput(1272, 450, 'чорна', 1, this.game),
-            new CrosswordInput(1160, 506, 'енеїда', 3, this.game),
-            new CrosswordInput(1103, 562, 'руїна', 4, this.game),
-            new CrosswordInput(1216, 618, 'україни', 2, this.game),
-            new CrosswordInput(1215, 676, 'козак', 2, this.game),
-        ];
+
+
+        if(var_name == PROGRAMMING){
+            this.inputs = [
+                new CrosswordInput(1190, 303, 'компілятор', 4, this.game),
+                new CrosswordInput(992, 354, 'коментар', 8, this.game),
+                new CrosswordInput(1340, 404, 'обєкт', 1, this.game),
+                new CrosswordInput(1238, 453, 'алгоритм', 3, this.game),
+                new CrosswordInput(1190, 504, 'інкремент', 4, this.game),
+                new CrosswordInput(1090, 553, 'константа', 6, this.game),
+                new CrosswordInput(1340, 603, 'модуль', 1, this.game),
+                new CrosswordInput(1290, 652, 'масив', 2, this.game),
+            ];  
+        }else if(var_name == GRAPHICSS){
+            this.inputs = [
+                new CrosswordInput(1100, 305, 'трасування', 6, this.game),
+                new CrosswordInput(1152, 355, 'піксель', 5, this.game),
+                new CrosswordInput(1102, 404, 'графіка', 6, this.game),
+                new CrosswordInput(1201, 455, 'растушевка', 4, this.game),
+                new CrosswordInput(1053, 504, 'редактор', 7, this.game),
+                new CrosswordInput(1102, 553, 'палітра', 6, this.game),
+                new CrosswordInput(1202, 603, 'планшет', 4, this.game),
+                new CrosswordInput(1152, 652, 'анімація', 5, this.game),
+            ];  
+        }else if(var_name == NETWORKS){
+            this.inputs = [
+                new CrosswordInput(1064, 298, 'забезпечення', 6, this.game),
+                new CrosswordInput(1215, 348, 'сервер', 3, this.game),
+                new CrosswordInput(1264, 397, 'модем', 2, this.game),
+                new CrosswordInput(1164, 446, 'провідник', 4, this.game),
+                new CrosswordInput(1264, 495, 'память', 2, this.game),
+                new CrosswordInput(1016, 546, 'кілобайт', 7, this.game),
+                new CrosswordInput(1314, 596, 'домен', 1, this.game),
+                new CrosswordInput(1164, 645, 'адреса', 4, this.game),
+                new CrosswordInput(1264, 695, 'браузер', 2, this.game),
+                new CrosswordInput(1064, 495, 'біт', -1, this.game, true),
+            ];  
+        }
+
         this.inputs.forEach((input, index) => {
             input.onInputEnd = () => {
                 if (input.value === input.word) {

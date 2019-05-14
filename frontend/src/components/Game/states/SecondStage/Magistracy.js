@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+    import Phaser from 'phaser';
 import {smartSetHeight, smartSetWidth} from '../../utils';
 import todos from '../../todos/Scanner';
 import SSF from '../../states/SecondStageFunctions';
@@ -121,6 +121,7 @@ export default class Scanner extends Phaser.State {
         this.game.displayDialogLine('Голос', 'Ви ще не відчували впевненості у своїх знаннях. Чи можливо буде працевлаштуватися вже зараз? Щось ніяково… Треба з кимось порадитися', () => this.next());
         yield;
 
+        //Пред. выбор
         if (this.friend == 0){
             this.game.add.tween(this.warning).to({
                 alpha: 1
@@ -195,28 +196,110 @@ export default class Scanner extends Phaser.State {
 
         }
         else {
+            this.game.add.tween(this.warning).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => {
+                    setTimeout(() => {
+                        this.game.add.tween(this.warning).to({
+                            alpha: 0
+                        }, 1500, Phaser.Easing.Cubic.InOut)
+                            .start();
+                    }, 3000);   
+            });
+
+            this.game.add.tween(this.fourthWarning).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => {
+                    setTimeout(() => {
+                        this.game.add.tween(this.fourthWarning).to({
+                            alpha: 0
+                        }, 1500, Phaser.Easing.Cubic.InOut)
+                            .start();
+                    }, 3000);   
+            });
+
+            this.game.displayDialogLine('Голос', 'Ви побачили, як Адам Вікторович прямує до кафедри. Звичайно! Варто порадитися з ним, адже саме він допоміг, коли Ви не могли визначитися з професією. Сповнившись рішучості, Ви покликали його біля кабінету', () => this.next());
+            yield;
+
+            this.game.add.tween(this.bg2).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
+            this.game.add.tween(this.teacher).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
+
+            this.game.displayDialogLine('Адам Вікторович', 'Це ти? Що ж, мої вітання! Деякі люди мріють але бездіють, та ті, що обравши шлях, виявляють наполегливість, завжди досягнуть свого', () => this.next());
+            yield;
+            
+            this.game.displayDialogLine('Голос', 'Вам до вподоби його слова, та зверталися Ви не за похвалою, тож розповівши про свої сумніви, прохаєте поради', () => this.next());
+            yield;
+
+            this.game.displayDialogLine('Адам Вікторович', 'В тебе є можливість пройти навчання у магістратурі. Навчальні програми магістратури формуються з курсів, які стирають грань між теорією і практикою. Студенти вчаться, розбираючи реальні кейси, проходять стажування, вирішують завдання, аналогічні тим, які будуть виникати на робочому місці', () => this.next());
+            yield;
+
+            this.game.displayDialogLine('Голос', 'Вас не привертала необхідність вчитися ще кілька років. Ви запитали, навіщо це потрібно, бо вже втратили бажання повертатися до лекційних аудиторій', () => this.next());
+            yield;
+
+            this.game.displayDialogLine('Адам Вікторович', 'Якщо ми говоримо саме про освіту та роботу за фахом, особливо в західних компаніях і компаніях світового рівня, то одна з головних причин, навіщо потрібна магістратура, це те, що без ступеня магістра, як правило, неможливо займати керівні посади, а значить і отримувати більший дохід і зростати у своїй професії', () => this.next());
+            yield;
+
+            this.game.displayDialogLine('Адам Вікторович', 'Якщо ж ти не хочеш бути керівником, а хочеш розвиватися саме як фахівець, відсутність поглиблених знань також може перешкодити в подальшому професійному зростанні - без диплома магістра і відповідних поглиблених знань також, як правило, неможливо перейти на більш  цікаву роботу вже в якості спеціаліста вищої категорії', () => this.next());
+            yield;
+
+            this.game.displayDialogLine('Адам Вікторович', 'Та вибір за тобою', () => this.next());
+            yield;
 
         }
+
+        this.button_choose_mag.inputEnabled = true;
+        this.button_choose_mag.alpha = 1;
+        this.button_text_mag.alpha = 1;
+
+        this.button_choose_work.inputEnabled = true;
+        this.button_choose_work.alpha = 1;
+        this.button_text_work.alpha = 1;
+        yield;
+
+        if (this.answer == 1){
+            this.game.displayDialogLine('Голос', 'Ваші амбіції справді необмежені! Ви бажаєте взяти від життя все можливе, тож спеціалізація Вам життєво необхідна. Магістратура - Ваш шлях до керівних посад та грунтовних практичних навиків', () => this.next());
+        }
+
+        else { 
+            this.game.displayDialogLine('Голос', 'Годі з Вас навчання! Попереду чекає захоплюючий шлях працевлаштування. Ви впевнені, що двері великого світу відкриються перед Вами, адже саме Ви - той, за кого змагаються роботодавці!', () => this.next());
+        }
+        yield;
 
         this.game.camera.fade(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.nextState(this.score);
+        if (this.answer == 1){
+            this.game.nextState(this.score); 
+        }
+        else {
+            this.game.nextStateForWork(this.score);
+        }
     }
 
     init() {
         this._gen = this.gen();
-        this.score = 0;
+
+        //total score
+        this.score = 100;
 
         //0 - girl, 1 - man
-        this.friend = 0;
+        this.friend = 1;
 
         this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);
         this.game.phone.setEnabled(false);
         this.game.phone.setTime('14:07');
         this.game.phone.setDate('02.07.18');
+        this.answer = null;
     }
 
     preload() {
@@ -226,12 +309,13 @@ export default class Scanner extends Phaser.State {
         this.load.image('teacher', './assets/images/2-7 (Magistracy)/teacher.png');
         this.load.image('girl', './assets/images/2-7 (Magistracy)/girl.png');
 
+        this.load.spritesheet('button_choose_yes', './assets/images/2-7 (Magistracy)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_choose_no', './assets/images/2-7 (Magistracy)/Button_Choice_On_Blue.png', 610, 122);
+
         this.load.image('warning_message', './assets/images/2-7 (Magistracy)/warning_message.png');
         
         this.load.image('bachelor_blue', './assets/images/2-7 (Magistracy)/bachelor_blue.png');
         this.load.image('bachelor_red', './assets/images/2-7 (Magistracy)/bachelor_red.png');
-        this.load.image('master_blue', './assets/images/2-7 (Magistracy)/master_blue.png');
-        this.load.image('master_red', './assets/images/2-7 (Magistracy)/master_red.png');
 
     }
 
@@ -251,14 +335,40 @@ export default class Scanner extends Phaser.State {
         bg2.alpha = 0;
         this.bg2 = bg2;
 
+        //Кнопки выбора
+        let button_choose_mag = this.game.add.button(656, 300, 'button_choose_yes', this.choose, this, 1, 1, 0);
+        button_choose_mag.inputEnabled = false;
+        button_choose_mag.alpha = 0;
+        this.button_choose_mag = button_choose_mag;
+
+        let button_choose_work = this.game.add.button(656, 650, 'button_choose_no', this.choose, this, 1, 1, 0);
+        button_choose_work.inputEnabled = false;
+        button_choose_work.alpha = 0;
+        this.button_choose_work = button_choose_work;
+
+        this.button_text_mag = this.game.add.text(685, 330, 'Так, я хочу здобути спеціалізацію', {
+            font: "Leftonade",
+            fontSize: 45,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.button_text_mag.alpha = 0;
+
+        this.button_text_work = this.game.add.text(680, 685, 'Краще зосередитись на працевлаштуванні', {
+            font: "Leftonade",
+            fontSize: 35,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.button_text_work.alpha = 0;
 
         this.teacher = this.SSF.makeImg(1260, 50, 'teacher', 700, 900);
         this.girl = this.SSF.makeImg(1329, 0, 'girl', 700, 900);
 
         this.bachelor_blue = this.SSF.makeImg(430, 210, 'bachelor_blue', 1050, 750);
         this.bachelor_red = this.SSF.makeImg(430, 210, 'bachelor_red', 1050, 750);
-        this.master_blue = this.SSF.makeImg(430, 210, 'master_blue', 1050, 750);
-        this.master_red = this.SSF.makeImg(430, 210, 'master_red', 1050, 750);
 
         //Уведомления
         let warning = this.game.add.image(700, 0, 'warning_message');
@@ -303,6 +413,20 @@ export default class Scanner extends Phaser.State {
         this.fourthWarning.alpha = 0;
 
 
+        this.next();
+    }
+
+    choose(obj) {
+        if (obj.key == 'button_choose_yes'){
+            this.answer = 1;
+        }
+        else {
+            this.answer = 0;
+        }
+        this.button_choose_mag.destroy();
+        this.button_choose_work.destroy();
+        this.button_text_mag.destroy();
+        this.button_text_work.destroy();
         this.next();
     }
 
