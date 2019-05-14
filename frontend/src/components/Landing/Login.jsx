@@ -4,6 +4,8 @@ import {Button, TextField, LinearProgress, Paper} from 'react-md';
 import validate from 'validate.js';
 import autobind from 'autobind-decorator';
 import {GoogleLogin} from 'react-google-login';
+import line from '../../img/login/line.png';
+import googleFon from '../../img/login/fon_google.png';
 
 import {logIn, isAuthenticated, googleLogIn} from '~api';
 
@@ -119,66 +121,90 @@ class Login extends Component {
 
         return (
             <div className="login-form">
-                <div className="md-text-center title">
-                    <h3>Вхід</h3>
+            <div className="md-text-center title">
+                <h3 className="title_log">Вхід</h3>
+            </div>
+            <div className="text_l">
+                <img src={line} alt=""/>
+                <h2>увійти через</h2>
+                <img src={line} alt=""/>
+            </div>
+           
+           
+                <GoogleLogin
+                    render={renderProps => (
+                             <div className="goo_butt"
+                              onClick={renderProps.onClick}
+                             >
+                                 <h2>
+                                 УВІЙТИ ЧЕРЕЗ
+                                 </h2>
+                                 <img src={googleFon} alt=""/>
+                             </div>
+                    )}
+                    onSuccess={this.handleGoogleResponseSuccess}
+                    onFailure={e => console.error(e)}
+                    clientId="160162546321-8u5mfbbgqa28l3q5d80l8is3ps9gsd0c.apps.googleusercontent.com"
+                />
+            <div className="text_2">
+                <img src={line} alt=""/>
+                <h2>або</h2>
+                <img src={line} alt=""/>
+            </div>
+            
+            
+            <form
+                onSubmit={this.handleSubmit}
+            >
+                <div className="md-text--error md-headline md-text-center">
+                    {this.state.errors.generic.map(e => <div>{e}</div>)}
                 </div>
-                <div className="md-text-center">
-                    <GoogleLogin
-                        render={renderProps => (
-                            <button
-                                onClick={renderProps.onClick}
-                                className="drawn-btn drawn-btn__google"
-                            >
-                            </button>
-                        )}
-                        onSuccess={this.handleGoogleResponseSuccess}
-                        onFailure={e => console.error(e)}
-                        clientId="160162546321-8u5mfbbgqa28l3q5d80l8is3ps9gsd0c.apps.googleusercontent.com"
-                    />
-                </div>
-                {/* <form
-                    onSubmit={this.handleSubmit}
-                >
-                    <div className="md-text--error md-headline md-text-center">
-                        {this.state.errors.generic.map(e => <div>{e}</div>)}
+                <div>
+                    <div>
+                        <TextField
+                            block={true}
+                            className="wrap_em"
+                            inputClassName="email_style"
+                            placeholder="e-mail"
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={value => this.handleChange(value, 'email')}
+                            
+                           // error={!!this.state.errors.email.length}
+                           // errorText={this.state.errors.email.map(e => <div>{e}</div>)}
+                        />
                     </div>
                     <div>
-                        <div>
-                            <TextField
-                                id="email"
-                                type="email"
-                                value={email}
-                                onChange={value => this.handleChange(value, 'email')}
-                                label="e-mail"
-                                onBlur={() => this.validateField('email')}
-                                error={!!this.state.errors.email.length}
-                                errorText={this.state.errors.email.map(e => <div>{e}</div>)}
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                id="password"
-                                type="password"
-                                value={password}
-                                onChange={value => this.handleChange(value, 'password')}
-                                label="Пароль"
-                                onBlur={() => this.validateField('password')}
-                                error={!!this.state.errors.password.length}
-                                errorText={this.state.errors.password.map(e => <div>{e}</div>)}
-                            />
-                        </div>
+                        <TextField
+                            block={true}
+                            className="wrap_em"
+                            inputClassName="email_style"
+                            placeholder="Пароль"
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={value => this.handleChange(value, 'password')}
+                           
+                            // onBlur={() => this.validateField('password')}
+                            // error={!!this.state.errors.password.length}
+                            // errorText={this.state.errors.password.map(e => <div>{e}</div>)}
+                        />
                     </div>
-                    <div className="md-text-center">
-                        {this.state.isLoading ? <LinearProgress /> : null}
-                        <button
-                            type="submit"
-                            className="drawn-btn drawn-btn__log-in"
-                            disabled={this.state.isLoading}
-                        >
-                        </button>
-                    </div>
-                </form> */}
-            </div>
+                </div>
+                <div className="md-text-center">
+                    {this.state.isLoading ? <LinearProgress /> : null}
+                    <button
+                        type="submit"
+                        className="login_goo"
+                        disabled={this.state.isLoading}
+                    >
+                    УВІЙТИ
+                    </button>
+                   
+                </div>
+            </form>
+        </div>
         );
     }
 }

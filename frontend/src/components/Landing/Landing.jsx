@@ -86,6 +86,8 @@ class Landing extends Component {
                     focusOnMount={false}
                     visible={formIsVisible}
                     onHide={() => this.setState({formIsVisible: false})}
+                    dialogClassName="login_main"
+                    contentClassName="container_log"
                 >
                     <Login />
                 </DialogContainer>
