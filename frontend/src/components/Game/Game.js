@@ -32,7 +32,9 @@ import CutImagesState from './states/SecondStage/CutImages';
 //Квест 6 "Робот" - 
 //Квест 7 "Научная работа (карточки)" + 
 import CardsState from './states/SecondStage/Cards';
-//Квест 8 "Тесты" -
+//Квест 8 "Магистратура" +
+import MagistracyState from './states/SecondStage/Magistracy';
+
 import TransitionToThirdStageState from './states/SecondStage/TransitionToThirdStage';
 
 //Этап 3
@@ -89,7 +91,8 @@ class Game extends Phaser.Game {
         //Robot -
         //Cards +
         this.state.add("Cards", CardsState, false);
-        //Tests -
+        //Magistracy +
+        this.state.add("Magistracy", MagistracyState, false);
 
         //Stage 3
         //Labyrinth -
@@ -104,7 +107,7 @@ class Game extends Phaser.Game {
         this.state.add('Final', new Phaser.State(), false);
         */
         
-        this.state.add('Intro', CardsState, false);
+        this.state.add('Intro', MagistracyState, false);
 
 
         this.state.start('Boot', true, false, 'Map');

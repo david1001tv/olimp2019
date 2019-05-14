@@ -225,21 +225,21 @@ export default class Scanner extends Phaser.State {
 
     preload() {
 
-        this.load.image('bg', './assets/images/2-7 (Cards)/background.png');
-        this.load.image('bg2', './assets/images/2-7 (Cards)/background_2.png');
-        this.load.image('no', './assets/images/2-7 (Cards)/no.png');
-        this.load.image('yes', './assets/images/2-7 (Cards)/yes.png');
+        this.load.image('bg', './assets/images/2-6 (Cards)/background.png');
+        this.load.image('bg2', './assets/images/2-6 (Cards)/background_2.png');
+        this.load.image('no', './assets/images/2-6 (Cards)/no.png');
+        this.load.image('yes', './assets/images/2-6 (Cards)/yes.png');
 
         for (let i = 0; i < 9; i++){
-            this.load.image('card' + i, './assets/images/2-7 (Cards)/card' + i + '.png');
+            this.load.image('card' + i, './assets/images/2-6 (Cards)/card' + i + '.png');
         }
-        this.load.image('blur_card', './assets/images/2-7 (Cards)/blur.png');
+        this.load.image('blur_card', './assets/images/2-6 (Cards)/blur.png');
 
         this.load.spritesheet('button_red_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
         this.load.spritesheet('button_blue_on', './assets/images/1-0 (Intro)/Button_Choice_On_Blue.png', 610, 122);
 
-        this.load.image('teacher', './assets/images/2-7 (Cards)/teacher.png');
-        this.load.image('warning_message', './assets/images/2-7 (Cards)/warning_message.png');
+        this.load.image('teacher', './assets/images/2-6 (Cards)/teacher.png');
+        this.load.image('warning_message', './assets/images/2-6 (Cards)/warning_message.png');
 
     }
 
