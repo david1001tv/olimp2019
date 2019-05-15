@@ -407,7 +407,7 @@ export default class CryptoState extends Phaser.State {
         for (var i = 0; i < str.length; i++) {
             charcode = (str[i].charCodeAt()) + num;
             if(charcode > ALPHABET_END) {
-                var offset = charcode - ALPHABET_END;
+                var offset = charcode - ALPHABET_END - 1;
                 charcode = ALPHABET_BEGIN + offset;
             }
             result += String.fromCharCode(charcode);
