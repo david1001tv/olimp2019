@@ -351,7 +351,8 @@ export default class CryptoState extends Phaser.State {
         this.updateField();
         switch(algNum) {
             case 1: {
-                this.currentWord = this.caesarCipher(this.currentWord, this.currentKey);
+                //this.currentWord = this.caesarCipher(this.currentWord, this.currentKey);
+                this.currentWord = this.caesarCipher('geology', 14);
                 break;
             }
             case 2: {
@@ -407,8 +408,8 @@ export default class CryptoState extends Phaser.State {
         for (var i = 0; i < str.length; i++) {
             charcode = (str[i].charCodeAt()) + num;
             if(charcode > ALPHABET_END) {
-                num = charcode - ALPHABET_END;
-                charcode = ALPHABET_BEGIN + num;
+                var offset = charcode - ALPHABET_END;
+                charcode = ALPHABET_BEGIN + offset;
             }
             result += String.fromCharCode(charcode);
         }
