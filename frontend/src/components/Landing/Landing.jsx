@@ -4,7 +4,8 @@ import {DialogContainer} from 'react-md';
 import {Link} from 'react-router-dom';
 import autobind from 'autobind-decorator';
 import photo from '../../img/photo.jpg'
-
+ 
+import Team from './Team';
 import Login from './Login';
 import Regulations from './Regulations';
 import Feedback from './Feedback';
@@ -18,6 +19,7 @@ class Landing extends Component {
         formIsVisible: false,
         feedbackIsVisible: false,
         regulationVisible: false,
+        teamVisible: false,
         likeCount: 6
     };
 
@@ -32,7 +34,7 @@ class Landing extends Component {
     }
 
     render() {
-        const {formIsVisible, feedbackIsVisible, regulationVisible, likeCount} = this.state;
+        const {formIsVisible, feedbackIsVisible, regulationVisible, likeCount, teamVisible} = this.state;
 
         return (
 
@@ -75,7 +77,7 @@ class Landing extends Component {
     <div className="butf">
         <div className="wrap">
         <div className="link-f"><div onClick={() => this.setState({regulationVisible: true})}> <p> Правила Квесту</p></div></div>
-        <div className="link-f"><div><p> КОМАНДА ДВНЗ “ПДТУ”, 2019 ©</p></div></div>
+        <div className="link-f"><div onClick={() => this.setState({teamVisible: true})}><p> КОМАНДА ДВНЗ “ПДТУ”, 2019 ©</p></div></div>
         <div className="link-f"><div onClick={() => this.setState({feedbackIsVisible: true})}><p> Зворотній зв'язок</p></div></div>
         <div className="link-f"> <div><a href="https://pstu.edu/ru/"> ОФІЦІЙНИЙ САЙТ ПДТУ</a></div></div>
     </div>
@@ -86,6 +88,8 @@ class Landing extends Component {
                     focusOnMount={false}
                     visible={formIsVisible}
                     onHide={() => this.setState({formIsVisible: false})}
+                    dialogClassName="login_main"
+                    contentClassName="container_log"
                 >
                     <Login />
                 </DialogContainer>
@@ -93,6 +97,8 @@ class Landing extends Component {
                     focusOnMount={false}
                     visible={feedbackIsVisible}
                     onHide={() => this.setState({feedbackIsVisible: false})}
+                    dialogClassName="opis_g2"
+                    contentClassName="opis_container"
                 >
                     <Feedback />
                 </DialogContainer>
@@ -100,8 +106,17 @@ class Landing extends Component {
                     focusOnMount={false}
                     visible={regulationVisible}
                     onHide={() => this.setState({regulationVisible: false})}
+                    dialogClassName="opis_g"
+                    contentClassName="opis_container"
                 >
                 <Regulations />
+                </DialogContainer>
+                <DialogContainer
+                      focusOnMount={false}
+                      visible={teamVisible}
+                      onHide={() => this.setState({teamVisible: false})}
+                >
+                    <Team />
                 </DialogContainer>
 </div>
 

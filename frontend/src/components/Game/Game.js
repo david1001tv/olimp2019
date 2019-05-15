@@ -130,7 +130,7 @@ class Game extends Phaser.Game {
         this.state.add('Final', new Phaser.State(), false);
         */
 
-        this.state.add('Intro', ConferenceState, false);
+        this.state.add('Intro', IntroState, false);
 
 
 
