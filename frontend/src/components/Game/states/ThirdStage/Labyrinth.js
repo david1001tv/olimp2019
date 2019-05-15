@@ -24,6 +24,7 @@ export default class LabyrinthState extends Phaser.State {
         this.game.displayDialogLine('Голос', 'Основною перевагою таких величезних будівель є те, що тут Ви зможете відшукати роботу на будь-яку спеціальність, але з цього випливає і мінус - зробити це вкрай складно. Вам доведеться затриматися, для того, щоб відшукати потрібний кабінет, проте який з номерів вірний?', () => this.next());
         yield;
         this.game.displayDialogLine('Ви', 'Здається в номері кабінету повинна бути цифра "1"…', () => {
+            
             this.game.add.tween(this.bg).to({
                 alpha: 0
             }, 1500, Phaser.Easing.Cubic.InOut)

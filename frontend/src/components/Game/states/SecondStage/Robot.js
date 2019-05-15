@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
+import {smartSetHeight} from '../../utils';
 import SSF from '../../states/SecondStageFunctions';
  
-
 const ARROWS_BOTTOM = 950;
  
 let checkI = false;
@@ -14,8 +14,6 @@ let globT = 0;
 let globid = 0;
 let checkid = 0;
 let strAll = "";
-
-
 
 
 export default class Scanner extends Phaser.State {
@@ -59,6 +57,29 @@ export default class Scanner extends Phaser.State {
         this.game.add.tween(fullDavid).to({alpha: 1}, 3000).start().onComplete.add(() => this.next());
         yield;
         
+        this.game.add.tween(this.warning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.warning).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
+
+        this.game.add.tween(this.firstWarning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.firstWarning).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
 
         this.game.displayDialogLine('Голос ', 'Поїхали', () => this.next());
         yield;
@@ -148,6 +169,8 @@ export default class Scanner extends Phaser.State {
         this.load.image('bg3', './assets/images/2-9 (Robot)/background2.png');
         this.load.image('teacher', './assets/images/2-9 (Robot)/teacher.png');
 
+        this.load.image('warning_message', './assets/images/3-1 (Labyrinth)/warning_message.png');
+
         this.load.image('d-shadow', './assets/images/2-9 (Robot)/robot.png');
         this.load.image('robot-rot', './assets/images/2-9 (Robot)/robot_rot.png');
         this.load.image('blue-eyes', './assets/images/2-9 (Robot)/blue.png');
@@ -177,7 +200,7 @@ export default class Scanner extends Phaser.State {
         this.bg = bg;
 
         this.teacher = this.SSF.makeImg(1260, 50, 'teacher', 700, 900);
-
+    
         this.activeArrows = [];
         this.porc = 0;
 
@@ -265,6 +288,20 @@ export default class Scanner extends Phaser.State {
         this.greeneye = this.game.add.image(1454, 160, 'green-eyes');
         this.greeneye.alpha = 0;
         
+        let warning = this.game.add.image(700, 0, 'warning_message');
+        warning.alpha = 0;
+        smartSetHeight(warning, 200);
+        this.warning = warning;
+
+        this.firstWarning = this.game.add.text(735, 60, 'Управління здійснюється стрілками\nна клавіатурі : вiрно :  <- ; не вiрно:  ->', {
+            font: "Leftonade",
+            fontSize: 30,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.firstWarning.alpha = 0;
+
         // это не трогать, а то пахать перестает
         let fullDavid = this.game.add.group();
         fullDavid.addMultiple([this.textA, robot, this.rot, this.eye, this.redeye, this.greeneye, cloud]);

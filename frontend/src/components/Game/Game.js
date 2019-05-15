@@ -33,12 +33,12 @@ import CutImagesState from './states/SecondStage/CutImages';
 import CardsState from './states/SecondStage/Cards';
 //Квест 7 "Магистратура" +
 import MagistracyState from './states/SecondStage/Magistracy';
-//Квест 8 "Криптография" - 
+//Квест 8 "Криптография" - not WORK!
+import CryptoState from './states/SecondStage/Crypto';
 //Квест 9 "Робот" +
 import RobotState from './states/SecondStage/Robot';
 //Аутро 10 "Диплом магистра"
 import OutroState from './states/SecondStage/Outro';
-
 
 import TransitionToThirdStageState from './states/SecondStage/TransitionToThirdStage';
 
@@ -56,6 +56,7 @@ import CrossState from './states/ThirdStage/Cross';
 
 //Этап 4
 //Квест 1 "Поиск предметов" -
+import ConferenceState from './states/FourthStage/Conference';
 //Квест 2 "Три в ряд" -
 //Квест 3 "Тестирование и отлавливание багов" -
 
@@ -88,7 +89,7 @@ class Game extends Phaser.Game {
         //Questions +
         this.state.add('Questions', QuestionsState, false);
 
-        //Stage 2 -
+        //Stage 2 +
         //Schedule +
         this.state.add("Shedule", ScheduleState, false);
         //Fillword +
@@ -103,9 +104,10 @@ class Game extends Phaser.Game {
         this.state.add("Cards", CardsState, false);
         //Magistracy +
         this.state.add("Magistracy", MagistracyState, false);
-        //Cryptographic -
-        //Robot -
-
+        //Cryptographic - not WORK!
+        this.state.add("Crypto", CryptoState, false);
+        //Robot +
+        this.state.add("Robot", RobotState, false);
         //Outro +
         this.state.add("Outro", OutroState, false);
 
@@ -119,7 +121,8 @@ class Game extends Phaser.Game {
         this.state.add('Cross', CrossState, false);
 
         //Stage 4 -
-        //FindItems -
+        //FindItems (Conferenct) +
+        this.state.add('Conference', ConferenceState, false);
         //ThreeInARow -
         //TestingAndDebugging -
 
@@ -127,7 +130,7 @@ class Game extends Phaser.Game {
         this.state.add('Final', new Phaser.State(), false);
         */
 
-        this.state.add('Intro', RobotState, false);
+        this.state.add('Intro', ConferenceState, false);
 
 
 
