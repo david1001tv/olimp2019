@@ -55,6 +55,13 @@ module.exports = {
                 }],
             },
             {
+                test: /.(otf|ttf)$/,
+                loader: 'file-loader',
+                query: {
+                    name: 'fonts/[name].[hash:8].[ext]'
+                }
+            },
+            {
                 test: /\.css$/,
                 use: [{
                     loader: 'style-loader', // creates style nodes from JS strings

@@ -6,6 +6,7 @@ import progressManager from '../../etc/ProgressManager';
 
 import Game from './Game';
 import FakeBrowser from '~components/FakeBrowser';
+
 import {Redirect} from 'react-router-dom';
 
 
@@ -21,6 +22,8 @@ class GameComponent extends Component {
     };
 
     state = {
+        registerIsShown: false,
+        googleMapIsShown: false,
         fakeBrowserIsShown: false,
         redirectToFinal: false,
     };
@@ -43,6 +46,8 @@ class GameComponent extends Component {
         this.game.displayDialogLine = this.props.displayDialogLine;
         this.game.phone = this.props.phone;
         this.game.setFakeBrowserEnabled = this.setFakeBrowserEnabled;
+        this.game.setGoogleMapEnabled = this.setGoogleMapEnabled;
+        this.game.setRegisterEnabled = this.setRegisterEnabled;
 
         this.game.state.onStateChange.add(this.handleGameStateChange, this);
 
@@ -57,7 +62,7 @@ class GameComponent extends Component {
 
     @autobind
     setFakeBrowserEnabled(enabled) {
-        this.setState({fakeBrowserIsShown: enabled})
+        this.setState({fakeBrowserIsShown: enabled});
     }
 
     handleGameStateChange(stateName) {
