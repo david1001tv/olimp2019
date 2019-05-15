@@ -53,33 +53,170 @@ export default class CryptoState extends Phaser.State {
 
         let context = this;
 
-        this.generateKey(1);
-        this.teacherAppears('hello');
+        setTimeout(() => this.next(), 3000);
+        this.game.camera.flash(0x000000, 3000, true);
         yield;
+
+        this.game.displayDialogLine('Голос', 'Страшно уявити, що Ви будете проходити в магістратурі. \
+        Вам уявляються секретні знання, недосяжні для звичайних людей. Та ось наближається Адам \
+        Вікторович, і на книжці у його руках Ви читаєте “Криптографія”. Що ж, звучить цікаво!', 
+        () => this.next());
+        yield;
+
+        this.game.add.tween(this.cathedra).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut).start().onComplete.add(() => {
+            this.game.add.tween(this.machine).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut).start().onComplete.add(() => {
+                this.generateStage();
+                this.generateKey(1);
+                this.teacherAppears('Ви', 'Доброго дня, Адаме Вікторовичу!');
+            }); 
+        }); 
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Вітаю, студент! Я здивований, що ти прийшов \
+        до мене на пару раніше її початку. Для студентів 4 курсу це дуже рідке явище! Криптографія - дуже \
+        цікава наука, але все одно студенти навіть не уявляють її важливості для сучасних комп\'\ютерних наук.', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Ви', 'Це дуже дивно, адже я прийшов до вас як раз з питанням\
+        стосовно криптографії.', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Та невже !? Ну гаразд, я тебе уважно слухаю.', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Ви', 'Останні кілька днів я займаюсь розробкою сайта університету.\
+        В мене вже багато чого зроблено - дизайн, макет сайту, розгорнут сервер. Сьогодні я вже дійшов\
+        до функціоналу реєстрації та авторизації на сайті. Однак є такая проблема: мені необхідно зберігати\
+        данні клієнта у безпечному форматі, особливо його пароль в системі.', 
+        () => this.next());
+        yield;
+        
+        this.game.displayDialogLine('Ви', 'Мені відомо, що для цього існує\
+        безліч різноманітних алгоритмів шифрування, але я не можу знайти найбільш ефективний з них. Ви\
+        не могли би мені допомогти ?', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Хм, розробка сайта університету? Звучить доволі серйозно\
+        з твого боку. Гаразд, я допоможу тобі. Але не сподівайся, що я сам все тобі розкажу! Найкращий спосіб\
+        засвоїти матеріал - це використати його на практиці. Отже, якщо ти дійсно хочеш розбиратися у\
+        шифрувальних алгоритмах, тобі доведеться виконати кілька моїх завдань.', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Ви', 'Гаразд, я готовий.', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Добре, тоді почнемо!', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Перше завдання для тебе буде пов\'\язано \
+        з шифром Цезаря. Шифр Цезаря - це вид шифру підстановки, в якому кожен символ у відкритому\
+        тексті замінюється символом, що знаходиться на деякому постійному числі позицій ліворуч або\
+        праворуч нього в алфавіті. Наприклад, в шифрі зі зрушенням вправо на 3, А була б замінена на Г,\
+        Б стане Д, і так далі. Спробуй зашифрувати слово у верхньому полі за допомогою шифра Цезаря з ключом ' +
+        this.currentKey, 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Ви', 'Звучить трішки складно, але я впораюсь, не сумнівайтеся!', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Чекатиму на тебе для наступного завдання. Хай щастить!', 
+        () => this.next());
+        yield;
+
         this.teacherDisappears(function() {
-            context.warning.sprite.alpha = context.warning.text.alpha = 1;
+            context.toggleWarning(1, function() {
+                context.toggleWarning(0, null, 0)
+            }, 3000);
             context.generateWord(1, function() {
                 context.generateKey(2);
-                context.teacherAppears('hello');
-            });
-        });
-        yield;
-        this.teacherDisappears(function() {
-            context.clearInputCells();
-            context.generateWord(2, function() {
-                context.teacherAppears('hello');
-            });
-        });
-        yield;
-        this.teacherDisappears(function() {
-            context.clearInputCells();
-            context.generateWord(3, function() {
-                context.teacherAppears('hello');
+                context.teacherAppears('Адам Вікторович', 'Непогано як для початку, але це далеко не все, що у мене є.\
+                Готовий продовжити ?');
             });
         });
         yield;
 
-        this.game.nextState();
+        this.game.displayDialogLine('Ви', 'Так, залюбки!', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Тоді перейдемо до наступного алгоритму.', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Шифр Віженера - метод поліалфавітного\
+        шифрування літерного тексту з використанням ключового слова. Людина, яка посилає повідомлення,\
+        записує ключове слово циклічно доти, поки його довжина не буде відповідати довжині вихідного тексту.\
+        Перший символ вихідного тексту шифрується першим символом ключа згідно таблиці Віженера.\
+        Решта символів шифруються подібним чином.', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Спробуй зашифрувати наступне слово із таким ключем: '+
+        this.currentKey.toUpperCase(), 
+        () => this.next());
+        yield;
+
+        this.teacherDisappears(function() {
+            context.clearInputCells();
+            context.generateWord(2, function() {
+                context.teacherAppears('Адам Вікторович', 'В тебе дуже непогано виходить! Однак в мене є для тебе ще дещо.\
+                Не втомився ?');
+            });
+        });
+        yield;
+
+        this.game.displayDialogLine('Ви', 'Ні, в мене ще багато сил!', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Тоді останній на сьогодні шифр - шифр Атбаш.\
+        Це простий шифр підстановки для алфавітного письма. Правило шифрування полягає в заміні i-й літери\
+        алфавіту буквою з номером n - i + 1, де n - число букв в алфавіті. Зашифруй наступне слово за допогою шифру Атбаш.', 
+        () => this.next());
+        yield;
+        
+        this.teacherDisappears(function() {
+            context.clearInputCells();
+            context.generateWord(3, function() {
+                context.teacherAppears('Адам Вікторович', 'Молодець, я в тобі і не сумнівався.\
+                Сподіваюсь, що цей матеріал допоможе тобі зробити безпечну систему зберігання паролів.\
+                Використовуй його з розумом!');
+            });
+        });
+        yield;
+
+        this.game.displayDialogLine('Ви', 'Дуже Вам дякую! Після цих вправ мені вже не терпить\
+        попрацювати!', 
+        () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Адам Вікторович', 'Завжди радий допомогти!', 
+        () => this.next());
+        yield;
+
+        this.teacherDisappears(function() {
+            context.warning.text = 'Відмінна робота! Ти ознайомився з основними видам алгоритмів шифрування та\
+            маєш можливість самостійно обрати для себе найкращий!'
+            context.toggleWarning(1, function() {
+                context.toggleWarning(0, function() {
+                    context.game.camera.fade(0x000000, 1500, true);
+                    setTimeout(() => context.game.nextState(), 1500); 
+                }, 0);
+            }, 3000);
+        });
     }
 
     init() {
@@ -89,6 +226,7 @@ export default class CryptoState extends Phaser.State {
     }
 
     preload() {
+        this.load.image('cathedra', './assets/images/crypto/cathedra.png');
         this.load.image('machine', './assets/images/crypto/background.png');
         this.load.image('teacher', './assets/images/crypto/teacher.png');
         this.load.image('input', './assets/images/crypto/input.png');
@@ -125,19 +263,12 @@ export default class CryptoState extends Phaser.State {
     }
 
     create() {
-        this.game.add.image(0, 0, 'machine');
-        this.teacher = this.game.add.image(1400, 0, 'teacher');
-        this.teacher.alpha = 0;
-
-        this.warning = { 
-            sprite: this.game.add.sprite(0, 0, 'warning'),
-            text: this.game.add.text(50, 50, 'Слідуючи алгоритму, введіть\nшифр за допомогою миші або\nклавіатури', {
-                fontSize: 30,
-                font: 'Pangolin',
-            })
-        }
-        smartSetHeight(this.warning.sprite, 200);
-        this.warning.sprite.alpha = this.warning.text.alpha = 0;
+        this.cathedra = this.game.add.image(0, 0, 'cathedra');
+        this.cathedra.height = this.game.width * this.cathedra.height / this.cathedra.width;
+        this.cathedra.width = this.game.width;
+        this.cathedra.alpha = 1;
+        this.machine = this.game.add.image(0, 0, 'machine');
+        this.machine.alpha = 0;
 
         this.keyWidth = this.game.cache.getImage('A').width;
         this.keyHeight = this.game.cache.getImage('A').height;
@@ -147,6 +278,37 @@ export default class CryptoState extends Phaser.State {
         this.random = new Phaser.RandomDataGenerator([Date.now()]);
 
         this.keyBoard = this.game.add.group();
+
+        this.stage.disableVisibilityChange = true;
+
+        this.game.input.keyboard.addCallbacks(this, null, null, this.keyPressed);
+
+        this.next();
+    }
+
+    toggleWarning(visibility, callFunc, timeout) {
+        this.game.add.tween(this.warning.sprite).to({
+            alpha: visibility
+        }, 1500, Phaser.Easing.Cubic.InOut).start(); 
+        this.game.add.tween(this.warning.text).to({
+            alpha: visibility
+        }, 1500, Phaser.Easing.Cubic.InOut).start().onComplete.add(() => {
+            if(callFunc !== null) {
+                if(timeout !== 0) {
+                    setTimeout(() => {
+                        callFunc();
+                    }, timeout);
+                }
+                else callFunc();
+            }
+        });
+
+    }
+
+    generateStage() {
+        this.teacher = this.game.add.image(1400, 0, 'teacher');
+        this.teacher.alpha = 0;
+
         this.field = {
             sprite: this.game.add.sprite(FIELD_OFFSET_HOR, FIELD_OFFSET_VER, 'field'),
             text: this.game.add.text(FIELD_TEXT_OFFSET_HOR, FIELD_TEXT_OFFSET_VER, '', {
@@ -156,15 +318,19 @@ export default class CryptoState extends Phaser.State {
             mark: null
         }
 
+        this.warning = { 
+            sprite: this.game.add.sprite(600, 0, 'warning'),
+            text: this.game.add.text(650, 50, 'Слідуючи алгоритму, введіть\nшифр за допомогою миші або\nклавіатури', {
+                fontSize: 30,
+                font: 'Pangolin',
+            })
+        }
+        smartSetHeight(this.warning.sprite, 200);
+        this.warning.sprite.alpha = this.warning.text.alpha = 0;
+
         this.input = new CryptoInput(CELL_OFFSET_HOR, CELL_OFFSET_VER, this.game);
 
         this.initSymbols();
-
-        this.stage.disableVisibilityChange = true;
-
-        this.game.input.keyboard.addCallbacks(this, null, null, this.keyPressed);
-
-        this.next();
     }
 
     generateKey(algNum) {
@@ -204,6 +370,7 @@ export default class CryptoState extends Phaser.State {
                 answer += member.value;
             });
             if(answer === this.input.word) {
+                this.input.disableInput = true;
                 this.destroyFieldMark();
                 mark = 'ok';
                 setTimeout(callback, 100);
@@ -213,12 +380,12 @@ export default class CryptoState extends Phaser.State {
         };
     }
 
-    teacherAppears(text) {
+    teacherAppears(author, text) {
         this.input.disableInput = true;
         this.game.add.tween(this.teacher).to({
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut).start().onComplete.add(() => {
-            this.game.displayDialogLine('Препод', text, () => this.next());
+            if(text !== '') this.game.displayDialogLine(author, text, () => this.next());
         });
     }
 
