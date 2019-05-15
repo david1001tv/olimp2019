@@ -34,7 +34,8 @@ import CardsState from './states/SecondStage/Cards';
 //Квест 7 "Магистратура" +
 import MagistracyState from './states/SecondStage/Magistracy';
 //Квест 8 "Криптография" - 
-//Квест 9 "Робот" - 
+//Квест 9 "Робот" +
+import RobotState from './states/SecondStage/Robot';
 //Аутро 10 "Диплом магистра"
 import OutroState from './states/SecondStage/Outro';
 
@@ -44,8 +45,13 @@ import TransitionToThirdStageState from './states/SecondStage/TransitionToThirdS
 //Этап 3
 //Квест 1 "Лабиринт" +
 import LabyrinthState from './states/ThirdStage/Labyrinth';
+//Сцена 2 "Собеседование программист" +
 import FirstInterviewState from './states/ThirdStage/FirstInterview';
-//Квест 2 "Кроссворд" +
+//Сцена 3 "Собеседование дизайнер" +
+import SecondInterviewState from './states/ThirdStage/SecondInterview';
+//Сцена 4 "Собеседование комп. сети" +
+import ThirdInterviewState from './states/ThirdStage/ThirdInterview';
+//Квест 5 "Кроссворд" +
 import CrossState from './states/ThirdStage/Cross';
 
 //Этап 4
@@ -74,7 +80,7 @@ class Game extends Phaser.Game {
         this.state.add('Boot', BootState, false);
         
         /*
-        //Stage 1
+        //Stage 1 +
         //Intro +
         this.state.add('Intro', IntroState, false);
         //PostIntro +
@@ -82,7 +88,7 @@ class Game extends Phaser.Game {
         //Questions +
         this.state.add('Questions', QuestionsState, false);
 
-        //Stage 2
+        //Stage 2 -
         //Schedule +
         this.state.add("Shedule", ScheduleState, false);
         //Fillword +
@@ -99,17 +105,20 @@ class Game extends Phaser.Game {
         this.state.add("Magistracy", MagistracyState, false);
         //Cryptographic -
         //Robot -
+
         //Outro +
         this.state.add("Outro", OutroState, false);
 
-        //Stage 3
+        //Stage 3 +
         //Labyrinth 
         this.state.add('Labyrinth', LabyrinthState, false);
-        
+        this.state.add('FirstInterview', FirstInterviewState, false);
+        this.state.add('SecondInterview', SecondInterviewState, false);
+        this.state.add('ThirdInterview', ThirdInterviewState, false);
         //Crossword +
         this.state.add('Cross', CrossState, false);
 
-        //Stage 4
+        //Stage 4 -
         //FindItems -
         //ThreeInARow -
         //TestingAndDebugging -
@@ -117,8 +126,8 @@ class Game extends Phaser.Game {
         
         this.state.add('Final', new Phaser.State(), false);
         */
-        
-        this.state.add('Intro', FirstInterviewState, false);
+
+        this.state.add('Intro', RobotState, false);
 
 
 

@@ -3,17 +3,17 @@ import {smartSetHeight, smartSetWidth} from '../../utils';
 import SSF from '../../states/SecondStageFunctions';
 
 
-export default class FirstInterviewState extends Phaser.State {
+export default class SecondInterviewState extends Phaser.State {
     * gen() {
         this.game.input.enabled = false;
         this.game.camera.flash(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.displayDialogLine('Голос', 'Ви увійшли до кабінету та привітались з його господарем.  Людина, що займала крісло керівника відділу розробки, була стриманою, ввічливою і відчуженою. Ви не могли позбутися незатишного відчуття та нервувалися', () => this.next());
+        this.game.displayDialogLine('Голос', 'Цей кабінет з порога вдихнув у Вас життя і квітуче натхнення. Так що до крісла перед роботодавцем Ви сідали повні рішучості й нетерпіння. До Вас ставилися з повагою і симпатією, запропонували чашку чаю і ввічливо запитали про погоду', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Взяти себе в руки та правильно відповідати на запитання було дуже важко', () => this.next());
+        this.game.displayDialogLine('Голос', ' Посміхаючись, Ви надали роботодавцю разом з резюме портфоліо своїх найкращих графічних робіт. І почалась співбесіда...', () => this.next());
         yield;
 
         this.game.add.tween(this.employer).to({
@@ -21,10 +21,10 @@ export default class FirstInterviewState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        this.game.displayDialogLine('Роботодавець', 'Як Ви уявляєте свій ідеальний робочий день?', () => this.next());
+        this.game.displayDialogLine('Роботодавець', 'Що ви будете робити, якщо у вас залишилася одна задача, або взагалі не залишиться?', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Ідеальний? О, Вам було що на це відповісти...', () => this.next());
+        this.game.displayDialogLine('Голос', 'Навчені досвідом, Ви задумалися над питанням. Напевно, роботодавець хоче з\'ясувати, чи візьмете Ви собі додаткову роботу', () => this.next());
         yield;
 
         this.game.add.tween(this.employer).to({
@@ -46,77 +46,92 @@ export default class FirstInterviewState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        if (this.firstAnswer == 1) {
-            this.game.displayDialogLine('Роботодавець', 'Роботодавець дивно на Вас подивився та потім посміхнувся', () => this.next());
-        }
-        else {
-            this.game.displayDialogLine('Роботодавець', 'Роботодавець поважно хитнув головою, мов щось вирішив для себе', () => this.next());
-        }
-        yield;
-        
-
-        this.game.displayDialogLine('Голос', 'Ви раптом збагнули, що завдяки цьому питанню можна було зрозуміти, які завдання цікаві і пріоритетні Вам, скільки часу Ви відводите на роботу і відпочинок протягом дня...', () => this.next());
+        this.game.displayDialogLine('Роботодавець', 'Роботодавець вислухавши Вашу відповідь, щось записав собі до блокноту', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Роботодавець', 'Чому ви хочете почати кар\'єру в сфері ІТ', () => this.next());
+        this.game.displayDialogLine('Голос', 'Вас запитали за Ваш процес створення дизайну, попрохали розповісти про методи, які Ви використовуєте', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'На сей раз Ви відразу здогадалися, що мета цього питання - прояснити Вашу мотивацію, бажання і готовність розвиватися в обраній професії. Тож відповіли Ви, обмірковуючи кожне слово та отримали вже більш зацікавлений погляд', () => this.next());
+        this.game.displayDialogLine('Голос', 'Ви подумки відзначили, що він намагається з\'ясувати, які Ви на ділі. Треба бути обачливими', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Роботодавець', 'Що ви зазвичай робите, коли розумієте, що не встигаєте щось зробити (занадто багато завдань)?', () => this.next());
-        yield;
-
-        this.game.add.tween(this.employer).to({
-                alpha: 0
-            }, 1500, Phaser.Easing.Cubic.InOut)
-                .start();
-
-        this.buttonSecond_top.inputEnabled = true;
-        this.buttonSecond_top.alpha = 1;
-        this.selectSecond_top.alpha = 1;
-        
-        this.buttonSecond_bottom.inputEnabled = true;
-        this.buttonSecond_bottom.alpha = 1;
-        this.selectSecond_bottom.alpha = 1;
-        yield;
-
-        this.game.add.tween(this.employer).to({
-                alpha: 1
-            }, 1500, Phaser.Easing.Cubic.InOut)
-                .start();
-        
-        this.game.displayDialogLine('Роботодавець', 'За відповіддю, а саме за способом вирішення цієї проблеми я можу багато про що судити. Якщо людина бере на себе всі завдання, то він швидше за все не командний гравець, такий собі герой-одиночка', () => this.next());
-        yield;
-
-        this.game.displayDialogLine('Роботодавець', 'Якщо людина звернеться до менеджера з питання пріоритетності завдань і додаткових ресурсів, то він раціональний, проактивний і швидше за все буде рости', () => this.next());
-        yield;
-
-        this.game.displayDialogLine('Голос', 'Ви похитали у відповідь, як кожна розумна людина. Співбесіда підходила до кінця, і Вас запитали за Ваші досягнення', () => this.next());
-        yield;
-        
         this.game.add.tween(this.employer).to({
             alpha: 0
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
         if ( this.ConfStatus == 1) {
+            this.buttonSecond_top.inputEnabled = true;
+            this.buttonSecond_top.alpha = 1;
+            this.selectSecond_top.alpha = 1; 
+            }
+
+        else {
+            this.buttonSecond_top.inputEnabled = false;
+            this.buttonSecond_top.alpha = 0.5;
+            this.selectSecond_top.alpha = 0.5; 
+            }
+      
+        this.buttonSecond_bottom.inputEnabled = true;
+        this.buttonSecond_bottom.alpha = 1;
+        this.selectSecond_bottom.alpha = 1;
+        yield;
+
+        this.game.add.tween(this.employer).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+        
+        if (this.secondAnswer == 0){
+            this.game.displayDialogLine('Роботодавець', 'Було б непогано, якби Ви розповіли про підхід, орієнтований на користувача. Ще більш ефективно було б показати це в рамках конкретного проекту. Шкода, що у Вас не було досвіду', () => this.next());
+        }
+        else {
+            this.game.displayDialogLine('Роботодавець', 'Не бійтеся того, що Ваш процес відрізняється від методів роботи інших дизайнерів. Головне - Ви показали логічне обгрунтування того, чому Ви вирішили саме так виконати завдання. Це гідна відповідь. Дякую', () => this.next());
+        }
+        yield;
+
+        this.game.displayDialogLine('Роботодавець', 'Як Ви працюєте з іншими дизайнерами, програмістами, керівниками проектів?', () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Голос', 'Ага! Він намагається з\'ясувати, чи вписуєтися Ви до культури компанії, хоче зрозуміти Ваш стиль роботи', () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Голос', '*Набувши серйозного вигляду, Ви офіційним тоном відповіли...*', () => this.next());
+        yield;
+
+        this.game.add.tween(this.employer).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
         this.buttonThird_top.inputEnabled = true;
         this.buttonThird_top.alpha = 1;
         this.selectThird_top.alpha = 1; 
-        }
-        else {
-        this.buttonThird_top.inputEnabled = false;
-        this.buttonThird_top.alpha = 0.5;
-        this.selectThird_top.alpha = 0.5; 
-        }
   
         this.buttonThird_bottom.inputEnabled = true;
         this.buttonThird_bottom.alpha = 1;
         this.selectThird_bottom.alpha = 1;
         yield;
-       
-        this.game.displayDialogLine('Голос', 'За результатами співбесіди Вам запропонували декілька варіантів працевлаштування, кожний із своїми вимогами, деякі з котрих залежали від обраних Вами важливих та неважливих дисциплін під час навчання в університеті. Тож деякі вакансії були Вам недоступні через нестачу знань', () => this.next());
+
+        this.game.add.tween(this.employer).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
+        if (this.thirdAnswer == 1){
+            this.game.displayDialogLine('Роботодавець', 'Добре, що Ви знаєте, як ефективно повідомляти про свої рішення всій команді', () => this.next());
+        }
+        else {
+            this.game.displayDialogLine('Роботодавець', 'Майте на увазі, що кожен член команди, ймовірно, бачить проект зі своєї точки зору. Однак Вам потрібно вміти спілкуватися з усіма, щоб швидко запобігти будь-які проблеми чи непорозуміння', () => this.next());
+        }
+        yield;
+
+        this.game.add.tween(this.employer).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
+        this.game.displayDialogLine('Голос', 'Співбесіда добігала кінця. Ви розповіли про проект, яким пишаєтися найбільше, коли роботодавець намагався з\'ясувати Ваші сильні і слабкі сторони. Вам запропонували пройти швидкий тест на логіку та ерудицію, після чого надали на вибір наступні вакансії*', () => this.next());
         yield;
 
         this.game.add.tween(this.bg2).to({
@@ -175,7 +190,7 @@ export default class FirstInterviewState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
         .start();
                
-        this.game.displayDialogLine('Голос', 'Перша співбесіда залишила незабутні враження, але Ви ще не були впевнені, що саме ця посада заслуговує на Вас. То ж вирушили до наступного кабінету', () => this.next());
+        this.game.displayDialogLine('Голос', 'Цей досвід співбесіди був корисним. Залишилося навідатися ще до одного кабінету', () => this.next());
         yield;
 
         this.game.camera.fade(0x000000, 1500, true);
@@ -198,17 +213,17 @@ export default class FirstInterviewState extends Phaser.State {
 
     preload() {
 
-        this.load.image('bg', './assets/images/3-1-1 (FirstInterview)/backgorund.png');
-        this.load.image('bg2', './assets/images/3-1-1 (FirstInterview)/backgorund2.png');
-        this.load.image('employer', './assets/images/3-1-1 (FirstInterview)/employer.png');
+        this.load.image('bg', './assets/images/3-1-2 (SecondInterview)/backgorund.png');
+        this.load.image('bg2', './assets/images/3-1-2 (SecondInterview)/backgorund2.png');
+        this.load.image('employer', './assets/images/3-1-2 (SecondInterview)/employer.png');
 
-        this.load.spritesheet('button_top', './assets/images/3-1-1 (FirstInterview)/Button_Choice_On_Blue.png', 610, 122);
-        this.load.spritesheet('button_bottom', './assets/images/3-1-1 (FirstInterview)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_top', './assets/images/3-1-2 (SecondInterview)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_bottom', './assets/images/3-1-2 (SecondInterview)/Button_Choice_On_Blue.png', 610, 122);
 
-        this.load.image('vac1', './assets/images/3-1-1 (FirstInterview)/vac1.png');
-        this.load.image('vac2', './assets/images/3-1-1 (FirstInterview)/vac2.png');
-        this.load.image('vac3', './assets/images/3-1-1 (FirstInterview)/vac3.png');
-        this.load.image('vac4', './assets/images/3-1-1 (FirstInterview)/vac4.png');
+        this.load.image('vac1', './assets/images/3-1-2 (SecondInterview)/vac1.png');
+        this.load.image('vac2', './assets/images/3-1-2 (SecondInterview)/vac2.png');
+        this.load.image('vac3', './assets/images/3-1-2 (SecondInterview)/vac3.png');
+        this.load.image('vac4', './assets/images/3-1-2 (SecondInterview)/vac4.png');
 
     }
 
@@ -228,13 +243,12 @@ export default class FirstInterviewState extends Phaser.State {
         bg2.alpha = 0;
         this.bg2 = bg2;
 
-        this.employer = this.SSF.makeImg(1260, 50, 'employer', 700, 900);
+        this.employer = this.SSF.makeImg(1220, 50, 'employer', 700, 900);
 
         this.vac1 = this.SSF.makeImg(660, 50, 'vac1', 600, 800);
         this.vac2 = this.SSF.makeImg(660, 50, 'vac2', 600, 800);
         this.vac3 = this.SSF.makeImg(660, 50, 'vac3', 600, 800);
         this.vac4 = this.SSF.makeImg(660, 50, 'vac4', 600, 800);
-
 
         //Вопрос 1
         let buttonFirst_top = this.game.add.button(656, 300, 'button_top', this.firstSelection, this, 1, 1, 0);
@@ -247,7 +261,7 @@ export default class FirstInterviewState extends Phaser.State {
         buttonFirst_bottom.alpha = 0;
         this.buttonFirst_bottom = buttonFirst_bottom;
 
-        this.selectFirst_top = this.game.add.text(750, 325, 'У відрядженні в Нью-Йорку', {
+        this.selectFirst_top = this.game.add.text(715, 330, 'Зізнатися, що у Вас є вільний час', {
             font: "Leftonade",
             fontSize: 40,
             fill: 'white',
@@ -256,9 +270,9 @@ export default class FirstInterviewState extends Phaser.State {
         });
         this.selectFirst_top.alpha = 0; 
 
-        this.selectFirst_bottom = this.game.add.text(700, 685, 'Вирішуючи завдання складного проекту', {
+        this.selectFirst_bottom = this.game.add.text(730, 680, 'Займатися самонавчанням', {
             font: "Leftonade",
-            fontSize: 35,
+            fontSize: 45,
             fill: 'white',
             stroke: 'black',
             strokeThickness: 8,
@@ -276,18 +290,18 @@ export default class FirstInterviewState extends Phaser.State {
         buttonSecond_bottom.alpha = 0;
         this.buttonSecond_bottom = buttonSecond_bottom;
 
-        this.selectSecond_top = this.game.add.text(820, 325, 'Беру все на себе', {
+        this.selectSecond_top = this.game.add.text(780, 310, 'Показати, як Ви працювали\nнад проектами в минулому', {
             font: "Leftonade",
-            fontSize: 45,
+            fontSize: 35,
             fill: 'white',
             stroke: 'black',
             strokeThickness: 8,
         });
         this.selectSecond_top.alpha = 0; 
 
-        this.selectSecond_bottom = this.game.add.text(760, 675, 'Звернуся до менеджеру', {
+        this.selectSecond_bottom = this.game.add.text(780, 655, 'Описати потенційний підхід\nдо типового проекту', {
             font: "Leftonade",
-            fontSize: 45,
+            fontSize: 35,
             fill: 'white',
             stroke: 'black',
             strokeThickness: 8,
@@ -305,18 +319,18 @@ export default class FirstInterviewState extends Phaser.State {
         buttonThird_bottom.alpha = 0;
         this.buttonThird_bottom = buttonThird_bottom;
 
-        this.selectThird_top = this.game.add.text(775, 325, 'Наукова конференція', {
+        this.selectThird_top = this.game.add.text(705, 330, 'Дизайн - це командний вид спорту', {
             font: "Leftonade",
-            fontSize: 45,
+            fontSize: 40,
             fill: 'white',
             stroke: 'black',
             strokeThickness: 8,
         });
         this.selectThird_top.alpha = 0; 
 
-        this.selectThird_bottom = this.game.add.text(690, 675, 'Я вчився, а не брав участь у конкурсах', {
+        this.selectThird_bottom = this.game.add.text(705, 675, 'Моя точка зору найголовніша!', {
             font: "Leftonade",
-            fontSize: 38,
+            fontSize: 45,
             fill: 'white',
             stroke: 'black',
             strokeThickness: 8,
