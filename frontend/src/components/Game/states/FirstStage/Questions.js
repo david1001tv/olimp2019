@@ -50,8 +50,7 @@ export default class QuestionsState extends Phaser.State {
                 alpha: 1
             }, 1500, Phaser.Easing.Cubic.InOut)
                 .start();
-
-
+                
         if (this.friend == 0){
             this.game.displayDialogLine('Голос', 'Здається, Ви знаєте, кто така Стильна', () => this.next());
             yield;
