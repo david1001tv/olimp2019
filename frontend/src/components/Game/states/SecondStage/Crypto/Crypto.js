@@ -336,7 +336,7 @@ export default class CryptoState extends Phaser.State {
     generateKey(algNum) {
         switch(algNum) {
             case 1: {
-                this.currentKey = this.random.integerInRange(0, (ALPHABET_END - ALPHABET_BEGIN));
+                this.currentKey = this.random.integerInRange(1, (ALPHABET_END - ALPHABET_BEGIN));
                 break;
             }
             case 2: {
