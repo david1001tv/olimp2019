@@ -215,16 +215,16 @@ export default class CryptoState extends Phaser.State {
                 context.toggleWarning(0, function() {
                     context.game.camera.fade(0x000000, 1500, true);
                     setTimeout(() => {
-                        if (this.mistakes <= 2){
-                            this.score = 100;
+                        if (context.mistakes <= 2){
+                            context.score = 100;
                         }
-                        else if (this.mistakes <= 5){
-                            this.score = 50;
+                        else if (context.mistakes <= 5){
+                            context.score = 50;
                         }
                         else {
-                            this.score = 10; 
+                            context.score = 10; 
                         }
-                        context.game.nextState(this.score);
+                        context.game.nextState(context.score);
                     }, 1500); 
                 }, 0);
             }, 3000);
@@ -331,7 +331,7 @@ export default class CryptoState extends Phaser.State {
             sprite: this.game.add.sprite(FIELD_OFFSET_HOR, FIELD_OFFSET_VER, 'field'),
             text: this.game.add.text(FIELD_TEXT_OFFSET_HOR, FIELD_TEXT_OFFSET_VER, '', {
                 fontSize: FIELD_TEXT_FONT_SIZE,
-                font: 'Pangolin',
+                font: 'Leftonade',
             }),
             mark: null
         }
@@ -340,7 +340,7 @@ export default class CryptoState extends Phaser.State {
             sprite: this.game.add.sprite(600, 0, 'warning'),
             text: this.game.add.text(650, 50, 'Слідуючи алгоритму, введіть\nшифр за допомогою миші або\nклавіатури', {
                 fontSize: 30,
-                font: 'Pangolin',
+                font: 'Leftonade',
             })
         }
         smartSetHeight(this.warning.sprite, 200);
