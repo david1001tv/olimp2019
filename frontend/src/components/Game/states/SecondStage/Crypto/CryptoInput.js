@@ -23,7 +23,7 @@ export default class CryptoInput {
                 sprite: this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'input'),
                 text: this.game.add.text(x + 10 + (CELL_WIDTH + CELL_PADDING) * i, y, '', {
                     fontSize: 40,
-                    font: 'Leftonade',
+                    font: 'Pangolin',
                 }),
                 index: i,
                 value: ''
@@ -47,7 +47,6 @@ export default class CryptoInput {
 
     @autobind
     handleKeyDown(e) {
-        console.log(e.key);
         this.isDeleteLetter(e.keyCode);
         if(this.disableInput)
             return;

@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import {smartSetHeight} from '../../../utils';
-import SSF from '../../../states/SecondStageFunctions';
 import CryptoInput from './CryptoInput';
+import SSF from '../../../states/SecondStageFunctions';
 
 const keyBoardTemplate = [
     ['Q','W','E','R','T','Z','U','I','O'],
@@ -264,11 +264,6 @@ export default class CryptoState extends Phaser.State {
     }
 
     create() {
-        this.SSF = {...SSF};
-        for (let key in this.SSF) {
-            this.SSF[key] = this.SSF[key].bind(this);
-        }
-
         this.cathedra = this.game.add.image(0, 0, 'cathedra');
         this.cathedra.height = this.game.width * this.cathedra.height / this.cathedra.width;
         this.cathedra.width = this.game.width;
@@ -318,7 +313,7 @@ export default class CryptoState extends Phaser.State {
             sprite: this.game.add.sprite(FIELD_OFFSET_HOR, FIELD_OFFSET_VER, 'field'),
             text: this.game.add.text(FIELD_TEXT_OFFSET_HOR, FIELD_TEXT_OFFSET_VER, '', {
                 fontSize: FIELD_TEXT_FONT_SIZE,
-                font: 'Leftonade',
+                font: 'Pangolin',
             }),
             mark: null
         }
@@ -327,7 +322,7 @@ export default class CryptoState extends Phaser.State {
             sprite: this.game.add.sprite(600, 0, 'warning'),
             text: this.game.add.text(650, 50, 'Слідуючи алгоритму, введіть\nшифр за допомогою миші або\nклавіатури', {
                 fontSize: 30,
-                font: 'Leftonade',
+                font: 'Pangolin',
             })
         }
         smartSetHeight(this.warning.sprite, 200);
@@ -412,7 +407,7 @@ export default class CryptoState extends Phaser.State {
         for (var i = 0; i < str.length; i++) {
             charcode = (str[i].charCodeAt()) + num;
             if(charcode > ALPHABET_END) {
-                var offset = charcode - ALPHABET_END;
+                var offset = charcode - ALPHABET_END - 1;
                 charcode = ALPHABET_BEGIN + offset;
             }
             result += String.fromCharCode(charcode);
