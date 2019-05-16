@@ -304,7 +304,7 @@ export default class WWHState extends Phaser.State {
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
         let choices = this.game.getChoice();
         choices.then(res => {
-            this.friend = res.choice.friend;
+            this.friend = res.friend;
         });
     }
 

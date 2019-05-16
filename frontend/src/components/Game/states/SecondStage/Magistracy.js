@@ -1,4 +1,4 @@
-    import Phaser from 'phaser';
+import Phaser from 'phaser';
 import {smartSetHeight, smartSetWidth} from '../../utils';
 import todos from '../../todos/Scanner';
 import SSF from '../../states/SecondStageFunctions';
@@ -309,6 +309,11 @@ export default class Scanner extends Phaser.State {
         });
         this.score /= 10;
 
+        let me = this.game.getMe();
+        me.then(res => {
+            this.me = res;
+        });
+
         this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);
         this.game.phone.setEnabled(false);
@@ -318,7 +323,6 @@ export default class Scanner extends Phaser.State {
     }
 
     preload() {
-
         this.load.image('bg', './assets/images/2-7 (Magistracy)/background.png');
         this.load.image('bg2', './assets/images/2-7 (Magistracy)/background2.png');
         this.load.image('teacher', './assets/images/2-7 (Magistracy)/teacher.png');
@@ -331,7 +335,6 @@ export default class Scanner extends Phaser.State {
         
         this.load.image('bachelor_blue', './assets/images/2-7 (Magistracy)/bachelor_blue.png');
         this.load.image('bachelor_red', './assets/images/2-7 (Magistracy)/bachelor_red.png');
-
     }
 
     create() {

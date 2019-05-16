@@ -32,9 +32,7 @@ router.post('/', async function (req, res) {
             choice.save();
         }
 
-        res.status(200).send({
-            choice
-        });
+        res.status(200).send(choice);
     } catch (e) {
         console.error(e);
         res.status(500).send();
@@ -49,9 +47,7 @@ router.get('/', async function (req, res) {
             }
         });
 
-        res.status(200).send({
-            choice
-        });
+        res.status(200).send(choice);
     } catch (e) {
         console.error(e);
         res.status(500).send();

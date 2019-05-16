@@ -40,6 +40,7 @@ app.use('/api/feedback', require('./routes/feedback'));
 app.use('/api/report', require('./routes/report'));
 app.use('/api/subjects', require('./routes/subjects'));
 app.use('/api/choice', require('./routes/choice'));
+app.use('/api/me', require('./routes/me'));
 
 /**
  * Start Express server.
