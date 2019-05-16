@@ -293,11 +293,18 @@ export default class QuestionsState extends Phaser.State {
         this.score = 0;
 
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
+<<<<<<< HEAD
         // let choices = this.game.getChoice();
         // choices.then(res => {
         //     this.friend = res.choice.friend;
         // });
         this.friend = 0;
+=======
+        let choices = this.game.getChoice();
+        choices.then(res => {
+            this.friend = res.friend;
+        });
+>>>>>>> bead728328b67452187f8976d57a95360a2fd538
     }
 
     preload() {

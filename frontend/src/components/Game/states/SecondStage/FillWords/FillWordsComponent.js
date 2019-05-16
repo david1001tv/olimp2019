@@ -230,7 +230,6 @@ export default class FillWordsComponent {
                         .start();
                     if (!words.length) {
                         let score = 0;
-                        console.log(this.count - this.wordsCount);
                         switch (true) {
                             case (this.count - this.wordsCount) < 20:
                                 score = 100;

@@ -429,7 +429,6 @@ export default class PostIntroState extends Phaser.State {
     }
 
     firstQuest(obj) {
-        console.log(obj);
         if (obj.key == 'button_blue_on'){
             this.firstAnswer = 'Girl';
             this.game.saveChoice(false);

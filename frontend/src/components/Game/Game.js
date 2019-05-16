@@ -185,6 +185,10 @@ class Game extends Phaser.Game {
         return progressManager.getHistory();
     }
 
+    getMa() {
+        return progressManager.getMe();
+    }
+
     @autobind
     startState(stateKey, isReplaying = false) {
         this.isReplaying = isReplaying;

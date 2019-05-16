@@ -204,7 +204,7 @@ export default class ScheduleState extends Phaser.State {
 
         let choices = this.game.getChoice();
         choices.then(res => {
-            this.friend = res.choice.friend;
+            this.friend = res.friend;
         });
     }
 

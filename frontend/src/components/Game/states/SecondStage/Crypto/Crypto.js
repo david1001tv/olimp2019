@@ -429,7 +429,6 @@ export default class CryptoState extends Phaser.State {
             }
             result += String.fromCharCode(charcode);
         }
-        console.log(result)
         return result;
     }
 
@@ -443,7 +442,6 @@ export default class CryptoState extends Phaser.State {
             num = (key[i].charCodeAt()) - ALPHABET_BEGIN;
             result += this.caesarCipher(str[i], num)
         }
-        console.log(result)
         return result;
     }
 
@@ -457,7 +455,6 @@ export default class CryptoState extends Phaser.State {
             num = (ALPHABET_END - ALPHABET_BEGIN) - (str[i].charCodeAt() - ALPHABET_BEGIN);
             result += this.caesarCipher(String.fromCharCode(ALPHABET_BEGIN), num);
         }
-        console.log(result);
         return result;
     }
 

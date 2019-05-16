@@ -1,4 +1,4 @@
-    import Phaser from 'phaser';
+import Phaser from 'phaser';
 import {smartSetHeight, smartSetWidth} from '../../utils';
 import todos from '../../todos/Scanner';
 import SSF from '../../states/SecondStageFunctions';
@@ -300,9 +300,10 @@ export default class Scanner extends Phaser.State {
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
         let choices = this.game.getChoice();
         choices.then(res => {
-            this.friend = res.choice.friend;
+            this.friend = res.friend;
         });
 
+<<<<<<< HEAD
         // let history = this.game.getHistory();
         // history.then(res => {
         //     this.history = res;
@@ -317,6 +318,21 @@ export default class Scanner extends Phaser.State {
 
         //Максимум 600 балов, если все средне сдавал - 300, если плохо - 60
         this.score = 600;
+=======
+        let history = this.game.getHistory();
+        history.then(res => {
+            res.forEach(state => {
+                if (state.score) {
+                    this.score += state.score;
+                }
+            });
+        });
+
+        let me = this.game.getMe();
+        me.then(res => {
+            this.me = res;
+        });
+>>>>>>> bead728328b67452187f8976d57a95360a2fd538
 
         this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);
@@ -327,7 +343,6 @@ export default class Scanner extends Phaser.State {
     }
 
     preload() {
-
         this.load.image('bg', './assets/images/2-7 (Magistracy)/background.png');
         this.load.image('bg2', './assets/images/2-7 (Magistracy)/background2.png');
         this.load.image('teacher', './assets/images/2-7 (Magistracy)/teacher.png');
@@ -340,7 +355,6 @@ export default class Scanner extends Phaser.State {
         
         this.load.image('bachelor_blue', './assets/images/2-7 (Magistracy)/bachelor_blue.png');
         this.load.image('bachelor_red', './assets/images/2-7 (Magistracy)/bachelor_red.png');
-
     }
 
     create() {
