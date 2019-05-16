@@ -23,6 +23,7 @@ class Map extends Component {
 
     @autobind
     handleClick(key, status) {
+        console.log(key, status);
         let isReplaying = status === COMPLETED;
         this.props.onSelect(key, isReplaying);
     }
@@ -79,8 +80,8 @@ class Map extends Component {
                 </div>
                 <Checkpoint
                     left="24%"
-                    top="25%"
-                    type={FLAG}
+                    top="34%"
+                    type={CHECKPOINT}
                     state="Schedule"
                     onClick={this.handleClick}
                     popoverText="Етап 2"
@@ -163,8 +164,8 @@ class Map extends Component {
                 </div>
                 <Checkpoint
                     left="56%"
-                    top="75%"
-                    type={FLAG}
+                    top="79%"
+                    type={CHECKPOINT}
                     state="Labyrinth"
                     onClick={this.handleClick}
                     popoverText="Етап 3"
@@ -207,8 +208,8 @@ class Map extends Component {
                 </div>
                 <Checkpoint
                     left="80%"
-                    top="45%"
-                    type={FLAG}
+                    top="48%"
+                    type={CHECKPOINT}
                     state="Conference"
                     onClick={this.handleClick}
                     popoverText="Етап 4"
@@ -230,8 +231,8 @@ class Map extends Component {
                     popoverText="Тестування"
                 />
                 <Checkpoint
-                    left="94%"
-                    top="24%"
+                    left="92%"
+                    top="20%"
                     type={FINISH}
                     state="End"
                     onClick={this.handleClick}

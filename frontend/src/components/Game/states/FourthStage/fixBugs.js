@@ -46,15 +46,8 @@ export default class testGame extends Phaser.State {
         });
 
         this.game.setfixBugsEnabled(true);
-        // таймер
-        this.goTimer = setTimeout(() => this.checkRate(), this.time);
-        this.timer = setInterval(() => this.checkTime(), 1000);
         yield;
         this.game.setfixBugsEnabled(false);
-        this.timerText.alpha = 0;
-        // игра
-        // конец
-        // this.game.setfixBugsEnabled(false);
 
         this.game.displayDialogLine('Голос', 'Підійшов час здавати проект. Все, що могли, Ви зробили', () => this.next());
         yield;
@@ -77,7 +70,7 @@ export default class testGame extends Phaser.State {
     }
 
     init() {
-        this.time = 7 * 60 * 1000; // таймер
+        this.game.phone.setEnabled(true);
         this._gen = this.gen();
 
     }
@@ -94,14 +87,6 @@ export default class testGame extends Phaser.State {
         bg.width = this.game.width;
         this.flag_kiy = false;
         this.flagBackspace = false;
-
-        this.timerText = this.game.add.text(50, 32, '', {
-            font: "Pangolin",
-            fontSize: 70,
-            fill: 'white',
-            stroke: 'black',
-            strokeThickness: 8,
-        });
 
         let warning = this.game.add.image(700, 0, 'warning_message');
         warning.alpha = 0;
@@ -120,24 +105,7 @@ export default class testGame extends Phaser.State {
         this.next();
     }
 
-    checkRate() {
-        this.rate = this.minPoints;
-        this.next();
-    }
-
-    checkTime() {
-        function leadingZero(number) {
-            return number >= 10 ? number.toString() : '0' + number;
-        }
-
-        this.time -= 1000;
-        let minutes = Math.floor(this.time / (60 * 1000));
-        let seconds = this.time / 1000 - minutes * 60;
-        this.timerText.setText(`${leadingZero(minutes)}:${leadingZero(seconds)}`);
-    }
-
     shutdown() {
-        clearTimeout(this.goTimer);
         PubSub.unsubscribe(this.token);
     }
     next() {

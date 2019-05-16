@@ -15,8 +15,6 @@ export default class ScheduleState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.phone.setEnabled(true);
-
         this.game.displayDialogLine('Голос', 'Ніколи ще Ви не чекали першого вересня з таким нетерпінням. І нарешті, залишивши позаду приймальну комісію, Ви стали гордим володарем студентського квитка та поки що чистої заліковки', () => this.next());
         yield;
 
@@ -199,7 +197,7 @@ export default class ScheduleState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
-        this.game.phone.clearTodos();
+        this.game.phone.setEnabled(true);
         this.massOk = [];
 
         let choices = this.game.getChoice();

@@ -114,14 +114,7 @@ export default class CrossState extends Phaser.State {
         this.mistakes = 0;
 
         this._gen = this.gen();
-        this.game.phone.clearTodos();
-        this.game.phone.addTodo({
-            id: "CROSS",
-            text: "Розв\'язати кросворд"
-        });
         this.game.phone.setEnabled(true);
-        this.game.phone.setTime('10:22');
-        this.game.phone.setDate('21.07.18');
         this.minPoints = 100;
         this.maxPoints = 200;
         this.answer = null;
@@ -293,7 +286,6 @@ export default class CrossState extends Phaser.State {
                 }
 
                 if (this.inputs.every(input => input.disabled)) {
-                    this.game.phone.completeTodo("CROSS");
                     setTimeout(() => this.next(), 500);
                 }
             };

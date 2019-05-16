@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import {smartSetHeight, smartSetWidth} from '../../utils';
 import FSF from '../../states/FirstStageFunctions';
 
-export default class PostIntroState extends Phaser.State {
+export default class IntroState extends Phaser.State {
     * gen() {
 
         setTimeout(() => this.next(), 3000);
@@ -266,9 +266,7 @@ export default class PostIntroState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
-        this.game.phone.setEnabled(false);
-        this.game.phone.setTime('13:56');
-        this.game.phone.setDate('02.07.18');
+        this.game.phone.setEnabled(true);
         this.firstAnswer = null;
         this.secondAnswer = null;
         this.thirdAnswer = null;
@@ -284,6 +282,9 @@ export default class PostIntroState extends Phaser.State {
         this.load.image('firstMeetingGirl', './assets/images/1-1 (PostIntro)/girl.png');
 
         this.load.image('warning_message', './assets/images/1-1 (PostIntro)/warning_message.png');
+        this.load.image('sun', './assets/images/1-1 (PostIntro)/sun.png');
+        this.load.image('sun2', './assets/images/1-1 (PostIntro)/sun2.png');
+        this.load.image('sun3', './assets/images/1-1 (PostIntro)/sun3.png');
 
 
     }
@@ -297,6 +298,35 @@ export default class PostIntroState extends Phaser.State {
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
+
+        let sun1 = this.game.add.image(1812, 100, 'sun2');
+        smartSetHeight(sun1, 80);
+        this.game.add.tween(sun1).to({ x: 1700 }, 10000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, false);
+        this.game.add.tween(sun1).to({ y: 150 }, 10000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, false);
+        this.game.add.tween(sun1).to({ alpha: 0 }, 6000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+        this.game.add.tween(sun1).to({ height: 40 }, 3000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+        let sun2 = this.game.add.image(1612, 50, 'sun3');
+        smartSetHeight(sun2, 80);
+        this.game.add.tween(sun2).to({ x: 1680 }, 40000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+        this.game.add.tween(sun2).to({ y: 280 }, 30000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, false);
+        this.game.add.tween(sun2).to({ alpha: 0 }, 4000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+let sun4 = this.game.add.image(1712, 250, 'sun3');
+        smartSetHeight(sun4, 200);
+        // this.game.add.tween(sun2).to({ x: 1680 }, 40000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+        this.game.add.tween(sun4).to({ y: 280 }, 30000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, false);
+        this.game.add.tween(sun4).to({ alpha: 0 }, 4000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+let sun3 = this.game.add.image(1412, 20, 'sun');
+        smartSetHeight(sun3, 200);
+        this.game.add.tween(sun3).to({ x: 1600 }, 20000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+        this.game.add.tween(sun3).to({ y: 30 }, 10000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+        this.game.add.tween(sun3).to({ alpha: 0 }, 5000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, true);
+      
+        // let cloud2 = this.game.add.image(1912, -250, 'cloud2');
+        // this.game.add.tween(cloud2).to({ x: -1100 }, 40000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, false);
+
+        // let cloud3 = this.game.add.image(1912, -50, 'cloud3');
+        // this.game.add.tween(cloud3).to({ x: -900 }, 60000, Phaser.Easing.Quadratic.InOut, true, 0, 1000, false);
+
 
         //Уведомления
         let warning = this.game.add.image(700, 0, 'warning_message');
@@ -429,6 +459,7 @@ export default class PostIntroState extends Phaser.State {
     }
 
     firstQuest(obj) {
+        console.log(obj);
         if (obj.key == 'button_blue_on'){
             this.firstAnswer = 'Girl';
             this.game.saveChoice(false);

@@ -70,7 +70,7 @@ export default class FillwordsState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
-        this.game.phone.clearTodos();
+        this.game.phone.setEnabled(true);
     }
 
     preload() {

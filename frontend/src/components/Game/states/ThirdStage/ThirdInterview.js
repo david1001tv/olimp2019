@@ -210,6 +210,7 @@ export default class ThirdInterviewState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
+        this.game.phone.setEnabled(true);
         //Коэффициент комп. сетей максимальный?: 0 - no, 1 - yes   
         this.NetworkCoef = 0;
 

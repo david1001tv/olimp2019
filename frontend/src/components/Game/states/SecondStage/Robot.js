@@ -168,10 +168,8 @@ export default class Scanner extends Phaser.State {
 
     init() {
         this.activeDocument = null;
-
         this._gen = this.gen();
-
-        this.game.phone.setEnabled(false);
+        this.game.phone.setEnabled(true);
     }
 
     preload() {

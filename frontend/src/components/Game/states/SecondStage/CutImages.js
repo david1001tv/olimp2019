@@ -254,14 +254,7 @@ rotate_image (e) {
 
 init() {
     this._gen = this.gen();
-    this.game.phone.clearTodos();
-    this.game.phone.addTodo({
-        id: "TRANSLATE",
-        text: "Допомогти з перекладом"
-    });
-    this.game.phone.setEnabled(false);
-    this.game.phone.setTime('11:00');
-    this.game.phone.setDate('21.07.18');
+    this.game.phone.setEnabled(true);
 
     this.mistakes = 0;
     this.score = 0;

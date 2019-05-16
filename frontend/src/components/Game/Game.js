@@ -49,10 +49,11 @@ import ThirdInterviewState from './states/ThirdStage/ThirdInterview';
 //Квест 5 "Кроссворд" +
 import CrossState from './states/ThirdStage/Cross';
 
-//Этап 4
+//Этап 4 +
 //Квест 1 "Поиск предметов" +
 import ConferenceState from './states/FourthStage/Conference';
-//Квест 2 "Три в ряд" -
+//Квест 2 "Три в ряд" +
+import ThreeInARowState from './states/FourthStage/ThreeInRow';
 //Квест 3 "Тестирование и отлавливание багов" +
 import DebuggingState from './states/FourthStage/fixBugs';
 //Конец 4 +
@@ -77,8 +78,7 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-        
-
+    
         //Stage 1 +
         //Intro +
         this.state.add('Intro', IntroState, false);
@@ -118,17 +118,17 @@ class Game extends Phaser.Game {
         //Crossword +
         this.state.add('Cross', CrossState, false);
 
-        //Stage 4 -
+        //Stage 4 +
         //FindItems (Conference) +
         this.state.add('Conference', ConferenceState, false);
-        //ThreeInARow -
+        //ThreeInARow +
+        this.state.add('ThreeInARow', ThreeInARowState, false);
         //TestingAndDebugging +
         this.state.add('Debugging', DebuggingState, false);
         //End +
         this.state.add('End', EndState, false);
    
         this.state.add('Final', new Phaser.State(), false);
-
 
 
         this.state.start('Boot', true, false, 'Map');

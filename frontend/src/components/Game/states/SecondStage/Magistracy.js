@@ -317,11 +317,7 @@ export default class Scanner extends Phaser.State {
             this.me = res;
         });
 
-        this.game.phone.clearTodos();
-        this.game.phone.addTodos(todos);
-        this.game.phone.setEnabled(false);
-        this.game.phone.setTime('14:07');
-        this.game.phone.setDate('02.07.18');
+        this.game.phone.setEnabled(true);
         this.answer = null;
     }
 

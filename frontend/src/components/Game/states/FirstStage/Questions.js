@@ -8,8 +8,6 @@ export default class QuestionsState extends Phaser.State {
         this.game.camera.flash(0x000000, 3000, true);
         yield;
 
-        this.game.phone.setEnabled(false);
-
         this.game.displayDialogLine('Голос', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => this.next());
         yield;
 
@@ -256,7 +254,7 @@ export default class QuestionsState extends Phaser.State {
                 }, 3000);   
         });
         
-        this.game.displayDialogLine('Ви', 'За один лише день Ви пересичені інформацією, але рішення приймаєте усвідомлено. Ви міцні у своїй вірі, що дивний світ ІТ - це Ваш шлях. Тож перший і найважчий крок був зроблений...', () => this.next());
+        this.game.displayDialogLine('Голос', 'За один лише день Ви пересичені інформацією, але рішення приймаєте усвідомлено. Ви міцні у своїй вірі, що дивний світ ІТ - це Ваш шлях. Тож перший і найважчий крок був зроблений...', () => this.next());
         yield;
 
         this.game.camera.fade(0x000000, 1500, true);
@@ -278,14 +276,7 @@ export default class QuestionsState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
-        this.game.phone.clearTodos();
-        this.game.phone.addTodo({
-            id: "TRANSLATE",
-            text: "Прослухати інформацію"
-        });
-        this.game.phone.setEnabled(false);
-        this.game.phone.setTime('11:00');
-        this.game.phone.setDate('21.05.19');
+        this.game.phone.setEnabled(true);
         this.go = false;
 
         //кол-во ошибок

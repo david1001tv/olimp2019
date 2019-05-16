@@ -145,7 +145,6 @@ export default class Scanner extends Phaser.State {
             this.stage.disableVisibilityChange = true;
 
             this.game.input.enabled = true;
-            this.game.phone.setEnabled(true);
             yield;
 
             this.game.displayDialogLine('Голос', 'Зі своєю роботою Ви виступили на науковій конференції, де вас зустріли скептично налаштовані фахівці. Вони задавали Вам незручні питання, а Ви переконували їх у своїй правоті, що допомогло поглянути на проблему під іншим кутом', () => this.next());
@@ -224,13 +223,7 @@ export default class Scanner extends Phaser.State {
         this.score = 0;
 
         this._gen = this.gen();
-
-        this.game.phone.clearTodos();
-        this.game.phone.addTodos(todos);
-        this.game.phone.setEnabled(false);
-        this.game.phone.setTime('14:07');
-        this.game.phone.setDate('02.07.18');
-
+        this.game.phone.setEnabled(true);
         this.firstChoice = null;
     }
 
@@ -412,7 +405,6 @@ export default class Scanner extends Phaser.State {
                     }
 
                     this.game.displayDialogLine('Голос', 'Добре! Ви рушите вірним шляхом');
-                    this.game.phone.completeTodo(activePart.todoId);
 
                     this.activePart = this.cards[index];
                 } else {

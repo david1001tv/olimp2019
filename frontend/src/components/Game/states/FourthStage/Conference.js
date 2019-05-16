@@ -292,14 +292,7 @@ export default class WWHState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
-        this.game.phone.clearTodos();
-        this.game.phone.addTodo({
-            id: "TRANSLATE",
-            text: "Допомогти з перекладом"
-        });
-        this.game.phone.setEnabled(false);
-        this.game.phone.setTime('11:00');
-        this.game.phone.setDate('21.07.18');
+        this.game.phone.setEnabled(true);
 
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
         let choices = this.game.getChoice();

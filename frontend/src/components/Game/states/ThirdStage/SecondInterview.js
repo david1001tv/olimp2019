@@ -202,6 +202,7 @@ export default class SecondInterviewState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
+        this.game.phone.setEnabled(true);
         //Участвол ли в конференци: 0 - no, 1 - yes   
         this.ConfStatus = 0;
 

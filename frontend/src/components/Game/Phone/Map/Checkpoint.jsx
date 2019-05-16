@@ -37,8 +37,8 @@ let checkpointTypes = {
         }
     },
     finish: {
-        width: '5%',
-        height: '10%',
+        width: '6.979%',
+        height: '12.222%',
         image: {
             completed: finishCompleted,
             available: finishAvailable,

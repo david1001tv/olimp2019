@@ -233,8 +233,7 @@ export default class CryptoState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
-        this.game.phone.clearTodos();
-        this.game.phone.setEnabled(false);
+        this.game.phone.setEnabled(true);
 
         this.mistakes = 0;
         this.score = 0;
@@ -278,6 +277,11 @@ export default class CryptoState extends Phaser.State {
     }
 
     create() {
+        this.SSF = {...SSF};
+        for (let key in this.SSF) {
+            this.SSF[key] = this.SSF[key].bind(this);
+        }
+
         this.cathedra = this.game.add.image(0, 0, 'cathedra');
         this.cathedra.height = this.game.width * this.cathedra.height / this.cathedra.width;
         this.cathedra.width = this.game.width;

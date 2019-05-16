@@ -82,7 +82,7 @@ class GameWrapper extends Component {
     handleShowPhoneButtonClick() {
         if (!this.state.dialogIsShown) {
             this.setState({
-                phoneIsShown: !this.state.phoneIsShown,
+                m: !this.state.mapIsShown,
             });
         }
     }
@@ -134,18 +134,10 @@ class GameWrapper extends Component {
                     />
                     <button
                         className="show-phone-button"
-                        onClick={this.handleShowPhoneButtonClick}
-                        disabled={!this.state.phoneEnabled}
+                        onClick={() => this.setState({mapIsShown: true})}
                     >
                     </button>
-                    <Phone
-                        isShown={phoneIsShown}
-                        todos={this.state.todos}
-                        messages={this.state.phoneMessages}
-                        time={this.state.phoneTime}
-                        date={this.state.phoneDate}
-                        onMapOpen={() => this.setState({mapIsShown: true})}
-                    />
+                    
                     {
                         mapIsShown
                             ?

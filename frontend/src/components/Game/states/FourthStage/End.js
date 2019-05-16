@@ -53,9 +53,7 @@ export default class EndState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
-        this.game.phone.setEnabled(false);
-        this.game.phone.setTime('13:56');
-        this.game.phone.setDate('02.07.18');
+        this.game.phone.setEnabled(true);
         this.answer = null;
     }
 

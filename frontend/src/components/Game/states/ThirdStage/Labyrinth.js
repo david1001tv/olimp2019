@@ -75,16 +75,7 @@ export default class LabyrinthState extends Phaser.State {
 
     init() {
         this._gen = this.gen();
-
         this.game.phone.setEnabled(true);
-        this.game.phone.setTime('08:30');
-        this.game.phone.setDate('01.09.18');
-        this.game.phone.clearTodos();
-        this.game.phone.addTodo({
-            id: 'LABYRINTH',
-            text: 'Пройти до 330-ї аудиторії'
-        });
-
         this.mistakes = 0;
         this.score = 0;
     }

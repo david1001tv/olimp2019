@@ -54,7 +54,6 @@ export default class Scanner extends Phaser.State {
             .start(); 
 
         this.game.input.enabled = true;
-        this.game.phone.setEnabled(true);
         yield;
 
         this.game.add.tween(this.teacher).to({
@@ -129,12 +128,7 @@ export default class Scanner extends Phaser.State {
         this.score = 0;
 
         this._gen = this.gen();
-
-        this.game.phone.clearTodos();
-        this.game.phone.addTodos(todos);
-        this.game.phone.setEnabled(false);
-        this.game.phone.setTime('14:07');
-        this.game.phone.setDate('02.07.18');
+        this.game.phone.setEnabled(true);
     }
 
     preload() {
@@ -369,8 +363,6 @@ export default class Scanner extends Phaser.State {
                                 .start(); 
                         });
                      });
-
-                    this.game.phone.completeTodo(activePart.todoId);
 
                     this.activePart = null;
                 } else {

@@ -73,15 +73,13 @@ export default class TagsState extends Phaser.State {
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
-
-        this.game.phone.setEnabled(true);
         yield;
         this.game.nextState(0);
     }
 
     init() {
         this._gen = this.gen();
-        this.game.phone.clearTodos();
+        this.game.phone.setEnabled(true);
     }
 
     preload() {
