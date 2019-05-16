@@ -223,7 +223,7 @@ export default class CrossState extends Phaser.State {
         this.flagBackspace = false;
 
         this.timerText = this.game.add.text(32, 32, '', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 70,
             fill: 'white',
             stroke: 'black',

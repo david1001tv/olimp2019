@@ -112,7 +112,7 @@ export default class IntroState extends Phaser.State {
 
         //Текст в формах выбора
         this.firstTake = this.game.add.text(this.game.world.centerX + 435, 420, 'Схопити', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 60,
             fill: 'white',
             stroke: 'black',
@@ -121,7 +121,7 @@ export default class IntroState extends Phaser.State {
         this.firstTake.alpha = 0;
 
         this.firstIgonre = this.game.add.text(this.game.world.centerX - 685, 420, 'Ігнорувати', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 60,
             fill: 'white',
             stroke: 'black',

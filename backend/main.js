@@ -38,6 +38,8 @@ app.use('/api/like', require('./routes/like'));
 app.use('/api/score', require('./routes/score'));
 app.use('/api/feedback', require('./routes/feedback'));
 app.use('/api/report', require('./routes/report'));
+app.use('/api/subjects', require('./routes/subjects'));
+app.use('/api/choice', require('./routes/choice'));
 
 /**
  * Start Express server.

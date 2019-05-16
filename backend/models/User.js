@@ -40,8 +40,29 @@ module.exports = (sequelize) => {
     });
 
     User.associate = function (models) {
-        const { HistoryEntry } = models;
+        const { HistoryEntry, Subjects, Coefficients, Choice } = models;
         User.HistoryEntry = User.hasMany(HistoryEntry, {
+            onDelete: 'CASCADE',
+            foreignKey: {
+                name: 'user_id',
+                allowNull: false,
+            },
+        });
+        User.Subjects = User.hasMany(Subjects, {
+            onDelete: 'CASCADE',
+            foreignKey: {
+                name: 'user_id',
+                allowNull: false,
+            },
+        });
+        User.Coefficients = User.hasMany(Coefficients, {
+            onDelete: 'CASCADE',
+            foreignKey: {
+                name: 'user_id',
+                allowNull: false,
+            },
+        });
+        User.Choice = User.hasMany(Choice, {
             onDelete: 'CASCADE',
             foreignKey: {
                 name: 'user_id',

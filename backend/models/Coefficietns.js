@@ -9,18 +9,18 @@ module.exports = (sequelize) => {
             primaryKey: true,
         },
         first_proff: {
-            type: DataTypes.INTEGER,
-            defaultValue: null,
+            type: DataTypes.DOUBLE,
+            defaultValue: 1,
             allowNull: true,
         },
         second_proff: {
-            type: DataTypes.INTEGER,
-            defaultValue: null,
+            type: DataTypes.DOUBLE,
+            defaultValue: 1,
             allowNull: true,
         },
         third_proff: {
-            type: DataTypes.INTEGER,
-            defaultValue: null,
+            type: DataTypes.DOUBLE,
+            defaultValue: 1,
             allowNull: true,
         }
     }, {

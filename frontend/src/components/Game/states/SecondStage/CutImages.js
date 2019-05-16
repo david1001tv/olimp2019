@@ -212,7 +212,7 @@ startGame() {
     this.warning = warning;
 
     this.firstWarning = this.game.add.text(735, 65, 'Розплутайте кабелі,\nповертаючи частини головоломки', {
-        font: "Pangolin",
+        font: "Leftonade",
         fontSize: 30,
         fill: 'white',
         stroke: 'black',
@@ -221,7 +221,7 @@ startGame() {
     this.firstWarning.alpha = 0;
 
     this.secondWarning = this.game.add.text(735, 45, 'Вітаємо! Ви отримали навички\nмонтажа локальної мережі та\nполіпшили ставлення викладача!', {
-        font: "Pangolin",
+        font: "Leftonade",
         fontSize: 30,
         fill: 'white',
         stroke: 'black',

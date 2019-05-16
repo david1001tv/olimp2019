@@ -36,7 +36,7 @@ export default class CrosswordInput {
                 sprite: this.game.add.sprite(x, y  + (CELL_WIDTH + CELL_PADDING) * i, 'square'),
                 text: this.game.add.text(x + 15, y + 0 + (CELL_WIDTH + CELL_PADDING) * i, '', {
                     fontSize: 40,
-                    font: 'Pangolin',
+                    font: 'Leftonade',
                 }),
                 index: i,
                 value: ''
@@ -49,7 +49,7 @@ export default class CrosswordInput {
                 sprite: this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'square'),
                 text: this.game.add.text(x + 10 + (CELL_WIDTH + CELL_PADDING) * i, y, '', {
                     fontSize: 40,
-                    font: 'Pangolin',
+                    font: 'Leftonade',
                 }),
                 index: i,
                 value: ''

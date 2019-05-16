@@ -304,7 +304,7 @@ export default class QuestionsState extends Phaser.State {
         //Уведомление: "Окончание квеста (результат)"
         if (this.mistakes <= 1) {
             this.firstWarning = this.game.add.text(725, 45, 'Ви уважно слухали викладача і\nотримали повніше уявлення\nпро професію', {
-                font: "Pangolin",
+                font: "Leftonade",
                 fontSize: 30,
                 fill: 'white',
                 stroke: 'black',
@@ -313,7 +313,7 @@ export default class QuestionsState extends Phaser.State {
         }
         else if (this.mistakes > 1 ) {
             this.firstWarning = this.game.add.text(730, 60, 'Ви здобули базове уявлення про\nпрофесію. Варто бути уважнішим', {
-                font: "Pangolin",
+                font: "Leftonade",
                 fontSize: 30,
                 fill: 'white',
                 stroke: 'black',
@@ -324,7 +324,7 @@ export default class QuestionsState extends Phaser.State {
 
         //Уведомление: "Подсказка, что необходимо выбрать толпу"
         this.secondWarning = this.game.add.text(725, 85, 'Менi потрiбно обрати вiрну групу', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 33,
             fill: 'white',
             stroke: 'black',

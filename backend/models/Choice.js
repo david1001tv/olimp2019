@@ -1,44 +1,43 @@
 const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize) => {
-    const Skills = sequelize.define('skills', {
+    const Choice = sequelize.define('choice', {
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
         },
-        first_skill: {
-            type: DataTypes.INTEGER,
-            defaultValue: null,
+        friend: {
+            type: DataTypes.BOOLEAN,
             allowNull: true,
+            default: false,
         },
-        second_skill: {
-            type: DataTypes.INTEGER,
-            defaultValue: null,
+        magistracy: {
+            type: DataTypes.BOOLEAN,
             allowNull: true,
+            default: false,
         },
-        third_skill: {
-            type: DataTypes.INTEGER,
-            defaultValue: null,
+        science: {
+            type: DataTypes.BOOLEAN,
             allowNull: true,
+            default: false,
         }
     }, {
         timestamps: false,
         freezeTableName: true,
     });
 
-    Skills.associate = function (models) {
-        const {User} = models;
-        Skills.User = Skills.belongsTo(User, {
+    Choice.associate = function (models) {
+        const { User } = models;
+        Choice.User = Choice.belongsTo(User, {
             onDelete: 'CASCADE',
             foreignKey: {
                 name: 'user_id',
                 allowNull: false,
-                unique: 'FOREIGN',
             },
         });
     };
 
-    return Skills;
+    return Choice;
 };

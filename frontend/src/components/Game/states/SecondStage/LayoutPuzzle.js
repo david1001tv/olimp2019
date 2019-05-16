@@ -237,7 +237,7 @@ export default class Scanner extends Phaser.State {
         this.warning = warning;
 
         this.firstWarning = this.game.add.text(720, 40, 'Перетягніть потрібний слой з\nправої nпанелі до основного макету,\nта правильного його розташуйте', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',
@@ -246,7 +246,7 @@ export default class Scanner extends Phaser.State {
         this.firstWarning.alpha = 0;
 
         this.secondWarning = this.game.add.text(720, 40, 'Вітаємо! Ви отримали навички\nвеб-дизайну і nполіпшили ставлення\nвикладача!', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',

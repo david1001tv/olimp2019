@@ -80,7 +80,7 @@ class Game extends Phaser.Game {
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
 
-        /*
+
         //Stage 1 +
         //Intro +
         this.state.add('Intro', IntroState, false);
@@ -128,9 +128,9 @@ class Game extends Phaser.Game {
 
 
         this.state.add('Final', new Phaser.State(), false);
-        */
 
-        this.state.add('Intro', ConferenceState, false);
+
+        // this.state.add('Intro', ConferenceState, false);
 
 
 

@@ -272,7 +272,7 @@ export default class Scanner extends Phaser.State {
         this.buttonDisapprove_on = buttonDisapprove_on;
 
         this.selectFirst = this.game.add.text(690, 335, 'Прийняти участь у науковому житті', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 35,
             fill: 'white',
             stroke: 'black',
@@ -281,7 +281,7 @@ export default class Scanner extends Phaser.State {
         this.selectFirst.alpha = 0; 
 
         this.selectSecond = this.game.add.text(720, 675, 'Мені це не потрібно', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 55,
             fill: 'white',
             stroke: 'black',
@@ -299,7 +299,7 @@ export default class Scanner extends Phaser.State {
 
         //Надпис "Так"
         this.answerYes = this.game.add.text(1575, 440, 'Так', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 150,
             fill: 'white',
             stroke: 'black',
@@ -309,7 +309,7 @@ export default class Scanner extends Phaser.State {
 
         //Надпис "Нi"
         this.answerNo = this.game.add.text(150, 440, 'Нi', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 150,
             fill: 'white',
             stroke: 'black',
@@ -346,7 +346,7 @@ export default class Scanner extends Phaser.State {
         this.warning = warning;
 
         this.firstWarning = this.game.add.text(735, 80, 'Цей вибір вплине на Вашу історію', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',
@@ -355,7 +355,7 @@ export default class Scanner extends Phaser.State {
         this.firstWarning.alpha = 0;
 
         this.secondWarning = this.game.add.text(735, 40, 'Картки з вірними порадами\nперетягніть до зеленої області,\nз невірними - до червоної', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',
@@ -364,7 +364,7 @@ export default class Scanner extends Phaser.State {
         this.secondWarning.alpha = 0;
 
         this.thirdWarning = this.game.add.text(720, 60, 'Вітаємо! Ви отримали новий\nдосвід і завели корисні знайомства!', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',

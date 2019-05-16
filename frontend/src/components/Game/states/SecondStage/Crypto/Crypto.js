@@ -318,7 +318,7 @@ export default class CryptoState extends Phaser.State {
             sprite: this.game.add.sprite(FIELD_OFFSET_HOR, FIELD_OFFSET_VER, 'field'),
             text: this.game.add.text(FIELD_TEXT_OFFSET_HOR, FIELD_TEXT_OFFSET_VER, '', {
                 fontSize: FIELD_TEXT_FONT_SIZE,
-                font: 'Pangolin',
+                font: 'Leftonade',
             }),
             mark: null
         }
@@ -327,7 +327,7 @@ export default class CryptoState extends Phaser.State {
             sprite: this.game.add.sprite(600, 0, 'warning'),
             text: this.game.add.text(650, 50, 'Слідуючи алгоритму, введіть\nшифр за допомогою миші або\nклавіатури', {
                 fontSize: 30,
-                font: 'Pangolin',
+                font: 'Leftonade',
             })
         }
         smartSetHeight(this.warning.sprite, 200);

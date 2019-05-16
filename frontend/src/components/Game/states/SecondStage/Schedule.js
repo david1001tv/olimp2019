@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import {smartSetHeight} from '../../utils';
 import {subjectsArray} from "../../DataForSchedule/subjects";
 import SSF from '../../states/SecondStageFunctions';
+
 var PostIntro = require("../FirstStage/PostIntro.js");
 
 const style = {
@@ -17,15 +18,14 @@ export default class ScheduleState extends Phaser.State {
         yield;
 
         this.game.phone.setEnabled(true);
-        
+
         this.game.displayDialogLine('Голос', 'Ніколи ще Ви не чекали першого вересня з таким нетерпінням. І нарешті, залишивши позаду приймальну комісію, Ви стали гордим володарем студентського квитка та поки що чистої заліковки', () => this.next());
         yield;
 
         //пред. выбор
-        if (PostIntro.GirlOrMan == "Girl"){
+        if (PostIntro.GirlOrMan == "Girl") {
             this.game.displayDialogLine('Голос', 'Атмосфера актового залу, до якого Вас запросили, сповнювала душу почуттям тріумфу. Ось на сцену підійнявся чоловік, якого Ви злякалися на Дні відкритих дверей. Хто б міг подумати, що він - завідувач кафедри Комп\'ютерних наук. Не дивно, що в залі одразу настала абсолютна тиша', () => this.next());
-        }
-        else {
+        } else {
             this.game.displayDialogLine('Голос', 'Атмосфера актового залу, до якого Вас запросили, сповнювала душу почуттям тріумфу. Ось на сцену підійнявся вже знайомий Вам чоловік. Не дивно, що в залі одразу настала абсолютна тиша', () => this.next());
         }
         yield;
@@ -63,7 +63,7 @@ export default class ScheduleState extends Phaser.State {
             .start();
 
         this.game.displayDialogLine('Тарас Денисович', 'Мене звати Тарас. Тарас Денисович. На своїх лекціях я ознайомлю вас з сучасними мережевими технологіями і системним адмініструванням. Та в мене так багато справ. Йдіть краще познайомтесь з іншими викладачами', () => this.next());
-        yield;  
+        yield;
 
         this.game.add.tween(this.teacher2).to({
             alpha: 0
@@ -71,7 +71,7 @@ export default class ScheduleState extends Phaser.State {
             .start();
 
         this.game.displayDialogLine('Голос', 'Завідувач всміхнувся та подивився на вас з потаємним співчуттям', () => this.next());
-        yield; 
+        yield;
 
         this.game.add.tween(this.teacher).to({
             alpha: 1
@@ -79,18 +79,18 @@ export default class ScheduleState extends Phaser.State {
             .start();
 
         this.game.displayDialogLine('Адам Викторович', 'Я викладаю розробку програмного забезпечення. Настільні, мобільні додатки, веб-програмування, тестування - все це ви будете опановувати під моїм керівництвом', () => this.next());
-        yield;   
-        
+        yield;
+
         this.game.displayDialogLine('Адам Викторович', 'Звуть мене Адам Вікторовіч, а з кожним з вас я познайомлюсь на своїх практичних заняттях. Тож раджу бути присутніми на них', () => this.next());
-        yield; 
+        yield;
 
         this.game.add.tween(this.teacher).to({
             alpha: 0
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
-        
+
         this.game.displayDialogLine('Голос', 'Поки він говорив, до вас наблизилась Анастасія Марковна, привертаючи увагу всіх юнаків, що одразу приосанились', () => this.next());
-        yield; 
+        yield;
 
         this.game.add.tween(this.teacher3).to({
             alpha: 1
@@ -98,7 +98,7 @@ export default class ScheduleState extends Phaser.State {
             .start();
 
         this.game.displayDialogLine('Анастасія Марковна', 'Моя сфера - комп\'ютерна графіка та веб-дизайн. Працюючи з сучасними графічними редакторами, ми з вами будемо створювати макети сайтів, анімаційні ролики, графічні елементи композицій та багато іншого. Сподіваюся, мої предмети змусять прокинутися в вас творчі таланти. Кращим стає лише той дизайнер, що відчуває креативне у звичайному', () => this.next());
-        yield; 
+        yield;
 
         this.game.add.tween(this.teacher3).to({
             alpha: 0
@@ -107,7 +107,7 @@ export default class ScheduleState extends Phaser.State {
 
 
         this.game.displayDialogLine('Голос', 'Ви познайомились ще з кількома викладачами кафедри та вже збиралися йти подому, як ваш куратор згадав дещо важливе', () => this.next());
-        yield; 
+        yield;
 
         this.game.add.tween(this.teacher2).to({
             alpha: 1
@@ -126,7 +126,7 @@ export default class ScheduleState extends Phaser.State {
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
-           
+
         this.buttonGo.inputEnabled = true;
         this.game.add.tween(this.buttonGo).to({
             alpha: 1
@@ -149,24 +149,24 @@ export default class ScheduleState extends Phaser.State {
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start().onComplete.add(() => {
-                setTimeout(() => {
-                    this.game.add.tween(this.warning).to({
-                        alpha: 0
-                    }, 1500, Phaser.Easing.Cubic.InOut)
-                        .start();
-                }, 3000);   
+            setTimeout(() => {
+                this.game.add.tween(this.warning).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+            }, 3000);
         });
 
         this.game.add.tween(this.firstWarning).to({
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start().onComplete.add(() => {
-                setTimeout(() => {
-                    this.game.add.tween(this.firstWarning).to({
-                        alpha: 0
-                    }, 1500, Phaser.Easing.Cubic.InOut)
-                        .start();
-                }, 3000);   
+            setTimeout(() => {
+                this.game.add.tween(this.firstWarning).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+            }, 3000);
         });
         yield;
 
@@ -183,7 +183,7 @@ export default class ScheduleState extends Phaser.State {
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
-        
+
         this.game.displayDialogLine('Голос', 'Ви ознайомились з навчальним планом кафедри, визначили важливі на Вашу думку дисципліни, та розподілили часи на викладання основних. Втомленні але задоволені Ви повертаєтесь до дому', () => this.next());
         yield;
 
@@ -260,7 +260,7 @@ export default class ScheduleState extends Phaser.State {
         this.next();
     }
 
-    startGame() { 
+    startGame() {
         style.fontSize = 25;
         let mainSubj = this.addTextOnSprite(580, 115, 'ОБОВ\'ЯЗКОВІ ДИСЦИПЛІНИ ПРОФЕСІЙНОГО І ПРАКТИЧНОГО СПРЯМУВАННЯ', style);
         mainSubj.addColor('#ffffff', 0);
@@ -301,7 +301,7 @@ export default class ScheduleState extends Phaser.State {
             });
 
             let minusButton = null;
-            let plusButton  = null;
+            let plusButton = null;
             let checkbox = null;
             let hoursText = null;
             if (subject.minusButton && subject.plusButton) {
@@ -366,7 +366,7 @@ export default class ScheduleState extends Phaser.State {
         this.warning = warning;
 
         this.firstWarning = this.game.add.text(735, 80, 'Цей вибір вплине на Вашу історію', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',
@@ -375,7 +375,7 @@ export default class ScheduleState extends Phaser.State {
         this.firstWarning.alpha = 0;
     }
 
-    handleCheckboxClick (checkbox) {
+    handleCheckboxClick(checkbox) {
         if (!checkbox.isChecked) {
             if (this.count === 4) {
                 alert('too much optional subjects');
@@ -392,7 +392,7 @@ export default class ScheduleState extends Phaser.State {
         }
     }
 
-    handleMinusClick (button) {
+    handleMinusClick(button) {
         if (this.subjects[button.key].hours - 1 >= this.subjects[button.key].min) {
             this.reduceHours(button.key);
 
@@ -410,7 +410,7 @@ export default class ScheduleState extends Phaser.State {
         }
     }
 
-    handlePlusClick (button) {
+    handlePlusClick(button) {
         if (this.subjects[button.key].hours + 1 <= this.subjects[button.key].max) {
             this.produceHours(button.key);
 

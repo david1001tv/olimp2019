@@ -130,7 +130,7 @@ const FSF = {
 
     addText: function(str, posX, posY, fontSize, todoId){
         let tmp = this.game.add.text(posX, posY, str, {
-                font: fontSize + 'px Pangolin',
+                font: fontSize + 'px Leftonade',
                 fill: 'white',
                 stroke: 'black',
                 strokeThickness: 4,

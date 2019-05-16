@@ -126,7 +126,7 @@ export default class FillwordsState extends Phaser.State {
         this.warning = warning;
 
         this.firstWarning = this.game.add.text(760, 60, 'Знайдіть на робочому столі\nярлик і запустіть його', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',
@@ -135,7 +135,7 @@ export default class FillwordsState extends Phaser.State {
         this.firstWarning.alpha = 0;
 
         this.thirdWarning = this.game.add.text(735, 40, 'Вітаємо! Тепер Ви можете\nрозмовляти загадковою мовою\nпрограмістів', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',

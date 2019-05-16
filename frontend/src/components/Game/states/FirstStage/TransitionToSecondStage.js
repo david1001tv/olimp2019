@@ -21,7 +21,7 @@ export default class TransitionToSecondStageState extends Phaser.State {
         this.mobile.visible = true;
         let continueText = this.game.add.text(1050, 975, 'Клацніть, щоб продовжити...', {
             align: 'center',
-            font: 'Pangolin',
+            font: 'Leftonade',
             fontSize: 70,
             fontStyle: 'italic',
             fill: 'white',

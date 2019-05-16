@@ -103,7 +103,7 @@ export default class FillWordsComponent {
         this.warning2 = warning2;
 
         this.secondWarning = this.game.add.text(725, 40, 'Виділить одним довгим\nнатисканням слово, та викладач\nпояснить його', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',
@@ -114,24 +114,24 @@ export default class FillWordsComponent {
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start().onComplete.add(() => {
-                setTimeout(() => {
-                    this.game.add.tween(this.warning2).to({
-                        alpha: 0
-                    }, 1500, Phaser.Easing.Cubic.InOut)
-                        .start();
-                }, 3000);   
+            setTimeout(() => {
+                this.game.add.tween(this.warning2).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+            }, 3000);
         });
 
         this.game.add.tween(this.secondWarning).to({
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start().onComplete.add(() => {
-                setTimeout(() => {
-                    this.game.add.tween(this.secondWarning).to({
-                        alpha: 0
-                    }, 1500, Phaser.Easing.Cubic.InOut)
-                        .start();
-                }, 3000);   
+            setTimeout(() => {
+                this.game.add.tween(this.secondWarning).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+            }, 3000);
         });
 
         document.addEventListener('mousedown', this.handleOnMouseDown);
@@ -209,7 +209,7 @@ export default class FillWordsComponent {
                     cell.isChecked = false;
                 });
             } else {
-                let description=descriptions[words.indexOf(word)];
+                let description = descriptions[words.indexOf(word)];
 
                 words = words.filter((item) => {
                     return item !== word
@@ -218,23 +218,21 @@ export default class FillWordsComponent {
                     return item !== description
                 });
                 this.game.add.tween(this.teacher).to({
-                        alpha: 1
+                    alpha: 1
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.game.displayDialogLine('Тарас Денисович', description, () => {
+                    this.game.add.tween(this.teacher).to({
+                        alpha: 0
                     }, 1500, Phaser.Easing.Cubic.InOut)
-                        .start(); 
-                this.game.displayDialogLine('Тарас Денисович', description,()=>{                    
-                            this.game.add.tween(this.teacher).to({
-                                alpha: 0
-                            }, 1500, Phaser.Easing.Cubic.InOut)
-                                .start();
-                                if (!words.length) {
-                                    this.game.displayDialogLine('Голос', "О це була дійсно корисна пара! Ви згадуєте уривки розмов старшокурсників, що почули біля кафедри, і більше не відчуваєте себе невпевнено", ()=>this.game.nextState(0));
-                                    }
+                        .start();
+                    if (!words.length) {
+                        this.game.displayDialogLine('Голос', "О це була дійсно корисна пара! Ви згадуєте уривки розмов старшокурсників, що почули біля кафедри, і більше не відчуваєте себе невпевнено", () => this.game.nextState(0));
+                    }
                 });
-
-               
             }
         }
-        
+
         this.isMouseDown = false;
         this.isFocused = false;
         this.focusedCell = null;
