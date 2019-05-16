@@ -1,4 +1,4 @@
-import { isAuthenticated, sendHistory, sendChoice, getChoice, sendSubjects, getHistory, getMe } from '~api';
+import { isAuthenticated, sendHistory, sendChoice, getChoice, sendSubjects, getHistory, getMe, getSubjects } from '~api';
 import PubSub from 'pubsub-js';
 import autobind from 'autobind-decorator';
 
@@ -140,6 +140,12 @@ class ProgressManager {
     saveSubjects(subjects) {
         if (isAuthenticated()) {
             sendSubjects(subjects);
+        }
+    }
+
+    getSubjects() {
+        if (isAuthenticated()) {
+            getSubjects();
         }
     }
 

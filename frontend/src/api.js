@@ -209,6 +209,18 @@ export async function sendSubjects(data) {
     return response;
 }
 
+export async function getSubjects() {
+    const response = await fetch(`${API_URL}/subjects`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    }).then(res => res.json());
+
+    return response;
+}
+
 export async function getMe() {
     const response = await fetch(`${API_URL}/me`, {
         method: 'GET',

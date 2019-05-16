@@ -185,7 +185,11 @@ class Game extends Phaser.Game {
         return progressManager.getHistory();
     }
 
-    getMa() {
+    getSubjects() {
+        return progressManager.getSubjects();
+    }
+
+    getMe() {
         return progressManager.getMe();
     }
 
