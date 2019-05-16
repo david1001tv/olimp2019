@@ -303,20 +303,17 @@ export default class Scanner extends Phaser.State {
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
         let choices = this.game.getChoice();
         choices.then(res => {
-            this.friend = res.choice.friend;
+            this.friend = res.friend;
         });
 
         let history = this.game.getHistory();
         history.then(res => {
-            this.history = res;
+            res.forEach(state => {
+                if (state.score) {
+                    this.score += state.score;
+                }
+            });
         });
-
-        this.history.forEach(state => {
-            if (state.score) {
-                this.score += state.score;
-            }
-        });
-        this.score /= 10;
 
         let me = this.game.getMe();
         me.then(res => {
