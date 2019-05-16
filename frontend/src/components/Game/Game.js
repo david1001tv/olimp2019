@@ -79,58 +79,55 @@ class Game extends Phaser.Game {
         this.state.add('Boot', BootState, false);
         
 
-        // //Stage 1 +
-        // //Intro +
-        // this.state.add('Intro', IntroState, false);
-        // //PostIntro +
-        // this.state.add('PostIntro', PostIntroState, false);
-        // //Questions +
-        // this.state.add('Questions', QuestionsState, false);
+        //Stage 1 +
+        //Intro +
+        this.state.add('Intro', IntroState, false);
+        //PostIntro +
+        this.state.add('PostIntro', PostIntroState, false);
+        //Questions +
+        this.state.add('Questions', QuestionsState, false);
 
-        // //Stage 2 +
-        // //Schedule +
-        // this.state.add("Schedule", ScheduleState, false);
-        // //Fillword +
-        // this.state.add("FillWords", FillwordsState, false);
-        // //LayoutPuzzle +
-        // this.state.add("LayoutPuzzle", LayoutPuzzleState, false);
-        // //Tags +
-        // this.state.add("Tags", TagsState, false);
-        // //Wiring +
-        // this.state.add("CutImages", CutImagesState, false);
-        // //Cards +
-        // this.state.add("Cards", CardsState, false);
-        // //Magistracy +
-        // this.state.add("Magistracy", MagistracyState, false);
-        // //Cryptographic +
-        // this.state.add("Crypto", CryptoState, false);
-        // //Robot +
-        // this.state.add("Robot", RobotState, false);
-        // //Outro +
-        // this.state.add("Outro", OutroState, false);
+        //Stage 2 +
+        //Schedule +
+        this.state.add("Schedule", ScheduleState, false);
+        //Fillword +
+        this.state.add("FillWords", FillwordsState, false);
+        //LayoutPuzzle +
+        this.state.add("LayoutPuzzle", LayoutPuzzleState, false);
+        //Tags +
+        this.state.add("Tags", TagsState, false);
+        //Wiring +
+        this.state.add("CutImages", CutImagesState, false);
+        //Cards +
+        this.state.add("Cards", CardsState, false);
+        //Magistracy +
+        this.state.add("Magistracy", MagistracyState, false);
+        //Cryptographic +
+        this.state.add("Crypto", CryptoState, false);
+        //Robot +
+        this.state.add("Robot", RobotState, false);
+        //Outro +
+        this.state.add("Outro", OutroState, false);
 
-        // //Stage 3 +
-        // //Labyrinth 
-        // this.state.add('Labyrinth', LabyrinthState, false);
-        // this.state.add('FirstInterview', FirstInterviewState, false);
-        // this.state.add('SecondInterview', SecondInterviewState, false);
-        // this.state.add('ThirdInterview', ThirdInterviewState, false);
-        // //Crossword +
-        // this.state.add('Cross', CrossState, false);
+        //Stage 3 +
+        //Labyrinth 
+        this.state.add('Labyrinth', LabyrinthState, false);
+        this.state.add('FirstInterview', FirstInterviewState, false);
+        this.state.add('SecondInterview', SecondInterviewState, false);
+        this.state.add('ThirdInterview', ThirdInterviewState, false);
+        //Crossword +
+        this.state.add('Cross', CrossState, false);
 
-        // //Stage 4 -
-        // //FindItems (Conference) +
-        // this.state.add('Conference', ConferenceState, false);
-        // //ThreeInARow -
-        // //TestingAndDebugging +
-        // this.state.add('Debugging', DebuggingState, false);
-        // //End +
-        // this.state.add('End', EndState, false);
+        //Stage 4 -
+        //FindItems (Conference) +
+        this.state.add('Conference', ConferenceState, false);
+        //ThreeInARow -
+        //TestingAndDebugging +
+        this.state.add('Debugging', DebuggingState, false);
+        //End +
+        this.state.add('End', EndState, false);
    
-        // this.state.add('Final', new Phaser.State(), false);
-
-
-        this.state.add('Intro', LabyrinthState, false);
+        this.state.add('Final', new Phaser.State(), false);
 
 
 

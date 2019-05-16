@@ -384,10 +384,6 @@ export default class Scanner extends Phaser.State {
     }
 
     handleCheck(currImg, currPointer, first, second, third, fourth){
-<<<<<<< HEAD
-
-=======
->>>>>>> bead728328b67452187f8976d57a95360a2fd538
         if (!this.isRight){
             this.game.input.enabled = false;
 
@@ -426,16 +422,16 @@ export default class Scanner extends Phaser.State {
             }
 
             if (this.cards.every(e => e.isRight)) {
-                // if (this.count === 5) {
-                //     this.score = 100;
-                // }
-                // else if (this.count <= 9) {
-                //     this.score = Math.round(40 / (this.count - 5)) + 50;
-                // }
-                // else {
-                //     this.score = 50;
-                // }
-                this.next();
+                if (this.mistakes <= 1){
+                    this.score = 100;
+                }
+                else if (this.mistakes <= 3){
+                    this.score = 50;
+                }
+                else {
+                    this.score = 10; 
+                }
+                this.game.nextState(this.score);
             }
         }
     }

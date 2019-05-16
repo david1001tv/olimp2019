@@ -303,22 +303,6 @@ export default class Scanner extends Phaser.State {
             this.friend = res.friend;
         });
 
-<<<<<<< HEAD
-        // let history = this.game.getHistory();
-        // history.then(res => {
-        //     this.history = res;
-        // });
-
-        // this.history.forEach(state => {
-        //     if (state.score) {
-        //         this.score += state.score;
-        //     }
-        // });
-        // this.score /= 10;
-
-        //Максимум 600 балов, если все средне сдавал - 300, если плохо - 60
-        this.score = 600;
-=======
         let history = this.game.getHistory();
         history.then(res => {
             res.forEach(state => {
@@ -332,7 +316,6 @@ export default class Scanner extends Phaser.State {
         me.then(res => {
             this.me = res;
         });
->>>>>>> bead728328b67452187f8976d57a95360a2fd538
 
         this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);

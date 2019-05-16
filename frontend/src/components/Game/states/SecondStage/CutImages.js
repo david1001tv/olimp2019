@@ -233,13 +233,9 @@ rotate_image (e) {
     let key = this.mass_angles.indexOf(e.angle); 
     (key < this.mass_angles.length - 1) ? key++ : key = 0;
     e.angle = this.mass_angles[key];
-<<<<<<< HEAD
     this.mistakes += 1;
     
     console.log(this.SSF.imageCheck(this.mass));
-=======
-
->>>>>>> bead728328b67452187f8976d57a95360a2fd538
     if (this.SSF.imageCheck(this.mass)){
         if (this.mistakes <= 125){
             this.score = 100;

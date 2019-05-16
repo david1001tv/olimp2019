@@ -28,12 +28,7 @@ export default class CrosswordInput {
         this.onInputEnd = () => null;
         this.prefilledIndex = prefilledIndex;
 
-<<<<<<< HEAD
-        if(vertical){
-=======
-
         if (vertical) {
->>>>>>> bead728328b67452187f8976d57a95360a2fd538
             this.cells = word.split('').map((e, i) => ({
                 focused: false,
                 sprite: this.game.add.sprite(x, y + (CELL_WIDTH + CELL_PADDING) * i, 'square'),

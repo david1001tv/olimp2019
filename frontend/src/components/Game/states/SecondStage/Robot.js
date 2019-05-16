@@ -158,8 +158,6 @@ export default class Scanner extends Phaser.State {
         }
         
         this.game.nextState(this.score);
-
-        this.game.nextState();
     }
 
     constructor() {
