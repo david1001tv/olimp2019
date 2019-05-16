@@ -104,7 +104,7 @@ export default class FillWordsComponent {
         smartSetHeight(warning2, 200);
         this.warning2 = warning2;
 
-        this.secondWarning = this.game.add.text(725, 40, 'Виділить одним довгим\nнатисканням слово, та викладач\nпояснить його', {
+        this.secondWarning = this.game.add.text(770, 40, 'Виділить одним довгим\nнатисканням слово, та викладач\nпояснить його', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',

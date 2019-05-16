@@ -12,7 +12,7 @@ export default class Scanner extends Phaser.State {
         this.game.camera.flash(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
         yield;
-
+        
         this.game.displayDialogLine('Голос', 'Сьогодні всі, хто стояли біля кафедри, обговорювали майбутню наукову конференцію. Ви ще не вирішили, чи будете брати участь, але мимоволі прислухалися до розмов. Хтось запитав за необхідність наукової роботи у Вашого куратора', () => this.next());
         yield;
 
@@ -224,21 +224,21 @@ export default class Scanner extends Phaser.State {
     }
 
     preload() {
-        this.load.image('bg', './assets/images/2-6 (Cards)/background.png');
-        this.load.image('bg2', './assets/images/2-6 (Cards)/background_2.png');
-        this.load.image('no', './assets/images/2-6 (Cards)/no.png');
-        this.load.image('yes', './assets/images/2-6 (Cards)/yes.png');
+        this.load.image('bg', './assets/images/2-6 (Сards)/background.png');
+        this.load.image('bg2', './assets/images/2-6 (Сards)/background_2.png');
+        this.load.image('no', './assets/images/2-6 (Сards)/no.png');
+        this.load.image('yes', './assets/images/2-6 (Сards)/yes.png');
 
         for (let i = 0; i < 9; i++){
-            this.load.image('card' + i, './assets/images/2-6 (Cards)/card' + i + '.png');
+            this.load.image('card' + i, './assets/images/2-6 (Сards)/card' + i + '.png');
         }
-        this.load.image('blur_card', './assets/images/2-6 (Cards)/blur.png');
+        this.load.image('blur_card', './assets/images/2-6 (Сards)/blur.png');
 
-        this.load.spritesheet('button_red_on', './assets/images/2-6 (Cards)/Button_Choice_On_Blue.png', 610, 122);
-        this.load.spritesheet('button_blue_on', './assets/images/2-6 (Cards)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_red_on', './assets/images/2-6 (Сards)/Button_Choice_On_Blue.png', 610, 122);
+        this.load.spritesheet('button_blue_on', './assets/images/2-6 (Сards)/Button_Choice_On_Blue.png', 610, 122);
 
-        this.load.image('teacher', './assets/images/2-6 (Cards)/teacher.png');
-        this.load.image('warning_message', './assets/images/2-6 (Cards)/warning_message.png');
+        this.load.image('teacher', './assets/images/2-6 (Сards)/teacher.png');
+        this.load.image('warning_message', './assets/images/2-6 (Сards)/warning_message.png');
     }
 
     create() {
@@ -269,7 +269,7 @@ export default class Scanner extends Phaser.State {
         buttonDisapprove_on.alpha = 0;
         this.buttonDisapprove_on = buttonDisapprove_on;
 
-        this.selectFirst = this.game.add.text(690, 335, 'Прийняти участь у науковому житті', {
+        this.selectFirst = this.game.add.text(730, 335, 'Прийняти участь у науковому житті', {
             font: "Leftonade",
             fontSize: 35,
             fill: 'white',
@@ -278,7 +278,7 @@ export default class Scanner extends Phaser.State {
         });
         this.selectFirst.alpha = 0; 
 
-        this.selectSecond = this.game.add.text(720, 675, 'Мені це не потрібно', {
+        this.selectSecond = this.game.add.text(750, 675, 'Мені це не потрібно', {
             font: "Leftonade",
             fontSize: 55,
             fill: 'white',
@@ -343,7 +343,7 @@ export default class Scanner extends Phaser.State {
         smartSetHeight(warning, 200);
         this.warning = warning;
 
-        this.firstWarning = this.game.add.text(735, 80, 'Цей вибір вплине на Вашу історію', {
+        this.firstWarning = this.game.add.text(760, 80, 'Цей вибір вплине на Вашу історію', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',
@@ -352,7 +352,7 @@ export default class Scanner extends Phaser.State {
         });
         this.firstWarning.alpha = 0;
 
-        this.secondWarning = this.game.add.text(735, 40, 'Картки з вірними порадами\nперетягніть до зеленої області,\nз невірними - до червоної', {
+        this.secondWarning = this.game.add.text(770, 40, 'Картки з вірними порадами\nперетягніть до зеленої області,\nз невірними - до червоної', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',
@@ -361,7 +361,7 @@ export default class Scanner extends Phaser.State {
         });
         this.secondWarning.alpha = 0;
 
-        this.thirdWarning = this.game.add.text(720, 60, 'Вітаємо! Ви отримали новий\nдосвід і завели корисні знайомства!', {
+        this.thirdWarning = this.game.add.text(750, 60, 'Вітаємо! Ви отримали новий\nдосвід і завели корисні знайомства!', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',

@@ -121,11 +121,6 @@ export default class ScheduleState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        this.game.add.tween(this.buttonGo).to({
-            alpha: 1
-        }, 1500, Phaser.Easing.Cubic.InOut)
-            .start();
-
         this.buttonGo.inputEnabled = true;
         this.game.add.tween(this.buttonGo).to({
             alpha: 1

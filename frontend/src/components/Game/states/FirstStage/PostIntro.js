@@ -304,7 +304,7 @@ export default class IntroState extends Phaser.State {
         smartSetHeight(warning, 200);
         this.warning = warning;
 
-        this.firstWarning = this.game.add.text(735, 80, 'Цей вибір вплине на Вашу історію', {
+        this.firstWarning = this.game.add.text(760, 80, 'Цей вибір вплине на Вашу історію', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',
@@ -313,7 +313,7 @@ export default class IntroState extends Phaser.State {
         });
         this.firstWarning.alpha = 0;
 
-        this.secondWarning = this.game.add.text(735, 70, 'Вітаємо! У Вас з’явилась подруга,\n що допоможе у майбутньому', {
+        this.secondWarning = this.game.add.text(750, 60, 'Вітаємо! У Вас з’явилась подруга,\n що допоможе у майбутньому', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',
@@ -322,7 +322,7 @@ export default class IntroState extends Phaser.State {
         });
         this.secondWarning.alpha = 0;
 
-        this.thirdWarning = this.game.add.text(715, 70, 'Завдяки своїй сміливості Ви завели\n знайомство з завідувачем кафедри', {
+        this.thirdWarning = this.game.add.text(740, 60, 'Завдяки своїй сміливості Ви завели\nзнайомство з завідувачем кафедри', {
             font: "Leftonade",
             fontSize: 31,
             fill: 'white',
@@ -347,7 +347,7 @@ export default class IntroState extends Phaser.State {
         buttonMan_on.alpha = 0;
         this.buttonMan_on = buttonMan_on;
 
-        this.firstGirl = this.game.add.text(this.game.world.centerX + 310, 425, 'Підійти до дівчини', {
+        this.firstGirl = this.game.add.text(this.game.world.centerX + 340, 425, 'Підійти до дівчини', {
             font: "Leftonade",
             fontSize: 60,
             fill: 'white',
@@ -356,7 +356,7 @@ export default class IntroState extends Phaser.State {
         });
         this.firstGirl.alpha = 0;
 
-        this.firstMan = this.game.add.text(this.game.world.centerX - 800, 425, 'Підійти до чоловiка', {
+        this.firstMan = this.game.add.text(this.game.world.centerX - 770, 425, 'Підійти до чоловiка', {
             font: "Leftonade",
             fontSize: 60,
             fill: 'white',
@@ -376,7 +376,7 @@ export default class IntroState extends Phaser.State {
         buttonMistrust_on.alpha = 0;
         this.buttonMistrust_on = buttonMistrust_on;
 
-        this.secondGirl1 = this.game.add.text(685, 325, 'Довірити їй свої думки', {
+        this.secondGirl1 = this.game.add.text(730, 325, 'Довірити їй свої думки', {
             font: "Leftonade",
             fontSize: 55,
             fill: 'white',
@@ -385,7 +385,7 @@ export default class IntroState extends Phaser.State {
         });
         this.secondGirl1.alpha = 0;
 
-        this.secondGirl2 = this.game.add.text(672.5, 680, 'Не відкривати серце незнайомці', {
+        this.secondGirl2 = this.game.add.text(720, 680, 'Не відкривати серце незнайомці', {
             font: "Leftonade",
             fontSize: 40,
             fill: 'white',
@@ -405,7 +405,7 @@ export default class IntroState extends Phaser.State {
         buttonResolve_on.alpha = 0;
         this.buttonResolve_on = buttonResolve_on;
 
-        this.secondMan1 = this.game.add.text(685, 325, 'Розповісти про сумніви', {
+        this.secondMan1 = this.game.add.text(720, 325, 'Розповісти про сумніви', {
             font: "Leftonade",
             fontSize: 55,
             fill: 'white',
@@ -414,7 +414,7 @@ export default class IntroState extends Phaser.State {
         });
         this.secondMan1.alpha = 0;
 
-        this.secondMan2 = this.game.add.text(680, 680, 'Спитати, хто він в біса такий', {
+        this.secondMan2 = this.game.add.text(720, 680, 'Спитати, хто він в біса такий', {
             font: "Leftonade",
             fontSize: 45,
             fill: 'white',

@@ -139,10 +139,12 @@ export default class TagsState extends Phaser.State {
         warning.alpha = 0;
         smartSetHeight(warning, 200);
         this.warning = warning;
-        this.firstWarning = this.game.add.text(760, 60, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
+        this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
             font: "Leftonade",
             fontSize: 30,
-            fill: 'black'
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
         });
 
         this.firstWarning.alpha = 0;

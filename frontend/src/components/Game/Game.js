@@ -7,8 +7,6 @@ import progressManager from '~etc/ProgressManager';
 import MapState from './states/Map';
 import BootState from './states/Boot';
 
-//import IntroState from './states/FirstStage/Intro';
-
 //Этап 1 +
 //Интро +
 import IntroState from './states/FirstStage/Intro';
@@ -104,7 +102,7 @@ class Game extends Phaser.Game {
         this.state.add("Cards", CardsState, false);
         //Magistracy +
         this.state.add("Magistracy", MagistracyState, false);
-        //Cryptographic - not WORK!
+        //Cryptographic +
         this.state.add("Crypto", CryptoState, false);
         //Robot +
         this.state.add("Robot", RobotState, false);
@@ -121,19 +119,18 @@ class Game extends Phaser.Game {
         this.state.add('Cross', CrossState, false);
 
         //Stage 4 -
-        //FindItems (Conferenct) +
+        //FindItems (Conference) +
         this.state.add('Conference', ConferenceState, false);
         //ThreeInARow -
         //TestingAndDebugging +
         this.state.add('Debugging', DebuggingState, false);
         //End +
         this.state.add('End', EndState, false);
-
-        
+   
         this.state.add('Final', new Phaser.State(), false);
 
 
-        // this.state.add('Intro', ScheduleState, false);
+        //this.state.add('Intro', CryptoState, false);
 
 
 

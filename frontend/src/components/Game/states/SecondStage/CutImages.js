@@ -211,7 +211,7 @@ startGame() {
     smartSetHeight(warning, 200);
     this.warning = warning;
 
-    this.firstWarning = this.game.add.text(735, 65, 'Розплутайте кабелі,\nповертаючи частини головоломки', {
+    this.firstWarning = this.game.add.text(750, 65, 'Розплутайте кабелі,\nповертаючи частини головоломки', {
         font: "Leftonade",
         fontSize: 30,
         fill: 'white',
@@ -220,7 +220,7 @@ startGame() {
     });
     this.firstWarning.alpha = 0;
 
-    this.secondWarning = this.game.add.text(735, 45, 'Вітаємо! Ви отримали навички\nмонтажа локальної мережі та\nполіпшили ставлення викладача!', {
+    this.secondWarning = this.game.add.text(750, 45, 'Вітаємо! Ви отримали навички\nмонтажа локальної мережі та\nполіпшили ставлення викладача!', {
         font: "Leftonade",
         fontSize: 30,
         fill: 'white',

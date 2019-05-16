@@ -236,7 +236,7 @@ export default class Scanner extends Phaser.State {
         smartSetHeight(warning, 200);
         this.warning = warning;
 
-        this.firstWarning = this.game.add.text(720, 40, 'Перетягніть потрібний слой з\nправої nпанелі до основного макету,\nта правильного його розташуйте', {
+        this.firstWarning = this.game.add.text(750, 40, 'Перетягніть потрібний слой з\nправої nпанелі до основного макету,\nта правильного його розташуйте', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',
@@ -245,7 +245,7 @@ export default class Scanner extends Phaser.State {
         });
         this.firstWarning.alpha = 0;
 
-        this.secondWarning = this.game.add.text(720, 40, 'Вітаємо! Ви отримали навички\nвеб-дизайну і nполіпшили ставлення\nвикладача!', {
+        this.secondWarning = this.game.add.text(750, 40, 'Вітаємо! Ви отримали навички\nвеб-дизайну і поліпшили ставлення\nвикладача!', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',
