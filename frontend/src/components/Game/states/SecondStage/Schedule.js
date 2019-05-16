@@ -299,7 +299,7 @@ export default class ScheduleState extends Phaser.State {
             subjectName.inputEnabled = true;
             subjectName.input.useHandCursor = true;
             subjectName.events.onInputDown.add(() => {
-                this.game.add.tween(this.teacher).to({
+                this.game.add.tween(this.teacher2).to({
                     alpha: 1
                 }, 1500, Phaser.Easing.Cubic.InOut)
                     .start();
@@ -307,7 +307,7 @@ export default class ScheduleState extends Phaser.State {
                 this.game.displayDialogLine('Тарас Денисович', subject.descriptionTarget,()=>{
                     this.game.displayDialogLine('Тарас Денисович', subject.descriptionKnowledge,
                         ()=>{
-                            this.game.add.tween(this.teacher).to({
+                            this.game.add.tween(this.teacher2).to({
                                 alpha: 0
                             }, 1500, Phaser.Easing.Cubic.InOut)
                                 .start();
@@ -395,13 +395,13 @@ export default class ScheduleState extends Phaser.State {
     handleCheckboxClick (checkbox) {
         if (!checkbox.isChecked) {
             if (this.count === 4) {
-                this.game.add.tween(this.teacher).to({
+                this.game.add.tween(this.teacher2).to({
                     alpha: 1
                 }, 1500, Phaser.Easing.Cubic.InOut)
                     .start();
 
                 this.game.displayDialogLine('Тарас Денисович', "Можливо обрати не більше 4 вибіркових предметів",()=>{
-                    this.game.add.tween(this.teacher).to({
+                    this.game.add.tween(this.teacher2).to({
                         alpha: 0
                     }, 1500, Phaser.Easing.Cubic.InOut)
                         .start();

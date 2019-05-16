@@ -109,7 +109,7 @@ export default class QuestionsState extends Phaser.State {
             "Сфера ІТ ... розвивається, і хороший ІТ-фахівець ніколи не залишиться без роботи", 
             ["а) повільно","б) динамічно","в) стрибкоподібно","г) невпевнено"], 
             [false,true,false,false],  
-            this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
+            this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect, this.FSF.deleteText, oneTask, this.cloud);
         console.log(this.mistakes);
@@ -119,7 +119,7 @@ export default class QuestionsState extends Phaser.State {
             "Комп'ютерні науки є дуже ... спеціальністю", 
             ["а) престижною","б) героїчною","в) магічною","г) застарілою"], 
             [true,false,false,false],  
-            this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
+            this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect, this.FSF.deleteText, oneTask, this.cloud);
 
@@ -128,7 +128,7 @@ export default class QuestionsState extends Phaser.State {
             "Ми підготуємо вас до проектування, розробки та супроводу ... систем", 
             ["а) інформаційних","б) телекомунікаційних","в) зоряних","г) геоінформаційних"], 
             [true,false,false,false],  
-            this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
+            this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect,this.FSF.deleteText,oneTask,this.cloud)
 
@@ -137,7 +137,7 @@ export default class QuestionsState extends Phaser.State {
             "На спеціальності 'КН' ... вивчають графіку, комп'ютерні мережі і розробку програмного забезпечення", 
             ["а) викладачі","б) студенти","в) бабусі","г) чаклуни"], 
             [false,true,false,false],  
-            this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
+            this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect,this.FSF.deleteText,oneTask,this.cloud)
         
@@ -146,7 +146,7 @@ export default class QuestionsState extends Phaser.State {
             "Спеціаліст з інформаційних технологій може реалізувати себе у ... напрямках.", 
             ["а) безлічі","б) двох","в) небагатьох","г) гуманітарних"], 
             [true,false,false,false],  
-            this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
+            this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect,this.FSF.deleteText,oneTask,this.cloud)
 
@@ -155,7 +155,7 @@ export default class QuestionsState extends Phaser.State {
             "Після навчання, ви можете влаштуватися на посаду ... продюсера", 
             ["а) театрального","б) музичного","в) кiно","г) веб"], 
             [false,false,false,true],  
-            this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
+            this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect,this.FSF.deleteText,oneTask,this.cloud)
        
@@ -191,7 +191,7 @@ export default class QuestionsState extends Phaser.State {
             "Підвищення кваліфікації призначене для ... знань, обраної вами професії", 
             ["а) узагальнення","б) успадкування","в) поглиблення","г) погiршення"], 
             [false,false,true,false],  
-            this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
+            this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect,this.FSF.deleteText,oneTask,this.cloud)     
 
@@ -200,7 +200,7 @@ export default class QuestionsState extends Phaser.State {
             "Почавши свою кар’єру як Junior, Ви можете досягти звання ...", 
             ["а) Senior","б) Master","в) Mister","г) Don"], 
             [true,false,false,false],  
-            this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
+            this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect,this.FSF.deleteText,oneTask,this.cloud)  
 
@@ -286,7 +286,7 @@ export default class QuestionsState extends Phaser.State {
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
         let choices = this.game.getChoice();
         choices.then(res => {
-            this.friend = res.friend;
+			this.friend = res.friend;
         });
 
     }
@@ -341,7 +341,7 @@ export default class QuestionsState extends Phaser.State {
 
         this.teacher = this.FSF.makeImg(1260, 0, 'teacher', 700, 900);
 
-        this.fake_dialog = this.FSF.makeImg(0, 850, 'fake_dialog_background', 1920, 400);
+        this.fake_dialog = this.FSF.makeImg(40, 800, 'fake_dialog_background', 1820, 400);
         this.cloud = this.FSF.makeImg(10, 580, 'cloud', 400, 200);
 
         //Уведомления

@@ -1,6 +1,7 @@
 import autobind from 'autobind-decorator';
 
 import {smartSetHeight} from '../../../utils';
+import SSF from '../../../states/SecondStageFunctions';
 
 const CELL_WIDTH = 60;
 const DEFAULT_TINT = 0xffffff;
@@ -219,12 +220,19 @@ export default class FillWordsComponent {
                 descriptions = descriptions.filter((item) => {
                     return item !== description
                 });
-                this.game.add.tween(this.teacher).to({
+                this.SSF = {...SSF};
+                for (let key in this.SSF) {
+                    this.SSF[key] = this.SSF[key].bind(this);
+                }
+                
+                this.teacher2 = this.SSF.makeImg(1250, 50, 'teacher', 700, 900);
+
+                this.game.add.tween(this.teacher2).to({
                     alpha: 1
                 }, 1500, Phaser.Easing.Cubic.InOut)
                     .start();
                 this.game.displayDialogLine('Тарас Денисович', description, () => {
-                    this.game.add.tween(this.teacher).to({
+                    this.game.add.tween(this.teacher2).to({
                         alpha: 0
                     }, 1500, Phaser.Easing.Cubic.InOut)
                         .start();

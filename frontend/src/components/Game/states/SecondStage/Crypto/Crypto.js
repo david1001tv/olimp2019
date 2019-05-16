@@ -51,9 +51,8 @@ const TOGGLE_KEYBOARD_OFFSET = 50;
 
 export default class CryptoState extends Phaser.State {
     * gen() {
-
         let context = this;
-
+        
         setTimeout(() => this.next(), 3000);
         this.game.camera.flash(0x000000, 3000, true);
         yield;
@@ -209,8 +208,10 @@ export default class CryptoState extends Phaser.State {
         yield;
 
         this.teacherDisappears(function() {
-            context.warning.text = 'Відмінна робота! Ти ознайомився з основними видам алгоритмів шифрування та\
-            маєш можливість самостійно обрати для себе найкращий!'
+            context.warning.text = context.game.add.text(625, 35, 'Відмінна робота! Ти ознайомився з\nосновними видам алгоритмів шифрування\nта маєш можливість самостійно\nобрати для себе найкращий!', {
+                fontSize: 29,
+                font: 'Leftonade',
+            })
             context.toggleWarning(1, function() {
                 context.toggleWarning(0, function() {
                     context.game.camera.fade(0x000000, 1500, true);

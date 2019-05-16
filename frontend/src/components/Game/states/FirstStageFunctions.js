@@ -8,8 +8,8 @@ const FSF = {
         return slide;
     },
 
-    makeAnswer: function(text, x, y, size, bad_x, isRight, check, addText){
-    let answer = addText(text,x,y,size);
+    makeAnswer: function(text, x, y, size, bad_x, isRight, check, addTextSimple){
+    let answer = addTextSimple(text,x,y,size);
     answer.isRight = isRight;
     answer.coord_x = bad_x;
     answer.coord_y = y;
@@ -17,11 +17,11 @@ const FSF = {
     return answer;
     },
 
-    getMasAnswer: function(text, is_Right, makeAnswer, addText){
-        let firstAnswer = makeAnswer(text[0], 140, 630, 24, 100, is_Right[0], false,addText);
-        let secondAnswer = makeAnswer(text[1], 140, 670, 24, 100, is_Right[1], false,addText);
-        let thirdAnswer = makeAnswer(text[2], 140, 710, 24, 100, is_Right[2], false,addText);
-        let fourthAnswer = makeAnswer(text[3], 140, 750, 24, 100, is_Right[3], false,addText);
+    getMasAnswer: function(text, is_Right, makeAnswer, addTextSimple){
+        let firstAnswer = makeAnswer(text[0], 140, 630, 24, 100, is_Right[0], false, addTextSimple);
+        let secondAnswer = makeAnswer(text[1], 140, 670, 24, 100, is_Right[1], false, addTextSimple);
+        let thirdAnswer = makeAnswer(text[2], 140, 710, 24, 100, is_Right[2], false, addTextSimple);
+        let fourthAnswer = makeAnswer(text[3], 140, 750, 24, 100, is_Right[3], false, addTextSimple);
         return [firstAnswer, secondAnswer, thirdAnswer, fourthAnswer];
     },
 
@@ -33,14 +33,14 @@ const FSF = {
     },
 
     oneTask: function(slide, cloud, teacher_text, answers_text, answers_is_right, 
-        addText,makeAnswer,getMasAnswer,addCheck, setTextAlpha){
+        addText, addTextSimple, makeAnswer, getMasAnswer, addCheck, setTextAlpha){
         let dialog_author,dialog_text,answers;
-        dialog_author=addText("Анастасія Марківна", 220, 870, 30);
-        dialog_text=addText(teacher_text, 220, 920, 30);
+        dialog_author=addText("Анастасія Марківна", 250, 830, 32);
+        dialog_text=addTextSimple(teacher_text, 250, 870, 30);
         answers = getMasAnswer(
             answers_text, 
             answers_is_right, 
-            makeAnswer, addText);  
+            makeAnswer, addTextSimple);  
         setTextAlpha(dialog_author,dialog_text,answers,false);
         this.game.add.tween(slide).to({
             alpha: 1
@@ -129,6 +129,20 @@ const FSF = {
     },
 
     addText: function(str, posX, posY, fontSize, todoId){
+        let tmp = this.game.add.text(posX, posY, str, {
+                font: fontSize + 'px Pribambas',
+                fill: '#73cfff',
+                fontStyle: 'bold'
+                //stroke: 'black',
+                //strokeThickness: 4,
+        });
+        if(todoId !== undefined){
+            tmp.todoId = todoId;
+        }
+        return tmp;
+    },
+
+    addTextSimple: function(str, posX, posY, fontSize, todoId){
         let tmp = this.game.add.text(posX, posY, str, {
                 font: fontSize + 'px Leftonade',
                 fill: 'white',
