@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 import {smartSetHeight} from '../../utils';
 import {subjectsArray} from "../../DataForSchedule/subjects";
 import SSF from '../../states/SecondStageFunctions';
-
 var PostIntro = require("../FirstStage/PostIntro.js");
 
 const style = {
@@ -183,6 +182,12 @@ export default class ScheduleState extends Phaser.State {
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
+        this.massOk.forEach((index) => {
+            this.game.add.tween(index).to({
+                alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+        });
 
         this.game.displayDialogLine('Голос', 'Ви ознайомились з навчальним планом кафедри, визначили важливі на Вашу думку дисципліни, та розподілили часи на викладання основних. Втомленні але задоволені Ви повертаєтесь до дому', () => this.next());
         yield;
@@ -200,6 +205,7 @@ export default class ScheduleState extends Phaser.State {
     init() {
         this._gen = this.gen();
         this.game.phone.clearTodos();
+        this.massOk = [];
 
     }
 
@@ -384,6 +390,7 @@ export default class ScheduleState extends Phaser.State {
             }
             checkbox.ok = this.game.add.image(checkbox.world.x, checkbox.world.y - 5, 'ok');
             checkbox.isChecked = true;
+            this.massOk.push(checkbox.ok);
             this.count++;
         } else {
             checkbox.ok.destroy();

@@ -9,27 +9,26 @@ import BootState from './states/Boot';
 
 //import IntroState from './states/FirstStage/Intro';
 
-//Этап 1
-//Интро
+//Этап 1 +
+//Интро +
 import IntroState from './states/FirstStage/Intro';
-//ПостИнтро
+//ПостИнтро +
 import PostIntroState from './states/FirstStage/PostIntro';
-//Квест 1 "Вставить слова" +
+//Квест 1 "Вставить слова" + 
 import QuestionsState from './states/FirstStage/Questions';
-import TransitionToSecondStageState from './states/FirstStage/TransitionToSecondStage';
 
-//Этап 2
+//Этап 2 +
 //Интро 1 "Расписание" +
 import ScheduleState from './states/SecondStage/Schedule';
 //Квест 2 "Филворд" +
 import FillwordsState from './states/SecondStage/FillWords';
-//Квест 3 "Собери макет" +
+//Квест 3 "Собери макет" + 
 import LayoutPuzzleState from './states/SecondStage/LayoutPuzzle';
 //Квест 4 "Ввод тегов" +
 import TagsState from './states/SecondStage/Tags';
-//Квест 5 "Собери проводку" +
+//Квест 5 "Собери проводку" + 
 import CutImagesState from './states/SecondStage/CutImages';
-//Квест 6 "Научная работа (карточки)" +
+//Квест 6 "Научная работа (карточки)" + 
 import CardsState from './states/SecondStage/Cards';
 //Квест 7 "Магистратура" +
 import MagistracyState from './states/SecondStage/Magistracy';
@@ -40,9 +39,7 @@ import RobotState from './states/SecondStage/Robot';
 //Аутро 10 "Диплом магистра"
 import OutroState from './states/SecondStage/Outro';
 
-import TransitionToThirdStageState from './states/SecondStage/TransitionToThirdStage';
-
-//Этап 3
+//Этап 3 +
 //Квест 1 "Лабиринт" +
 import LabyrinthState from './states/ThirdStage/Labyrinth';
 //Сцена 2 "Собеседование программист" +
@@ -55,10 +52,13 @@ import ThirdInterviewState from './states/ThirdStage/ThirdInterview';
 import CrossState from './states/ThirdStage/Cross';
 
 //Этап 4
-//Квест 1 "Поиск предметов" -
+//Квест 1 "Поиск предметов" +
 import ConferenceState from './states/FourthStage/Conference';
 //Квест 2 "Три в ряд" -
-//Квест 3 "Тестирование и отлавливание багов" -
+//Квест 3 "Тестирование и отлавливание багов" +
+import DebuggingState from './states/FourthStage/fixBugs';
+//Конец 4 +
+import EndState from './states/FourthStage/End';
 
 
 import config from './config';
@@ -79,8 +79,8 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-
-
+        
+        /*
         //Stage 1 +
         //Intro +
         this.state.add('Intro', IntroState, false);
@@ -112,7 +112,7 @@ class Game extends Phaser.Game {
         this.state.add("Outro", OutroState, false);
 
         //Stage 3 +
-        //Labyrinth
+        //Labyrinth 
         this.state.add('Labyrinth', LabyrinthState, false);
         this.state.add('FirstInterview', FirstInterviewState, false);
         this.state.add('SecondInterview', SecondInterviewState, false);
@@ -124,13 +124,16 @@ class Game extends Phaser.Game {
         //FindItems (Conferenct) +
         this.state.add('Conference', ConferenceState, false);
         //ThreeInARow -
-        //TestingAndDebugging -
+        //TestingAndDebugging +
+        this.state.add('Debugging', DebuggingState, false);
+        //End +
+        this.state.add('End', EndState, false);
 
-
+        
         this.state.add('Final', new Phaser.State(), false);
+        */
 
-
-        // this.state.add('Intro', ConferenceState, false);
+        this.state.add('Intro', ScheduleState, false);
 
 
 

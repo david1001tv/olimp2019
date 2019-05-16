@@ -5,22 +5,26 @@ import {Link, Redirect, withRouter} from 'react-router-dom';
 class Regulations extends Component{
 
 
-    state = {
-        text:  `
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, aliquid culpa officiis asperiores praesentium nesciunt velit excepturi magnam, rerum est odit omnis nisi fugiat et eaque qui iste maxime consectetur.
-        Id rerum numquam iure minima aperiam distinctio quibusdam assumenda ut accusantium optio commodi nulla consectetur a, esse quas, excepturi laudantium. Doloremque iste perferendis alias quis tempore fugiat nobis accusamus magni.
-        Nam, qui officiis labore perspiciatis magni eius explicabo eaque inventore iusto eveniet reiciendis earum debitis doloribus voluptate quasi obcaecati enim aliquam, at voluptatibus sit in. Incidunt autem nisi veniam minus.
-        Blanditiis sunt obcaecati voluptas, quod mollitia, aperiam, recusandae velit esse minus natus veritatis veniam nam maiores illum saepe praesentium quibusdam nesciunt dignissimos fugiat expedita. Laboriosam quis corrupti ex distinctio cupiditate.
-        Esse, cupiditate veritatis rerum labore deleniti dolorem repellendus voluptatibus sed laudantium! Minus sunt sint, dolore doloremque veniam nulla ipsam cumque mollitia? Culpa illo eius explicabo labore excepturi, in quia? Recusandae?
-        `
-    }
-
     render(){
         return(
             <div className="regulation-text">
-                <p>
-                    {this.state.text}
-                </p>
+                <p>При проходженні квестів на нашому інформаційному порталі ви дізнаєтеся про спеціальність 
+        "Комп'ютерні науки". Вам буде забезпечено можливість познайомиться з трьома напрямками:</p>
+        <ul>
+        <li>Веб дизайн та веб-розробка</li>
+        <li>Програмування</li>
+        <li>Комп'ютерні мережі</li>
+        </ul>
+        <p>Для кожного напряму на кафедрі є свої дисципліни, які виховують з абітурієнта фахівця інформаційних 
+        технологій. Для веб-дизайну це основи роботи в графічних редакторах, таких як: Adobe Photoshop, 
+        CorelDRAW, Illustration, основи веб-розробки (HTML, CSS, PHP, JavaScript), робота з різними фреймворками 
+        (Bootstrap, laravel, ASP.NET). Для програмування наявний широкий спект дисциплін, таких як: алгоритмізація 
+        і програмування, теорія алгоритмів, об'єктно-орієнтоване програмування (С++), технологія розробки 
+        кроссплатформенних додатків (Qt, STL, OpenGL), створення додатків для платформи Microsoft.Net (Windows Form, ADO .Net, ASP.NET).
+         Для комп'ютерних мереж: побудова і адміністрування локальних і корпоративних комп'ютерних мереж.
+          Під час проходження квестів ви ознайомитеся з кожним напрямком. Після цього вам буде надана можливість обрати свій 
+          подальший шлях: ви можете спробувати попрацювати на імпровізованій фірмі або продовжити вдосконалювати свої навички.</p>
+        
             </div>
         );
     }

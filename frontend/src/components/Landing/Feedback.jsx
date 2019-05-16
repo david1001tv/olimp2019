@@ -3,6 +3,7 @@ import {Link, Redirect, withRouter} from 'react-router-dom';
 import {Button, TextField, LinearProgress, Paper} from 'react-md';
 import validate from 'validate.js';
 import autobind from 'autobind-decorator';
+import fLine from '../../img/line_feedb.png';
 
 import {sendFeedback} from '~api';
 
@@ -94,6 +95,7 @@ class Feedback extends Component {
                     <h3>Зворотній зв'язок</h3>
                 </div>
                 <div className="md-text-center">
+                <img className="line_f" src={fLine} alt="feedbeak" />
                 </div>
                 <form
                     onSubmit={this.handleSubmit}
@@ -101,26 +103,32 @@ class Feedback extends Component {
                     <div>
                         <div>
                             <TextField
+                                block={true}
+                                className="wrap_em"
+                                inputClassName="email_style"
                                 id="email"
                                 type="email"
+                                placeholder="email"
                                 value={email}
                                 onChange={value => this.handleChange(value, 'email')}
-                                label="e-mail"
-                                onBlur={() => this.validateField('email')}
-                                error={!!this.state.errors.email.length}
-                                errorText={this.state.errors.email.map(e => <div>{e}</div>)}
+                                // onBlur={() => this.validateField('email')}
+                                // error={!!this.state.errors.email.length}
+                                // errorText={this.state.errors.email.map(e => <div>{e}</div>)}
                             />
                         </div>
                         <div>
                             <TextField
+                                block={true}
+                                className="wrap_em"
+                                inputClassName="email_style"
                                 id="message"
                                 value={message}
                                 onChange={value => this.handleChange(value, 'message')}
-                                label="Повiдомлення"
+                                placeholder="Повiдомлення"
                                 multiLine={true}
-                                rows={1}
-                                error={!!this.state.errors.message.length}
-                                errorText={this.state.errors.message.map(e => <div>{e}</div>)}
+                                rows={5}
+                                // error={!!this.state.errors.message.length}
+                                // errorText={this.state.errors.message.map(e => <div>{e}</div>)}
                             />
                         </div>
                     </div>
@@ -131,9 +139,10 @@ class Feedback extends Component {
                         {this.state.isLoading ? <LinearProgress /> : null}
                         <button
                             type="submit"
-                            className="drawn-btn drawn-btn__feedback"
+                            className="fedd"
                             disabled={this.state.isLoading}
                         >
+                        Надіслати
                         </button>
                     </div>
                 </form>
