@@ -125,9 +125,9 @@ class ProgressManager {
         }
     }
 
-    saveChoice(friend, science, magistracy) {
+    saveChoice(friend, science, magistracy, profession) {
         if (isAuthenticated()) {
-            sendChoice({ friend, science, magistracy });
+            sendChoice({ friend, science, magistracy, profession });
         }
     }
 

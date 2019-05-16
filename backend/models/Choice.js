@@ -22,6 +22,11 @@ module.exports = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: true,
             default: false,
+        },
+        profession: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            default: '',
         }
     }, {
         timestamps: false,
