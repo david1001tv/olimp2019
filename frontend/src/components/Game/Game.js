@@ -150,8 +150,8 @@ class Game extends Phaser.Game {
         // }
     }
 
-    saveChoice(friend = false, science = false, magistracy = false) {
-        progressManager.saveChoice(friend, science, magistracy);
+    saveChoice(friend = false, science = false, magistracy = false, profession = '') {
+        progressManager.saveChoice(friend, science, magistracy, profession);
     }
 
     @autobind
