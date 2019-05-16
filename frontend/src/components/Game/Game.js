@@ -121,19 +121,18 @@ class Game extends Phaser.Game {
         this.state.add('Cross', CrossState, false);
 
         //Stage 4 -
-        //FindItems (Conferenct) +
+        //FindItems (Conference) +
         this.state.add('Conference', ConferenceState, false);
         //ThreeInARow -
         //TestingAndDebugging +
         this.state.add('Debugging', DebuggingState, false);
         //End +
         this.state.add('End', EndState, false);
-
-        
+   
         this.state.add('Final', new Phaser.State(), false);
 
 
-        // this.state.add('Intro', ScheduleState, false);
+        //this.state.add('Intro', ConferenceState, false);
 
 
 

@@ -134,7 +134,7 @@ export default class FillwordsState extends Phaser.State {
         });
         this.firstWarning.alpha = 0;
 
-        this.thirdWarning = this.game.add.text(735, 40, 'Вітаємо! Тепер Ви можете\nрозмовляти загадковою мовою\nпрограмістів', {
+        this.thirdWarning = this.game.add.text(780, 40, 'Вітаємо! Тепер Ви можете\nрозмовляти загадковою мовою\nпрограмістів', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',

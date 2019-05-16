@@ -257,7 +257,7 @@ export default class QuestionsState extends Phaser.State {
         this.go = false;
 
         //кол-во ошибок
-        this.mistakes = 0;
+        this.mistakes = 10;
 
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
         let choices = this.game.getChoice();
@@ -303,7 +303,7 @@ export default class QuestionsState extends Phaser.State {
 
         //Уведомление: "Окончание квеста (результат)"
         if (this.mistakes <= 1) {
-            this.firstWarning = this.game.add.text(725, 45, 'Ви уважно слухали викладача і\nотримали повніше уявлення\nпро професію', {
+            this.firstWarning = this.game.add.text(760, 45, 'Ви уважно слухали викладача і\nотримали повніше уявлення\nпро професію', {
                 font: "Leftonade",
                 fontSize: 30,
                 fill: 'white',
@@ -312,7 +312,7 @@ export default class QuestionsState extends Phaser.State {
             });
         }
         else if (this.mistakes > 1 ) {
-            this.firstWarning = this.game.add.text(730, 60, 'Ви здобули базове уявлення про\nпрофесію. Варто бути уважнішим', {
+            this.firstWarning = this.game.add.text(760, 60, 'Ви здобули базове уявлення про\nпрофесію. Варто бути уважнішим', {
                 font: "Leftonade",
                 fontSize: 30,
                 fill: 'white',
@@ -323,7 +323,7 @@ export default class QuestionsState extends Phaser.State {
         this.firstWarning.alpha = 0;
 
         //Уведомление: "Подсказка, что необходимо выбрать толпу"
-        this.secondWarning = this.game.add.text(725, 85, 'Менi потрiбно обрати вiрну групу', {
+        this.secondWarning = this.game.add.text(740, 85, 'Менi потрiбно обрати вiрну групу', {
             font: "Leftonade",
             fontSize: 33,
             fill: 'white',

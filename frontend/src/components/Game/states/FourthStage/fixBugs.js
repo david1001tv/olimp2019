@@ -108,9 +108,9 @@ export default class testGame extends Phaser.State {
         smartSetHeight(warning, 180);
         this.warning = warning;
 
-        this.firstWarning = this.game.add.text(750, 45, 'Натискаючи на "баги"\nпроекту позбудьтесь їх', {
+        this.firstWarning = this.game.add.text(770, 45, 'Натискаючи на "баги"\nпроекту позбудьтесь їх', {
             font: "Leftonade",
-            fontSize: 40,
+            fontSize: 35,
             fill: 'white',
             stroke: 'black',
             strokeThickness: 8,
