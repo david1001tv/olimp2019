@@ -287,17 +287,19 @@ export default class ThreeInRowState extends Phaser.State {
         var matches = me.getMatches(me.tileGrid);
 
         //If there are matches, remove them
-        if(matches.length > 0){
+        if(matches.length > 0) {
 
             if(matches.length > 1) {
-                var temp = [];
                 for(var i = 0; i < matches.length; i++) {
-                    for(var j = 0; j < matches[i].length; j++) {
-                        temp.push(matches[i][j]);
+                    if(i < (matches.length - 1)) {
+                        for(var j = 0; j < matches[i].length; j++) {
+                            var index = matches[i+1].indexOf(matches[i][j]);
+                            if(index !== -1) {
+                                matches[i].splice(index, 1);
+                            } 
+                        }
                     }
                 }
-                matches = [...new Set(temp)];
-                console.log(matches)
             }
 
             //Remove the tiles
