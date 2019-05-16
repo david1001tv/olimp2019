@@ -22,7 +22,7 @@ export default class WWHState extends Phaser.State {
             .start();
 
         //Данные из БД
-        if (this.friend == 0){
+        if (!this.friend){
             this.game.add.tween(this.warning).to({
                 alpha: 1
             }, 1500, Phaser.Easing.Cubic.InOut)
@@ -301,8 +301,11 @@ export default class WWHState extends Phaser.State {
         this.game.phone.setTime('11:00');
         this.game.phone.setDate('21.07.18');
 
-        //Подгрузить из бд, с кем выбор из 1 этапа: 0 - girl; 1 - man
-        this.friend = 1;
+        //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
+        let choices = this.game.getChoice();
+        choices.then(res => {
+            this.friend = res.choice.friend;
+        });
     }
 
     preload() {

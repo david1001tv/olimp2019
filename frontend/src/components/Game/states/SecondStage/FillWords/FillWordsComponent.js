@@ -45,6 +45,8 @@ function handleFocusChange() {
 
 export default class FillWordsComponent {
     constructor(game, teacher, objArr, posX, posY) {
+        this.count = 0;
+        this.wordsCount = words.length;
         this.game = game;
         this.teacher = teacher;
         this.cells = {};
@@ -227,7 +229,26 @@ export default class FillWordsComponent {
                     }, 1500, Phaser.Easing.Cubic.InOut)
                         .start();
                     if (!words.length) {
-                        this.game.displayDialogLine('Голос', "О це була дійсно корисна пара! Ви згадуєте уривки розмов старшокурсників, що почули біля кафедри, і більше не відчуваєте себе невпевнено", () => this.game.nextState(0));
+                        let score = 0;
+                        console.log(this.count - this.wordsCount);
+                        switch (true) {
+                            case (this.count - this.wordsCount) < 20:
+                                score = 200;
+                                break;
+                            case (this.count - this.wordsCount) < 23:
+                                score = 175;
+                                break;
+                            case (this.count - this.wordsCount) < 25:
+                                score = 150;
+                                break;
+                            case (this.count - this.wordsCount) < 28:
+                                score = 125;
+                                break;
+                            default:
+                                score = 100;
+                                break;
+                        }
+                        this.game.displayDialogLine('Голос', "О це була дійсно корисна пара! Ви згадуєте уривки розмов старшокурсників, що почули біля кафедри, і більше не відчуваєте себе невпевнено", () => this.game.nextState(score));
                     }
                 });
             }

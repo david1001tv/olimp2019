@@ -1,4 +1,4 @@
-import { isAuthenticated, sendHistory } from '~api';
+import { isAuthenticated, sendHistory, sendChoice, getChoice, sendSubjects, getHistory } from '~api';
 import PubSub from 'pubsub-js';
 import autobind from 'autobind-decorator';
 
@@ -8,37 +8,47 @@ export const UNAVAILABLE = 'unavailable';
 
 const states = [
     'Intro',
-    'Docs',
-    'Scanner',
-    'Browser',
-    'GrannyBad',
-    'Cross',
-    'WaterAlyoshin',
-    'WaterMarket',
-    'Translate',
-    'Proffs',
-    'Audience',
-    'Grades',
-    'thirdIntro',
+    'PostIntro',
+    'Questions',
+    'Schedule',
+    'FillWords',
+    'LayoutPuzzle',
+    'Tags',
+    'CutImages',
+    'Cards',
+    'Magistracy',
+    'Crypto',
+    'Robot',
+    'Outro',
     'Labyrinth',
-    'CodeEditor',
-    'Dance',
-    'Final',
+    'FirstInterview',
+    'SecondInterview',
+    'ThirdInterview',
+    'Cross',
+    'Conference',
+    'threeInRow',
+    'fixBugs',
+    'End'
 ];
 
 const stages = [
     {
         start: 'Intro',
-        end: 'Browser'
+        end: 'Questions'
     },
     {
-        start: 'GrannyBad',
-        end: 'Proffs',
+        start: 'Schedule',
+        end: 'Outro',
     },
     {
-        start: 'thirdIntro',
-        end: 'Final',
+        start: 'Labyrinth',
+        end: 'Cross',
+    },
+    {
+        start: 'Conference',
+        end: 'End',
     }
+
 ];
 
 class ProgressManager {
@@ -112,6 +122,30 @@ class ProgressManager {
                 this._entriesQueue.push({state, time, score});
             }
             localStorage.setItem('entriesQueue', JSON.stringify(this._entriesQueue));
+        }
+    }
+
+    saveChoice(friend, science, magistracy) {
+        if (isAuthenticated()) {
+            sendChoice({ friend, science, magistracy });
+        }
+    }
+
+    getChoice() {
+        if (isAuthenticated()) {
+            return getChoice();
+        }
+    }
+
+    saveSubjects(subjects) {
+        if (isAuthenticated()) {
+            sendSubjects(subjects);
+        }
+    }
+
+    getHistory() {
+        if(isAuthenticated()) {
+            return getHistory();
         }
     }
 

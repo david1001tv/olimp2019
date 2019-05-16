@@ -19,16 +19,16 @@ router.post('/', async function (req, res) {
             where: {user_id:req.decodedToken.userId}
         });
         if (!choice) {
-            await Choice.create({
+            choice = await Choice.create({
                 user_id: req.decodedToken.userId,
                 friend: friend,
                 magistracy: magistracy,
                 science: science
             });
         } else {
-            choice.friend = friend || choice.friend;
-            choice.magistracy = magistracy || choice.magistracy;
-            choice.science = science || choice.science;
+            choice.friend = friend !== null ? friend : choice.friend;
+            choice.magistracy = magistracy !== null ? magistracy : choice.magistracy;
+            choice.science = science !== null ? science : choice.science;
             choice.save();
         }
 

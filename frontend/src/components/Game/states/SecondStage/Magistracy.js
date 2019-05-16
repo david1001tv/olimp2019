@@ -122,7 +122,7 @@ export default class Scanner extends Phaser.State {
         yield;
 
         //Пред. выбор
-        if (this.friend == 0){
+        if (!this.friend){
             this.game.add.tween(this.warning).to({
                 alpha: 1
             }, 1500, Phaser.Easing.Cubic.InOut)
@@ -289,10 +289,25 @@ export default class Scanner extends Phaser.State {
         this._gen = this.gen();
 
         //total score
-        this.score = 100;
+        this.score = 0;
 
-        //0 - girl, 1 - man
-        this.friend = 1;
+        //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
+        let choices = this.game.getChoice();
+        choices.then(res => {
+            this.friend = res.choice.friend;
+        });
+
+        let history = this.game.getHistory();
+        history.then(res => {
+            this.history = res;
+        });
+
+        this.history.forEach(state => {
+            if (state.score) {
+                this.score += state.score;
+            }
+        });
+        this.score /= 10;
 
         this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);

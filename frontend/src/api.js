@@ -1,10 +1,10 @@
 let token = localStorage.getItem('token');
 // let token = '';
-let API_URL;
-if (window.location.port)
-    API_URL = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/api`;
-else
-    API_URL = `${window.location.protocol}//${window.location.hostname}/api`;
+let API_URL = 'http://127.0.0.1:8090/api';
+// if (window.location.port)
+//     API_URL = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/api`;
+// else
+//     API_URL = `${window.location.protocol}//${window.location.hostname}/api`;
 
 import PubSub from 'pubsub-js';
 
@@ -162,6 +162,45 @@ export async function toggleLike() {
 export async function getReport() {
     const response = await fetch(`${API_URL}/report/json`, {
         method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    }).then(res => res.json());
+
+    return response;
+}
+
+export async function sendChoice(data) {
+    const response = await fetch(`${API_URL}/choice`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    }).then(res => res.json());
+
+    return response;
+}
+
+export async function getChoice() {
+    const response = await fetch(`${API_URL}/choice`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+    }).then(res => res.json());
+
+    return response;
+}
+
+export async function sendSubjects(data) {
+    console.log(data);
+    const response = await fetch(`${API_URL}/subjects`, {
+        method: 'POST',
+        body: JSON.stringify({subjects: data}),
         headers: {
             'Content-Type': 'application/json',
             'x-access-token': token,

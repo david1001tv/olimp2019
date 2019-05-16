@@ -224,7 +224,6 @@ export default class Scanner extends Phaser.State {
     }
 
     preload() {
-
         this.load.image('bg', './assets/images/2-6 (Cards)/background.png');
         this.load.image('bg2', './assets/images/2-6 (Cards)/background_2.png');
         this.load.image('no', './assets/images/2-6 (Cards)/no.png');
@@ -240,7 +239,6 @@ export default class Scanner extends Phaser.State {
 
         this.load.image('teacher', './assets/images/2-6 (Cards)/teacher.png');
         this.load.image('warning_message', './assets/images/2-6 (Cards)/warning_message.png');
-
     }
 
     create() {

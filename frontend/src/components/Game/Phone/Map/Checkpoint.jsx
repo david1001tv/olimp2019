@@ -28,8 +28,8 @@ export const FLAG = 'flag';
 
 let checkpointTypes = {
     checkpoint: {
-        width: '3.5%',
-        height: '3.7%',
+        width: '6.5%',
+        height: '3.3%',
         image: {
             completed: checkpointCompleted,
             available: checkpointAvailable,
@@ -38,7 +38,7 @@ let checkpointTypes = {
     },
     finish: {
         width: '5%',
-        height: '8%',
+        height: '10%',
         image: {
             completed: finishCompleted,
             available: finishAvailable,
@@ -62,7 +62,7 @@ class Checkpoint extends React.Component {
         const {state, status} = this.props;
         this.props.onClick(state, status);
     }
-    
+
     render() {
         const {
             type,
@@ -125,4 +125,3 @@ Checkpoint.propTypes = {
 };
 
 export default Checkpoint;
-

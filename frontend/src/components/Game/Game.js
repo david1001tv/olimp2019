@@ -80,7 +80,7 @@ class Game extends Phaser.Game {
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
         
-        /*
+
         //Stage 1 +
         //Intro +
         this.state.add('Intro', IntroState, false);
@@ -91,9 +91,9 @@ class Game extends Phaser.Game {
 
         //Stage 2 +
         //Schedule +
-        this.state.add("Shedule", ScheduleState, false);
+        this.state.add("Schedule", ScheduleState, false);
         //Fillword +
-        this.state.add("Fillword", FillwordsState, false);
+        this.state.add("FillWords", FillwordsState, false);
         //LayoutPuzzle +
         this.state.add("LayoutPuzzle", LayoutPuzzleState, false);
         //Tags +
@@ -131,9 +131,9 @@ class Game extends Phaser.Game {
 
         
         this.state.add('Final', new Phaser.State(), false);
-        */
 
-        this.state.add('Intro', ScheduleState, false);
+
+        // this.state.add('Intro', ScheduleState, false);
 
 
 
@@ -156,6 +156,10 @@ class Game extends Phaser.Game {
         // }
     }
 
+    saveChoice(friend = false, science = false, magistracy = false) {
+        progressManager.saveChoice(friend, science, magistracy);
+    }
+
     @autobind
     nextStateForWork(score = null) {
         let time = new Date() - this.startTime;
@@ -170,6 +174,18 @@ class Game extends Phaser.Game {
 
             this.state.start('Boot', true, false, states[currentIndex + 4]);
         // }
+    }
+
+    getChoice() {
+        return progressManager.getChoice();
+    }
+
+    saveSchedule(subjects) {
+        progressManager.saveSubjects(subjects)
+    }
+
+    getHistory() {
+        return progressManager.getHistory();
     }
 
     @autobind

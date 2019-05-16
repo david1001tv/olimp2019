@@ -66,7 +66,7 @@ router.post('/', async function (req, res) {
             where: {user_id:req.decodedToken.userId}
         });
         if (!coeff) {
-            await Coefficients.create({
+            coeff = await Coefficients.create({
                 user_id: req.decodedToken.userId,
                 first_proff: firstProff,
                 second_proff: secondProff,

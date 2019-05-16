@@ -50,8 +50,8 @@ export default class QuestionsState extends Phaser.State {
                 alpha: 1
             }, 1500, Phaser.Easing.Cubic.InOut)
                 .start();
-                
-        if (this.friend == 0){
+
+        if (!this.friend){
             this.game.displayDialogLine('Голос', 'Здається, Ви знаєте, кто така Стильна', () => this.next());
             yield;
         }
@@ -257,12 +257,13 @@ export default class QuestionsState extends Phaser.State {
         this.go = false;
 
         //кол-во ошибок
-        this.mistakes = 0; 
+        this.mistakes = 0;
 
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
-        this.friend = 0;
-
-        
+        let choices = this.game.getChoice();
+        choices.then(res => {
+            this.friend = res.choice.friend;
+        });
     }
 
     preload() {

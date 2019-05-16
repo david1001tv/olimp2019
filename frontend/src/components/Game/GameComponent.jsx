@@ -6,7 +6,7 @@ import progressManager from '../../etc/ProgressManager';
 
 import Game from './Game';
 import FakeBrowser from '~components/FakeBrowser';
-import FixBugs from '~components/FixBugs/FixBugs';
+import FixBugs from '~components/fixBugs';
 
 import {Redirect} from 'react-router-dom';
 

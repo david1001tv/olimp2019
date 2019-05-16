@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 import {smartSetHeight} from '../../utils';
 import {subjectsArray} from "../../DataForSchedule/subjects";
 import SSF from '../../states/SecondStageFunctions';
-var PostIntro = require("../FirstStage/PostIntro.js");
 
 const style = {
     fontSize: 20,
@@ -22,9 +21,10 @@ export default class ScheduleState extends Phaser.State {
         yield;
 
         //пред. выбор
-        if (PostIntro.GirlOrMan == "Girl") {
+        if (!this.friend){
             this.game.displayDialogLine('Голос', 'Атмосфера актового залу, до якого Вас запросили, сповнювала душу почуттям тріумфу. Ось на сцену підійнявся чоловік, якого Ви злякалися на Дні відкритих дверей. Хто б міг подумати, що він - завідувач кафедри Комп\'ютерних наук. Не дивно, що в залі одразу настала абсолютна тиша', () => this.next());
-        } else {
+        }
+        else {
             this.game.displayDialogLine('Голос', 'Атмосфера актового залу, до якого Вас запросили, сповнювала душу почуттям тріумфу. Ось на сцену підійнявся вже знайомий Вам чоловік. Не дивно, що в залі одразу настала абсолютна тиша', () => this.next());
         }
         yield;
@@ -185,8 +185,8 @@ export default class ScheduleState extends Phaser.State {
         this.massOk.forEach((index) => {
             this.game.add.tween(index).to({
                 alpha: 0
-                }, 1500, Phaser.Easing.Cubic.InOut)
-                    .start();
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
         });
 
         this.game.displayDialogLine('Голос', 'Ви ознайомились з навчальним планом кафедри, визначили важливі на Вашу думку дисципліни, та розподілили часи на викладання основних. Втомленні але задоволені Ви повертаєтесь до дому', () => this.next());
@@ -207,6 +207,10 @@ export default class ScheduleState extends Phaser.State {
         this.game.phone.clearTodos();
         this.massOk = [];
 
+        let choices = this.game.getChoice();
+        choices.then(res => {
+            this.friend = res.choice.friend;
+        });
     }
 
     preload() {
@@ -254,7 +258,7 @@ export default class ScheduleState extends Phaser.State {
         this.teacher2 = this.SSF.makeImg(1250, 50, 'teacher2', 700, 900); //network
         this.teacher3 = this.SSF.makeImg(1260, 0, 'teacher3', 700, 900); //design
 
-        let buttonGo = this.game.add.button(1190, 830, 'button_go', () => this.next(), this, 1, 1, 0);
+        let buttonGo = this.game.add.button(1190, 830, 'button_go', () => this.sendSubjects(), this, 1, 1, 0);
         buttonGo.inputEnabled = false;
         buttonGo.alpha = 0;
         this.buttonGo = buttonGo;
@@ -302,12 +306,24 @@ export default class ScheduleState extends Phaser.State {
             subjectName.inputEnabled = true;
             subjectName.input.useHandCursor = true;
             subjectName.events.onInputDown.add(() => {
-                //TODO: add normal displaying of subjects info
-                alert(subject.subjectName);
+                this.game.add.tween(this.teacher).to({
+                    alpha: 1
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+
+                this.game.displayDialogLine('Тарас Денисович', subject.descriptionTarget,()=>{
+                    this.game.displayDialogLine('Тарас Денисович', subject.descriptionKnowledge,
+                        ()=>{
+                            this.game.add.tween(this.teacher).to({
+                                alpha: 0
+                            }, 1500, Phaser.Easing.Cubic.InOut)
+                                .start();
+                        });
+                });
             });
 
             let minusButton = null;
-            let plusButton = null;
+            let plusButton  = null;
             let checkbox = null;
             let hoursText = null;
             if (subject.minusButton && subject.plusButton) {
@@ -355,7 +371,9 @@ export default class ScheduleState extends Phaser.State {
                 min: subject.min,
                 max: subject.max,
                 hoursText: hoursText,
-                subjectObj: subject
+                subjectObj: subject,
+                key: subject.key,
+                name: subject.subjectName
             };
         });
 
@@ -372,7 +390,7 @@ export default class ScheduleState extends Phaser.State {
         this.warning = warning;
 
         this.firstWarning = this.game.add.text(735, 80, 'Цей вибір вплине на Вашу історію', {
-            font: "Leftonade",
+            font: "Pangolin",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',
@@ -381,16 +399,24 @@ export default class ScheduleState extends Phaser.State {
         this.firstWarning.alpha = 0;
     }
 
-    handleCheckboxClick(checkbox) {
+    handleCheckboxClick (checkbox) {
         if (!checkbox.isChecked) {
             if (this.count === 4) {
-                alert('too much optional subjects');
-                // TODO: add message about too much checked optional subjects
+                this.game.add.tween(this.teacher).to({
+                    alpha: 1
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+
+                this.game.displayDialogLine('Тарас Денисович', "Можливо обрати не більше 4 вибіркових предметів",()=>{
+                    this.game.add.tween(this.teacher).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                });
                 return;
             }
             checkbox.ok = this.game.add.image(checkbox.world.x, checkbox.world.y - 5, 'ok');
             checkbox.isChecked = true;
-            this.massOk.push(checkbox.ok);
             this.count++;
         } else {
             checkbox.ok.destroy();
@@ -399,7 +425,7 @@ export default class ScheduleState extends Phaser.State {
         }
     }
 
-    handleMinusClick(button) {
+    handleMinusClick (button) {
         if (this.subjects[button.key].hours - 1 >= this.subjects[button.key].min) {
             this.reduceHours(button.key);
 
@@ -417,7 +443,7 @@ export default class ScheduleState extends Phaser.State {
         }
     }
 
-    handlePlusClick(button) {
+    handlePlusClick (button) {
         if (this.subjects[button.key].hours + 1 <= this.subjects[button.key].max) {
             this.produceHours(button.key);
 
@@ -451,6 +477,22 @@ export default class ScheduleState extends Phaser.State {
 
     addTextOnSprite(x, y, text, style) {
         return this.add.text(x, y, text, style);
+    }
+
+    sendSubjects() {
+        const data = [];
+        for(let key in this.subjects) {
+            data.push({
+                key: this.subjects[key].key,
+                hours: this.subjects[key].hours,
+                is_need: this.subjects[key].checkbox ? this.subjects[key].checkbox.isChecked : true,
+                name: this.subjects[key].name
+            });
+            this.subjects[key].hoursText ? this.subjects[key].hoursText.destroy() : null;
+            this.subjects[key].checkbox ? (this.subjects[key].checkbox.ok ? this.subjects[key].checkbox.ok.destroy() : null) : null;
+        }
+        this.game.saveSchedule(data);
+        this.next();
     }
 
     next() {

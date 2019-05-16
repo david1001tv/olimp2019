@@ -2,8 +2,8 @@ module.exports = [
     'Intro',
     'PostIntro',
     'Questions',
-    'Shedule',
-    'Fillword',
+    'Schedule',
+    'FillWords',
     'LayoutPuzzle',
     'Tags',
     'CutImages',
@@ -19,6 +19,7 @@ module.exports = [
     'Cross',
     'Conference',
     'ThreeInARow',
-    'TestingAndDebugging',
+    'Debugging',
     'Final',
+    'Map'
 ];

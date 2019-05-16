@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "debug": "set NODE_ENV=debug && nodemon ./main.js localhost 8080",
+    "debug": "set NODE_ENV=debug && nodemon ./main.js localhost 8090",
     "api": "set NODE_ENV=production && node main.js"
   },
   "dependencies": {

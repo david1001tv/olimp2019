@@ -49,148 +49,194 @@ class Map extends Component {
                 <div
                     className={`map-label map-label--first map-label map-label--${progressManager.getStageStatus(1)} no-select`}
                 >
-                    <h3>Етап 1</h3>
-                    <h4>Домашні пригоди</h4>
                 </div>
                 <Checkpoint
-                    left="4.3229%"
-                    top="23.7963%"
+                    left="4.0229%"
+                    top="13.7963%"
                     type={FLAG}
                     state="Intro"
                     onClick={this.handleClick}
                     popoverText="Етап 1"
                 />
                 <Checkpoint
-                    left="10.3125%"
-                    top="34.35185%"
+                    left="10%"
+                    top="26%"
                     type={CHECKPOINT}
-                    state="Docs"
+                    state="PostIntro"
                     onClick={this.handleClick}
-                    popoverText="Збір документів"
+                    popoverText="День відкритих дверей"
                 />
                 <Checkpoint
                     left="16.35416667%"
-                    top="38.05555556%"
+                    top="30%"
                     type={CHECKPOINT}
-                    state="Scanner"
+                    state="Questions"
                     onClick={this.handleClick}
-                    popoverText="Скани документів"
-                />
-                <Checkpoint
-                    left="23.48958333%"
-                    top="45.27777778%"
-                    type={CHECKPOINT}
-                    state="Browser"
-                    onClick={this.handleClick}
-                    popoverText="Реєстрація"
+                    popoverText="Інформація"
                 />
                 <div
                     className={`map-label map-label--second map-label map-label--${progressManager.getStageStatus(2)} no-select`}
                 >
-                    <h3>Етап 2</h3>
-                    <h4>Шлях крізь терни до зірок</h4>
                 </div>
                 <Checkpoint
-                    left="35%"
-                    top="40.09259%"
+                    left="24%"
+                    top="25%"
                     type={FLAG}
-                    state="GrannyBad"
+                    state="Schedule"
                     onClick={this.handleClick}
                     popoverText="Етап 2"
                 />
                 <Checkpoint
-                    left="35.625%"
-                    top="57.59259%"
+                    left="26%"
+                    top="40%"
                     type={CHECKPOINT}
-                    state="Cross"
+                    state="FillWords"
                     onClick={this.handleClick}
-                    popoverText="Прохідна"
+                    popoverText="Вступ до комп'ютерних наук"
                 />
                 <Checkpoint
-                    left="39.0625%"
-                    top="66.2963%"
+                    left="28%"
+                    top="46%"
                     type={CHECKPOINT}
-                    state="WaterAlyoshin"
+                    state="LayoutPuzzle"
                     onClick={this.handleClick}
-                    popoverText="Комісія"
+                    popoverText="Веб-дизайн"
                 />
                 <Checkpoint
-                    left="44.5%"
-                    top="71.7%"
+                    left="30%"
+                    top="52%"
                     type={CHECKPOINT}
-                    state="Translate"
+                    state="Tags"
                     onClick={this.handleClick}
-                    popoverText="Переклад"
+                    popoverText="Веб-програмування"
                 />
                 <Checkpoint
-                    left="51.6%"
-                    top="70.8%"
+                    left="32%"
+                    top="58%"
                     type={CHECKPOINT}
-                    state="Proffs"
+                    state="CutImages"
                     onClick={this.handleClick}
-                    popoverText="Знайомство"
+                    popoverText="Комп'ютерні мережі"
                 />
                 <Checkpoint
-                    left="56.7%"
-                    top="65.8%"
+                    left="34%"
+                    top="64%"
                     type={CHECKPOINT}
-                    state="Audience"
+                    state="Cards"
                     onClick={this.handleClick}
-                    popoverText="Співбесіда"
+                    popoverText="Наукова робота"
                 />
                 <Checkpoint
-                    left="58.6%"
-                    top="57.4%"
+                    left="37%"
+                    top="70%"
                     type={CHECKPOINT}
-                    state="Grades"
+                    state="Magistracy"
                     onClick={this.handleClick}
-                    popoverText="Оцінювання"
+                    popoverText="Диплом бакалавра"
+                />
+                <Checkpoint
+                    left="40%"
+                    top="76%"
+                    type={CHECKPOINT}
+                    state="Crypto"
+                    onClick={this.handleClick}
+                    popoverText="Кріптографія"
+                />
+                <Checkpoint
+                    left="44%"
+                    top="82%"
+                    type={CHECKPOINT}
+                    state="Robot"
+                    onClick={this.handleClick}
+                    popoverText="Штучний інтелект"
+                />
+                <Checkpoint
+                    left="47%"
+                    top="88%"
+                    type={CHECKPOINT}
+                    state="Outro"
+                    onClick={this.handleClick}
+                    popoverText="Диплом магістра"
                 />
                 <div
                     className={`map-label map-label--third map-label map-label--${progressManager.getStageStatus(3)} no-select`}
                 >
-                    <h3>Етап 3</h3>
-                    <h4>Gaudeamus igitur</h4>
                 </div>
                 <Checkpoint
-                    left="70.2%"
-                    top="50.5%"
+                    left="56%"
+                    top="75%"
                     type={FLAG}
-                    state="thirdIntro"
+                    state="Labyrinth"
                     onClick={this.handleClick}
                     popoverText="Етап 3"
                 />
                 <Checkpoint
-                    left="73.3%"
-                    top="64.3%"
+                    left="60%"
+                    top="73%"
                     type={CHECKPOINT}
-                    state="Labyrinth"
+                    state="FirstInterview"
                     onClick={this.handleClick}
-                    popoverText="Лабіринт"
+                    popoverText="Перша співбесіда"
                 />
                 <Checkpoint
-                    left="76.9%"
-                    top="71.0%"
+                    left="64%"
+                    top="67%"
                     type={CHECKPOINT}
-                    state="CodeEditor"
+                    state="SecondInterview"
                     onClick={this.handleClick}
-                    popoverText="Лабораторна"
+                    popoverText="Друга співбесіда"
                 />
                 <Checkpoint
-                    left="81.9%"
-                    top="77.6%"
+                    left="68%"
+                    top="61%"
                     type={CHECKPOINT}
-                    state="Dance"
+                    state="ThirdInterview"
                     onClick={this.handleClick}
-                    popoverText="Виступ"
+                    popoverText="Третя співбесіда"
                 />
                 <Checkpoint
-                    left="88.8%"
-                    top="80.5%"
+                    left="72%"
+                    top="55%"
+                    type={CHECKPOINT}
+                    state="Cross"
+                    onClick={this.handleClick}
+                    popoverText="Договір"
+                />
+                <div
+                    className={`map-label map-label--third map-label map-label--${progressManager.getStageStatus(4)} no-select`}
+                >
+                </div>
+                <Checkpoint
+                    left="80%"
+                    top="45%"
+                    type={FLAG}
+                    state="Conference"
+                    onClick={this.handleClick}
+                    popoverText="Етап 4"
+                />
+                <Checkpoint
+                    left="84%"
+                    top="42%"
+                    type={CHECKPOINT}
+                    state="threeInRow"
+                    onClick={this.handleClick}
+                    popoverText="Розробка проекту"
+                />
+                <Checkpoint
+                    left="88%"
+                    top="36%"
+                    type={CHECKPOINT}
+                    state="fixBugs"
+                    onClick={this.handleClick}
+                    popoverText="Тестування"
+                />
+                <Checkpoint
+                    left="94%"
+                    top="24%"
                     type={FINISH}
-                    state="Final"
+                    state="End"
                     onClick={this.handleClick}
-                    popoverText="Кінець"
+                    popoverText="Успіх"
                 />
             </div>
         );

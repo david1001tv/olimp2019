@@ -429,11 +429,14 @@ export default class IntroState extends Phaser.State {
     }
 
     firstQuest(obj) {
+        console.log(obj);
         if (obj.key == 'button_blue_on'){
             this.firstAnswer = 'Girl';
+            this.game.saveChoice(false);
         }
         else {
             this.firstAnswer = 'Man';
+            this.game.saveChoice(true);
         }
         module.exports.GirlOrMan = this.firstAnswer;
         this.buttonGirl_on.destroy();
