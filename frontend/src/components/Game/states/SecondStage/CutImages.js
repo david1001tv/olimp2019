@@ -234,8 +234,7 @@ rotate_image (e) {
     let key = this.mass_angles.indexOf(e.angle); 
     (key < this.mass_angles.length - 1) ? key++ : key = 0;
     e.angle = this.mass_angles[key];
-    
-    console.log(this.SSF.imageCheck(this.mass));
+
     if (this.SSF.imageCheck(this.mass)){
         this.next();
     }

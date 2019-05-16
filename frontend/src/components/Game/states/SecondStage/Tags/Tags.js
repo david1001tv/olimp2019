@@ -100,8 +100,7 @@ export default class TagsState extends Phaser.State {
     }
 
     create() {
-        
-
+        this.count = 0;
         let bg2 = this.game.add.image(0, 0, 'bg2');
         bg2.height = this.game.width * bg2.height / bg2.width;
         bg2.width = this.game.width;
@@ -154,6 +153,7 @@ export default class TagsState extends Phaser.State {
 
     @autobind
     handleKeyUp(e) {
+        this.count++;
         for (let key in tagsForMaket) {
             let count = 0;
             tagsForMaket[key].forEach(e => {
@@ -168,19 +168,30 @@ export default class TagsState extends Phaser.State {
                 delete tagsForMaket[key];
             }
         }
-        console.log(Object.keys(tagsForMaket).length);
         if (!Object.keys(tagsForMaket).length) {
-        this.warning=this.game.add.image(700, 0, 'warning_message');
-                smartSetHeight(this.warning, 200);
-        this.firstWarning = this.game.add.text(760, 60, 'Вітаємо! Ви отримали навички\n веб-програмування та поліпшили\n ставлення викладача!', {
+            this.warning=this.game.add.image(700, 0, 'warning_message');
+            smartSetHeight(this.warning, 200);
+            this.firstWarning = this.game.add.text(760, 60, 'Вітаємо! Ви отримали навички\n веб-програмування та поліпшили\n ставлення викладача!', {
                     font: "Leftonade",
                     fontSize: 30,
                     fill: 'black'
                 });
-        this.game.displayDialogLine('Голос', 'Світ не буде колишнім. Знаючи, як створюються веб-сторінки, Ви інакше дивитись на знайомі сайти', () => this.game.nextState(0) );
-        // yield; 
-    
-           
+            let score = 0;
+            switch (true) {
+                case (this.count === 52):
+                    score = 100;
+                    break;
+                case (this.count <= 62):
+                    score = 75;
+                    break;
+                case (this.count <= 70):
+                    score = 50;
+                    break;
+                default:
+                    score = 25;
+                    break;
+            }
+            this.game.displayDialogLine('Голос', 'Світ не буде колишнім. Знаючи, як створюються веб-сторінки, Ви інакше дивитись на знайомі сайти', () => this.game.nextState(score) );
         }
     }
 

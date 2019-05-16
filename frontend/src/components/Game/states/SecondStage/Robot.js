@@ -243,7 +243,6 @@ export default class Scanner extends Phaser.State {
     }
 
     createCursors() {
-        console.log('work');
         this.cursors = this.game.input.keyboard.createCursorKeys();
         
         this.cursors.left.onDown.add(e => this.handleKeyDown(LEFT_ARROW));
@@ -325,7 +324,6 @@ export default class Scanner extends Phaser.State {
                         this.flag =  true;
                     }
                     ++checkid;
-                    console.log('yes');
                 }else{
                     this.flag = false;
                     this.redeye.alpha = 1;
@@ -379,7 +377,6 @@ export default class Scanner extends Phaser.State {
         arrow.index = index;
 
         arrow.inputEnabled = true;
-        arrow.events.onInputDown.add(() => console.log(text));
         return arrow;
     }
 

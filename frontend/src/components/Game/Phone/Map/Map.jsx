@@ -23,7 +23,6 @@ class Map extends Component {
 
     @autobind
     handleClick(key, status) {
-        console.log(key, status);
         let isReplaying = status === COMPLETED;
         this.props.onSelect(key, isReplaying);
     }

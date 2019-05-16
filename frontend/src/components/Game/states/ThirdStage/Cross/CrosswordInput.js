@@ -15,6 +15,7 @@ const KEY_RIGHT = 39;
 
 
 let focusChangeListeners = [];
+
 function handleFocusChange() {
     focusChangeListeners.forEach(f => f());
 }
@@ -30,10 +31,10 @@ export default class CrosswordInput {
         this.prefilledIndex = prefilledIndex;
 
 
-        if(vertical){
+        if (vertical) {
             this.cells = word.split('').map((e, i) => ({
                 focused: false,
-                sprite: this.game.add.sprite(x, y  + (CELL_WIDTH + CELL_PADDING) * i, 'square'),
+                sprite: this.game.add.sprite(x, y + (CELL_WIDTH + CELL_PADDING) * i, 'square'),
                 text: this.game.add.text(x + 15, y + 0 + (CELL_WIDTH + CELL_PADDING) * i, '', {
                     fontSize: 40,
                     font: 'Leftonade',
@@ -43,7 +44,7 @@ export default class CrosswordInput {
             }));
             this.mark = this.game.add.sprite(x, y + (CELL_WIDTH + CELL_PADDING) * this.word.length, 'bad');
             this.mark.visible = false;
-        }else{
+        } else {
             this.cells = word.split('').map((e, i) => ({
                 focused: false,
                 sprite: this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'square'),
@@ -59,7 +60,6 @@ export default class CrosswordInput {
         }
 
 
-
         smartSetHeight(this.mark, CELL_WIDTH);
 
         this.cells.forEach(cell => {
@@ -71,14 +71,13 @@ export default class CrosswordInput {
         });
 
 
+        if (prefilledIndex == -2) {
 
-       if(prefilledIndex == -2 ){
-
-       }else{
-        this.cells[prefilledIndex].sprite.tint = TINT_DISABLED;
-        this.cells[prefilledIndex].value = word[prefilledIndex];
-        this.cells[prefilledIndex].text.setText(word[prefilledIndex]);
-       }
+        } else {
+            this.cells[prefilledIndex].sprite.tint = TINT_DISABLED;
+            this.cells[prefilledIndex].value = word[prefilledIndex];
+            this.cells[prefilledIndex].text.setText(word[prefilledIndex]);
+        }
 
 
         focusChangeListeners.push(this.blur);
@@ -98,8 +97,7 @@ export default class CrosswordInput {
             this.focusedCell.focused = false;
             if (this.focusedCell.index === this.prefilledIndex) {
                 this.focusedCell.sprite.tint = TINT_DISABLED;
-            }
-            else {
+            } else {
                 this.focusedCell.sprite.tint = TINT_ENABLED;
             }
 

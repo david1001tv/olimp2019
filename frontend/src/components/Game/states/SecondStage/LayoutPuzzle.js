@@ -305,9 +305,6 @@ export default class Scanner extends Phaser.State {
     }
 
     handleCheck(currImg, currPointer, first, second, third, fourth){
-
-        console.log(first, second, third, fourth);
-
         if (!this.isRight){
             this.game.input.enabled = false;
 

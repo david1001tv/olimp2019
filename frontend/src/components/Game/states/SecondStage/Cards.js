@@ -324,7 +324,6 @@ export default class Scanner extends Phaser.State {
         let addx = 5;
         let addy = 3;
         for (let i = 0; i < 9; i++){
-            console.log(this.cardsIsRight[i]);
             if (this.cardsIsRight[i]){
                 this.cards.push(this.SSF.makeImageDrop(660 + addx, 95 + addy, 'card' + this.count_back , 1300, -100, 2000, 2000));
             }
@@ -374,11 +373,6 @@ export default class Scanner extends Phaser.State {
     }
 
     handleCheck(currImg, currPointer, first, second, third, fourth){
-
-        console.log(first, second, third, fourth);
-        //console.log(this.activePart.x, this.activePart.y);
-
-
         if (!this.isRight){
             this.game.input.enabled = false;
 

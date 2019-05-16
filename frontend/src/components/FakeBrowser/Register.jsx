@@ -89,8 +89,6 @@ class Register extends Component {
             this.setState({errors: {...errors, ...validationResult}});
             return;
         }
-
-        console.log('submit');
         this.setState({isLoading: true});
         try {
             let response = await register(this.state.data);
@@ -114,7 +112,6 @@ class Register extends Component {
 
     @autobind
     async handleGoogleResponseSuccess(res) {
-        console.log(res);
         this.setState({isLoading: true});
         try {
             let basicProfile = res.getBasicProfile();
