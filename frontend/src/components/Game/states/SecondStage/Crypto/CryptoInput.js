@@ -23,7 +23,7 @@ export default class CryptoInput {
                 sprite: this.game.add.sprite(x + (CELL_WIDTH + CELL_PADDING) * i, y, 'input'),
                 text: this.game.add.text(x + 10 + (CELL_WIDTH + CELL_PADDING) * i, y, '', {
                     fontSize: 40,
-                    font: 'Pangolin',
+                    font: 'Leftonade',
                 }),
                 index: i,
                 value: ''

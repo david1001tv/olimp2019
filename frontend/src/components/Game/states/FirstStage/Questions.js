@@ -114,6 +114,7 @@ export default class QuestionsState extends Phaser.State {
             this.FSF.addText,this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect, this.FSF.deleteText, oneTask, this.cloud);
+        console.log(this.mistakes);
         
         //second question
         oneTask=this.FSF.oneTask(this.slide3, this.cloud, 
@@ -205,6 +206,27 @@ export default class QuestionsState extends Phaser.State {
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect,this.FSF.deleteText,oneTask,this.cloud)  
 
+        //Уведомление: "Окончание квеста (результат)"
+        if (this.mistakes <= 1) {
+            this.firstWarning = this.game.add.text(760, 45, 'Ви уважно слухали викладача і\nотримали повніше уявлення\nпро професію', {
+                font: "Leftonade",
+                fontSize: 30,
+                fill: 'white',
+                stroke: 'black',
+                strokeThickness: 8,
+            });
+        }
+        else if (this.mistakes > 1 ) {
+            this.firstWarning = this.game.add.text(760, 60, 'Ви здобули базове уявлення про\nпрофесію. Варто бути уважнішим', {
+                font: "Leftonade",
+                fontSize: 30,
+                fill: 'white',
+                stroke: 'black',
+                strokeThickness: 8,
+            });
+        }
+        this.firstWarning.alpha = 0;
+
         this.game.add.tween(this.fake_dialog).to({
             alpha: 0
         }, 1000, Phaser.Easing.Cubic.InOut)
@@ -241,7 +263,17 @@ export default class QuestionsState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
         this.camera.scale.setTo(1, 1);
-        this.game.nextState(this.grade);
+
+        if (this.mistakes <= 1){
+            this.score = 100;
+        }
+        else if (this.mistakes <= 3){
+            this.score = 50;
+        }
+        else {
+            this.score = 10; 
+        }
+        this.game.nextState(this.score);
     }
 
     init() {
@@ -257,13 +289,15 @@ export default class QuestionsState extends Phaser.State {
         this.go = false;
 
         //кол-во ошибок
-        this.mistakes = 10;
+        this.mistakes = 0;
+        this.score = 0;
 
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
-        let choices = this.game.getChoice();
-        choices.then(res => {
-            this.friend = res.choice.friend;
-        });
+        // let choices = this.game.getChoice();
+        // choices.then(res => {
+        //     this.friend = res.choice.friend;
+        // });
+        this.friend = 0;
     }
 
     preload() {
@@ -295,43 +329,6 @@ export default class QuestionsState extends Phaser.State {
         bg.events.onInputDown.add(this.clickZone, this);
         this.bg = bg;
 
-        //Уведомления
-        let warning = this.game.add.image(700, 0, 'warning_message');
-        warning.alpha = 0;
-        smartSetHeight(warning, 200);
-        this.warning = warning;
-
-        //Уведомление: "Окончание квеста (результат)"
-        if (this.mistakes <= 1) {
-            this.firstWarning = this.game.add.text(760, 45, 'Ви уважно слухали викладача і\nотримали повніше уявлення\nпро професію', {
-                font: "Leftonade",
-                fontSize: 30,
-                fill: 'white',
-                stroke: 'black',
-                strokeThickness: 8,
-            });
-        }
-        else if (this.mistakes > 1 ) {
-            this.firstWarning = this.game.add.text(760, 60, 'Ви здобули базове уявлення про\nпрофесію. Варто бути уважнішим', {
-                font: "Leftonade",
-                fontSize: 30,
-                fill: 'white',
-                stroke: 'black',
-                strokeThickness: 8,
-            });
-        }
-        this.firstWarning.alpha = 0;
-
-        //Уведомление: "Подсказка, что необходимо выбрать толпу"
-        this.secondWarning = this.game.add.text(740, 85, 'Менi потрiбно обрати вiрну групу', {
-            font: "Leftonade",
-            fontSize: 33,
-            fill: 'white',
-            stroke: 'black',
-            strokeThickness: 8,
-        });
-        this.secondWarning.alpha = 0;
-
         let presentation = this.game.add.image(0, 0, 'presentation');
         presentation.height = this.game.width * presentation.height / presentation.width;
         presentation.width = this.game.width;
@@ -355,6 +352,22 @@ export default class QuestionsState extends Phaser.State {
 
         this.fake_dialog = this.FSF.makeImg(0, 850, 'fake_dialog_background', 1920, 400);
         this.cloud = this.FSF.makeImg(10, 580, 'cloud', 400, 200);
+
+        //Уведомления
+        let warning = this.game.add.image(700, 0, 'warning_message');
+        warning.alpha = 0;
+        smartSetHeight(warning, 200);
+        this.warning = warning;
+
+        //Уведомление: "Подсказка, что необходимо выбрать толпу"
+        this.secondWarning = this.game.add.text(740, 85, 'Менi потрiбно обрати вiрну групу', {
+            font: "Leftonade",
+            fontSize: 33,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.secondWarning.alpha = 0;
 
         this.stage.disableVisibilityChange = true;
 

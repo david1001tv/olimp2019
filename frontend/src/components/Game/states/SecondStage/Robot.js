@@ -144,8 +144,21 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 2500);
         yield;
 
-
         this.cleanUpCursors();
+
+        
+        if (this.proc >= 90){
+            this.score = 100;
+        }
+        else if (this.proc >= 74){
+            this.score = 50;
+        }
+        else {
+            this.score = 10; 
+        }
+        
+        this.game.nextState(this.score);
+
         this.game.nextState();
     }
 

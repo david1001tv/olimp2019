@@ -96,10 +96,23 @@ export default class CrossState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
+        if (this.mistakes <= 2){
+            this.score = 100;
+        }
+        else if (this.mistakes <= 4){
+            this.score = 50;
+        }
+        else {
+            this.score = 10; 
+        }
         this.game.nextState(this.score);
+
     }
 
     init() {
+        this.score = 0;
+        this.mistakes = 0;
+
         this._gen = this.gen();
         this.game.phone.clearTodos();
         this.game.phone.addTodo({
@@ -109,13 +122,10 @@ export default class CrossState extends Phaser.State {
         this.game.phone.setEnabled(true);
         this.game.phone.setTime('10:22');
         this.game.phone.setDate('21.07.18');
-        this.time = 7 * 60 * 1000;
         this.minPoints = 100;
         this.maxPoints = 200;
-        this.rate = 0;
-        this.goTimer = setTimeout(() => this.checkRate(), this.time);
-        this.timer = setInterval(() => this.checkTime(), 1000);
         this.answer = null;
+
     }
 
     preload() {
@@ -272,26 +282,19 @@ export default class CrossState extends Phaser.State {
                 if (input.value === input.word) {
                     input.blur();
                     let nextInput = this.inputs.find((curr, currIndex) => !curr.disabled && currIndex > index);
-                    if (nextInput) {
+                if (nextInput) {
                         setTimeout(() => nextInput.focusCell(0), 0);
                     }
                     input.wrong = false;
                     input.disabled = true;
                 } else {
+                    this.mistakes += 1;
                     input.wrong = true;
                 }
 
                 if (this.inputs.every(input => input.disabled)) {
-                    let rate;
-                    if ((this.time) / 1000 >= 330) {
-                        rate = this.maxPoints;
-                    }
-                    else {
-                        let percent = this.time / (7 * 60 * 1000);
-                        rate = Math.round(this.minPoints * percent + this.minPoints);
-                    }
                     this.game.phone.completeTodo("CROSS");
-                    setTimeout(() => this.next()/*this.game.nextState(rate)*/, 500);
+                    setTimeout(() => this.next(), 500);
                 }
             };
         });
@@ -303,23 +306,6 @@ export default class CrossState extends Phaser.State {
         bg5.width = this.game.width;
         bg5.alpha = 0;
         this.bg5 = bg5;
-    }
-
-    checkRate() {
-        this.rate = this.minPoints;
-        //this.game.nextState(this.rate);
-        this.next();
-    }
-
-    checkTime() {
-        function leadingZero(number) {
-            return number >= 10 ? number.toString() : '0' + number;
-        }
-
-        this.time -= 1000;
-        let minutes = Math.floor(this.time / (60 * 1000));
-        let seconds = this.time / 1000 - minutes * 60;
-        this.timerText.setText(`${leadingZero(minutes)}:${leadingZero(seconds)}`);
     }
 
     shutdown() {

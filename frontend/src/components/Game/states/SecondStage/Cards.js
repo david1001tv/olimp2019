@@ -205,12 +205,23 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
+        if (this.mistakes <= 1){
+            this.score = 100;
+        }
+        else if (this.mistakes <= 3){
+            this.score = 50;
+        }
+        else {
+            this.score = 10; 
+        }
         this.game.nextState(this.score);
     }
 
     init() {
         this.activePart = null;
         this.isRight = false;
+        this.mistakes = 0;
+        this.score = 0;
 
         this._gen = this.gen();
 
@@ -375,10 +386,6 @@ export default class Scanner extends Phaser.State {
 
     handleCheck(currImg, currPointer, first, second, third, fourth){
 
-        console.log(first, second, third, fourth);
-        //console.log(this.activePart.x, this.activePart.y);
-
-
         if (!this.isRight){
             this.game.input.enabled = false;
 
@@ -411,6 +418,7 @@ export default class Scanner extends Phaser.State {
 
                     this.activePart = this.cards[index];
                 } else {
+                    this.mistakes += 1;
                     this.game.displayDialogLine('Ви', 'О ні! Це була жорстока помилка');
                 }
             }

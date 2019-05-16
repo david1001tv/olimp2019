@@ -194,7 +194,7 @@ export default class ScheduleState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.nextState(this.score);
+        this.game.nextState();
     }
 
     init() {

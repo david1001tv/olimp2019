@@ -142,7 +142,6 @@ preload() {
 }
 
 create() {
-    
     this.SSF = {...SSF};
     for (let key in this.SSF) {
         this.SSF[key] = this.SSF[key].bind(this);
@@ -234,10 +233,20 @@ rotate_image (e) {
     let key = this.mass_angles.indexOf(e.angle); 
     (key < this.mass_angles.length - 1) ? key++ : key = 0;
     e.angle = this.mass_angles[key];
+    this.mistakes += 1;
     
     console.log(this.SSF.imageCheck(this.mass));
     if (this.SSF.imageCheck(this.mass)){
-        this.next();
+        if (this.mistakes <= 125){
+            this.score = 100;
+        }
+        else if (this.mistakes <= 175){
+            this.score = 50;
+        }
+        else {
+            this.score = 10; 
+        }
+        this.game.nextState(this.score);
     }
 
 
@@ -253,6 +262,9 @@ init() {
     this.game.phone.setEnabled(false);
     this.game.phone.setTime('11:00');
     this.game.phone.setDate('21.07.18');
+
+    this.mistakes = 0;
+    this.score = 0;
 }
 
 shutdown() {

@@ -125,6 +125,9 @@ export default class Scanner extends Phaser.State {
         this.activePart = null;
         this.isRight = false;
 
+        this.mistakes = 0;
+        this.score = 0;
+
         this._gen = this.gen();
 
         this.game.phone.clearTodos();
@@ -374,21 +377,22 @@ export default class Scanner extends Phaser.State {
 
                     this.activePart = null;
                 } else {
+                    this.mistakes += 1;
                     this.game.displayDialogLine('Ви', 'Щось не те, спробую розташувати трохи інакше');
                 }
             }
 
             if (this.mass.every(e => e.isRight)) {
-                // if (this.count === 5) {
-                //     this.score = 100;
-                // }
-                // else if (this.count <= 9) {
-                //     this.score = Math.round(40 / (this.count - 5)) + 50;
-                // }
-                // else {
-                //     this.score = 50;
-                // }
-                this.next();
+                if (this.mistakes <= 12){
+                    this.score = 100;
+                }
+                else if (this.mistakes <= 18){
+                    this.score = 50;
+                }
+                else {
+                    this.score = 10; 
+                }
+                this.game.nextState(this.score);
             }
         }
     }

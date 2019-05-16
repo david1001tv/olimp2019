@@ -50,7 +50,7 @@ export default class Scanner extends Phaser.State {
         this.game.displayDialogLine('Голос', 'Адам Вікторович запрошує студентів на сцену під гучні оплески зали та з пошаною видає заслугований диплом. Ось і Ваша черга. Хвилювання охопило кожну клітинку тіла, коли Ви отримали...', () => this.next());
         yield;
 
-        if (this.score >= 90){
+        if (this.score >= 400){
             this.game.add.tween(this.warning).to({
                 alpha: 1
             }, 1500, Phaser.Easing.Cubic.InOut)
@@ -297,26 +297,26 @@ export default class Scanner extends Phaser.State {
     init() {
         this._gen = this.gen();
 
-        //total score
-        this.score = 0;
-
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
         let choices = this.game.getChoice();
         choices.then(res => {
             this.friend = res.choice.friend;
         });
 
-        let history = this.game.getHistory();
-        history.then(res => {
-            this.history = res;
-        });
+        // let history = this.game.getHistory();
+        // history.then(res => {
+        //     this.history = res;
+        // });
 
-        this.history.forEach(state => {
-            if (state.score) {
-                this.score += state.score;
-            }
-        });
-        this.score /= 10;
+        // this.history.forEach(state => {
+        //     if (state.score) {
+        //         this.score += state.score;
+        //     }
+        // });
+        // this.score /= 10;
+
+        //Максимум 600 балов, если все средне сдавал - 300, если плохо - 60
+        this.score = 600;
 
         this.game.phone.clearTodos();
         this.game.phone.addTodos(todos);

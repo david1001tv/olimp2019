@@ -233,19 +233,19 @@ export default class FillWordsComponent {
                         console.log(this.count - this.wordsCount);
                         switch (true) {
                             case (this.count - this.wordsCount) < 20:
-                                score = 200;
+                                score = 100;
                                 break;
                             case (this.count - this.wordsCount) < 23:
-                                score = 175;
+                                score = 75;
                                 break;
                             case (this.count - this.wordsCount) < 25:
-                                score = 150;
+                                score = 50;
                                 break;
                             case (this.count - this.wordsCount) < 28:
-                                score = 125;
+                                score = 25;
                                 break;
                             default:
-                                score = 100;
+                                score = 10;
                                 break;
                         }
                         this.game.displayDialogLine('Голос', "О це була дійсно корисна пара! Ви згадуєте уривки розмов старшокурсників, що почули біля кафедри, і більше не відчуваєте себе невпевнено", () => this.game.nextState(score));

@@ -3,9 +3,6 @@ import {smartSetHeight, smartSetWidth} from '../../utils';
 import todos from '../../todos/Scanner';
 import SSF from '../../states/SecondStageFunctions';
 
-const INACTIVE_Y = 940;
-
-
 export default class Scanner extends Phaser.State {
     * gen() {
         this.game.input.enabled = false;
@@ -20,7 +17,7 @@ export default class Scanner extends Phaser.State {
         yield;
 
 
-        if (this.score >= 180){
+        if (this.score >= 600){
         this.game.add.tween(this.master_red).to({
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
@@ -58,7 +55,8 @@ export default class Scanner extends Phaser.State {
 
     init() {
         //total score
-        this.score = 100;
+        //800/600/80
+        this.score = 800;
 
         this._gen = this.gen();
 

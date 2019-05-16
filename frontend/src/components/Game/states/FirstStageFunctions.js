@@ -42,7 +42,6 @@ const FSF = {
             answers_is_right, 
             makeAnswer, addText);  
         setTextAlpha(dialog_author,dialog_text,answers,false);
-
         this.game.add.tween(slide).to({
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut).start().onComplete.add(() => {
@@ -84,10 +83,11 @@ const FSF = {
             if(obj.isRight === false) {
                 let bad = this.game.add.image(obj.coord_x, obj.coord_y, 'bad');
                 smartSetHeight(bad, 30);
-                this.bad.push(bad);
+                this.bad.push(bad);   
                 if(obj.check === false) {
                     obj.check = true;
                 }
+                this.mistakes += 1;
             }
             else {
                 if(this.bad.length == 0) this.grade += 12.5;

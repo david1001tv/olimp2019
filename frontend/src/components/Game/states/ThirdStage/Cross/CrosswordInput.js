@@ -12,8 +12,6 @@ const TINT_ERROR = 0xff7777;
 const KEY_BACKSPACE = 8;
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
-
-
 let focusChangeListeners = [];
 function handleFocusChange() {
     focusChangeListeners.forEach(f => f());
@@ -28,7 +26,6 @@ export default class CrosswordInput {
         this.focusedCell = null;
         this.onInputEnd = () => null;
         this.prefilledIndex = prefilledIndex;
-
 
         if(vertical){
             this.cells = word.split('').map((e, i) => ({

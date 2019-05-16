@@ -214,7 +214,18 @@ export default class CryptoState extends Phaser.State {
             context.toggleWarning(1, function() {
                 context.toggleWarning(0, function() {
                     context.game.camera.fade(0x000000, 1500, true);
-                    setTimeout(() => context.game.nextState(), 1500); 
+                    setTimeout(() => {
+                        if (this.mistakes <= 2){
+                            this.score = 100;
+                        }
+                        else if (this.mistakes <= 5){
+                            this.score = 50;
+                        }
+                        else {
+                            this.score = 10; 
+                        }
+                        context.game.nextState(this.score);
+                    }, 1500); 
                 }, 0);
             }, 3000);
         });
@@ -224,6 +235,9 @@ export default class CryptoState extends Phaser.State {
         this._gen = this.gen();
         this.game.phone.clearTodos();
         this.game.phone.setEnabled(false);
+
+        this.mistakes = 0;
+        this.score = 0;
     }
 
     preload() {
@@ -375,7 +389,10 @@ export default class CryptoState extends Phaser.State {
                 mark = 'ok';
                 setTimeout(callback, 100);
             }
-            else mark = 'bad';
+            else {
+                this.mistakes += 1;
+                mark = 'bad';
+            }
             this.setFieldMark(MARK_OFFSET_HOR, MARK_OFFSET_VER, mark);
         };
     }

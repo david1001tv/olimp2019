@@ -61,8 +61,16 @@ export default class LabyrinthState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-
-        this.game.nextState();
+        if (this.mistakes <= 5){
+            this.score = 100;
+        }
+        else if (this.mistakes <= 10){
+            this.score = 50;
+        }
+        else {
+            this.score = 10; 
+        }
+        this.game.nextState(this.score);
     }
 
     init() {
@@ -76,6 +84,9 @@ export default class LabyrinthState extends Phaser.State {
             id: 'LABYRINTH',
             text: 'Пройти до 330-ї аудиторії'
         });
+
+        this.mistakes = 0;
+        this.score = 0;
     }
 
     preload() {
@@ -226,6 +237,7 @@ export default class LabyrinthState extends Phaser.State {
             this.game.paused = false;
             player.animations.stop('walk');
         });
+        this.mistakes += 0.5;
     }
 
     phrase (rand) {

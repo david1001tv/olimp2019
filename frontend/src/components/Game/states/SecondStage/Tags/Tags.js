@@ -76,7 +76,7 @@ export default class TagsState extends Phaser.State {
 
         this.game.phone.setEnabled(true);
         yield;
-        this.game.nextState(this.score);
+        this.game.nextState(0);
     }
 
     init() {

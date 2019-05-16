@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import {smartSetHeight, smartSetWidth} from '../../utils';
 import FSF from '../../states/FirstStageFunctions';
 
-export default class IntroState extends Phaser.State {
+export default class PostIntroState extends Phaser.State {
     * gen() {
 
         setTimeout(() => this.next(), 3000);
