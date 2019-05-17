@@ -8,7 +8,7 @@ const PADDING_HOR = 10;
 const PADDING_VER = 11;
 
 const TIME = 5 * 60 * 1000;
-const GOAL = 200;
+const GOAL = 220;
 const MIN_POINTS = 100;
 const MAX_POINTS = 1000;
 
