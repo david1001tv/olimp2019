@@ -98,6 +98,11 @@ export default class ThreeInRowState extends Phaser.State {
         this.timer = setInterval(() => this.checkTime(), 1000);
 
         //Данные из бд (получаем на сцене кроссворда, когда выбираем) 1 - programmer; 2 - networks; 3 - designer
+        let choices = this.game.getChoice();
+        choices.then(res => {
+            this.specName = res.profession;
+            this.next();
+        });
         this.spec = 1;
     }
 

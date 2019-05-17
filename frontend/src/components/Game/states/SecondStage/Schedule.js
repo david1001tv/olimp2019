@@ -203,6 +203,7 @@ export default class ScheduleState extends Phaser.State {
         let choices = this.game.getChoice();
         choices.then(res => {
             this.friend = res.friend;
+            this.next();
         });
     }
 
@@ -259,8 +260,6 @@ export default class ScheduleState extends Phaser.State {
         let button_text = this.addTextOnSprite(1270, 840, 'ГОТОВО', style).addColor('#ffffff', 0);
         button_text.alpha = 0;
         this.button_text = button_text;
-
-        this.next();
     }
 
     startGame() {

@@ -343,6 +343,7 @@ export default class Scanner extends Phaser.State {
                     this.score += state.score;
                 }
             });
+            this.next();
         });
 
         let me = this.game.getMe();
@@ -467,9 +468,6 @@ export default class Scanner extends Phaser.State {
 
         this.rightText = this.game.add.text(1100, 450, this.me.firstName + ' ' + this.me.lastName);
         this.rightText.alpha = 0;
-
-
-        this.next();
     }
 
     choose(obj) {
