@@ -135,9 +135,6 @@ export default class Scanner extends Phaser.State {
                     .start()
             }, 3000));
 
-        this.game.displayDialogLine('Анастасія Марківна', 'Готово. Тепер потрібно зареєструватися на сайті університету', () => this.next());
-        yield;
-
         this.game.camera.fade(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);
         yield;
