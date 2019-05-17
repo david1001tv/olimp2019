@@ -15,7 +15,10 @@ class Leaderboard extends Component {
 
     componentDidMount() {
         getReport()
-            .then(data => this.setState({data}));
+            .then(data => {
+                console.log(data);
+                this.setState({data})
+            });
     }
 
     render() {
