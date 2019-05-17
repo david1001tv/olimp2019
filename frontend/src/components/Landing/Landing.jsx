@@ -99,7 +99,7 @@ class Landing extends Component {
                     visible={feedbackIsVisible}
                     onHide={() => this.setState({feedbackIsVisible: false})}
                     dialogClassName="opis_g2"
-                    contentClassName="opis_container"
+                    contentClassName="opis_container2"
                 >
                     <Feedback />
                 </DialogContainer>
