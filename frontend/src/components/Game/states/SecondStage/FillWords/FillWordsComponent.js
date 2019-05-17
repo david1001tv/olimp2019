@@ -201,6 +201,7 @@ export default class FillWordsComponent {
         if (this.cellsStack.length === 1) {
             let last = this.cellsStack.pop();
             last.sprite.tint = DEFAULT_TINT;
+            last.isChecked = false;
         } else {
             let word = '';
             this.cellsStack.forEach(cell => {
