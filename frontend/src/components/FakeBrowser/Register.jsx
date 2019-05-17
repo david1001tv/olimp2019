@@ -253,6 +253,7 @@ class Register extends Component {
                             className="reggul"
                             disabled={this.state.isLoading}
                         >
+                            <h2>реєстрація</h2>
                         </button>
                     </div>
                 </form>

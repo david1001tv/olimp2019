@@ -9,7 +9,7 @@ export default class testGame extends Phaser.State {
         this.game.camera.flash(0x000000, 3000, true);
         yield;  
         
-        this.game.displayDialogLine('Голос', 'Нарешті завершилася робота над проектом. Ви зібрали воєдино всі частини, залишилося лише провести тестування на роботоспроможність', () => this.next());
+        this.game.displayDialogLine('Голос', 'Нарешті завершилася робота над проектом. Ви зібрали докупи всі частини, залишилося лише провести тестування на роботоспроможність', () => this.next());
         yield;
                 
         this.game.displayDialogLine('Голос', 'Але що це?! У роботі баги! Треба терміново позбутися від них!', () => this.next());
@@ -49,7 +49,7 @@ export default class testGame extends Phaser.State {
         yield;
         this.game.setfixBugsEnabled(false);
 
-        this.game.displayDialogLine('Голос', 'Підійшов час здавати проект. Все, що могли, Ви зробили', () => this.next());
+        this.game.displayDialogLine('Голос', 'Наближавшся час, коли потрібно здавати проект. Все, що могли, Ви зробили', () => this.next());
         yield;
 
         this.game.camera.fade(0x000000, 1500, true);
@@ -93,7 +93,7 @@ export default class testGame extends Phaser.State {
         smartSetHeight(warning, 180);
         this.warning = warning;
 
-        this.firstWarning = this.game.add.text(770, 45, 'Натискаючи на "баги"\nпроекту позбудьтесь їх', {
+        this.firstWarning = this.game.add.text(770, 45, 'Натискаючи на "баги"\nпроекту, позбудьтесь їх', {
             font: "Leftonade",
             fontSize: 35,
             fill: 'white',

@@ -51,10 +51,11 @@ class Landing extends Component {
     <div className="main-text_p">
             <div className="text_p">
                <p>
-                    Пориньте в історію вступу до установи вищої освіти.
-                     Ваше завдання полягає у подоланні тернистого шляху 
-                     абітурієнта, який проходить вступну кампанію та знайомиться
-                      зі специфікою своєї професії!
+               Хочете дізнатися, як стають ІТ-фахівцями? Пориньте в дивовижну і
+                реалістичну історію становлення фахівцем найпрестижнішої професії
+                 нашого часу. Пройдіть шлях від вибору спеціальності, навчання в 
+                 університеті і працевлаштування до професійного та кар'єрного росту.
+                  Світ ІТ ближче, ніж Вам здається...
                </p>
                </div>
     </div>
@@ -76,7 +77,7 @@ class Landing extends Component {
  <div className="footer">
     <div className="butf">
         <div className="wrap">
-        <div className="link-f"><div onClick={() => this.setState({regulationVisible: true})}> <p> Правила Квесту</p></div></div>
+        <div className="link-f"><div onClick={() => this.setState({regulationVisible: true})}> <p> Про квест</p></div></div>
         <div className="link-f"><div onClick={() => this.setState({teamVisible: true})}><p> КОМАНДА ДВНЗ “ПДТУ”, 2019 ©</p></div></div>
         <div className="link-f"><div onClick={() => this.setState({feedbackIsVisible: true})}><p> Зворотній зв'язок</p></div></div>
         <div className="link-f"> <div><a href="https://pstu.edu/ru/"> ОФІЦІЙНИЙ САЙТ ПДТУ</a></div></div>

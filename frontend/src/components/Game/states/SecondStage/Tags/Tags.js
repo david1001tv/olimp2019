@@ -4,13 +4,13 @@ import autobind from 'autobind-decorator';
 import {smartSetWidth, smartSetHeight} from '../../../utils';
 
 const tagsForMaket = {
-    header: ['html', 'head', 'title', 'header', 'body'],
-    nav: ['html', 'head', 'title', 'nav', 'header', 'body'],
-    logo: ['html', 'head', 'title', 'nav', 'header', 'body', 'a', 'img'],
-    'body-1': ['html', 'body', 'section'],
-    'body-2': ['html', 'body', 'section', 'div'],
-    footer: ['html', 'footer'],
-    script: ['html', 'footer', 'script']
+    header: ['header'],
+    nav: ['nav'],
+    logo: ['img'],
+    'body-1': ['section'],
+    'body-2': ['div'],
+    footer: ['footer'],
+    script: ['script']
 
 };
 
@@ -51,11 +51,11 @@ export default class TagsState extends Phaser.State {
             .start(); 
         this.game.displayDialogLine('Адам Вікторович', 'Сучасні технології - рушійна сила світу нашого часу. Сайти давно і міцно замінили в повсякденності книги і газети, так що вміння їх створювати, верстати, точно стане у нагоді. Ви, можливо, пам\'ятаєте з дитинства, що для будівництва чогось конкретного потрібно багато різних блоків, які корисні для різних речей. Кожен з них має певну функцію. Те ж саме і з сайтами. Коли ви створюєте свій сайт, то використовуєте різні елементи відповідно до їх ідеального призначення', () => this.next());
         yield;      
-        this.game.displayDialogLine('Адам Вікторович', 'Наша робота - розповісти браузеру так, щоб йому стало зрозуміло, що позначає кожен з цих елементів і як вони поєднуються один з одним синтаксично. Для написання сайтів використовується HTML (HyperText Markup Language) - мова розмітки гіпертексту. Простіше кажучи, це мова, яка використовує «теги» (наприклад, <так>) для розмітки тексту, щоб ви могли описати текст своєму браузеру. Верстати сайт можна в будь-якому текстовому редакторі, навіть в Блокноті, але ми скористаємося більш зручним додатком', () => this.next());
+        this.game.displayDialogLine('Адам Вікторович', 'Наша робота - розповісти браузеру так, щоб йому стало зрозуміло, що позначає кожен з цих елементів і як вони поєднуються один з одним синтаксично. Для написання сайтів використовується HTML (HyperText Markup Language) - мова розмітки гіпертексту. Простіше кажучи, це мова, яка використовує «теги» (наприклад, <так>) для розмітки тексту, щоб ви могли описати текст своєму браузеру. Верстати сайт можна в будь-якому текстовому редакторі, навіть в Блокноті', () => this.next());
         yield; 
         this.game.displayDialogLine('Адам Вікторович', 'Всі конструкції тегів надзвичайно прості і виглядають наступним чином <tagname>контент</tagname>. Ви могли помітити, що другий тег відрізняється. Це тому, що кожен тег повинен бути «закритий», якщо говорити на жаргоні. Слеш в останьому тезі повідомляє браузеру, що ця розмітка завершує елемент. Є також теги, які не потрібно закривати. Наприклад, тег зображення <img>, який використовується для вставки зображення (запам\'ятайте його)', () => this.next());
         yield; 
-        this.game.displayDialogLine('Адам Вікторович', 'Важливим розумінням щодо HTML-тегів є те, що HTML містить словник, який визначає теги і описує, коли і де їх використовувати, подібно словникам, які містять слова мови. Тож коротко розповім про ключові теги, які Вам доведеться сьогодні використати. Тег <html> є контейнером, який містить в собі весь вміст веб-сторінки. Погляньмо на тег <head>, який містить елементи дуже корисні для пошукових систем, вкладок браузера. Наприклад, назва веб-сторінки знаходиться у <title>.', () => this.next());
+        this.game.displayDialogLine('Адам Вікторович', 'Важливим розумінням щодо HTML-тегів є те, що HTML містить словник, який визначає теги і описує, коли і де їх використовувати, подібно словникам, які містять слова мови. Тож коротко розповім про ключові теги, які Вам доведеться сьогодні використати. Тег <html> є контейнером, який містить в собі весь вміст веб-сторінки. Погляньмо на тег <head>, який містить елементи дуже корисні для пошукових систем, вкладок браузера. Наприклад, назва веб-сторінки знаходиться у <title>', () => this.next());
         yield; 
         this.game.displayDialogLine('Адам Вікторович', 'Ми повинні зробити ще одну річ після додавання <head> і вставити тег <body>. Він відокремлює зміст всієї сторінки від <head>. Все, що відображається на веб-сторінці, поміщається в <body>. Тег <a> є одним з важливих елементів HTML і призначений для створення посилань (переходів на інші сторінки після натискання на елемент). Тож, починайте! Про інші теги я розповім під час роботи', () => this.next());
         yield; 
@@ -197,22 +197,98 @@ export default class TagsState extends Phaser.State {
         switch (key) {
             case 'header':
                 this.game.add.image(135, 160, key);
+                this.warning=this.game.add.image(700, 0, 'warning_message');
+                smartSetHeight(this.warning, 200);
+                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
+                    font: "Leftonade",
+                    fontSize: 30,
+                    fill: 'white',
+                    stroke: 'black',
+                    strokeThickness: 8,
+                });
+                this.teacher = this.game.add.image(1250, 50, 'teacher');
+                smartSetWidth(this.teacher,700);
+                this.game.displayDialogLine('Адам Вікторович', 'Тег <header> задає «шапку» сайту або розділу, в якому зазвичай розташовується заголовок', ()=>{
+                    this.game.add.tween(this.teacher).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start(); 
+                });
                 return;
             case 'nav':
                 this.game.add.image(530, 190, key);
+                this.warning=this.game.add.image(700, 0, 'warning_message');
+                smartSetHeight(this.warning, 200);
+                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
+                    font: "Leftonade",
+                    fontSize: 30,
+                    fill: 'white',
+                    stroke: 'black',
+                    strokeThickness: 8,
+                });
+                this.teacher = this.game.add.image(1250, 50, 'teacher');
+                smartSetWidth(this.teacher,700);
+                this.game.displayDialogLine('Адам Вікторович', 'Тег <nav> задає навігацію сайту. Якщо на сторінці кілька блоків посилань, то в <nav> зазвичай поміщають пріоритетні посилання', ()=>{
+                    this.game.add.tween(this.teacher).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start(); 
+                });
                 return;
             case 'logo':
                 this.game.add.image(150, 160, key);
+                this.teacher = this.game.add.image(1250, 50, 'teacher');
+                smartSetWidth(this.teacher,700);
+                this.game.displayDialogLine('Адам Вікторович', 'В цьому випадку тег <img> був модифікований атрибутом src. Якщо ми залишимо тег на самоті, браузер не матиме ніякої можливості для отримання джерела інформації для відображення. Коли ми визначаємо src, то говоримо браузеру: «Гей, завантаж інформацію з цього джерела». Браузер знає, що потрібно шукати папку і в ній файл', ()=>{
+                    this.game.add.tween(this.teacher).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start(); 
+                });
                 return;
             case 'body-1':
                 let body = this.game.add.image(132, 252, key);
+                this.teacher = this.game.add.image(1250, 50, 'teacher');
+                smartSetWidth(this.teacher,700);
+                this.game.displayDialogLine('Адам Вікторович', '<section> задає розділ документа, може застосовуватися для блоку новин, контактної інформації, глав тексту, вкладок в діалоговому вікні та ін. Розділ зазвичай містить заголовок', ()=>{
+                    this.game.add.tween(this.teacher).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start(); 
+                });
                 return;
             case 'body-2':
                 this.game.add.image(135, 500, key);
+                this.teacher = this.game.add.image(1250, 50, 'teacher');
+                smartSetWidth(this.teacher,700);
+                this.game.displayDialogLine('Адам Вікторович', 'Елемент <div> є блоковим елементом і призначений для виділення фрагмента документа з метою зміни виду вмісту. Простіше кажучи, це контейнер для угруповання інших елементів.', ()=>{
+                    this.game.add.tween(this.teacher).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start(); 
+                });
                 return;
             case 'footer':
                 let footer = this.game.add.image(132, 760, key);
                 footer.width += 4;
+                this.teacher = this.game.add.image(1250, 50, 'teacher');
+                smartSetWidth(this.teacher,700);
+                this.game.displayDialogLine('Адам Вікторович', 'Тег <footer> задає «підвал» сайту або розділу, в ньому може розташовуватися ім\'я автора, дата документа, контактна і правова інформація', ()=>{
+                    this.game.add.tween(this.teacher).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start(); 
+                });
+                return;
+            case 'script':
+                this.teacher = this.game.add.image(1250, 50, 'teacher');
+                smartSetWidth(this.teacher,700);
+                this.game.displayDialogLine('Адам Вікторович', 'Тег <script> призначений для опису скриптів, може містити посилання на програму або її частину тексту певною мовою. Тобто, це якийсь функціональний блок', ()=>{
+                    this.game.add.tween(this.teacher).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start(); 
+                });
                 return;
         }
     }

@@ -13,7 +13,7 @@ router.use(authMiddleware);
 
 router.post('/', async function (req, res) {
     try {
-        const {friend = null, magistracy = null, science = null} = req.body;
+        const {friend = null, magistracy = null, science = null, profession = ''} = req.body;
 
         let choice = await Choice.findOne({
             where: {user_id:req.decodedToken.userId}
@@ -23,12 +23,14 @@ router.post('/', async function (req, res) {
                 user_id: req.decodedToken.userId,
                 friend: friend,
                 magistracy: magistracy,
-                science: science
+                science: science,
+                profession: profession
             });
         } else {
             choice.friend = friend !== null ? friend : choice.friend;
             choice.magistracy = magistracy !== null ? magistracy : choice.magistracy;
             choice.science = science !== null ? science : choice.science;
+            choice.profession = profession !== null ? profession : choice.profession
             choice.save();
         }
 

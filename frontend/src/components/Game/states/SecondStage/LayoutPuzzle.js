@@ -117,7 +117,17 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
+        if (this.mistakes <= 12){
+            this.score = 100;
+        }
+        else if (this.mistakes <= 18){
+            this.score = 50;
+        }
+        else {
+            this.score = 10; 
+        }
         this.game.nextState(this.score);
+
     }
 
     init() {
@@ -372,16 +382,7 @@ export default class Scanner extends Phaser.State {
             }
 
             if (this.mass.every(e => e.isRight)) {
-                if (this.mistakes <= 12){
-                    this.score = 100;
-                }
-                else if (this.mistakes <= 18){
-                    this.score = 50;
-                }
-                else {
-                    this.score = 10; 
-                }
-                this.game.nextState(this.score);
+                this.next();
             }
         }
     }
