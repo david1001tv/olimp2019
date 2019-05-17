@@ -76,7 +76,7 @@ class Landing extends Component {
  <div className="footer">
     <div className="butf">
         <div className="wrap">
-        <div className="link-f"><div onClick={() => this.setState({regulationVisible: true})}> <p> Правила Квесту</p></div></div>
+        <div className="link-f"><div onClick={() => this.setState({regulationVisible: true})}> <p> Про квест</p></div></div>
         <div className="link-f"><div onClick={() => this.setState({teamVisible: true})}><p> КОМАНДА ДВНЗ “ПДТУ”, 2019 ©</p></div></div>
         <div className="link-f"><div onClick={() => this.setState({feedbackIsVisible: true})}><p> Зворотній зв'язок</p></div></div>
         <div className="link-f"> <div><a href="https://pstu.edu/ru/"> ОФІЦІЙНИЙ САЙТ ПДТУ</a></div></div>
