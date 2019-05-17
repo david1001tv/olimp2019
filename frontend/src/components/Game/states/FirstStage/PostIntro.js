@@ -468,7 +468,6 @@ let sun3 = this.game.add.image(1412, 20, 'sun');
             this.firstAnswer = 'Man';
             this.game.saveChoice(true);
         }
-        module.exports.GirlOrMan = this.firstAnswer;
         this.buttonGirl_on.destroy();
         this.buttonMan_on.destroy();
         this.firstGirl.destroy();
