@@ -204,16 +204,7 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        if (this.mistakes <= 1){
-            this.score = 100;
-        }
-        else if (this.mistakes <= 3){
-            this.score = 50;
-        }
-        else {
-            this.score = 10; 
-        }
-        this.game.nextState(this.score);
+        this.game.nextState(0);
     }
 
     init() {

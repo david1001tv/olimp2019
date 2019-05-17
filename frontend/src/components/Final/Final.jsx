@@ -14,6 +14,8 @@ import Feedback from '../Landing/Feedback';
 import '../Landing/Landing.sass';
 import './Final.sass';
 
+
+
 class Final extends Component {
     state = {
         feedbackIsVisible: false,
@@ -101,8 +103,8 @@ class Final extends Component {
                         <footer>
                             <div className="likes">Ця гра сподобалась {likeCount} користувачам.</div>
                             <div className="copyright">
-                                <span>Команда ДВНЗ “ПДТУ”, 2018 ©
-                                <img className="photo" id="photo" src={photo} alt="" />
+                                <span>КОМАНДА ДВНЗ “ПДТУ”, 2019 ©
+                                <img className="photo" id="photo"  alt="" />
                             </span>
                             </div>
                             <button className="btn-feedback"
@@ -117,6 +119,8 @@ class Final extends Component {
                     focusOnMount={false}
                     visible={feedbackIsVisible}
                     onHide={() => this.setState({feedbackIsVisible: false})}
+                    dialogClassName="opis_g2"
+                    contentClassName="opis_container"
                 >
                     <Feedback/>
                 </DialogContainer>

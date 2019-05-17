@@ -56,7 +56,16 @@ export default class testGame extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.nextState();
+        if (this.mistakes <= 14){
+            this.score = 100;
+        }
+        else if (this.mistakes <= 20){
+            this.score = 50;
+        }
+        else {
+            this.score = 10; 
+        }
+        this.game.nextState(this.score);
       
     }
 
@@ -69,10 +78,22 @@ export default class testGame extends Phaser.State {
 
     }
 
+    @autobind
+    handleMistakesEvent(_, event) {
+        if (event === 'yes') {
+            this.mistakes++;
+            console.log(this.mistakes);
+        }
+
+    }
+
     init() {
         this.game.phone.setEnabled(true);
         this._gen = this.gen();
 
+        //кол-во ошибок
+        this.mistakes = 0;
+        this.score = 0;
     }
 
     preload() {
@@ -82,6 +103,8 @@ export default class testGame extends Phaser.State {
 
     create() {
         this.token = PubSub.subscribe('goNext', this.handleBrowserEvent);
+        this.token2 = PubSub.subscribe('goMist', this.handleMistakesEvent);
+
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
@@ -107,6 +130,7 @@ export default class testGame extends Phaser.State {
 
     shutdown() {
         PubSub.unsubscribe(this.token);
+        PubSub.unsubscribe(this.token2);
     }
     next() {
         this._gen.next();

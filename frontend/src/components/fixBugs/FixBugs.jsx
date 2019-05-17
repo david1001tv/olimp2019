@@ -42,7 +42,6 @@ class FixBugs extends Component {
 
  
     isGood(){
- 
         let good = 0;
 
         let trAll = document.querySelectorAll("td");
@@ -55,7 +54,7 @@ class FixBugs extends Component {
         if(good == 25){
             console.log(good);
             this.setState({isVisible: true });
-            setTimeout(() => PubSub.publish('goNext', 'yes'), 500); // говно
+            setTimeout(() => PubSub.publish('goNext', 'yes'), 500);
 
             this.setState({isgood: true });
             document.querySelector("table").addEventListener("click", (e) => {
@@ -63,6 +62,7 @@ class FixBugs extends Component {
                 
             });
         }
+        setTimeout(() => PubSub.publish('goMist', 'yes'), 10);
     }
 
  
