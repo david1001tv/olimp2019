@@ -13,11 +13,36 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
+        this.game.displayDialogLine('Голос', 'Нарешті настав час познайомитися Вам з комп’ютерною графікою, стезею, що поєднала у собі нетленне мистецтво та сучасні технології.  Та Ви не могли не помітити, що останні дні на кафедрі відбуваються дивні та підозрілі речі', () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Голос', 'Викладачі були чимось стурбовані, кидали один на одного напружені погляди, не випускали з рук смартфони, що постійно тризвонили...', () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Голос', 'Тож, коли з’явилась Анастасія Марківна, Ви обережно запитали в неї, що коїться', () => this.next());
+        yield;
+
         this.game.add.tween(this.teacher).to({
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start(); 
 
+        this.game.displayDialogLine('Анастасія Марківна', 'Ах, це так жахливо, як і проблематично! Наш сайт піддався хакерській атаці, що знищила більшість файлів на сервері. Але я сподіваюсь, що Ви мені допоможете', () => this.next());
+        yield;
+
+        this.game.displayDialogLine('Анастасія Марківна', 'В Вас відчувається талант, інтуїція мене ще не підводила. На практичному занятті ми будемо розробляти дизайн головної сторінки веб-сайту. Тож прошу Вас, зробіть макет сайту нашої кафедри!', () => this.next());
+        yield;
+
+        this.game.add.tween(this.bg).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
+        this.game.add.tween(this.bg2).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+    
         this.game.displayDialogLine('Анастасія Марківна', 'Дизайн-макет сайту - це візуальний образ майбутнього сайту, розроблений з урахуванням технічних можливостей HTML верстки. Макет подається у вигляді картинки, яка буде відображатись в браузері, без активних кнопок та інших динамічних елементів', () => this.next());
         yield;
         this.game.displayDialogLine('Анастасія Марківна', 'Для розробки макету ми будемо використовувати Фотошоп - багатофункціональний графічний редактор. Слої в фотошопі - це найважливіша палітра програми. Слої можна уявити, як стопку прозорих плівок, з нанесеними на них фрагментами зображення. Якщо їх накласти один на одного, то вийде одна єдина картинка', () => this.next());
@@ -144,6 +169,8 @@ export default class Scanner extends Phaser.State {
     preload() {
 
         this.load.image('bg', './assets/images/2-3 (Layout puzzle)/background.png');
+        this.load.image('bg2', './assets/images/2-3 (Layout puzzle)/background2.png');
+
         this.load.image('teacher', './assets/images/2-3 (Layout puzzle)/teacher.png');
         this.load.image('warning_message', './assets/images/1-1 (PostIntro)/warning_message.png');
         this.load.image('checkmark', './assets/images/2-3 (Layout puzzle)/checkmark.png');
@@ -180,9 +207,11 @@ export default class Scanner extends Phaser.State {
             this.SSF[key] = this.SSF[key].bind(this);
         }
 
-        let bg = this.game.add.image(0, 0, 'bg');
-        bg.height = this.game.width * bg.height / bg.width;
-        bg.width = this.game.width;
+        let bg2 = this.game.add.image(0, 0, 'bg2');
+        bg2.height = this.game.width * bg2.height / bg2.width;
+        bg2.width = this.game.width;
+        bg2.alpha = 0;
+        this.bg2 = bg2;
 
         let minHeader = this.game.add.image(0, INACTIVE_Y, 'header-small');
         minHeader.first = 250;
@@ -261,8 +290,6 @@ export default class Scanner extends Phaser.State {
         });
         this.secondWarning.alpha = 0;   
 
-        this.teacher = this.SSF.makeImg(1260, 0, 'teacher', 700, 900);
-
         let mass = [minHeader, minBanner, minLeftMenu, minContent, minFooter, minLogo, minMenu];
 
         let todoIds = ['header', 'banner', 'leftmenu', 'content', 'footer', 'logo', 'menu'];
@@ -285,6 +312,13 @@ export default class Scanner extends Phaser.State {
         this.mass[0].input.enableDrag(false, true, true, 1);
         this.mass[0].events.onDragStart.add(this.handleDragStart, this);
         this.mass[0].events.onDragStop.add(this.handleCheck, this, 0,  this.mass[0].first,  this.mass[0].second,  this.mass[0].third,  this.mass[0].fourth);
+        
+        let bg = this.game.add.image(0, 0, 'bg');
+        bg.height = this.game.width * bg.height / bg.width;
+        bg.width = this.game.width;
+        this.bg = bg;
+
+        this.teacher = this.SSF.makeImg(1260, 0, 'teacher', 700, 900);
 
         this.stage.disableVisibilityChange = true;
         this.next();

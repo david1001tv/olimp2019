@@ -133,16 +133,6 @@ export default class FillwordsState extends Phaser.State {
             strokeThickness: 8,
         });
         this.firstWarning.alpha = 0;
-
-        this.thirdWarning = this.game.add.text(780, 40, 'Вітаємо! Тепер Ви можете\nрозмовляти загадковою мовою\nпрограмістів', {
-            font: "Leftonade",
-            fontSize: 30,
-            fill: 'white',
-            stroke: 'black',
-            strokeThickness: 8,
-        });
-        this.thirdWarning.alpha = 0;
-
         this.next();
     }
 
