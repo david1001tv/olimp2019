@@ -41,16 +41,19 @@ export default class CrossState extends Phaser.State {
         this.var_name = this.answer;
 
         if(this.var_name == this.PROGRAMMING){
+            this.game.saveChoice(null, null, null, 'prog');
             this.game.add.tween(this.bg4).to({
                 alpha: 1
             }, 1500, Phaser.Easing.Cubic.InOut)
                 .start();
         }else if(this.var_name == this.GRAPHICSS){
+            this.game.saveChoice(null, null, null, 'graph');
             this.game.add.tween(this.bg3).to({
                 alpha: 1
             }, 1500, Phaser.Easing.Cubic.InOut)
                 .start();
         }else if(this.var_name == this.NETWORKS){
+            this.game.saveChoice(null, null, null, 'net');
             this.game.add.tween(this.bg2).to({
                 alpha: 1
             }, 1500, Phaser.Easing.Cubic.InOut)
