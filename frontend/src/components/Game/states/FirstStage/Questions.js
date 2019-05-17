@@ -8,7 +8,7 @@ export default class QuestionsState extends Phaser.State {
         this.game.camera.flash(0x000000, 3000, true);
         yield;
 
-        this.game.displayDialogLine('Голос', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Ви відчуваєте себе частиною масштабної і значної події. Захоплення тісно переплітається з хвилюванням, збиваючи з звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => this.next());
+        this.game.displayDialogLine('Голос', 'Просторий хол, пронизаний сонячними променями, зустрічає вас галасливим натовпом. Захоплення тісно переплітається з хвилюванням, збиваючи зі звичного ритму сердце. Ваш погляд розгублено бігає по людських силуетах і табличках, що підняті високо над головами. Так багато кафедр...', () => this.next());
         yield;
 
         this.game.displayDialogLine('Голос', 'Але ось Ви помічаєте необхідну, її неможливо сплутати з іншими', () => this.next());
@@ -41,7 +41,7 @@ export default class QuestionsState extends Phaser.State {
         this.game.displayDialogLine('Голос', 'Приєднавшись до групи юнаків і дівчат, Ви непомітно розглядаєте ту, що утримує табличку в доглянутих руках з ніжним манікюром', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Ви приєдналися до групи абітурієнтів, але Ви навіть не встигли засумувати, як та хто тримала табличку заговорила', () => this.next());
+        this.game.displayDialogLine('Голос', 'Ви приєдналися до групи абітурієнтів, але Ви навіть не встигли засумувати, коли та, хто тримала табличку, заговорила', () => this.next());
         yield;
 
         this.game.add.tween(this.teacher).to({
@@ -50,11 +50,11 @@ export default class QuestionsState extends Phaser.State {
                 .start();
 
         if (!this.friend){
-            this.game.displayDialogLine('Голос', 'Здається, Ви знаєте, кто така Стильна', () => this.next());
+            this.game.displayDialogLine('Голос', 'Здається, Ви знаєте, хто така Стильна', () => this.next());
             yield;
         }
 
-        this.game.displayDialogLine('Викладач', 'Ще раз повторюю, звуть мене Анастасія Марківна, дочекаємося інших і через декілька хвилин ми підем до аудиторії', () => this.next());
+        this.game.displayDialogLine('Викладач', 'Ще раз повторюю, звуть мене Анастасія Марківна, дочекаємося інших і через декілька хвилин підем до аудиторії', () => this.next());
         yield;
 
         this.game.displayDialogLine('Голос', 'Невдовзі Ви разом з іншими рушаєте коридорами університету до лекційного залу з підготовленим для презентації екраном', () => this.next());
@@ -87,7 +87,7 @@ export default class QuestionsState extends Phaser.State {
             .start().onComplete.add(() => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Ви розумієте, яку помилку допустили, обравши останню парту. Слова Анастасії Марковни, як вона представилась, долітають до вас через одне', () => this.next());
+        this.game.displayDialogLine('Голос', 'Ви розумієте, яку помилку допустили, обравши останню парту. Слова Анастасії Марківни, як вона представилась, долітають до вас через одне', () => this.next());
         yield;
 
         this.game.displayDialogLine('Голос', 'Пересісти ближче немає можливості: всі місця зайняті. Добре хоч екран великий, і можна здогадатися, що за слово Ви не почули, ознайомившись з інформацією', () => this.next());
@@ -152,7 +152,7 @@ export default class QuestionsState extends Phaser.State {
 
         //sixth question
         oneTask=this.FSF.oneTask(this.slide7, this.cloud, 
-            "Після навчання, ви можете влаштуватися на посаду ... продюсера", 
+            "Після навчання ви можете влаштуватися на посаду ... продюсера", 
             ["а) театрального","б) музичного","в) кiно","г) веб"], 
             [false,false,false,true],  
             this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
@@ -188,7 +188,7 @@ export default class QuestionsState extends Phaser.State {
             .start();
 
         oneTask=this.FSF.oneTask(this.slide9, this.cloud, 
-            "Підвищення кваліфікації призначене для ... знань, обраної вами професії", 
+            "Підвищення кваліфікації призначене для ... знань обраної вами професії", 
             ["а) узагальнення","б) успадкування","в) поглиблення","г) погiршення"], 
             [false,false,true,false],  
             this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
@@ -197,7 +197,7 @@ export default class QuestionsState extends Phaser.State {
 
         //eigth question
         oneTask=this.FSF.oneTask(this.slide10, this.cloud, 
-            "Почавши свою кар’єру як Junior, Ви можете досягти звання ...", 
+            "Почавши свою кар’єру як Junior, ви можете досягти звання ...", 
             ["а) Senior","б) Master","в) Mister","г) Don"], 
             [true,false,false,false],  
             this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
@@ -254,7 +254,7 @@ export default class QuestionsState extends Phaser.State {
                 }, 3000);   
         });
         
-        this.game.displayDialogLine('Голос', 'За один лише день Ви пересичені інформацією, але рішення приймаєте усвідомлено. Ви міцні у своїй вірі, що дивний світ ІТ - це Ваш шлях. Тож перший і найважчий крок був зроблений...', () => this.next());
+        this.game.displayDialogLine('Голос', 'За один лише день Ви перенасичені інформацією, але рішення приймаєте усвідомлено. Ви міцні у своїй вірі, що дивний світ ІТ - це Ваш шлях. Тож перший і найважчий крок був зроблений...', () => this.next());
         yield;
 
         this.game.camera.fade(0x000000, 1500, true);

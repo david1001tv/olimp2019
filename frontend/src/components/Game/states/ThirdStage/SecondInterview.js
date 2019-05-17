@@ -10,7 +10,7 @@ export default class SecondInterviewState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.displayDialogLine('Голос', 'Цей кабінет з порога вдихнув у Вас життя і квітуче натхнення. Так що до крісла перед роботодавцем Ви сідали повні рішучості й нетерпіння. До Вас ставилися з повагою і симпатією, запропонували чашку чаю і ввічливо запитали про погоду', () => this.next());
+        this.game.displayDialogLine('Голос', 'Цей кабінет з першого погляду вдихнув у Вас життя і квітуче натхнення, тому до крісла перед роботодавцем Ви сідали повні рішучості й нетерпіння. До Вас ставилися з повагою і симпатією, запропонували чашку чаю і ввічливо запитали про погоду', () => this.next());
         yield;
 
         this.game.displayDialogLine('Голос', ' Посміхаючись, Ви надали роботодавцю разом з резюме портфоліо своїх найкращих графічних робіт. І почалась співбесіда...', () => this.next());
@@ -21,10 +21,10 @@ export default class SecondInterviewState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        this.game.displayDialogLine('Роботодавець', 'Що ви будете робити, якщо у вас залишилася одна задача, або взагалі не залишиться?', () => this.next());
+        this.game.displayDialogLine('Роботодавець', 'Що ви будете робити, якщо у вас залишилась одна або жодної задачі?', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Навчені досвідом, Ви задумалися над питанням. Напевно, роботодавець хоче з\'ясувати, чи візьмете Ви собі додаткову роботу', () => this.next());
+        this.game.displayDialogLine('Голос', 'Навчені досвідом, Ви задумались над питанням. Напевно, роботодавець хоче з\'ясувати, чи візьмете Ви собі додаткову роботу', () => this.next());
         yield;
 
         this.game.add.tween(this.employer).to({
@@ -46,13 +46,13 @@ export default class SecondInterviewState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        this.game.displayDialogLine('Роботодавець', 'Роботодавець вислухавши Вашу відповідь, щось записав собі до блокноту', () => this.next());
+        this.game.displayDialogLine('Голос', 'Роботодавець, вислухавши Вашу відповідь, щось записав собі до блокноту', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Вас запитали за Ваш процес створення дизайну, попрохали розповісти про методи, які Ви використовуєте', () => this.next());
+        this.game.displayDialogLine('Голос', 'Вас запитали за Ваш процес створення дизайну, попросили розповісти про методи, які Ви використовуєте', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Ви подумки відзначили, що він намагається з\'ясувати, які Ви на ділі. Треба бути обачливими', () => this.next());
+        this.game.displayDialogLine('Голос', 'Ви подумки відзначили, що він намагається з\'ясувати, які Ви в роботі. Треба бути обачливими', () => this.next());
         yield;
 
         this.game.add.tween(this.employer).to({
@@ -93,7 +93,7 @@ export default class SecondInterviewState extends Phaser.State {
         this.game.displayDialogLine('Роботодавець', 'Як Ви працюєте з іншими дизайнерами, програмістами, керівниками проектів?', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Ага! Він намагається з\'ясувати, чи вписуєтися Ви до культури компанії, хоче зрозуміти Ваш стиль роботи', () => this.next());
+        this.game.displayDialogLine('Голос', 'Ага! Він намагається з\'ясувати, чи вписуєтеся Ви до культури компанії, хоче зрозуміти Ваш стиль роботи', () => this.next());
         yield;
 
         this.game.displayDialogLine('Голос', '*Набувши серйозного вигляду, Ви офіційним тоном відповіли...*', () => this.next());
@@ -122,7 +122,7 @@ export default class SecondInterviewState extends Phaser.State {
             this.game.displayDialogLine('Роботодавець', 'Добре, що Ви знаєте, як ефективно повідомляти про свої рішення всій команді', () => this.next());
         }
         else {
-            this.game.displayDialogLine('Роботодавець', 'Майте на увазі, що кожен член команди, ймовірно, бачить проект зі своєї точки зору. Однак Вам потрібно вміти спілкуватися з усіма, щоб швидко запобігти будь-які проблеми чи непорозуміння', () => this.next());
+            this.game.displayDialogLine('Роботодавець', 'Майте на увазі, що кожний член команди, ймовірно, бачить проект зі своєї точки зору. Однак Вам потрібно вміти спілкуватися з усіма, щоб швидко запобігти будь-яким проблемам чи непорозумінням', () => this.next());
         }
         yield;
 
@@ -131,7 +131,7 @@ export default class SecondInterviewState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        this.game.displayDialogLine('Голос', 'Співбесіда добігала кінця. Ви розповіли про проект, яким пишаєтися найбільше, коли роботодавець намагався з\'ясувати Ваші сильні і слабкі сторони. Вам запропонували пройти швидкий тест на логіку та ерудицію, після чого надали на вибір наступні вакансії*', () => this.next());
+        this.game.displayDialogLine('Голос', 'Співбесіда добігала кінця. Ви розповіли про проект, яким пишаєтеся найбільше, коли роботодавець намагався з\'ясувати Ваші сильні і слабкі сторони. Вам запропонували пройти швидкий тест на логіку та ерудицію, після чого надали на вибір наступні вакансії*', () => this.next());
         yield;
 
         this.game.add.tween(this.bg2).to({
@@ -190,7 +190,7 @@ export default class SecondInterviewState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
         .start();
                
-        this.game.displayDialogLine('Голос', 'Цей досвід співбесіди був корисним. Залишилося навідатися ще до одного кабінету', () => this.next());
+        this.game.displayDialogLine('Голос', 'Цей досвід співбесіди був корисним. Залишилось навідатися ще до одного кабінету', () => this.next());
         yield;
 
         this.game.camera.fade(0x000000, 1500, true);
