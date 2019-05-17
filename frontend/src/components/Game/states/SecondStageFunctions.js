@@ -54,7 +54,7 @@ const SSF = {
 
     addText: function(str, posX, posY, fontSize, todoId){
         let tmp = this.game.add.text(posX, posY, str, {
-                font: fontSize+"px Pangolin",
+                font: fontSize+"px Leftonade",
         });
         if(todoId !== undefined){
             tmp.todoId = todoId;

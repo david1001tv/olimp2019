@@ -211,7 +211,7 @@ export default class ThreeInRowState extends Phaser.State {
 
         this.cells = this.currentScore.map((member, i) => ({
             text: this.game.add.text(750, 250 + 77 * i, this.currentScore[i].goal, {
-                font: "Pangolin",
+                font: "Leftonade",
                 fontSize: 50,
                 fill: 'white',
                 stroke: 'black',
@@ -222,7 +222,7 @@ export default class ThreeInRowState extends Phaser.State {
         }));
 
         this.timerText = this.game.add.text(700, 155, '', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 50,
             fill: 'white',
             stroke: 'black',

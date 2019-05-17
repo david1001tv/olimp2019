@@ -264,7 +264,8 @@ export default class ScheduleState extends Phaser.State {
 
     startGame() {
         style.fontSize = 25;
-        let mainSubj = this.addTextOnSprite(580, 115, 'ОБОВ\'ЯЗКОВІ ДИСЦИПЛІНИ ПРОФЕСІЙНОГО І ПРАКТИЧНОГО СПРЯМУВАННЯ', style);
+        style.font = 'Pribambas';
+        let mainSubj = this.addTextOnSprite(650, 115, 'ОБОВ\'ЯЗКОВІ ДИСЦИПЛІНИ ПРОФЕСІЙНОГО І ПРАКТИЧНОГО СПРЯМУВАННЯ', style);
         mainSubj.addColor('#ffffff', 0);
         let optionalSubj = this.addTextOnSprite(830, 595, 'ДОДАТКОВІ ДИСЦИПЛІНИ', style);
         optionalSubj.addColor('#ffffff', 0);
@@ -273,6 +274,7 @@ export default class ScheduleState extends Phaser.State {
 
         subjectsArray.forEach((subject) => {
             style.fontSize = 20;
+            style.font = 'Leftonade';
             if (subject.color) {
                 let numColumn = this.addTextOnSprite(subject.posX, subject.posY, subject.id, style);
                 numColumn.addColor(subject.color, 0);
@@ -382,7 +384,7 @@ export default class ScheduleState extends Phaser.State {
         this.warning = warning;
 
         this.firstWarning = this.game.add.text(735, 80, 'Цей вибір вплине на Вашу історію', {
-            font: "Pangolin",
+            font: "Leftonade",
             fontSize: 30,
             fill: 'white',
             stroke: 'black',
