@@ -126,7 +126,8 @@ class Game extends Phaser.Game {
         //TestingAndDebugging +
         this.state.add('Debugging', DebuggingState, false);
         //End +
-   
+        this.state.add('End', EndState, false);
+
         this.state.add('Final', new Phaser.State(), false);
 
         this.state.start('Boot', true, false, 'Map');

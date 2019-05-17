@@ -422,9 +422,11 @@ export default class Scanner extends Phaser.State {
     firstSelection(obj) {
         if (obj.key == 'button_blue_on'){
             this.firstChoice = 'Approved';
+            this.game.saveChoice(null, true);
         }
         else {
             this.firstChoice = 'Disapproved';
+            this.game.saveChoice(null, false);
         }
 
         this.buttonApprove_on.destroy();

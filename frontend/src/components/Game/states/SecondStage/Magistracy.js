@@ -474,9 +474,11 @@ export default class Scanner extends Phaser.State {
         console.log(obj);
         if (obj.key == 'button_choose_yes'){
             this.answer = 1;
+            this.game.saveChoice(null, null, true);
         }
         else {
             this.answer = 0;
+            this.game.saveChoice(null, null, false);
         }
         this.button_choose_mag.destroy();
         this.button_choose_work.destroy();
