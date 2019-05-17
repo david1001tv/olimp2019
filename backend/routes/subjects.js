@@ -20,47 +20,56 @@ router.post('/', async function (req, res) {
         let secondProff = 1;
         let thirdProff = 1;
 
-        subjects.forEach(async subject => {
+        for(let i in subjects) {
             let subj = await Subjects.findOne({
-                where: {user_id:req.decodedToken.userId}
+                where: {
+                    user_id:req.decodedToken.userId,
+                    key: subjects[i].key
+                }
             });
             if (!subj) {
                 subj = await Subjects.create({
-                    key: subject.key,
-                    hours: subject.hours,
-                    is_need: subject.is_need,
-                    name: subject.name,
+                    key: subjects[i].key,
+                    hours: subjects[i].hours,
+                    is_need: subjects[i].is_need,
+                    name: subjects[i].name,
                     user_id: req.decodedToken.userId
                 });
+            } else {
+                subj.key = subjects[i].key;
+                subj.hours = subjects[i].hours;
+                subj.is_need = subjects[i].is_need;
+                subj.name = subjects[i].name;
+                subj.save();
             }
             subjectsArray.push(subj);
 
-            switch (subj.key) {
+            switch (subjects[i].key) {
                 case 'graph':
-                    if (subject.hours > 120) {
+                    if (+subjects[i].hours > 120) {
                         firstProff = 1.5;
-                    } else if (subject.hours < 120) {
+                    } else if (subjects[i].hours < 120) {
                         firstProff = 0.75;
                     }
                     break;
                 case 'net':
-                    if (subject.hours > 225) {
+                    if (+subjects[i].hours > 225) {
                         secondProff = 1.5;
-                    } else if (subject.hours < 225) {
+                    } else if (subjects[i].hours < 225) {
                         secondProff = 0.75;
                     }
                     break;
                 case 'prog':
-                    if (subject.hours > 258) {
+                    if (+subjects[i].hours > 258) {
                         thirdProff = 1.5;
-                    } else if (subject.hours < 258) {
+                    } else if (subjects[i].hours < 258) {
                         thirdProff = 0.75;
                     }
                     break;
                 default:
                     break;
             }
-        });
+        }
 
         let coeff = await Coefficients.findOne({
             where: {user_id:req.decodedToken.userId}

@@ -79,8 +79,7 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-    
-<<<<<<< HEAD
+
         //Stage 1 +
         //Intro +
         this.state.add('Intro', IntroState, false);
@@ -113,46 +112,10 @@ class Game extends Phaser.Game {
 
         //Stage 3 +
         //Labyrinth
-=======
-        // //Stage 1 +
-        // //Intro +
-        // this.state.add('Intro', IntroState, false);
-        // //PostIntro +
-        // this.state.add('PostIntro', PostIntroState, false);
-        // //Questions +
-        // this.state.add('Questions', QuestionsState, false);
-
-        // //Stage 2 +
-        // //Schedule +
-        // this.state.add("Schedule", ScheduleState, false);
-        // //Fillword +
-        // this.state.add("FillWords", FillwordsState, false);
-        // //LayoutPuzzle +
-        // this.state.add("LayoutPuzzle", LayoutPuzzleState, false);
-        // //Tags +
-        // this.state.add("Tags", TagsState, false);
-        // //Wiring +
-        // this.state.add("CutImages", CutImagesState, false);
-        // //Cards +
-        // this.state.add("Cards", CardsState, false);
-        // //Magistracy +
-        // this.state.add("Magistracy", MagistracyState, false);
-        // //Cryptographic +
-        // this.state.add("Crypto", CryptoState, false);
-        // //Robot +
-        // this.state.add("Robot", RobotState, false);
-        // //Outro +
-        // this.state.add("Outro", OutroState, false);
-
-        // //Stage 3 +
-        // //Labyrinth 
-
->>>>>>> e58e0e561bf6ef16f64fa33b8968d3439e329cbb
         this.state.add('Labyrinth', LabyrinthState, false);
         this.state.add('FirstInterview', FirstInterviewState, false);
         this.state.add('SecondInterview', SecondInterviewState, false);
         this.state.add('ThirdInterview', ThirdInterviewState, false);
-<<<<<<< HEAD
         //Crossword +
         this.state.add('Cross', CrossState, false);
 
@@ -165,26 +128,8 @@ class Game extends Phaser.Game {
         this.state.add('Debugging', DebuggingState, false);
         //End +
         this.state.add('End', EndState, false);
-        
-        //this.state.add('Intro', ThreeInARowState, false);
-=======
 
-        // //Crossword +
-        // this.state.add('Cross', CrossState, false);
-
-        // //Stage 4 +
-        // //FindItems (Conference) +
-        // this.state.add('Conference', ConferenceState, false);
-        // //ThreeInARow +
-        // this.state.add('ThreeInARow', ThreeInARowState, false);
-        // //TestingAndDebugging +
-        // this.state.add('Debugging', DebuggingState, false);
-        // //End +
-
-        this.state.add('End', EndState, false);
-   
-        this.state.add('Final', new Phaser.State(), false);
->>>>>>> e58e0e561bf6ef16f64fa33b8968d3439e329cbb
+        //this.state.add('Final', new Phaser.State(), false);
 
         this.state.start('Boot', true, false, 'Map');
     }
@@ -197,11 +142,11 @@ class Game extends Phaser.Game {
         // if (this.isReplaying) {
         //     this.state.start('Map');
         // } else {
-            let states = Object.keys(this.state.states);
-            this.progressManager.completeState(this.state.current, 0);
-            let currentIndex = states.indexOf(this.state.current);
+        let states = Object.keys(this.state.states);
+        this.progressManager.completeState(this.state.current, 0);
+        let currentIndex = states.indexOf(this.state.current);
 
-            this.state.start('Boot', true, false, states[currentIndex + 1]);
+        this.state.start('Boot', true, false, states[currentIndex + 1]);
         // }
     }
 
@@ -217,11 +162,11 @@ class Game extends Phaser.Game {
         // if (this.isReplaying) {
         //     this.state.start('Map');
         // } else {
-            let states = Object.keys(this.state.states);
-            this.progressManager.completeState(this.state.current, 0);
-            let currentIndex = states.indexOf(this.state.current);
+        let states = Object.keys(this.state.states);
+        this.progressManager.completeState(this.state.current, 0);
+        let currentIndex = states.indexOf(this.state.current);
 
-            this.state.start('Boot', true, false, states[currentIndex + 4]);
+        this.state.start('Boot', true, false, states[currentIndex + 4]);
         // }
     }
 
