@@ -11,7 +11,7 @@
 
 #dialog-container
   font-family: "Leftonade"
-  height: 40%
+  height: 30%
   position: absolute
   bottom: 0
   width: 96%
@@ -23,47 +23,23 @@
   text-align: left
   color: white
   white-space: pre-line
-  font-size: 16px
 
-  @media (min-width: 700px)
-    font-size: 19px
+
+  @media (max-width: 820px)
     height: 40%
 
-  @media (min-width: 900px)
-    font-size: 21px
-    height: 27%
+  @media (min-width: 1100px)
+    font-size: 22px
+    height: 25%
 
   @media (min-width: 1400px)
-    height: 23%
-    font-size: 24px
+    font-size: 20px
 
-  @media (min-width: 1700px)
-    font-size: 28px
-
-  @media (min-width: 2000px)
-    font-size: 32px
-    height: 23%
-
-  @media (min-width: 2500px)
-    font-size: 35px
-    height: 17%
-
+  font-size: 14px
   #message-source
     font-family: "Pribambas"
     color: #73cfff
-    font-size: 21px  
-
-    @media (min-width: 700px)
-      font-size: 24px
-
-    @media (min-width: 1100px)
-      font-size: 30px
-
-    @media (min-width: 1700px)
-      font-size: 35px
-
-    @media (min-width: 2500px)
-      font-size: 40px
+    font-size: 30px
 
   #message-hint
     text-align: right
@@ -78,6 +54,7 @@
   width: 73px
   cursor: pointer
   background-color: transparent
+  outline: none
   border: none
   background-size: 100%
   background-repeat: no-repeat
@@ -86,4 +63,3 @@
     background-image: url(../../img/button-phone-pressed.png)
   &:disabled
     background-image: url(../../img/button-phone-disabled.png)
-
