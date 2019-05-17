@@ -68,7 +68,7 @@ export default class ThirdInterviewState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        if ( this.NetworkCoef == 1) {
+        if (this.NetworkCoef) {
             this.buttonSecond_top.inputEnabled = true;
             this.buttonSecond_top.alpha = 1;
             this.selectSecond_top.alpha = 1; 
@@ -212,7 +212,12 @@ export default class ThirdInterviewState extends Phaser.State {
         this._gen = this.gen();
         this.game.phone.setEnabled(true);
         //Коэффициент комп. сетей максимальный?: 0 - no, 1 - yes   
-        this.NetworkCoef = 0;
+        let subjects = this.game.getSubjects();
+        console.log(subjects);
+        subjects.then(res => {
+            this.NetworkCoef = res.second_proff > 1;
+            this.next();
+        });
 
         this.firstAnswer = null;
         this.secondAnswer = null;

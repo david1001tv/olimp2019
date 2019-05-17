@@ -145,7 +145,7 @@ class ProgressManager {
 
     getSubjects() {
         if (isAuthenticated()) {
-            getSubjects();
+            return getSubjects();
         }
     }
 

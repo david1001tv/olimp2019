@@ -60,7 +60,7 @@ export default class SecondInterviewState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        if ( this.ConfStatus === 1) {
+        if (this.magistracy) {
             this.buttonSecond_top.inputEnabled = true;
             this.buttonSecond_top.alpha = 1;
             this.selectSecond_top.alpha = 1; 
@@ -203,8 +203,13 @@ export default class SecondInterviewState extends Phaser.State {
     init() {
         this._gen = this.gen();
         this.game.phone.setEnabled(true);
-        //Участвол ли в конференци: 0 - no, 1 - yes   
-        this.ConfStatus = 0;
+        //Участвол ли в конференци: 0 - no, 1 - yes
+        let choices = this.game.getChoice();
+        choices.then(res => {
+            this.magistracy = res.magistracy;
+            console.log(this.magistracy);
+            this.next();
+        });
 
         this.firstAnswer = null;
         this.secondAnswer = null;
