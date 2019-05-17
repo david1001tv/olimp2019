@@ -79,8 +79,7 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-    
-  //Stage 1 +
+        //Stage 1 +
         //Intro +
         this.state.add('Intro', IntroState, false);
         //PostIntro +
@@ -128,6 +127,10 @@ class Game extends Phaser.Game {
         this.state.add('Debugging', DebuggingState, false);
         //End +
         this.state.add('End', EndState, false);
+   
+        this.state.add('Final', new Phaser.State(), false);
+
+        //this.state.add('Intro', ScheduleState, false);
 
         this.state.start('Boot', true, false, 'Map');
     }

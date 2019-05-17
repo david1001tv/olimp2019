@@ -74,7 +74,6 @@ export default class TagsState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
         yield;
-        this.game.nextState(0);
     }
 
     init() {
