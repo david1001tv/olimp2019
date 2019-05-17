@@ -18,11 +18,31 @@ export default class Scanner extends Phaser.State {
 
 
         if (this.score >= 600){
-        this.game.add.tween(this.master_red).to({
-            alpha: 1
-        }, 1500, Phaser.Easing.Cubic.InOut)
-            .start().onComplete.add(() => setTimeout(() => {  
-                this.game.add.tween(this.master_blue).to({
+            this.game.add.tween(this.master_red).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                    this.game.add.tween(this.master_blue).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                    this.next();
+                }, 3000));
+            this.game.add.tween(this.leftText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.leftText).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.next();
+            }, 3000));
+            this.game.add.tween(this.rightText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.rightText).to({
                     alpha: 0
                 }, 1500, Phaser.Easing.Cubic.InOut)
                     .start();
@@ -40,6 +60,26 @@ export default class Scanner extends Phaser.State {
                         .start();
                     this.next();
                 }, 3000));
+            this.game.add.tween(this.leftText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.leftText).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.next();
+            }, 3000));
+            this.game.add.tween(this.rightText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.rightText).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.next();
+            }, 3000));
         }
         yield;
 
@@ -56,7 +96,32 @@ export default class Scanner extends Phaser.State {
     init() {
         //total score
         //800/600/80
-        this.score = 800;
+        //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
+        let choices = this.game.getChoice();
+        choices.then(res => {
+            this.friend = res.friend;
+        });
+
+        let history = this.game.getHistory();
+        history.then(res => {
+            res.forEach(state => {
+                if (state.score) {
+                    this.score += state.score;
+                }
+            });
+        });
+
+        let me = this.game.getMe();
+        me.then(res => {
+            this.me = res;
+            this.leftText = this.game.add.text(575, 350, this.me.firstName + ' ' + this.me.lastName);
+            this.leftText.alpha = 0;
+
+            this.rightText = this.game.add.text(1100, 350, this.me.firstName + ' ' + this.me.lastName);
+            this.rightText.alpha = 0;
+
+            this.next();
+        });
 
         this._gen = this.gen();
 
@@ -84,8 +149,6 @@ export default class Scanner extends Phaser.State {
 
         this.master_blue = this.SSF.makeImg(430, 100, 'master_blue', 1050, 750);
         this.master_red = this.SSF.makeImg(430, 100, 'master_red', 1050, 750);
-
-        this.next();
     }
 
     next() {

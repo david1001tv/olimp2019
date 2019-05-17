@@ -76,6 +76,27 @@ export default class Scanner extends Phaser.State {
                         .start();
                     this.next();
                 }, 3000));
+
+            this.game.add.tween(this.leftText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                    this.game.add.tween(this.leftText).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                    this.next();
+                }, 3000));
+            this.game.add.tween(this.rightText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.rightText).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.next();
+            }, 3000));
         }
         else {
             this.game.add.tween(this.warning).to({
@@ -112,6 +133,27 @@ export default class Scanner extends Phaser.State {
                         .start();
                     this.next();
                 }, 3000));
+
+            this.game.add.tween(this.leftText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.leftText).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.next();
+            }, 3000));
+            this.game.add.tween(this.rightText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.rightText).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.next();
+            }, 3000));
         }
         yield;
 
@@ -420,11 +462,18 @@ export default class Scanner extends Phaser.State {
         });
         this.fourthWarning.alpha = 0;
 
+        this.leftText = this.game.add.text(575, 450, this.me.firstName + ' ' + this.me.lastName);
+        this.leftText.alpha = 0;
+
+        this.rightText = this.game.add.text(1100, 450, this.me.firstName + ' ' + this.me.lastName);
+        this.rightText.alpha = 0;
+
 
         this.next();
     }
 
     choose(obj) {
+        console.log(obj);
         if (obj.key == 'button_choose_yes'){
             this.answer = 1;
         }
