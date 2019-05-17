@@ -38,10 +38,10 @@ export default class QuestionsState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        this.game.displayDialogLine('Голос', 'Приєднавшись до групи юнаків і дівчат, Ви непомітно розглядаєте ту, що утримує табличку в доглянутих руках з ніжним манікюром', () => this.next());
+		this.game.displayDialogLine('Голос', 'Приєднавшись до групи юнаків і дівчат, Ви непомітно розглядаєте ту, що утримує табличку в доглянутих руках з ніжним манікюром', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Ви приєдналися до групи абітурієнтів, але Ви навіть не встигли засумувати, коли та, хто тримала табличку, заговорила', () => this.next());
+        this.game.displayDialogLine('Голос', 'У ній підсвідомо відчувається порода жінок, що зачаровують з перших поглядів і граціозних жестів. Вам важко повірити, що крижана красуня обрала шлях ІТ, але очі не обманюють', () => this.next());
         yield;
 
         this.game.add.tween(this.teacher).to({
@@ -57,7 +57,7 @@ export default class QuestionsState extends Phaser.State {
         this.game.displayDialogLine('Викладач', 'Ще раз повторюю, звуть мене Анастасія Марківна, дочекаємося інших і через декілька хвилин підем до аудиторії', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Голос', 'Невдовзі Ви разом з іншими рушаєте коридорами університету до лекційного залу з підготовленим для презентації екраном', () => this.next());
+        this.game.displayDialogLine('Голос', 'Невдовзі Ви разом з іншими рушаєте коридорами університету до лекційної зали з підготовленим для презентації екраном', () => this.next());
         yield;
 
         this.game.add.tween(this.teacher).to({
