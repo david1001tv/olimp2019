@@ -82,7 +82,7 @@ class Game extends Phaser.Game {
     
         //Stage 1 +
         //Intro +
-        this.state.add('Intro', IntroState, false);
+        this.state.add('Intro', MagistracyState, false);
         //PostIntro +
         this.state.add('PostIntro', PostIntroState, false);
         //Questions +

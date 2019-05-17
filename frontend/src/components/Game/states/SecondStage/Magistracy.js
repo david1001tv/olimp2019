@@ -13,15 +13,6 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.button_choose_mag.inputEnabled = true;
-        this.button_choose_mag.alpha = 1;
-        this.button_text_mag.alpha = 1;
-
-        this.button_choose_work.inputEnabled = true;
-        this.button_choose_work.alpha = 1;
-        this.button_text_work.alpha = 1;
-        yield;
-
         this.game.displayDialogLine('Голос', 'Ось і настав цей знаменний день! День підбиття підсумків, коли можна гордовито сказати: Ви це зробили, Ви впоралися! Подолавши важкий і тернистий шлях навчання, здобули диплом бакалавра!', () => this.next());
         yield;
 
@@ -85,6 +76,27 @@ export default class Scanner extends Phaser.State {
                         .start();
                     this.next();
                 }, 3000));
+
+            this.game.add.tween(this.leftText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                    this.game.add.tween(this.leftText).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                    this.next();
+                }, 3000));
+            this.game.add.tween(this.rightText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.rightText).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.next();
+            }, 3000));
         }
         else {
             this.game.add.tween(this.warning).to({
@@ -121,6 +133,27 @@ export default class Scanner extends Phaser.State {
                         .start();
                     this.next();
                 }, 3000));
+
+            this.game.add.tween(this.leftText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.leftText).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.next();
+            }, 3000));
+            this.game.add.tween(this.rightText).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start().onComplete.add(() => setTimeout(() => {
+                this.game.add.tween(this.rightText).to({
+                    alpha: 0
+                }, 1500, Phaser.Easing.Cubic.InOut)
+                    .start();
+                this.next();
+            }, 3000));
         }
         yield;
 
@@ -429,11 +462,18 @@ export default class Scanner extends Phaser.State {
         });
         this.fourthWarning.alpha = 0;
 
+        this.leftText = this.game.add.text(575, 450, this.me.firstName + ' ' + this.me.lastName);
+        this.leftText.alpha = 0;
+
+        this.rightText = this.game.add.text(1100, 450, this.me.firstName + ' ' + this.me.lastName);
+        this.rightText.alpha = 0;
+
 
         this.next();
     }
 
     choose(obj) {
+        console.log(obj);
         if (obj.key == 'button_choose_yes'){
             this.answer = 1;
         }
