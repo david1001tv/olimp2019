@@ -122,10 +122,16 @@ export default class WWHState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
+        if (this.mistakes <= 125){
+            this.score = 100;
+        }
+        else if (this.mistakes <= 175){
+            this.score = 50;
+        }
+        else {
+            this.score = 10; 
+        }
         this.game.nextState(this.score);
-
-
-
     }
 
 preload() {
@@ -237,16 +243,7 @@ rotate_image (e) {
     
     console.log(this.SSF.imageCheck(this.mass));
     if (this.SSF.imageCheck(this.mass)){
-        if (this.mistakes <= 125){
-            this.score = 100;
-        }
-        else if (this.mistakes <= 175){
-            this.score = 50;
-        }
-        else {
-            this.score = 10; 
-        }
-        this.game.nextState(this.score);
+        this.next();
     }
 
 

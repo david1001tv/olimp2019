@@ -48,7 +48,7 @@ export default class EndState extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.game.nextState();
+        this.game.nextState(0);
     }
 
     init() {

@@ -13,15 +13,6 @@ export default class Scanner extends Phaser.State {
         setTimeout(() => this.next(), 1500);
         yield;
 
-        this.button_choose_mag.inputEnabled = true;
-        this.button_choose_mag.alpha = 1;
-        this.button_text_mag.alpha = 1;
-
-        this.button_choose_work.inputEnabled = true;
-        this.button_choose_work.alpha = 1;
-        this.button_text_work.alpha = 1;
-        yield;
-
         this.game.displayDialogLine('Голос', 'Ось і настав цей знаменний день! День підбиття підсумків, коли можна гордовито сказати: Ви це зробили, Ви впоралися! Подолавши важкий і тернистий шлях навчання, здобули диплом бакалавра!', () => this.next());
         yield;
 
