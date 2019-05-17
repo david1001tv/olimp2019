@@ -134,10 +134,17 @@ class GameWrapper extends Component {
                     />
                     <button
                         className="show-phone-button"
-                        onClick={() => this.setState({mapIsShown: true})}
+                        onClick=
+                            {
+                                !this.state.dialogIsShown
+                                    ?
+                                    () => this.setState({mapIsShown: true})
+                                    :
+                                    null
+                            }
                     >
                     </button>
-                    
+
                     {
                         mapIsShown
                             ?
