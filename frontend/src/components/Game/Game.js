@@ -79,7 +79,6 @@ class Game extends Phaser.Game {
 
         this.state.add('Map', MapState, false);
         this.state.add('Boot', BootState, false);
-
         //Stage 1 +
         //Intro +
         this.state.add('Intro', IntroState, false);
@@ -111,7 +110,7 @@ class Game extends Phaser.Game {
         this.state.add("Outro", OutroState, false);
 
         //Stage 3 +
-        //Labyrinth 
+        //Labyrinth
         this.state.add('Labyrinth', LabyrinthState, false);
         this.state.add('FirstInterview', FirstInterviewState, false);
         this.state.add('SecondInterview', SecondInterviewState, false);
@@ -127,11 +126,13 @@ class Game extends Phaser.Game {
         //TestingAndDebugging +
         this.state.add('Debugging', DebuggingState, false);
         //End +
-        this.state.add('End', EndState, false);
    
         this.state.add('Final', new Phaser.State(), false);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dc99d5e3d00a41aca2e4aad936afabc12a6e9b08
         this.state.start('Boot', true, false, 'Map');
     }
 
@@ -143,11 +144,11 @@ class Game extends Phaser.Game {
         // if (this.isReplaying) {
         //     this.state.start('Map');
         // } else {
-            let states = Object.keys(this.state.states);
-            this.progressManager.completeState(this.state.current, 0);
-            let currentIndex = states.indexOf(this.state.current);
+        let states = Object.keys(this.state.states);
+        this.progressManager.completeState(this.state.current, 0);
+        let currentIndex = states.indexOf(this.state.current);
 
-            this.state.start('Boot', true, false, states[currentIndex + 1]);
+        this.state.start('Boot', true, false, states[currentIndex + 1]);
         // }
     }
 
@@ -163,11 +164,11 @@ class Game extends Phaser.Game {
         // if (this.isReplaying) {
         //     this.state.start('Map');
         // } else {
-            let states = Object.keys(this.state.states);
-            this.progressManager.completeState(this.state.current, 0);
-            let currentIndex = states.indexOf(this.state.current);
+        let states = Object.keys(this.state.states);
+        this.progressManager.completeState(this.state.current, 0);
+        let currentIndex = states.indexOf(this.state.current);
 
-            this.state.start('Boot', true, false, states[currentIndex + 4]);
+        this.state.start('Boot', true, false, states[currentIndex + 4]);
         // }
     }
 

@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const {HistoryEntry, State} = require('../models');
+const {HistoryEntry, State, Coefficients} = require('../models');
 const authMiddleware = require('../middleware').auth;
 const sequelize = require('../models/sequelize');
 
@@ -44,12 +44,34 @@ FROM
             return;
         }
 
+        const coefficients = (await Coefficients.findOne({
+            where: {
+                user_id: req.decodedToken.userId
+            }
+        }));
+
         const historyEntry = (await HistoryEntry.findOne({
             where: {
                 state_id: state.id,
                 user_id: req.decodedToken.userId
             }
         }));
+
+        let coef = 1;
+        switch (req.params.state) {
+            case 'FillWords': case 'CutImages':
+                coef = coefficients.second_proff;
+                break;
+            case 'LayoutPuzzle':
+                coef = coefficients.first_proff;
+                break;
+            case 'Tags':
+                coef = coefficients.third_proff;
+                break;
+            default:
+                break;
+
+        }
 
         // проверка на то проходил ли чел этот этап раньше
         if (historyEntry) {
@@ -59,7 +81,7 @@ FROM
         } else {
             await HistoryEntry.create({
                 time: req.body.time,
-                score: req.body.score,
+                score: req.body.score * coef,
                 state_id: state.id,
                 user_id: req.decodedToken.userId,
             });
