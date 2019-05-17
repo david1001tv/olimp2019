@@ -287,8 +287,8 @@ export default class QuestionsState extends Phaser.State {
         let choices = this.game.getChoice();
         choices.then(res => {
 			this.friend = res.friend;
+            this.next();
         });
-
     }
 
     preload() {
@@ -365,8 +365,6 @@ export default class QuestionsState extends Phaser.State {
         this.grade = 100;
         this.flag = true;
         this.bad = [];
-
-        this.next();
     }
 
     clickZone(obj) {

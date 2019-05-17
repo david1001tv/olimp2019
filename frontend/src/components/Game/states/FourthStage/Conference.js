@@ -320,6 +320,7 @@ export default class WWHState extends Phaser.State {
         let choices = this.game.getChoice();
         choices.then(res => {
             this.friend = res.friend;
+            this.next();
         });
     }
 
@@ -408,7 +409,6 @@ export default class WWHState extends Phaser.State {
         this.secondWarning.alpha = 0;
         
         this.stage.disableVisibilityChange = true;
-        this.next();
     }
 
     next() {
