@@ -1,6 +1,7 @@
 /* globals __DEV__ */
 import Phaser from 'phaser';
 import {smartSetHeight} from '../../utils';
+import SSF from '../../states/SecondStageFunctions';
 
 const OFFSET_HOR = 965;
 const OFFSET_VER = 202.5;
@@ -21,6 +22,11 @@ export default class ThreeInRowState extends Phaser.State {
         this.game.displayDialogLine('Голос', 'До Вашого столу впевнено прямував начальник. Ви насторожились і вимушено посміхнулися', () => this.next());
         yield;
 
+        this.game.add.tween(this.chief).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
         this.game.displayDialogLine('Начальник', 'Доброго дня. Я хочу поговорити з Вами про кар\'єрний ріст, який, як Ви знаєте, будується в ІТ на проходженні позицій від Junior до Middle і Senior', () => this.next());
         yield;
 
@@ -34,6 +40,29 @@ export default class ThreeInRowState extends Phaser.State {
         yield;
 
         //Повідомлення: “Вітаємо! Ви здобули підвищення!”
+        this.game.add.tween(this.warning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.warning).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
+
+        this.game.add.tween(this.firstWarning).to({
+            alpha: 1
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start().onComplete.add(() => {
+                setTimeout(() => {
+                    this.game.add.tween(this.firstWarning).to({
+                        alpha: 0
+                    }, 1500, Phaser.Easing.Cubic.InOut)
+                        .start();
+                }, 3000);   
+        });
 
         this.game.displayDialogLine('Начальник', 'Сподіваюсь, вже скоро Ви станете Senior - працівником, який добре знає предметну область, проводить code review, мислить проектом на рівні архітектури і розуміє довгострокові наслідки технічних рішень, вміє запропонувати глобальні рішення і альтернативні стеки технологій', () => this.next());
         yield;
@@ -50,6 +79,11 @@ export default class ThreeInRowState extends Phaser.State {
         this.game.displayDialogLine('Начальник', 'Є ще один шлях - розвивати і вдосконалювати себе до позиції IT-директора, що займається вже питаннями IT в цілому (зокрема, інфраструктури), але це вже сильно залежить від бажання самого фахівця продовжувати працювати в області знайомої йому розробки або вийти за її межі', () => this.next());
         yield;
 
+        this.game.add.tween(this.chief).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
         this.game.displayDialogLine('Голос', 'Ви, сповнені амбіційних надій, занурились у роботу над проектом, що Вам доручили', () => this.next());
         yield;
 
@@ -62,19 +96,23 @@ export default class ThreeInRowState extends Phaser.State {
         this.time = TIME;
         this.goTimer = setTimeout(() => this.checkRate(), this.time);
         this.timer = setInterval(() => this.checkTime(), 1000);
-        //1 - programmer; 2 - networks; 3 - designer
-        this.spec = 3;
+
+        //Данные из бд (получаем на сцене кроссворда, когда выбираем) 1 - programmer; 2 - networks; 3 - designer
+        this.spec = 1;
     }
 
     preload() {
 
         this.game.load.image('bg', 'assets/images/4-2 (ThreeInARow)/background.png');
+        this.game.load.image('warning_message', './assets/images/2-6 (Сards)/warning_message.png');
+
         if (this.spec == 1){
             this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/programmer/bg_programmer.png');
             this.game.load.image('cSharp', './assets/images/4-2 (ThreeInARow)/programmer/CSharp.png');
             this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/programmer/JS.png');
             this.game.load.image('ruby', './assets/images/4-2 (ThreeInARow)/programmer/Ruby.png');
             this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/programmer/Coffee.png');
+            this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/programmer.png');
         }    
         else if (this.spec == 2){
             this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/devops/bg_devops.png');
@@ -82,6 +120,7 @@ export default class ThreeInRowState extends Phaser.State {
             this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/devops/DB.png');
             this.game.load.image('ruby', './assets/images/4-2 (ThreeInARow)/devops/Internet.png');
             this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/devops/Shield.png');
+            this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/devops.png');
         } 
         else {
             this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/designer/bg_designer.png');
@@ -89,14 +128,45 @@ export default class ThreeInRowState extends Phaser.State {
             this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/designer/Illustrator.png');
             this.game.load.image('ruby', './assets/images/4-2 (ThreeInARow)/designer/Photoshop.png');
             this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/designer/Stylus.png');
+            this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/designer.png');
         }
     }
 
     create() {
+        this.SSF = {...SSF};
+        for (let key in this.SSF) {
+            this.SSF[key] = this.SSF[key].bind(this);
+        }
+
         let bg = this.game.add.image(0, 0, 'bg');
         bg.height = this.game.width * bg.height / bg.width;
         bg.width = this.game.width;
+
+        if (this.spec == 1){
+            this.chief = this.SSF.makeImg(1260, 50, 'chief', 700, 900);
+        }
+        else if(this.spec == 2){
+            this.chief = this.SSF.makeImg(1220, 50, 'chief', 700, 900);
+        }
+        else {
+            this.chief = this.SSF.makeImg(1220, 50, 'chief', 700, 900);
+        }
         
+        //Уведомления
+        let warning = this.game.add.image(700, 0, 'warning_message');
+        warning.alpha = 0;
+        smartSetHeight(warning, 200);
+        this.warning = warning;
+
+        this.firstWarning = this.game.add.text(760, 80, 'Вітаємо! Ви здобули підвищення!', {
+            font: "Leftonade",
+            fontSize: 30,
+            fill: 'white',
+            stroke: 'black',
+            strokeThickness: 8,
+        });
+        this.firstWarning.alpha = 0;
+
         this.stage.disableVisibilityChange = true;
         this.next();
     }
@@ -183,6 +253,7 @@ export default class ThreeInRowState extends Phaser.State {
         me.random = new Phaser.RandomDataGenerator([seed]);
 
         me.initTiles();
+
     }
 
     checkRate() {

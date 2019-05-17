@@ -131,10 +131,32 @@ export default class WWHState extends Phaser.State {
             this.game.displayDialogLine('Голос', 'Ви змогли лише кивнути, уражені можливостями, що раптово звалилися на Вас. Тиждень в Лондоні, занурення в ІТ - про це можна було лише мріяти! Треба збирати валізи', () => this.next());
             yield;
 
+            this.game.displayDialogLine('Адам Вікторович', 'Доречі, ти вже знайом з Надією? Ви з одного університету, та вона на чотири роки старша за тебе. Раджу із нею подружитися', () => this.next());
+            yield;
+            
             this.game.add.tween(this.teacher).to({
                 alpha: 0
             }, 1500, Phaser.Easing.Cubic.InOut)
                 .start();
+
+            this.game.displayDialogLine('Голос', 'Ви подивилися на дівчину. Вона здавалася Вам знайомою, та Ви не пригадували її. Однак вона була такою сонячною, привітною та доброзичливою, що Вам справді закортіло познайомитись із нею ' , () => this.next());
+            yield;
+
+            this.game.add.tween(this.girl).to({
+                alpha: 1
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
+
+            this.game.displayDialogLine('Надія', 'Привіт, колего! Пропоную прямувати до Лондона разом. Я вже була на курсах два роки тому, то ж екскурсовод з мене знатний!', () => this.next());
+            yield;
+
+            this.game.add.tween(this.girl).to({
+                alpha: 0
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
+
+            this.game.displayDialogLine('Голос', 'Ви ласкаво посміхнулися. Можливо, у Вас з\'явиться справжня подруга!' , () => this.next());
+            yield;
 
         }
 
