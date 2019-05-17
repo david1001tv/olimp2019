@@ -20,6 +20,5 @@ module.exports = [
     'Conference',
     'ThreeInARow',
     'Debugging',
-    'Final',
-    'Map'
+    'Final'
 ];
