@@ -29,7 +29,7 @@ export default class WWHState extends Phaser.State {
             alpha: 1
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start(); 
-        this.game.displayDialogLine('Тарас Денисович', 'Будь-яка локальна мережа складається з декількох складових: комп\ютери, які Ви будете об\'єднувати; кабель, за допомогою якого Ви будете їх об\'єднувати і центральний пристрій, який управлятиме передачею даних по мережі (комутатор)', () => this.next());
+        this.game.displayDialogLine('Тарас Денисович', 'Будь-яка локальна мережа складається з декількох складових: комп\'ютери, які Ви будете об\'єднувати; кабель, за допомогою якого Ви будете їх об\'єднувати і центральний пристрій, який управлятиме передачею даних по мережі (комутатор)', () => this.next());
         yield;
         this.game.displayDialogLine('Тарас Денисович', 'Ми розглянемо сьогодні найпоширеніший варіант побудови локальної мережі: з використанням топології "зірка", коли комп\'ютери підключаються до комутатора кабелем "вита пара". Та по-перше...', () => this.next());
         yield;
@@ -251,14 +251,14 @@ rotate_image (e) {
 
 init() {
     this._gen = this.gen();
-    this.game.phone.setEnabled(true);
+    // this.game.phone.setEnabled(false);
 
     this.mistakes = 0;
     this.score = 0;
 }
 
 shutdown() {
-    this.game.camera.scale.setTo(1, 1);
+    // this.game.camera.scale.setTo(1, 1);
 }
 
 next() {
