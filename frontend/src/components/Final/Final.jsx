@@ -104,7 +104,7 @@ class Final extends Component {
                             <div className="likes">Ця гра сподобалась {likeCount} користувачам.</div>
                             <div className="copyright">
                                 <span>КОМАНДА ДВНЗ “ПДТУ”, 2019 ©
-                                <img className="photo" id="photo"  alt="" />
+                                <img className="photo" id="photo" src={photo} alt="" />
                             </span>
                             </div>
                             <button className="btn-feedback"

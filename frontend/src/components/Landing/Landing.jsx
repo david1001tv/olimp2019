@@ -116,6 +116,8 @@ class Landing extends Component {
                       focusOnMount={false}
                       visible={teamVisible}
                       onHide={() => this.setState({teamVisible: false})}
+                      dialogClassName="photo"
+                      contentClassName="opis_container"
                 >
                     <Team />
                 </DialogContainer>
