@@ -78,7 +78,7 @@ export default class Scanner extends Phaser.State {
             this.game.add.tween(this.bachelor_red).to({
                 alpha: 1
             }, 1500, Phaser.Easing.Cubic.InOut)
-                .start().onComplete.add(() => setTimeout(() => {  
+                .start().onComplete.add(() => setTimeout(() => {
                     this.game.add.tween(this.bachelor_red).to({
                         alpha: 0
                     }, 1500, Phaser.Easing.Cubic.InOut)
