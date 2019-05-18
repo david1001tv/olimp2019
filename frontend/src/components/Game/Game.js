@@ -55,7 +55,7 @@ import ConferenceState from './states/FourthStage/Conference';
 //Квест 2 "Три в ряд" +
 import ThreeInARowState from './states/FourthStage/ThreeInRow';
 //Квест 3 "Тестирование и отлавливание багов" +
-import DebuggingState from './states/FourthStage/fixBugs';
+import testGame from './states/FourthStage/fixBugs';
 //Конец 4 +
 import EndState from './states/FourthStage/End';
 
@@ -124,7 +124,7 @@ class Game extends Phaser.Game {
         //ThreeInARow +
         this.state.add('ThreeInARow', ThreeInARowState, false);
         //TestingAndDebugging +
-        this.state.add('Debugging', DebuggingState, false);
+        this.state.add('fixBugs', testGame, false);
         //End +
         this.state.add('End', EndState, false);
 
