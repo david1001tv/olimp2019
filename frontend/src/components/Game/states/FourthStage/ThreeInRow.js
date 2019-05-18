@@ -104,7 +104,6 @@ export default class ThreeInRowState extends Phaser.State {
             // name - graph, net, prog
             this.next();
         });
-        this.spec = 1;
     }
 
     preload() {
@@ -112,7 +111,7 @@ export default class ThreeInRowState extends Phaser.State {
         this.game.load.image('bg', 'assets/images/4-2 (ThreeInARow)/background.png');
         this.game.load.image('warning_message', './assets/images/2-6 (Сards)/warning_message.png');
 
-        if (this.spec == 1){
+        if (this.specName == 'prog'){
             this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/programmer/bg_programmer.png');
             this.game.load.image('cSharp', './assets/images/4-2 (ThreeInARow)/programmer/CSharp.png');
             this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/programmer/JS.png');
@@ -120,7 +119,7 @@ export default class ThreeInRowState extends Phaser.State {
             this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/programmer/Coffee.png');
             this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/programmer.png');
         }    
-        else if (this.spec == 2){
+        else if (this.specName == 'net'){
             this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/devops/bg_devops.png');
             this.game.load.image('cSharp', './assets/images/4-2 (ThreeInARow)/devops/Bug.png');
             this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/devops/DB.png');
