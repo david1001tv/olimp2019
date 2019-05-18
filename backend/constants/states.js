@@ -1,4 +1,5 @@
 module.exports = [
+    'Map',
     'Intro',
     'PostIntro',
     'Questions',
