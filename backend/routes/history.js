@@ -58,23 +58,25 @@ FROM
         }));
 
         let coef = 1;
-        switch (req.params.state) {
-            case 'FillWords': case 'CutImages':
-                coef = coefficients.second_proff;
-                break;
-            case 'LayoutPuzzle':
-                coef = coefficients.first_proff;
-                break;
-            case 'Tags':
-                coef = coefficients.third_proff;
-                break;
-            default:
-                break;
 
+        if (coefficients) {
+            switch (req.params.state) {
+                case 'FillWords': case 'CutImages':
+                    coef = coefficients.second_proff || 1;
+                    break;
+                case 'LayoutPuzzle':
+                    coef = coefficients.first_proff || 1;
+                    break;
+                case 'Tags':
+                    coef = coefficients.third_proff || 1;
+                    break;
+                default:
+                    break;
+
+            }
         }
 
         // проверка на то проходил ли чел этот этап раньше
-        console.log(req.body.time >= 1000000000 ? req.body.time/1000000 : req.body.time);
         if (historyEntry) {
             historyEntry.time = req.body.time >= 1000000000 ? req.body.time/1000000 : req.body.time;
             historyEntry.score = req.body.score ? req.body.score * coef : 0;
