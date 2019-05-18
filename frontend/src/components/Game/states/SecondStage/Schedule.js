@@ -32,10 +32,10 @@ export default class ScheduleState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        this.game.displayDialogLine('Адам Викторович', 'Вітаю вас із знаменною подією у вашому житті. Ви стали студентами факультету Інформаційних технологій.  Можливо, цей маленький крок визначить ваше майбутнє', () => this.next());
+        this.game.displayDialogLine('Адам Вікторович', 'Вітаю вас із знаменною подією у вашому житті. Ви стали студентами факультету Інформаційних технологій.  Можливо, цей маленький крок визначить ваше майбутнє', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Адам Викторович', 'В університеті ви отримаєте фундаментальні знання і навички самостійної роботи. Справа за вами: від вашого прагнення до навчання і бажання проявити себе залежить те, як багато ви отримаєте в роки навчання. Успіхів!', () => this.next());
+        this.game.displayDialogLine('Адам Вікторович', 'В університеті ви отримаєте фундаментальні знання і навички самостійної роботи. Справа за вами: від вашого прагнення до навчання і бажання проявити себе залежить те, як багато ви отримаєте в роки навчання. Успіхів!', () => this.next());
         yield;
 
         this.game.add.tween(this.teacher).to({
@@ -75,10 +75,10 @@ export default class ScheduleState extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start();
 
-        this.game.displayDialogLine('Адам Викторович', 'Я викладаю розробку програмного забезпечення. Настільні, мобільні додатки, веб-програмування, тестування - все це ви будете опановувати під моїм керівництвом', () => this.next());
+        this.game.displayDialogLine('Адам Вікторович', 'Я викладаю розробку програмного забезпечення. Настільні, мобільні додатки, веб-програмування, тестування - все це ви будете опановувати під моїм керівництвом', () => this.next());
         yield;
 
-        this.game.displayDialogLine('Адам Викторович', 'Звуть мене Адам Викторович, а з кожним з вас я познайомлюсь на своїх практичних заняттях. Тож раджу бути присутніми на них', () => this.next());
+        this.game.displayDialogLine('Адам Вікторович', 'Звуть мене Адам Вікторович, а з кожним з вас я познайомлюсь на своїх практичних заняттях. Тож раджу бути присутніми на них', () => this.next());
         yield;
 
         this.game.add.tween(this.teacher).to({
@@ -248,10 +248,6 @@ export default class ScheduleState extends Phaser.State {
         bg3.alpha = 0;
         this.bg3 = bg3;
 
-        this.teacher = this.SSF.makeImg(1260, 50, 'teacher', 700, 900); //programmer
-        this.teacher2 = this.SSF.makeImg(1250, 50, 'teacher2', 700, 900); //network
-        this.teacher3 = this.SSF.makeImg(1260, 0, 'teacher3', 700, 900); //design
-
         let buttonGo = this.game.add.button(1190, 830, 'button_go', () => this.sendSubjects(), this, 1, 1, 0);
         buttonGo.inputEnabled = false;
         buttonGo.alpha = 0;
@@ -260,6 +256,10 @@ export default class ScheduleState extends Phaser.State {
         let button_text = this.addTextOnSprite(1270, 840, 'ГОТОВО', style).addColor('#ffffff', 0);
         button_text.alpha = 0;
         this.button_text = button_text;
+
+        this.teacher = this.SSF.makeImg(1260, 50, 'teacher', 700, 900); //programmer
+        this.teacher2 = this.SSF.makeImg(1250, 50, 'teacher2', 700, 900); //network
+        this.teacher3 = this.SSF.makeImg(1260, 0, 'teacher3', 700, 900); //design
     }
 
     startGame() {

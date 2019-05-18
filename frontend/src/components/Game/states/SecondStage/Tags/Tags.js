@@ -135,7 +135,7 @@ export default class TagsState extends Phaser.State {
         warning.alpha = 0;
         smartSetHeight(warning, 200);
         this.warning = warning;
-        this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
+        this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, section, img, div', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',
@@ -168,11 +168,13 @@ export default class TagsState extends Phaser.State {
         if (!Object.keys(tagsForMaket).length) {
             this.warning=this.game.add.image(700, 0, 'warning_message');
             smartSetHeight(this.warning, 200);
-            this.firstWarning = this.game.add.text(760, 60, 'Вітаємо! Ви отримали навички\n веб-програмування та поліпшили\n ставлення викладача!', {
-                    font: "Leftonade",
-                    fontSize: 30,
-                    fill: 'black'
-                });
+            this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, section, img, div', {
+                font: "Leftonade",
+                fontSize: 30,
+                fill: 'white',
+                stroke: 'black',
+                strokeThickness: 8,
+            });
             let score = 0;
             switch (true) {
                 case (this.count === 52):
@@ -198,7 +200,7 @@ export default class TagsState extends Phaser.State {
                 this.game.add.image(135, 160, key);
                 this.warning=this.game.add.image(700, 0, 'warning_message');
                 smartSetHeight(this.warning, 200);
-                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
+                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, section, img, div', {
                     font: "Leftonade",
                     fontSize: 30,
                     fill: 'white',
@@ -218,7 +220,7 @@ export default class TagsState extends Phaser.State {
                 this.game.add.image(530, 190, key);
                 this.warning=this.game.add.image(700, 0, 'warning_message');
                 smartSetHeight(this.warning, 200);
-                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
+                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, section, img, div', {
                     font: "Leftonade",
                     fontSize: 30,
                     fill: 'white',

@@ -320,15 +320,16 @@ export default class Scanner extends Phaser.State {
         yield;
 
         if (this.answer == 1){
-            this.game.nextState(this.score); 
+            this.game.nextState(0); 
         }
         else {
-            this.game.nextStateForWork(this.score);
+            this.game.nextStateForWork(0);
         }
     }
 
     init() {
         this._gen = this.gen();
+
 
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
         let choices = this.game.getChoice();
@@ -336,6 +337,7 @@ export default class Scanner extends Phaser.State {
             this.friend = res.friend;
         });
 
+        this.score = 0;
         let history = this.game.getHistory();
         history.then(res => {
             res.forEach(state => {
