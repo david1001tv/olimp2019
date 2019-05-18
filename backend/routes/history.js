@@ -74,14 +74,15 @@ FROM
         }
 
         // проверка на то проходил ли чел этот этап раньше
+        console.log(req.body.time >= 1000000000 ? req.body.time/1000000 : req.body.time);
         if (historyEntry) {
-            historyEntry.time = req.body.time;
-            historyEntry.score = req.body.score;
+            historyEntry.time = req.body.time >= 1000000000 ? req.body.time/1000000 : req.body.time;
+            historyEntry.score = req.body.score ? req.body.score * coef : 0;
             await historyEntry.save();
         } else {
             await HistoryEntry.create({
-                time: req.body.time,
-                score: req.body.score * coef,
+                time: req.body.time >= 1000000000 ? req.body.time/1000000 : req.body.time,
+                score: req.body.score ? req.body.score * coef : 0,
                 state_id: state.id,
                 user_id: req.decodedToken.userId,
             });

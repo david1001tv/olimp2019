@@ -20,6 +20,6 @@ module.exports = [
     'Cross',
     'Conference',
     'ThreeInARow',
-    'Debugging',
+    'FixBugs',
     'End'
 ];
