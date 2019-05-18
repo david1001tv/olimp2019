@@ -21,5 +21,5 @@ module.exports = [
     'Conference',
     'ThreeInARow',
     'Debugging',
-    'Final'
+    'End'
 ];

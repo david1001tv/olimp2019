@@ -134,7 +134,7 @@ class Game extends Phaser.Game {
     }
 
     @autobind
-    nextState(score = null) {
+    nextState(score = 0) {
         let time = new Date() - this.startTime;
         progressManager.saveHistoryEntry(this.state.current, time, score);
         this.startTime = new Date();
@@ -154,7 +154,7 @@ class Game extends Phaser.Game {
     }
 
     @autobind
-    nextStateForWork(score = null) {
+    nextStateForWork(score = 0) {
         let time = new Date() - this.startTime;
         progressManager.saveHistoryEntry(this.state.current, time, score);
         this.startTime = new Date();
