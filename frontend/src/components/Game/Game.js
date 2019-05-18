@@ -124,7 +124,7 @@ class Game extends Phaser.Game {
         //ThreeInARow +
         this.state.add('ThreeInARow', ThreeInARowState, false);
         //TestingAndDebugging +
-        this.state.add('fixBugs', testGame, false);
+        this.state.add('FixBugs', testGame, false);
         //End +
         this.state.add('End', EndState, false);
 

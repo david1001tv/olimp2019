@@ -27,7 +27,7 @@ const states = [
     'Cross',
     'Conference',
     'ThreeInARow',
-    'fixBugs',
+    'FixBugs',
     'End'
 ];
 

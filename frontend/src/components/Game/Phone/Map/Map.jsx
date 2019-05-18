@@ -226,7 +226,7 @@ class Map extends Component {
                     left="88%"
                     top="36%"
                     type={CHECKPOINT}
-                    state="fixBugs"
+                    state="FixBugs"
                     onClick={this.handleClick}
                     popoverText="Тестування"
                 />
