@@ -101,6 +101,7 @@ export default class ThreeInRowState extends Phaser.State {
         let choices = this.game.getChoice();
         choices.then(res => {
             this.specName = res.profession;
+            // name - graph, net, prog
             this.next();
         });
         this.spec = 1;
