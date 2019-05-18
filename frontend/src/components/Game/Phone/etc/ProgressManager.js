@@ -26,7 +26,7 @@ const states = [
     'ThirdInterview',
     'Cross',
     'Conference',
-    'threeInRow',
+    'ThreeInARow',
     'fixBugs',
     'End'
 ];
