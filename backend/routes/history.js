@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-const {HistoryEntry, State, Coefficients} = require('../models');
+const {HistoryEntry, State, Coefficients,Choice} = require('../models');
 const authMiddleware = require('../middleware').auth;
 const sequelize = require('../models/sequelize');
 
@@ -42,6 +42,29 @@ FROM
         if (state.index > lastIndex + 1) {
             res.status(400).send('States are not sequential');
             return;
+        }
+
+        if (state.index === 10) {
+            let choices = await Choice.findOne({
+                where: {
+                    user_id: req.decodedToken.userId
+                }
+            });
+            if (!choices.magistracy) {
+                let states = await State.findAll({
+                    where: {
+                        index: [11,12,13]
+                    }
+                });
+                for(let i in states) {
+                    await HistoryEntry.create({
+                        time: 0,
+                        score: 0,
+                        state_id: states[i].id,
+                        user_id: req.decodedToken.userId,
+                    });
+                }
+            }
         }
 
         const coefficients = (await Coefficients.findOne({
