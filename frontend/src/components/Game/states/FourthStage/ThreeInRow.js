@@ -97,44 +97,44 @@ export default class ThreeInRowState extends Phaser.State {
         this.goTimer = setTimeout(() => this.checkRate(), this.time);
         this.timer = setInterval(() => this.checkTime(), 1000);
 
-        //Данные из бд (получаем на сцене кроссворда, когда выбираем) 1 - programmer; 2 - networks; 3 - designer
-        let choices = this.game.getChoice();
-        choices.then(res => {
-            this.specName = res.profession;
-            // name - graph, net, prog
-            this.next();
-        });
+        this.next();
     }
 
     preload() {
+        //Данные из бд (получаем на сцене кроссворда, когда выбираем) 1 - programmer; 2 - networks; 3 - designer
+        let choices = this.game.getChoice();
+        choices.then(res => {
+            // name - graph, net, prog
+            this.specName = res.profession;
+            if (this.specName === 'prog'){
+                this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/programmer/bg_programmer.png');
+                this.game.load.image('cSharp', './assets/images/4-2 (ThreeInARow)/programmer/CSharp.png');
+                this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/programmer/JS.png');
+                this.game.load.image('ruby', './assets/images/4-2 (ThreeInARow)/programmer/Ruby.png');
+                this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/programmer/Coffee.png');
+                this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/programmer.png');
+            }    
+            else if (this.specName === 'net'){
+                this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/devops/bg_devops.png');
+                this.game.load.image('cSharp', './assets/images/4-2 (ThreeInARow)/devops/Bug.png');
+                this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/devops/DB.png');
+                this.game.load.image('ruby', './assets/images/4-2 (ThreeInARow)/devops/Internet.png');
+                this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/devops/Shield.png');
+                this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/devops.png');
+            } 
+            else {
+                this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/designer/bg_designer.png');
+                this.game.load.image('cSharp', './assets/images/4-2 (ThreeInARow)/designer/Corel.png');
+                this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/designer/Illustrator.png');
+                this.game.load.image('ruby', './assets/images/4-2 (ThreeInARow)/designer/Photoshop.png');
+                this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/designer/Stylus.png');
+                this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/designer.png');
+            }
+        });
 
         this.game.load.image('bg', 'assets/images/4-2 (ThreeInARow)/background.png');
         this.game.load.image('warning_message', './assets/images/2-6 (Сards)/warning_message.png');
-
-        if (this.specName == 'prog'){
-            this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/programmer/bg_programmer.png');
-            this.game.load.image('cSharp', './assets/images/4-2 (ThreeInARow)/programmer/CSharp.png');
-            this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/programmer/JS.png');
-            this.game.load.image('ruby', './assets/images/4-2 (ThreeInARow)/programmer/Ruby.png');
-            this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/programmer/Coffee.png');
-            this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/programmer.png');
-        }    
-        else if (this.specName == 'net'){
-            this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/devops/bg_devops.png');
-            this.game.load.image('cSharp', './assets/images/4-2 (ThreeInARow)/devops/Bug.png');
-            this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/devops/DB.png');
-            this.game.load.image('ruby', './assets/images/4-2 (ThreeInARow)/devops/Internet.png');
-            this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/devops/Shield.png');
-            this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/devops.png');
-        } 
-        else {
-            this.game.load.image('background', 'assets/images/4-2 (ThreeInARow)/designer/bg_designer.png');
-            this.game.load.image('cSharp', './assets/images/4-2 (ThreeInARow)/designer/Corel.png');
-            this.game.load.image('jS', './assets/images/4-2 (ThreeInARow)/designer/Illustrator.png');
-            this.game.load.image('ruby', './assets/images/4-2 (ThreeInARow)/designer/Photoshop.png');
-            this.game.load.image('coffee', 'assets/images/4-2 (ThreeInARow)/designer/Stylus.png');
-            this.game.load.image('chief', 'assets/images/4-2 (ThreeInARow)/designer.png');
-        }
+     
     }
 
     create() {
