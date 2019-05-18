@@ -459,7 +459,6 @@ let sun3 = this.game.add.image(1412, 20, 'sun');
     }
 
     firstQuest(obj) {
-        console.log(obj);
         if (obj.key == 'button_blue_on'){
             this.firstAnswer = 'Girl';
             this.game.saveChoice(false);

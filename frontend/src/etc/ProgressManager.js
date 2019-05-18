@@ -95,7 +95,7 @@ class ProgressManager {
         if (stateIndex !== -1) {
             let searchRes = this._checkpoints[stateIndex];
             searchRes.status = 'completed';
-            this._checkpoints[stateIndex + 1].status = 'available';
+            if(this._checkpoints[stateIndex + 1]) this._checkpoints[stateIndex + 1].status = 'available';
         }
     }
 

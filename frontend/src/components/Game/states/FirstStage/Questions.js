@@ -112,7 +112,6 @@ export default class QuestionsState extends Phaser.State {
             this.FSF.addText, this.FSF.addTextSimple, this.FSF.makeAnswer,this.FSF.getMasAnswer,this.FSF.addCheck,this.FSF.setTextAlpha);
         yield;
         this.FSF.deleteTask(this.FSF.destroyIncorrect, this.FSF.deleteText, oneTask, this.cloud);
-        console.log(this.mistakes);
         
         //second question
         oneTask=this.FSF.oneTask(this.slide3, this.cloud, 
