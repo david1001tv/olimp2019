@@ -131,6 +131,7 @@ export default class testGame extends Phaser.State {
     shutdown() {
         PubSub.unsubscribe(this.token);
         PubSub.unsubscribe(this.token2);
+        this.game.setfixBugsEnabled(false);
     }
     next() {
         this._gen.next();
