@@ -443,6 +443,11 @@ export default class Scanner extends Phaser.State {
         .start(); 
     }
 
+    shutdown() {
+        this.activeArrows = [];
+        this.sendArrow = null;
+    }
+
     
     update() {
        
