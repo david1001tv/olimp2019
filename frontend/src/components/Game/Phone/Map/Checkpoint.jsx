@@ -86,8 +86,6 @@ class Checkpoint extends React.Component {
             pointerEvents = 'none';
         }
 
-        console.log(checkpointTypes, type, status);
-
         return (
             <div
                 style={{

@@ -136,8 +136,8 @@ export default class FillwordsState extends Phaser.State {
         this.next();
     }
 
-    shutdown() {
-        
+    shutdown(game) {
+        this.inputs.destroy();
     }
 
     render() {

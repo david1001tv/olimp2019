@@ -292,6 +292,10 @@ export default class TagsState extends Phaser.State {
         }
     }
 
+    shutdown(game) {
+        document.addEventListener('keyup', this.handleKeyUp);
+    }
+
     next() {
         this._gen.next();
     }

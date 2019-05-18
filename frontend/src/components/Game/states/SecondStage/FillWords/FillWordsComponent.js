@@ -314,6 +314,12 @@ export default class FillWordsComponent {
         }
     }
 
+    destroy() {
+        focusChangeListeners.splice(focusChangeListeners.indexOf(this.blur));
+        document.removeEventListener('mousedown', this.handleOnMouseDown);
+        document.removeEventListener('mouseup', this.handleOnMouseUp);
+    }
+
     focusCell(cell) {
         if (typeof cell === 'string') {
             this.focusCell(this.cells[cell]);
