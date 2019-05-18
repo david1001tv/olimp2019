@@ -68,13 +68,13 @@ class Final extends Component {
                                     />
                                     <a
                                         className="twitter"
-                                        href={encodeURI(`https://twitter.com/intent/tweet?text=Я пройшов квест "Абітурієнт". Спробуй і ти!&url=http://olymp2019.fruch.pw`)}
+                                        href={encodeURI(`https://twitter.com/intent/tweet?text=Я пройшов квест "Моя майбутня професія". Спробуй і ти!&url=http://olymp2019.fruch.pw`)}
                                         rel="noopener noreferrer"
                                         target="_blank"
                                     />
                                     <a
                                         className="google"
-                                        href={encodeURI(`https://plus.google.com/share?text=Я пройшов квест "Абітурієнт". Спробуй і ти!&url=http://olymp2019.fruch.pw`)}
+                                        href={encodeURI(`https://plus.google.com/share?text=Я пройшов квест "Моя майбутня професія". Спробуй і ти!&url=http://olymp2019.fruch.pw`)}
                                         rel="noopener noreferrer"
                                         target="_blank"
                                     />
