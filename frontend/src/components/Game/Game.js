@@ -158,15 +158,12 @@ class Game extends Phaser.Game {
         let time = new Date() - this.startTime;
         progressManager.saveHistoryEntry(this.state.current, time, score);
         this.startTime = new Date();
-        // if (this.isReplaying) {
-        //     this.state.start('Map');
-        // } else {
+
         let states = Object.keys(this.state.states);
         this.progressManager.completeState(this.state.current, 0);
         let currentIndex = states.indexOf(this.state.current);
 
         this.state.start('Boot', true, false, states[currentIndex + 4]);
-        // }
     }
 
     getChoice() {

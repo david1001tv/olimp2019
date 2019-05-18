@@ -86,22 +86,6 @@ export default class Scanner extends Phaser.State {
         }, 1500, Phaser.Easing.Cubic.InOut)
             .start(); 
 
-        this.game.displayDialogLine('Анастасія Марківна', 'Я не помилилась у тобі. Дякую за допомогу!', () => {
-            this.game.add.tween(this.teacher).to({
-                alpha: 0
-            }, 1500, Phaser.Easing.Cubic.InOut)
-                .start();
-            this.next()  
-        });
-        yield;
-
-        this.game.displayDialogLine('Голос', '*Ви вирушаєте додому, задоволені собою, і плануєте продовжити освоювати Photoshop на професійному рівні*', () => this.next());
-        yield;
-        this.game.add.tween(this.teacher).to({
-            alpha: 0
-        }, 1500, Phaser.Easing.Cubic.InOut)
-            .start();
-
         //Уведомление "Вітаємо! Ви отримали навички веб-дизайну і поліпшили ставлення викладача!"
         this.mass.forEach((index) => {
             this.game.add.tween(index).to({
@@ -134,6 +118,23 @@ export default class Scanner extends Phaser.State {
                 }, 1500, Phaser.Easing.Cubic.InOut)
                     .start()
             }, 3000));
+
+        this.game.displayDialogLine('Анастасія Марківна', 'Я не помилилась у тобі. Дякую за допомогу!', () => {
+            this.game.add.tween(this.teacher).to({
+                alpha: 0
+            }, 1500, Phaser.Easing.Cubic.InOut)
+                .start();
+            this.next()  
+        });
+        yield;
+
+        this.game.displayDialogLine('Голос', '*Ви вирушаєте додому, задоволені собою, і плануєте продовжити освоювати Photoshop на професійному рівні*', () => this.next());
+        yield;
+        this.game.add.tween(this.teacher).to({
+            alpha: 0
+        }, 1500, Phaser.Easing.Cubic.InOut)
+            .start();
+
 
         this.game.camera.fade(0x000000, 1500, true);
         setTimeout(() => this.next(), 1500);

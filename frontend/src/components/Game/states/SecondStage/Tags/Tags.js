@@ -135,7 +135,7 @@ export default class TagsState extends Phaser.State {
         warning.alpha = 0;
         smartSetHeight(warning, 200);
         this.warning = warning;
-        this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
+        this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, section, img, div', {
             font: "Leftonade",
             fontSize: 30,
             fill: 'white',
@@ -290,10 +290,6 @@ export default class TagsState extends Phaser.State {
                 });
                 return;
         }
-    }
-
-    shutdown(game) {
-        document.addEventListener('keyup', this.handleKeyUp);
     }
 
     next() {
