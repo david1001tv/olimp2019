@@ -30,7 +30,7 @@ router.post('/', async function (req, res) {
             choice.friend = friend !== null ? friend : choice.friend;
             choice.magistracy = magistracy !== null ? magistracy : choice.magistracy;
             choice.science = science !== null ? science : choice.science;
-            choice.profession = profession !== null ? profession : choice.profession
+            choice.profession = profession !== '' ? profession : choice.profession
             choice.save();
         }
 
