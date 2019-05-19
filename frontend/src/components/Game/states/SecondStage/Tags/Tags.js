@@ -148,6 +148,13 @@ export default class TagsState extends Phaser.State {
         this.next();
     }
 
+    shutdown(game) {
+        document.removeEventListener('keyup', this.handleKeyUp);
+        this.inputs.forEach(input => {
+            input.destroy();
+        });
+    }
+
     @autobind
     handleKeyUp(e) {
         this.count++;
@@ -188,7 +195,7 @@ export default class TagsState extends Phaser.State {
                     score = 25;
                     break;
             }
-            this.game.displayDialogLine('Голос', 'Світ не буде колишнім. Знаючи, як створюються веб-сторінки, Ви інакше дивитись на знайомі сайти', () => this.game.nextState(score) );
+            this.game.displayDialogLine('Голос', 'Світ не буде колишнім. Знаючи, як створюються веб-сторінки, Ви інакше дивитись на знайомі сайти', () => this.game.nextState(score));
         }
     }
 

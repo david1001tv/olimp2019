@@ -91,7 +91,10 @@ export default class InputComponent {
 
     @autobind
     handleKeyDown(e) {
-        if (this.focusedCell.disabled) {
+        if (!this.focusedCell) {
+            return;
+        }
+        if (this.focusedCell && this.focusedCell.disabled) {
             return;
         }
         switch (true) {
