@@ -29,7 +29,12 @@ router.get('/json', async function (req, res) {
                 lastIndex: lastStateIndex
             },
             include: [
-                {model: State, required: true},
+                {
+                    model: State,
+                    required: true,
+                    as: 'state',
+                    attributes: [],
+                },
                 {model: User, required: true},
             ],
             order: [
