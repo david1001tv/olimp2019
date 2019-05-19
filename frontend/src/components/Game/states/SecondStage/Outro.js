@@ -94,6 +94,7 @@ export default class Scanner extends Phaser.State {
     }
 
     init() {
+        this.score = 0;
         //total score
         //800/600/80
         //Выбранные вариант в PostIntro, из бд: 0 - girl, 1 - man
