@@ -1,46 +1,44 @@
 import React, {Component} from 'react';
-import { getChoice } from '../../api';
  
 class Cell extends Component {
     
     state = {
         bug: '',
         no_bug: '',
-        styleTd: {
-            border: "1px solid black",
-			textAlign: "center",
-            backgroundColor: "red",
-            backgroundImage: `url(${this.bug})`,
-            backgroundRepeat: `no-repeat`,
-            backgroundSize: `100%`
-       }
     }
 
     constructor(props) {
         super(props);
-        let choices = getChoice();
-        console.log(choice)
-        choices.then(res => {
-            // name - graph, net, prog
-            this.specName = res.profession;
-            if (this.specName === 'prog'){
-                this.setState({bug: '../../img/fixbug/programmer/bug.png', no_bug: '../../img/fixbug/programmer/no_bug.png'});
-            }    
-            else if (this.specName === 'net'){
-                this.setState({bug: '../../img/fixbug/devops/bug.png', no_bug: '../../img/fixbug/devops/no_bug.png'});
-            } 
-            else {
-                this.setState({bug: '../../img/fixbug/designer/bug.png', no_bug: '../../img/fixbug/designer/no_bug.png'});
-            }
-        });
         this.bColor = props.bColor;
         this.dataRow = props.dataRow;
         this.dataColumn = props.dataColumn;
-        if(this.bColor != undefined){
-            this.state.styleTd. backgroundColor = this.bColor;
-            this.state.styleTd.backgroundImage = `url(${this.state.no_bug})`;
+        console.log(props.dataProf)
+
+        this.styleTd = {
+            border: "1px solid black",
+			textAlign: "center",
+            backgroundColor: "red",
+            backgroundImage: `url(${this.state.bug})`,
+            backgroundRepeat: `no-repeat`,
+            backgroundSize: `100%`
         }
-        
+        if(this.bColor != undefined){
+            this.styleTd. backgroundColor = this.bColor;
+            this.styleTd.backgroundImage = `url(${this.state.no_bug})`;
+        }
+        //this.dataProf = props.dataProf;
+    }
+
+    componentWillMount() {
+        if (this.dataProf === 'prog'){
+            this.setState({bug: './fixbug/programmer/bug.png', no_bug: './fixbug/programmer/no_bug.png'});
+        }    
+        else if (this.dataProf === 'net'){
+            this.setState({bug: './fixbug/devops/bug.png', no_bug: './fixbug/devops/no_bug.png'});
+        } 
+        else {
+            this.setState({bug: './fixbug/designer/bug.png', no_bug: './fixbug/designer/no_bug.png'});
+        }
     }
 
     highlight(){
@@ -102,6 +100,8 @@ class Cell extends Component {
   
  
     render() {
+
+        console.log(this.state.bug)
         
        return (
            
