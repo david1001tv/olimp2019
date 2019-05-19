@@ -4,10 +4,10 @@ import autobind from 'autobind-decorator';
 import {smartSetWidth, smartSetHeight} from '../../../utils';
 
 const tagsForMaket = {
-    header: ['header'],
+    header: ['html', 'head', 'title', 'header'],
     nav: ['nav'],
     logo: ['img'],
-    'body-1': ['section'],
+    'body-1': ['body', 'section'],
     'body-2': ['div'],
     footer: ['footer'],
     script: ['script']
@@ -205,7 +205,7 @@ export default class TagsState extends Phaser.State {
                 this.game.add.image(135, 160, key);
                 this.warning=this.game.add.image(700, 0, 'warning_message');
                 smartSetHeight(this.warning, 200);
-                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
+                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, section, img, div', {
                     font: "Leftonade",
                     fontSize: 30,
                     fill: 'white',
@@ -225,7 +225,7 @@ export default class TagsState extends Phaser.State {
                 this.game.add.image(530, 190, key);
                 this.warning=this.game.add.image(700, 0, 'warning_message');
                 smartSetHeight(this.warning, 200);
-                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, content, img, div', {
+                this.firstWarning = this.game.add.text(740, 40, 'Уведіть до полей, що праворуч, теги \ntitle, head, html, body, header, nav, \nfooter, script, a, section, img, div', {
                     font: "Leftonade",
                     fontSize: 30,
                     fill: 'white',
