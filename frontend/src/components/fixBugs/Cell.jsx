@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
+import bug from '../../img/fixbug/bug.png';
+import no_bug from '../../img/fixbug/no_bug.png';
  
 class Cell extends Component {
     
     state = {
-        bug: '',
-        no_bug: '',
+        styleTd: {
+            border: "1px solid black",
+			textAlign: "center",
+            backgroundColor: "red",
+            backgroundImage: `url(${bug})`,
+            backgroundRepeat: `no-repeat`,
+            backgroundSize: `100%`
+       }
     }
 
     constructor(props) {
@@ -12,33 +20,11 @@ class Cell extends Component {
         this.bColor = props.bColor;
         this.dataRow = props.dataRow;
         this.dataColumn = props.dataColumn;
-        console.log(props.dataProf)
-
-        this.styleTd = {
-            border: "1px solid black",
-			textAlign: "center",
-            backgroundColor: "red",
-            backgroundImage: `url(${this.state.bug})`,
-            backgroundRepeat: `no-repeat`,
-            backgroundSize: `100%`
-        }
         if(this.bColor != undefined){
-            this.styleTd. backgroundColor = this.bColor;
-            this.styleTd.backgroundImage = `url(${this.state.no_bug})`;
+            this.state.styleTd. backgroundColor = this.bColor;
+            this.state.styleTd.backgroundImage = `url(${no_bug})`;
         }
-        //this.dataProf = props.dataProf;
-    }
-
-    componentWillMount() {
-        if (this.dataProf === 'prog'){
-            this.setState({bug: './fixbug/programmer/bug.png', no_bug: './fixbug/programmer/no_bug.png'});
-        }    
-        else if (this.dataProf === 'net'){
-            this.setState({bug: './fixbug/devops/bug.png', no_bug: './fixbug/devops/no_bug.png'});
-        } 
-        else {
-            this.setState({bug: './fixbug/designer/bug.png', no_bug: './fixbug/designer/no_bug.png'});
-        }
+        
     }
 
     highlight(){
@@ -47,10 +33,10 @@ class Cell extends Component {
         if(g1 != null){
             if(g1.style.backgroundColor == "blue"){
                 g1.style.backgroundColor = "red";
-                g1.style.backgroundImage = `url(${this.state.bug})`;
+                g1.style.backgroundImage = `url(${bug})`;
             }else{
                 g1.style.backgroundColor = "blue";
-                g1.style.backgroundImage = `url(${this.state.no_bug})`;
+                g1.style.backgroundImage = `url(${no_bug})`;
             }
         }
         
@@ -58,10 +44,10 @@ class Cell extends Component {
         if(g2 != null){
             if(g2.style.backgroundColor == "blue"){
                 g2.style.backgroundColor = "red";
-                g2.style.backgroundImage = `url(${this.state.bug})`;
+                g2.style.backgroundImage = `url(${bug})`;
             }else{
                 g2.style.backgroundColor = "blue";
-                g2.style.backgroundImage = `url(${this.state.no_bug})`;
+                g2.style.backgroundImage = `url(${no_bug})`;
             }
         }
 
@@ -69,10 +55,10 @@ class Cell extends Component {
         if(g3 != null){
             if(g3.style.backgroundColor == "blue"){
                 g3.style.backgroundColor = "red";
-                g3.style.backgroundImage = `url(${this.state.bug})`;
+                g3.style.backgroundImage = `url(${bug})`;
             }else{
                 g3.style.backgroundColor = "blue";
-                g3.style.backgroundImage = `url(${this.state.no_bug})`;
+                g3.style.backgroundImage = `url(${no_bug})`;
             }
         }
 
@@ -80,28 +66,26 @@ class Cell extends Component {
         if(g4 != null){
             if(g4.style.backgroundColor == "blue"){
                 g4.style.backgroundColor = "red";
-                g4.style.backgroundImage = `url(${this.state.bug})`;
+                g4.style.backgroundImage = `url(${bug})`;
             }else{
                 g4.style.backgroundColor = "blue";
-                g4.style.backgroundImage = `url(${this.state.no_bug})`;
+                g4.style.backgroundImage = `url(${no_bug})`;
             }
         }
 
         let g5 = document.querySelector('[data-row="' + (this.dataRow) + '"][data-column="' + (this.dataColumn) + '"]');
         if(g5.style.backgroundColor == "blue"){
             g5.style.backgroundColor = "red";
-            g5.style.backgroundImage = `url(${this.state.bug})`;
+            g5.style.backgroundImage = `url(${bug})`;
         }else{
             g5.style.backgroundColor = "blue";
-            g5.style.backgroundImage = `url(${this.state.no_bug})`;
+            g5.style.backgroundImage = `url(${no_bug})`;
         }
     }
 // 
   
  
     render() {
-
-        console.log(this.state.bug)
         
        return (
            
