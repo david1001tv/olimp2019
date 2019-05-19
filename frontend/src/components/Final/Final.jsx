@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+﻿import React, {Component} from 'react';
 import {DialogContainer} from 'react-md';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
@@ -10,7 +10,7 @@ import photo from '../../img/photo.jpg'
 
 
 import Feedback from '../Landing/Feedback';
-
+import Team from '../Landing/Team';
 import '../Landing/Landing.sass';
 import './Final.sass';
 
@@ -19,6 +19,7 @@ import './Final.sass';
 class Final extends Component {
     state = {
         feedbackIsVisible: false,
+        teamVisible: false,
         liked: true,
         likeCount: 6
     };
@@ -39,7 +40,7 @@ class Final extends Component {
     }
     
     render() {
-        const {feedbackIsVisible, liked, likeCount} = this.state;
+        const {feedbackIsVisible, teamVisible, liked, likeCount} = this.state;
         return (
             <div>
                 <div className="wrapper">
@@ -102,9 +103,12 @@ class Final extends Component {
                         </div>
                         <footer>
                             <div className="likes">Ця гра сподобалась {likeCount} користувачам.</div>
-                            <div className="copyright">
+                            <div className="copyright"
+                            onClick={() => this.setState({teamVisible: true})}
+                            >
                                 <span>КОМАНДА ДВНЗ “ПДТУ”, 2019 ©
-                                <img className="photo" id="photo" src={photo} alt="" />
+                                {/* <img className="photo" id="photo" src={photo} alt="" /> */}
+
                             </span>
                             </div>
                             <button className="btn-feedback"
@@ -123,6 +127,15 @@ class Final extends Component {
                     contentClassName="opis_container"
                 >
                     <Feedback/>
+                </DialogContainer>
+                <DialogContainer
+                    focusOnMount={false}
+                    visible={teamVisible}
+                    onHide={() => this.setState({teamVisible: false})}
+                    dialogClassName="photo1"
+                    contentClassName="opis_container3"
+                >
+                    <Team />
                 </DialogContainer>
             </div>
         );
