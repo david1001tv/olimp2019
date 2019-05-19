@@ -16,33 +16,38 @@ const authMiddleware = require('../middleware').auth;
 // router.use(authMiddleware);
 
 router.get('/json', async function (req, res) {
-    let lastStateIndex = await State.max('index');
+    try {
+        let lastStateIndex = await State.max('index');
 
-    let report = await HistoryEntry.findAll({
-        attributes: [
-            [sequelize.fn('SUM', sequelize.col('time')), 'time'],
-            [sequelize.fn('SUM', sequelize.col('score')), 'score'],
-            [sequelize.fn('MAX', sequelize.col('index')), 'lastIndex'],
-        ],
-        having: {
-            lastIndex: lastStateIndex
-        },
-        include: [
-            {model: State, required: true},
-            {model: User, required: true},
-        ],
-        order: [
-            [sequelize.fn('SUM', sequelize.col('score')), 'DESC'],
-        ],
-        limit: 10,
-        group: 'user.id',
-    });
+        let report = await HistoryEntry.findAll({
+            attributes: [
+                [sequelize.fn('SUM', sequelize.col('time')), 'time'],
+                [sequelize.fn('SUM', sequelize.col('score')), 'score'],
+                [sequelize.fn('MAX', sequelize.col('index')), 'lastIndex'],
+            ],
+            having: {
+                lastIndex: lastStateIndex
+            },
+            include: [
+                {model: State, required: true},
+                {model: User, required: true},
+            ],
+            order: [
+                [sequelize.fn('SUM', sequelize.col('score')), 'DESC'],
+            ],
+            limit: 10,
+            group: 'user.id',
+        });
 
-    res.status(200).json(report.map(e => ({
-        name: e.user.lastName + ' ' + e.user.firstName,
-        time: e.time,
-        score: e.score,
-    })).sort((a, b) => b - a));
+        res.status(200).json(report.map(e => ({
+            name: e.user.lastName + ' ' + e.user.firstName,
+            time: e.time,
+            score: e.score,
+        })).sort((a, b) => b - a));
+    } catch (e) {
+        console.error(e);
+        res.status(500).send(e.message);
+    }
 });
 
 router.get('/excel', async function (req, res) {
