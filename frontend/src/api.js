@@ -2,7 +2,7 @@ let token = localStorage.getItem('token');
 // let token = '';
 let API_URL = '';
 if (window.location.port)
-    API_URL = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/api`;
+    API_URL = `${window.location.protocol}//${window.location.hostname}:${+window.location.port+1}/api`;
 else
     API_URL = `${window.location.protocol}//${window.location.hostname}/api`;
 
