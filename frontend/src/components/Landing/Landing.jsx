@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+﻿import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {DialogContainer} from 'react-md';
 import {Link} from 'react-router-dom';
@@ -116,7 +116,7 @@ class Landing extends Component {
                       focusOnMount={false}
                       visible={teamVisible}
                       onHide={() => this.setState({teamVisible: false})}
-                      dialogClassName="photo"
+                      dialogClassName="photo1"
                       contentClassName="opis_container"
                 >
                     <Team />
