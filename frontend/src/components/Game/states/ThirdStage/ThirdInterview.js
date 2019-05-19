@@ -351,8 +351,6 @@ export default class ThirdInterviewState extends Phaser.State {
             strokeThickness: 8,
         });
         this.selectThird_bottom.alpha = 0;
-
-        this.next();
     }
 
     firstSelection(obj){
