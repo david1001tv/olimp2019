@@ -8,21 +8,21 @@ const DEFAULT_TINT = 0xffffff;
 
 const focusChangeListeners = [];
 let colors = [
-    '0x96d5ff',
-    '0x2b9fed',
-    '0xa1aaff',
-    '0xffc0f7',
-    '0xff899f',
-    '0xffbb65',
-    '0xffe588',
-    '0xbdde00',
-    '0xc9ff88',
-    '0x15cb4d',
-    '0x19dea9',
-    '0x88ffad',
-    '0x9bfaff',
-    '0x966dff',
-    '0xff4d6d',
+    0x55d9ff,
+    0x2b9fed,
+    0xfe81ff,
+    0xffc0f7,
+    0xff899f,
+    0xffbb65,
+    0xffe588,
+    // 0xbdde00,
+    0xc9ff88,
+    0x15cb4d,
+    0x19dea9,
+    0x88ffad,
+    0x9bfaff,
+    0x966dff,
+    0xff4d6d,
 ];
 let words = [
     'модуль',
@@ -207,7 +207,9 @@ export default class FillWordsComponent {
     handleOnMouseDown(e) {
         if (this.isFocused) {
             if (!this.color) {
-                this.color = colors[Math.round(Math.random() * colors.length)];
+                let index = Math.round(Math.random() * (colors.length - 0)) + 0;
+                this.color = colors[index];
+                console.log(this.color, colors, index);
             }
             this.focusedCell.sprite.tint = this.color;
         }
